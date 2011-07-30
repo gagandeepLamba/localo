@@ -1,0 +1,47 @@
+
+body {
+    margin: auto; /* center in viewport */
+    width: 960px;
+    font-family: Arial ;
+    font-size: 12px;
+}
+
+#site-banner {
+    height:200px;
+    margin:0;
+    width:100%;
+    background-color :#263C52;
+    /* background-color: #EEF4F8 ;*/
+    margin-bottom: 20px;
+
+}
+
+#site-banner h1 {
+    font-size:30px;
+    text-align:center;
+    font-family: 'Trebuchet MS','Lucida Grande','Verdana','Arial','Sans-Serif';
+    font-weight: bold;
+    padding-top: 70px;
+    padding-bottom: 20px;
+}
+
+#site-banner h1 a {
+      color: #FFFFFF;
+      text-decoration: none ;
+}
+
+#site-banner .description {
+    color:white ;
+    text-align: center ;
+    font-size :18px;
+    font-family:'Trebuchet MS','Lucida Grande','Verdana','Arial','Sans-Serif';
+    font-weight: bold;
+
+}
+
+div #left-panel {
+    padding:10px;
+}
+div #main-panel {
+    padding:10px;
+}

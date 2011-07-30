@@ -1,0 +1,33 @@
+
+
+{if:hasItems}
+
+
+{if:hasErrors}
+<div class="script-error" >
+    <ul>
+        {foreach:errors,error}
+            <li> {error} </li>
+        {end:}
+
+    </ul>
+
+</div>
+{end:}
+
+{if:hasMessages}
+<div class="script-message" >
+    <ul>
+        {foreach:messages,message}
+            <li> {message} </li>
+        {end:}
+
+    </ul>
+
+</div>
+
+{end:}
+
+<div class="error_pad"></div>
+
+{end:}
