@@ -44,7 +44,7 @@
                             $openingDao = new webgloo\job\dao\Opening();
                             $rows = $openingDao->getAllRecords();
                             foreach ($rows as $row) {
-                                $html = webgloo\job\html\template\Opening::getUserSummary($row);
+                                $html = webgloo\job\html\template\Opening::getMainSummary($row);
                                 echo $html;
                             }
                         ?>

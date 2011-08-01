@@ -19,16 +19,23 @@ if ($uploader->hasError()) {
 } else {
     //file upload success
     //send back document data
-    $code = 1;
+   
     //send a json encoded response to JAVASCRIPT handler
     $document = new webgloo\job\view\Document();
-    $document->uuid = rand();
+   
     $document->originalName = $uploader->getName();
     $document->storeName = $uploader->getStoreName();
     $document->size = $uploader->getSize();
     $document->mime = $uploader->getMime();
+    //save in DB
+    $documentDao = new webgloo\job\dao\Document();
+    $data = $documentDao->create($document);
+    //get last insert id
+    $document->uuid = $data['lastInsertId'];
+
+    $code = 1;
     //send back
-    $message = 'file uploade is success';
+    $message = 'file upload done!';
     $data = array('code' => 1, 'document' => $document, 'message' => $message);
     echo json_encode($data);
 

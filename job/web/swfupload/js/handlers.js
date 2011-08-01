@@ -110,23 +110,27 @@ function uploadSuccess(file, serverData) {
         var dataObj ;
         
         try{
+            if(webgloo.gMedia.debug) {
+                alert("server returned => " + serverData);
+            }
+            
             dataObj = JSON.parse(serverData);
             //process server data
             if(dataObj.error === undefined || dataObj.error != 'yes'){
                 //no error object or error is not yes!
                 //process document object received from server
-                //read back the document id stored
+                webgloo.gMedia.table.addRow(dataObj.document.uuid, dataObj.document.originalName);
                 progress.setComplete();
                 progress.setStatus(dataObj.message);
                 progress.toggleCancel(false);
             }else {
                 //known error
-                progress.setStatus(dataObj.message);
+                progress.setStatus("Error: " + dataObj.message);
             }
             
         } catch(ex) {
             //we need to gaurd against JSON parsing errors as well
-            progress.setStatus("server error: received malformed json");
+            progress.setStatus("Error: " + ex.toString());
         }
         
         

@@ -18,6 +18,18 @@ namespace webgloo\job\mysql {
             return $rows;
         }
 
+        static function getRecordOnId($applicationId) {
+            $mysqli = MySQL\Connection::getInstance()->getHandle();
+            $applicationId = $mysqli->real_escape_string($applicationId);
+
+            $sql = " select opening.organization_name, opening.created_by, opening.bounty, opening.title, app.* " ;
+            $sql .= " from job_application app, job_opening opening " ;
+            $sql .= " where app.id = {applicationId} and app.opening_id = opening.id" ;
+            $sql = str_replace("{applicationId}", $applicationId, $sql);
+            $row = MySQL\Helper::fetchRow($mysqli, $sql);
+            return $row;
+        }
+        
         static function getRecordsOnUserId($userId) {
             $mysqli = MySQL\Connection::getInstance()->getHandle();
             $userId = $mysqli->real_escape_string($userId);
@@ -38,8 +50,9 @@ namespace webgloo\job\mysql {
             $sql .= " cv_description,cv_email, cv_phone, cv_education,cv_company,cv_location,cv_skill,created_on) ";
             $sql .= " values(?,?,?,?,?,?,?,?,?,?,?,?,?,now()) ";
 
-            $dbCode = MySQL\Connection::ACK_OK;
-
+            $code = MySQL\Connection::ACK_OK;
+            $lastInsertId = NULL ;
+            
             $stmt = $mysqli->prepare($sql);
             if ($stmt) {
                 $stmt->bind_param("iiissssssssss",
@@ -61,16 +74,23 @@ namespace webgloo\job\mysql {
                 $stmt->execute();
 
                 if ($mysqli->affected_rows != 1) {
-                    $dbCode = MySQL\Error::handle(self::MODULE_NAME, $stmt);
+                    $code = MySQL\Error::handle(self::MODULE_NAME, $stmt);
                 }
                 $stmt->close();
             } else {
-                $dbCode = MySQL\Error::handle(self::MODULE_NAME, $mysqli);
+                //problem during statement preparation
+                $code = MySQL\Error::handle(self::MODULE_NAME, $mysqli);
             }
 
-            return $dbCode;
+            //if no one has raised an error
+            if($code == MySQL\Connection::ACK_OK) {
+                //get last insert id
+                $lastInsertId = MySQL\Connection::getInstance()->getLastInsertId();
+            }
+            
+            return array('code' => $code , 'lastInsertId' => $lastInsertId ) ;
         }
-
+        
         static function update($openingId, $openingVO) {
 
             $mysqli = MySQL\Connection::getInstance()->getHandle();

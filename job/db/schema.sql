@@ -114,3 +114,16 @@ CREATE TABLE job_admin (
 
 alter table  job_admin add constraint UNIQUE uniq_admin_email (email);
 
+
+drop table if exists job_document;
+CREATE TABLE job_document (
+        id int(11) NOT NULL auto_increment,
+	mime varchar(64) not null,
+	size int not null,
+	store_name varchar(128) not null,
+	original_name varchar(64) not null,
+	created_on TIMESTAMP  default '0000-00-00 00:00:00',
+	updated_on TIMESTAMP   default '0000-00-00 00:00:00',
+	PRIMARY KEY (id)) ENGINE =MYISAM ;
+
+

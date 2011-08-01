@@ -45,3 +45,9 @@ div #left-panel {
 div #main-panel {
     padding:10px;
 }
+
+div #preview {
+    padding:20px;
+    border: 1px solid blue ;
+    margin-bottom: 20px;
+}

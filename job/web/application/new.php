@@ -36,23 +36,16 @@ $userVO = FormAuthentication::getLoggedInUser();
         
         <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
 
-        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.3.0/build/cssgrids/grids-min.css">
+        <link rel="stylesheet" type="text/css" href="/css/grids-min.css">
         <link rel="stylesheet" type="text/css" href="/css/main.css">
         
         <!-- app css here -->
         <!-- include any javascript here -->
         <script type="text/javascript" src="/js/jquery-1.6.2.min.js"></script>
         <script type="text/javascript" src="/js/jquery.validate.min.js"></script>
-        <script type="text/javascript" src="/js/json2.js"></script>
-
-        <!-- swfupload related stuff -->
-        <link href="/swfupload/default.css" rel="stylesheet" type="text/css" />
-        <script type="text/javascript" src="/swfupload/swfupload.js"></script>
-        <script type="text/javascript" src="/swfupload/js/swfupload.queue.js"></script>
-        <script type="text/javascript" src="/swfupload/js/fileprogress.js"></script>
-        <script type="text/javascript" src="/swfupload/js/handlers.js"></script>
-
+        
         <script type="text/javascript">
+            
             $(document).ready(function(){
                 //form validator
                 $("#web-form1").validate({
@@ -61,50 +54,7 @@ $userVO = FormAuthentication::getLoggedInUser();
 
             });
 
-            //swffileupload related javascript
-            var swfu;
-
-		window.onload = function() {
-			var settings = {
-				flash_url : "/swfupload/swfupload.swf",
-				upload_url: "/swfupload/receiver.php",
-				post_params: {"PHPSESSID" : "<?php echo session_id(); ?>"},
-				file_size_limit : "10 MB",
-				file_types : "*.*",
-				file_types_description : "All Files",
-				file_upload_limit : 100,
-				file_queue_limit : 0,
-				custom_settings : {
-					progressTarget : "fsUploadProgress",
-					cancelButtonId : "btnCancel"
-				},
-				debug: false,
-
-				// Button settings
-				button_image_url: "/swfupload/images/TestImageNoText_65x29.png",
-				button_width: "65",
-				button_height: "29",
-				button_placeholder_id: "spanButtonPlaceHolder",
-				button_text: '<span class="theFont">Upload</span>',
-				button_text_style: ".theFont { font-size: 16; }",
-				button_text_left_padding: 12,
-				button_text_top_padding: 3,
-
-				// The event handler functions are defined in handlers.js
-				file_queued_handler : fileQueued,
-				file_queue_error_handler : fileQueueError,
-				file_dialog_complete_handler : fileDialogComplete,
-				upload_start_handler : uploadStart,
-				upload_progress_handler : uploadProgress,
-				upload_error_handler : uploadError,
-				upload_success_handler : uploadSuccess,
-				upload_complete_handler : uploadComplete,
-				queue_complete_handler : queueComplete	// Queue plugin event
-			};
-
-			swfu = new SWFUpload(settings);
-	     };
-
+            
         </script>
 
     </head>
@@ -126,13 +76,14 @@ $userVO = FormAuthentication::getLoggedInUser();
                         <div class="yui3-u-19-24">
                             <div id="main-panel">
 
-                                    <h2> Send Application </h2>
+                                    
                                      <div>
                                         <!-- include opening details -->
                                         <?php  echo $openingHtml; ?>
                                             
                                     </div>
 
+                                    <h2> Send Application </h2>
                                     <p class="help-text">
                                        Please fill in the details below and post your job opening.
 
@@ -212,18 +163,7 @@ $userVO = FormAuthentication::getLoggedInUser();
                                             <div class="text-container">
                                                 <textarea  name="cv_skill" cols="50" rows="4" ><?php echo $sticky->get('cv_skill'); ?></textarea>
                                             </div>
-
-                                            <!-- file upload component  -->
-                                            <div class="fieldset flash" id="fsUploadProgress">
-                                                <span class="legend">Upload Queue</span>
-                                            </div>
-                                            <div id="divStatus">0 Files Uploaded</div>
-                                            <div>
-                                                    <span id="spanButtonPlaceHolder"></span>
-                                                    <input id="btnCancel" type="button" value="Cancel All Uploads" onclick="swfu.cancelQueue();" disabled="disabled" style="margin-left: 2px; font-size: 8pt; height: 29px;" />
-                                            </div>
-
-
+                                          
                                             <div class="button-container">
 
                                                 <div class="submit">

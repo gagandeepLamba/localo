@@ -52,9 +52,6 @@ webgloo.gMedia.table = {
 
     },
     removeRow : function(documentId){
-        //remove this row
-        tableRowId = "div#preview table tr#" + documentId ;
-        $(tableRowId).remove();
         //go through rows array and delete the one matching this id
         for(i = 0 ; i < webgloo.gMedia.table.rows.length ; i++ ) {
             var row = webgloo.gMedia.table.rows[i];
@@ -68,7 +65,12 @@ webgloo.gMedia.table = {
             }
 
         }
+        //write to form element
         webgloo.gMedia.table.flush();
+        //remove this row on UI
+        tableRowId = "div#preview table tr#" + documentId ;
+        $(tableRowId).remove();
+       
 
     },
     addRow : function(documentId,documentName) {
@@ -80,11 +82,13 @@ webgloo.gMedia.table = {
             id: documentId ,
             name: documentName
         };
+        webgloo.gMedia.table.rows.push(row);
+        webgloo.gMedia.table.flush();
+        //UI update should be the last step!
         buffer = this.rowHtml.supplant(row);
         //Add this html to table in preview DIV
         $("div#preview table").append(buffer);
-        webgloo.gMedia.table.rows.push(row);
-        webgloo.gMedia.table.flush();
+        
 
 
     },

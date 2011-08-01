@@ -21,11 +21,12 @@ if (isset($_POST['save']) && ($_POST['save'] == 'Save')) {
     $fvalues = $fhandler->getValues();
     $ferrors = $fhandler->getErrors();
     
-    $locationOnError = '/application/new.php?g_opening_id='.$_POST['opening_id'];
-    $locationOnSuccess = '/';
+    
+    
     
     
     if ($fhandler->hasErrors()) {
+        $locationOnError = '/application/new.php?g_opening_id='.$_POST['opening_id'];
         $gWeb->store('sticky_map', $fvalues);
         $gWeb->store('form_errors',$fhandler->getErrors());
         header("location: " . $locationOnError);
@@ -33,8 +34,9 @@ if (isset($_POST['save']) && ($_POST['save'] == 'Save')) {
     } else {
         //push values in DB
         //@todo - after success - attach a TxID to this application
+        //@todo - linkedIN profile for application
         $applicationDao = new webgloo\job\dao\Application();
-        $applicationDao->create($fvalues['organization_id'],
+        $data = $applicationDao->create($fvalues['organization_id'],
                             $fvalues['opening_id'],
                             $fvalues['user_id'],
                             $fvalues['forwarder_email'],
@@ -47,6 +49,14 @@ if (isset($_POST['save']) && ($_POST['save'] == 'Save')) {
                             $fvalues['cv_education'],
                             $fvalues['cv_location'],
                             $fvalues['cv_skill']);
+
+        $code = $data['code'];
+        if ($code != webgloo\common\mysql\Connection::ACK_OK ) {
+            //we are not prepared to handle any other code!
+            trigger_error("Error in Database operation");
+        }
+        
+        $locationOnSuccess = '/application/edit-media.php?g_application_id='.$data['lastInsertId'];
         //Go to success page!
         header("location: " . $locationOnSuccess);
     }

@@ -17,6 +17,11 @@ use webgloo\job\mysql as mysql;
             return $rows ;
         }
 
+        function getRecordOnId($applicationId) {
+            $row = mysql\Application::getRecordOnId($applicationId);
+            return $row ;
+        }
+
         function create($organizationId,
                 $openingId, $userId, $forwarderEmail, $cvName,$cvTitle, $cvPhone,
                 $cvEmail, $cvDescription,$cvCompany, $cvEducation,$cvLocation,$cvSkill) {
@@ -42,7 +47,8 @@ use webgloo\job\mysql as mysql;
 
 
             //store into DB layer
-            mysql\Application::create($applicationVO);
+            $data = mysql\Application::create($applicationVO);
+            return $data ;
         }
 
         function update($status) {

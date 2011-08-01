@@ -51,6 +51,10 @@ namespace webgloo\common\mysql {
 
             self::$instance == NULL;
         }
+        
+        public function getLastInsertId() {
+            return $this->mysqli->insert_id ;
+        }
 
         private function initDataBase() {
 

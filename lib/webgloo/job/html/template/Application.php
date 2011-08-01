@@ -21,7 +21,7 @@ namespace webgloo\job\html\template {
 
         }
 
-        static function getUserSummary($row) {
+        static function getUserSummary($row,$action=false) {
             $flexy = Flexy::getInstance();
             $flexy->compile('/application/user/summary.tmpl');
             $view = new \stdClass;
@@ -43,11 +43,12 @@ namespace webgloo\job\html\template {
 
             $view->cvDescription = substr($row['cv_description'],0,160);
             $view->cvDescription .= ' ...';
+            $view->action = $action ;
             $html = $flexy->bufferedOutputObject ($view);
             return $html ;
 
         }
-
+        
     }
 
 }
