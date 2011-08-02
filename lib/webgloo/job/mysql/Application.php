@@ -7,6 +7,16 @@ namespace webgloo\job\mysql {
     class Application {
         const MODULE_NAME = 'webgloo\common\mysql\Application';
 
+        static function getDocuments($applicationId){
+            $mysqli = MySQL\Connection::getInstance()->getHandle();
+            $applicationId = $mysqli->real_escape_string($applicationId);
+
+            $sql = " select * from job_document where entity_id = {applicationId} and entity_name = 'APPLICATION' " ;
+            $sql = \str_replace("{applicationId}", $applicationId, $sql);
+            $rows = MySQL\Helper::fetchRows($mysqli, $sql);
+            return $rows;
+        }
+
         static function getRecords($organizationId,$openingId) {
             $mysqli = MySQL\Connection::getInstance()->getHandle();
             $organizationId = $mysqli->real_escape_string($organizationId);

@@ -18,6 +18,22 @@ $applicationDao = new webgloo\job\dao\Application();
 $applicationDBRow = $applicationDao->getRecordOnId($applicationId);
 $applicationHtml = webgloo\job\html\template\Application::getUserSummary($applicationDBRow,false);
 
+//find document id and names
+$documentDBRows = $applicationDao->getDocuments($applicationId);
+$documentArray = array();
+foreach($documentDBRows as $documentDBRow){
+    array_push($documentArray,array('id' => $documentDBRow['id'], 'name' => $documentDBRow['original_name']));
+}
+
+//json encode the $docs array
+// this value is written to docs_array element of form
+
+$documentArrayAsJson = json_encode($documentArray);
+//@todo fix json encoding issue - right now if we put this string as
+// frm.element.value = "json_string" then we have escaping issues since the json_string
+// itself contains double quotes.
+
+
 //find and destroy sticky map
 $sticky = new Sticky($gWeb->find(Constants::STICKY_MAP,true));
 //This method will throw an error
@@ -65,7 +81,7 @@ $userVO = FormAuthentication::getLoggedInUser();
                 }) ;
 
                 //initialize gMedia table with documentId coming from server
-                webgloo.gMedia.debug = false ;
+                webgloo.gMedia.debug = true ;
                 webgloo.gMedia.table.load();
 
             });
@@ -77,7 +93,11 @@ $userVO = FormAuthentication::getLoggedInUser();
                 var settings = {
                     flash_url : "/swfupload/swfupload.swf",
                     upload_url: "/swfupload/receiver.php",
-                    post_params: {"PHPSESSID" : "<?php echo session_id(); ?>"},
+                    post_params: {
+                        "PHPSESSID" : "<?php echo session_id(); ?>",
+                        "entity_id" : "<?php echo $applicationId;  ?>",
+                        "entity_name" : "APPLICATION"
+                    },
                     file_size_limit : "10 MB",
                     file_types : "*.*",
                     file_types_description : "All Files",
@@ -175,27 +195,9 @@ $userVO = FormAuthentication::getLoggedInUser();
                                         <input id="btnCancel" type="button" value="Cancel All Uploads" onclick="swfu.cancelQueue();" disabled="disabled" style="margin-left: 2px; font-size: 8pt; height: 29px;" />
                                     </div>
 
-
-                                    <div class="button-container">
-
-                                        <div class="submit">
-                                            <div>
-                                                <button type="submit" name="save" value="Save" onclick="this.setAttribute('value','Save');" ><span>Save</span></button>
-                                            </div>
-                                        </div>
-
-                                        <div class="button">
-                                            <div>
-                                                <button type="button" name="cancel" onClick="javascript:go_back('http://www.test2.com');"><span>Cancel</span></button>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-
                                     <!-- hidden fields -->
                                     <input type="hidden" name="application_id" value="<?php echo $applicationId; ?>" />
-                                    <input type="hidden" name="document_rows" value="" />
+                                    <input type="hidden" name="document_array_json" value='<?php echo $documentArrayAsJson; ?>' />
                                     
                                     <div style="clear: both;"></div>
 

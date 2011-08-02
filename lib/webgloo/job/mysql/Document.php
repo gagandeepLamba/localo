@@ -11,18 +11,20 @@ namespace webgloo\job\mysql {
 
             $mysqli = MySQL\Connection::getInstance()->getHandle();
 
-            $sql = " insert into job_document(store_name, original_name,mime,size,created_on)";
-            $sql .= " values(?,?,?,?,now()) ";
+            $sql = " insert into job_document(store_name, original_name,mime,size,created_on,entity_id,entity_name)";
+            $sql .= " values(?,?,?,?,now(),?,? ) ";
 
             $code = MySQL\Connection::ACK_OK;
 
             $stmt = $mysqli->prepare($sql);
             if ($stmt) {
-                $stmt->bind_param("sssi",
+                $stmt->bind_param("sssiis",
                         $document->storeName,
                         $document->originalName,
                         $document->mime,
-                        $document->size);
+                        $document->size,
+                        $document->entityId,
+                        $document->entityName);
 
                 $stmt->execute();
 

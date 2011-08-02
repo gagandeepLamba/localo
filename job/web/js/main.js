@@ -21,34 +21,35 @@ webgloo.gMedia.table = {
 
         //load using document property
         frm = document.forms["web-form1"];
-        var strRows = frm.document_rows.value ;
-
-
-        if(strRows.lenght > 0 ) {
+        var strRows = frm.document_array_json.value ;
+        
+        if(strRows.length > 0 ) {
             if(webgloo.gMedia.debug) {
-                alert( "existing docs :: length => " + strRows.length);
+                alert( "existing doc array json is ::  " + strRows);
             }
             //objectify
             var rows = JSON.parse(strRows);
             for(i = 0 ;i < rows.length ; i++) {
                 //process ith row
-                webgloo.gMedia.table.addRow(row[i].id, rows[i].name);
+                webgloo.gMedia.table.addRow(rows[i].id, rows[i].name);
             }
         }
 
     },
     flush : function() {
         //override persistent store with our rows value
+
         try{
             var data = JSON.stringify(webgloo.gMedia.table.rows);
+             frm = document.forms["web-form1"];
+             frm.document_array_json.value = data ;
+             if(webgloo.gMedia.debug) {
+                alert("saving doc json :: " +  data);
+             }
         } catch(ex) {
             alert(ex.toString());
         }
-        frm = document.forms["web-form1"];
-        frm.document_rows.value = data ;
-        if(webgloo.gMedia.debug) {
-            alert("saving doc json :: " +  data);
-        }
+       
 
     },
     removeRow : function(documentId){
@@ -75,7 +76,7 @@ webgloo.gMedia.table = {
     },
     addRow : function(documentId,documentName) {
         if(webgloo.gMedia.debug) {
-            alert( "Adding doc :: name :: " + documentName);
+            alert( "Adding doc :: id:: " + documentId + " name :: " + documentName);
         }
 
         var row = {

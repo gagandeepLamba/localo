@@ -18,20 +18,26 @@ if ($uploader->hasError()) {
 
 } else {
     //file upload success
-    //send back document data
-   
+
+    //swfupload control should have sent application_id in _POST
+    $applicationId = $_POST['application_id'];
     //send a json encoded response to JAVASCRIPT handler
+    //send back document data
     $document = new webgloo\job\view\Document();
    
     $document->originalName = $uploader->getName();
     $document->storeName = $uploader->getStoreName();
     $document->size = $uploader->getSize();
     $document->mime = $uploader->getMime();
+    //entity name and id
+    $document->entityName = $_POST['entity_name'];
+    $document->entityId = $_POST['entity_id'];
     //save in DB
     $documentDao = new webgloo\job\dao\Document();
     $data = $documentDao->create($document);
     //get last insert id
     $document->uuid = $data['lastInsertId'];
+    
 
     $code = 1;
     //send back

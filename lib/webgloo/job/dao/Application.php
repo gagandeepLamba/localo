@@ -12,6 +12,11 @@ use webgloo\job\mysql as mysql;
             return $rows ;
         }
 
+        function getDocuments($applicationId) {
+            $rows = mysql\Application::getDocuments($applicationId);
+            return $rows ;
+        }
+
         function getRecordsOnUserId($userId) {
             $rows = mysql\Application::getRecordsOnUserId($userId);
             return $rows ;

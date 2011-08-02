@@ -122,6 +122,8 @@ CREATE TABLE job_document (
 	size int not null,
 	store_name varchar(128) not null,
 	original_name varchar(64) not null,
+        entity_id int not null,
+        entity_name varchar(16) not null ,
 	created_on TIMESTAMP  default '0000-00-00 00:00:00',
 	updated_on TIMESTAMP   default '0000-00-00 00:00:00',
 	PRIMARY KEY (id)) ENGINE =MYISAM ;
