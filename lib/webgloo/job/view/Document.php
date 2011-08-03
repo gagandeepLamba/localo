@@ -12,7 +12,10 @@ namespace webgloo\job\view {
         public $size ;
         public $isOrphan ;
         public $originalName;
-        
+
+        public $entityName;
+        public $entityId;
+
         //create one from DB Row
         function create($row) {
             $document = new Document();
@@ -21,7 +24,11 @@ namespace webgloo\job\view {
             $document->storeName = $row['store_name'];
             $document->size = $row['size'];
             $document->mime = $row['mime'];
+
             $document->isOrphan = $row['is_orphan'];
+            $document->entityId = $row['entity_id'];
+            $document->entityName = $row['entity_name'];
+
             return $document ;
         }
 
