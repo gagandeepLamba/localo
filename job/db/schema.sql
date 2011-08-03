@@ -71,9 +71,6 @@ create table job_application(
 	PRIMARY KEY (id)) ENGINE = MYISAM;
 
 
---alter table  job_org add constraint UNIQUE uniq_ca_login (org_id,login);
-
-
 drop table if exists job_user;
 CREATE TABLE job_user (
         id int(11) NOT NULL auto_increment,
