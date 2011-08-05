@@ -47,7 +47,20 @@ namespace webgloo\job\mysql {
             $sql = " select opening.organization_name, opening.created_by, opening.bounty, opening.title, app.* " ;
             $sql .= " from job_application app, job_opening opening " ;
             $sql .= " where app.user_id = {userId} and app.opening_id = opening.id" ;
+           
             $sql = str_replace("{userId}", $userId, $sql);
+            $rows = MySQL\Helper::fetchRows($mysqli, $sql);
+            return $rows;
+        }
+
+        static function getRecordsOnUserAndOpeningId($userId,$openingId){
+            $mysqli = MySQL\Connection::getInstance()->getHandle();
+            $userId = $mysqli->real_escape_string($userId);
+            $openingId = $mysqli->real_escape_string($openingId);
+
+            $sql = " select * from job_application where user_id =  ".$userId  ;
+            $sql .= " and opening_id = ".$openingId ;
+            
             $rows = MySQL\Helper::fetchRows($mysqli, $sql);
             return $rows;
         }

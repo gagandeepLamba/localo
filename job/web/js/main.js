@@ -98,3 +98,47 @@ webgloo.gMedia.table = {
 }
 
 
+webgloo.gui = {
+    debug : false
+}
+
+webgloo.gui.Dialog = {
+
+    loadOpeningDetail : function(openingId){
+       var loadURI = "/ajax/opening/detail.php?g_opening_id=" + openingId ;
+       if(webgloo.gui.debug){
+            alert(" load opening detail :: id :: " + openingId);
+       }
+       this.showDialogBox('Opening details', loadURI);
+    },
+    loadApplicationDetail : function(applicationId){
+       var loadURI = "/ajax/application/detail.php?g_application_id=" + applicationId ;
+       if(webgloo.gui.debug){
+            alert(" load application detail :: id :: " + applicationId);
+       }
+       this.showDialogBox('Application details', loadURI);
+    },
+    showDialogBox : function(title,dataURI) {
+        //load dialog box with content of data URI
+        $("#gui-dialog").load(dataURI);
+        $('#gui-dialog').dialog('option', 'title', title);
+        $('#gui-dialog').dialog('option', 'width', 640);
+        $('#gui-dialog').dialog('option', 'height', 510);
+        $('#gui-dialog').dialog('option', 'position', 'center');
+        $('#gui-dialog').dialog('option', 'modal', true);
+        //Buttons for this dialog box
+        $('#gui-dialog').dialog('option', 'buttons',
+        {
+
+            "Close": function() {
+                $(this).dialog("close");
+                $(this).html("");
+            }
+
+        });
+
+        $("#gui-dialog").dialog("open");
+
+    }
+
+}

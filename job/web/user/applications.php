@@ -19,15 +19,42 @@ $userId = $userVO->uuid ;
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 
-    <head><title> Applications for <?php echo $userVO->email ; ?> </title>
+    <head><title> Applications sent by <?php echo $userVO->email ; ?> </title>
         
 
         <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
 
-        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.3.0/build/cssgrids/grids-min.css">
+        <link rel="stylesheet" type="text/css" href="/css/grids-min.css">
         <!-- app css here -->
         <link rel="stylesheet" type="text/css" href="/css/main.css">
+        <link rel="stylesheet" type="text/css" href="/css/jquery/flick/jquery-ui-1.8.14.custom.css">
+        <!-- app css here -->
         <!-- include any javascript here -->
+        <script type="text/javascript" src="/js/jquery-1.6.2.min.js"></script>
+        <!-- jquery UI and css -->
+
+        <script type="text/javascript" src="/js/jquery-ui-1.8.14.custom.min.js"></script>
+        <script type="text/javascript" src="/js/main.js"></script>
+
+        <script type="text/javascript">
+
+            $(document).ready(function(){
+                
+                //create dialog box
+                $("#gui-dialog").dialog({
+                    autoOpen: false,
+                    modal: true,
+                    draggable: true,
+                    position: 'center',
+                    width: '310px'}) ;
+
+                });
+
+                //show on demand
+
+
+        </script>
+
 
 
     </head>
@@ -50,7 +77,7 @@ $userId = $userVO->uuid ;
                         <div class="yui3-u-19-24">
                             <div id="main-panel">
                                 <!-- include opening details -->
-                                     <h3> Applications for <?php echo $userVO->email ; ?></h3>
+                                     <h3> Applications sent by <?php echo $userVO->email ; ?></h3>
 
                                         <?php
                                         //applications
@@ -58,7 +85,7 @@ $userId = $userVO->uuid ;
                                         $rows = $applicationDao->getRecordsOnUserId($userVO->uuid);
                                         
                                         foreach ($rows as $row) {
-                                            $html = webgloo\job\html\template\Application::getUserSummary($row);
+                                            $html = webgloo\job\html\template\Application::getUserDetail($row);
                                             echo $html;
                                         }
                                     ?>
@@ -79,6 +106,12 @@ $userId = $userVO->uuid ;
                 <?php include($_SERVER['APP_WEB_DIR'] . '/inc/site-footer.inc'); ?>
             </div>
 
+            <!-- code for common UI dialog box -->
+
+        <div id="gui-dialog" title="">
+            <div id="gui-dialog-results"> </div>
+        </div>
+            
     </body>
 </html>
 

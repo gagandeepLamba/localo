@@ -17,6 +17,11 @@ use webgloo\job\mysql as mysql;
             return $rows ;
         }
 
+        function getRecordsOnUserAndOpeningId($userId,$openingId) {
+            $rows = mysql\Application::getRecordsOnUserAndOpeningId($userId,$openingId);
+            return $rows ;
+        }
+
         function getRecordsOnUserId($userId) {
             $rows = mysql\Application::getRecordsOnUserId($userId);
             return $rows ;

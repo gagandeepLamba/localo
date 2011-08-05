@@ -67,8 +67,8 @@ namespace webgloo\auth {
             return 1;
         }
 
-        #region - query methods - will assume a session exists
-        # these methods throw exception
+        //region - query methods - will assume a session exists
+        // these methods throw exception
 
         static function getLoggedInUser() {
             //logon related data
@@ -98,7 +98,7 @@ namespace webgloo\auth {
             }
         }
 
-        #region try query methods - do not raise exception for these methods
+        //region try query methods - do not raise exception for these methods
 
         function tryUserRole() {
             //check if we have a session going

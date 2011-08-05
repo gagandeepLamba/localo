@@ -2,6 +2,8 @@
 include ('job-app.inc');
 include ($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
 
+use webgloo\auth\FormAuthentication;
+
 $openingId = $gWeb->getRequestParam('g_opening_id');
 webgloo\common\Util::isEmpty('openingId', $openingId);
 
@@ -11,6 +13,19 @@ webgloo\common\Util::isEmpty('$organizationId', $organizationId);
 
 $openingDao = new webgloo\job\dao\Opening();
 $openingDBRow = $openingDao->getRecordOnId($openingId);
+$applicationRows = array();
+
+if(FormAuthentication::tryUserRole()) {
+    //This method will throw an error
+    $userVO = FormAuthentication::getLoggedInUser();
+    $userId = $userVO->uuid ;
+    //Now get applications already sent by this user
+
+    $applicationDao = new webgloo\job\dao\Application();
+    $applicationRows = $applicationDao->getRecordsOnUserAndOpeningId($userId,$openingId);
+    
+}
+
 ?>
 
 
@@ -23,7 +38,7 @@ $openingDBRow = $openingDao->getRecordOnId($openingId);
 
         <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
 
-        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.3.0/build/cssgrids/grids-min.css">
+        <link rel="stylesheet" type="text/css" href="/css/grids-min.css">
         <!-- app css here -->
         <link rel="stylesheet" type="text/css" href="/css/main.css"/>
 
@@ -62,6 +77,16 @@ $openingDBRow = $openingDao->getRecordOnId($openingId);
                             echo $html;
                             ?>
                         </div>
+
+                        <!-- applications sent by a user -->
+                        <?php
+                            
+                            foreach($applicationRows as $applicationRow) {
+                                echo webgloo\job\html\template\Application::getUserSummary($applicationRow);
+
+                            }
+                        ?>
+
 
                     </div> <!-- main unit -->
                 </div> <!-- GRID -->
