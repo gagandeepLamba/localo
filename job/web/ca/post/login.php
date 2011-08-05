@@ -33,7 +33,10 @@ if (isset($_POST['login']) && ($_POST['login'] == 'Login')) {
         //create redirect uri using saved request object
         //destroy after reading this value
         $lastRequest = $gWeb->find(Constants::LAST_REQUEST,true);
-        $locationOnSuccess = $lastRequest->getAttribute(Constants::LAST_URI);
+        $locationOnSuccess = '/' ;
+	if(!empty($lastRequest)) { 
+		$locationOnSuccess = $lastRequest->getAttribute(Constants::LAST_URI);
+	}
         //successful logon
         header("location: " . $locationOnSuccess);
     }
