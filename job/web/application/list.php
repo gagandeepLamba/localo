@@ -30,10 +30,36 @@ $openingDBRow = $openingDao->getRecordOnId($openingId);
 
         <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
 
-        <link rel="stylesheet" type="text/css" href="/css/grids-min.css">
+       <link rel="stylesheet" type="text/css" href="/css/grids-min.css">
+        <link rel="stylesheet" type="text/css" href="/css/jquery/flick/jquery-ui-1.8.14.custom.css">
         <!-- app css here -->
         <link rel="stylesheet" type="text/css" href="/css/main.css">
-        <!-- include any javascript here -->
+
+        <script type="text/javascript" src="/js/jquery-1.6.2.min.js"></script>
+        <!-- jquery UI and css -->
+        <script type="text/javascript" src="/js/jquery-ui-1.8.14.custom.min.js"></script>
+        <script type="text/javascript" src="/js/main.js"></script>
+
+        <script type="text/javascript">
+
+            $(document).ready(function(){
+
+                //create dialog box
+                $("#gui-dialog").dialog({
+                    autoOpen: false,
+                    modal: true,
+                    draggable: true,
+                    position: 'center',
+                    width: '310px'}) ;
+
+                });
+
+                //show on demand
+
+
+        </script>
+
+        
 
 
     </head>
@@ -55,14 +81,18 @@ $openingDBRow = $openingDao->getRecordOnId($openingId);
                     </div>
                         <div class="yui3-u-19-24">
                             <div id="main-panel">
+
+                                <div>
+                                 <span class="header"> Applications for <?php echo $openingDBRow['title'] ; ?> </span>
+                            </div>
                                 <!-- include opening details -->
                                 
                                     <?php
-                                        $html = webgloo\job\html\template\Opening::getOrganizationDetail($openingDBRow);
+                                        $html = webgloo\job\html\template\Opening::getMainSummary($openingDBRow);
                                         echo $html;
                                         ?>
 
-                                        <h3> Applications </h3>
+                                        <h3> Applications (Total&nbsp;<?php echo $openingDBRow['application_count'] ; ?>) </h3>
 
                                         <?php
                                         //applications
@@ -90,6 +120,10 @@ $openingDBRow = $openingDao->getRecordOnId($openingId);
 
             <div id="ft">
                 <?php include($_SERVER['APP_WEB_DIR'] . '/inc/site-footer.inc'); ?>
+            </div>
+            <!-- code for common UI dialog box -->
+            <div id="gui-dialog" title="">
+                <div id="gui-dialog-results"> </div>
             </div>
 
     </body>

@@ -32,7 +32,8 @@ namespace webgloo\job\mysql {
             $mysqli = MySQL\Connection::getInstance()->getHandle();
             $applicationId = $mysqli->real_escape_string($applicationId);
 
-            $sql = " select opening.organization_name, opening.created_by, opening.bounty, opening.title, app.* " ;
+            $sql = " select opening.organization_name, opening.created_by, opening.bounty, opening.title, " ;
+            $sql .= " opening.description as opening_description,opening.skill as opening_skill, app.* " ;
             $sql .= " from job_application app, job_opening opening " ;
             $sql .= " where app.id = {applicationId} and app.opening_id = opening.id" ;
             $sql = str_replace("{applicationId}", $applicationId, $sql);
@@ -44,7 +45,8 @@ namespace webgloo\job\mysql {
             $mysqli = MySQL\Connection::getInstance()->getHandle();
             $userId = $mysqli->real_escape_string($userId);
 
-            $sql = " select opening.organization_name, opening.created_by, opening.bounty, opening.title, app.* " ;
+            $sql = " select opening.organization_name, opening.created_by, opening.bounty, opening.title, " ;
+            $sql .= " opening.description as opening_description, opening.skill as opening_skill, app.* " ;
             $sql .= " from job_application app, job_opening opening " ;
             $sql .= " where app.user_id = {userId} and app.opening_id = opening.id" ;
            

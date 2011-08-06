@@ -39,10 +39,36 @@ if(FormAuthentication::tryUserRole()) {
         <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
 
         <link rel="stylesheet" type="text/css" href="/css/grids-min.css">
+         <!-- app css here -->
+        <link rel="stylesheet" type="text/css" href="/css/main.css">
+        <link rel="stylesheet" type="text/css" href="/css/jquery/flick/jquery-ui-1.8.14.custom.css">
         <!-- app css here -->
-        <link rel="stylesheet" type="text/css" href="/css/main.css"/>
-
         <!-- include any javascript here -->
+        <script type="text/javascript" src="/js/jquery-1.6.2.min.js"></script>
+        <!-- jquery UI and css -->
+
+        <script type="text/javascript" src="/js/jquery-ui-1.8.14.custom.min.js"></script>
+        <script type="text/javascript" src="/js/main.js"></script>
+
+        <script type="text/javascript">
+
+            $(document).ready(function(){
+
+                //create dialog box
+                $("#gui-dialog").dialog({
+                    autoOpen: false,
+                    modal: true,
+                    draggable: true,
+                    position: 'center',
+                    width: '310px'}) ;
+
+                });
+
+                //show on demand
+
+
+        </script>
+
 
 
     </head>
@@ -70,9 +96,11 @@ if(FormAuthentication::tryUserRole()) {
                             <?php
                             $html = '' ;
                             if(\webgloo\auth\FormAuthentication::tryAdminRole()){
-                                $html = webgloo\job\html\template\Opening::getOrganizationDetail($openingDBRow);
+                                //we do not want action links for admins
+                                $html = webgloo\job\html\template\Opening::getUserDetail($openingDBRow,false);
                             } else {
-                                $html = webgloo\job\html\template\Opening::getUserDetail($openingDBRow);
+                                //we want action links on user opening details
+                                $html = webgloo\job\html\template\Opening::getUserDetail($openingDBRow,true);
                             }
                             echo $html;
                             ?>
@@ -80,10 +108,13 @@ if(FormAuthentication::tryUserRole()) {
 
                         <!-- applications sent by a user -->
                         <?php
+                            $count = 0 ;
                             
                             foreach($applicationRows as $applicationRow) {
-                                echo webgloo\job\html\template\Application::getUserSummary($applicationRow);
-
+                                $flag = ($count == 0 ) ? true : false ;
+                                //get vanilla application summary
+                                echo webgloo\job\html\template\Application::getSummary($applicationRow,array("header" => $flag));
+                                $count++ ;
                             }
                         ?>
 
@@ -104,7 +135,11 @@ if(FormAuthentication::tryUserRole()) {
 
 
         </div>
-
+          <!-- code for common UI dialog box -->
+        <div id="gui-dialog" title="">
+            <div id="gui-dialog-results"> </div>
+        </div>
+            
     </body>
 </html>
 

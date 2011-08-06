@@ -9,23 +9,16 @@ namespace webgloo\job\dao {
 
     class Opening {
 
-        //Add an application to this opening
-        //do not accept more than x # of resumes from a particular user
-        function addApplication($userId,$openingId,$email,$phone,$description,$documentId){
-            
-        }
-
-        function removeApplication($applicationId){
-
-        }
-
-        function markApplicationAsDuplicate($applicationId){
-
-        }
+       
 
         function getRecordOnId($openingId) {
             $row = mysql\Opening::getRecordOnId($openingId);
             return $row ;
+        }
+
+        function getRecordsOnOrgId($organizationId) {
+            $rows = mysql\Opening::getRecordsOnOrgId($organizationId);
+            return $rows ;
         }
 
         //@todo - getAllRecords should accept filters

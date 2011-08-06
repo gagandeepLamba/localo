@@ -42,6 +42,7 @@ create table job_opening(
 	bounty  int(11) ,
         org_id  int(11) not null ,
         location varchar(32) not null,
+        application_count int default 0 ,
         created_on timestamp default '0000-00-00 00:00:00',
 	updated_on timestamp default '0000-00-00 00:00:00' ,
 	PRIMARY KEY (id)) ENGINE = MYISAM;
@@ -125,4 +126,20 @@ CREATE TABLE job_document (
 	updated_on TIMESTAMP   default '0000-00-00 00:00:00',
 	PRIMARY KEY (id)) ENGINE =MYISAM ;
 
+
+
+
+DROP TRIGGER IF EXISTS trg_job_application_count;
+
+delimiter //
+CREATE TRIGGER trg_job_application_count AFTER INSERT ON job_application
+    FOR EACH ROW
+    BEGIN
+
+       update job_opening set application_count = application_count + 1
+       where id = NEW.opening_id ;
+       
+
+    END;//
+delimiter ;
 

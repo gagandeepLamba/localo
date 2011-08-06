@@ -32,13 +32,17 @@ namespace webgloo\job\view {
             $opening->title = $row['title'];
             $opening->uuid = $row['id'];
             $opening->organizationId = $row['org_id'];
+            
             $opening->organizationName = $row['organization_name'];
             $opening->createdOn = $row['created_on'];
             $opening->description = $row['description'];
             $opening->skill = $row['skill'];
+            
             $opening->bounty = $row['bounty'];
             $opening->createdBy = $row['created_by'];
             $opening->location = $row['location'];
+            $opening->applicationCount = $row['application_count'];
+            
             return $opening ;
         }
 

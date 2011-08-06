@@ -1,0 +1,17 @@
+
+<div class="application">
+    {if:header}
+        <span class="header"> My Applications </span>
+    {end:}
+    
+    <h3> {cvName} &nbsp;(Email &nbsp;{cvEmail} &nbsp; Phone &nbsp;{cvPhone}) </h3>
+    <p> Company: {cvCompany} &nbsp; Education : {cvEducation} &nbsp; Location : {cvLocation} </p>
+    <p> Skills: &nbsp; {cvSkill} </p>
+    <p> {cvDescription} </p>
+    
+    <div class="action-links">
+         <a href="#" class="show-detail" onClick="javascript:webgloo.gui.Dialog.loadApplicationDetail({applicationId})"> view details</a>
+        
+    </div>
+
+</div>

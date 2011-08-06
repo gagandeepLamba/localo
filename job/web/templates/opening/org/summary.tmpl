@@ -1,18 +1,19 @@
+<div class="opening">
 
-<div class="summary"  style="border-bottom:1px solid #ccc;">
-   
-    <h2>  {title:h} </h2>
+    <h2> <a href="/opening/detail.php?g_opening_id={uuid}&g_org_id={organizationId}"> {title:h} </a> </h2>
     <span> Posted by:&nbsp;{createdBy:h} </span>
-    <span> Organization:&nbsp;{organizationName:h} </span>
-    <span> Location:&nbsp;{location:h} </span>
+    <span> of &nbsp;{organizationName:h} </span>
+    <span> (&nbsp;{location:h}) </span>
     <p> {description:h} </p>
     <p> Skills:&nbsp;{skill:h} </p>
-    <p> Bounty:&nbsp;{bounty:h} </p>
-
-    <p> 
-        <a href="/application/list.php?g_opening_id={uuid}"> View Applications </a>
+    <div class="bounty"> Reward&nbsp;{bounty:h}&nbsp;&#36;</div>
+     <div class="action-links">
+        <a href="#" id="{uuid}" class="show-detail" onClick="javascript:webgloo.gui.Dialog.loadOpeningDetail({uuid})"> view details</a>
+        {if:showApplication}
+        &nbsp;|&nbsp;
+        <a href="/application/list.php?g_opening_id={uuid}"> view applications </a> &nbsp;(total {applicationCount})
+        {end:}
         
-
-    </p>
+    </div>
 
 </div>

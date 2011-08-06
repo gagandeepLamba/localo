@@ -10,7 +10,7 @@ $sticky = new Form\Sticky($gWeb->find(Constants::STICKY_MAP, true));
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 
-       <head><title> logon page</title>
+       <head><title> User logon page</title>
          
 
         <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
@@ -51,7 +51,7 @@ $sticky = new Form\Sticky($gWeb->find(Constants::STICKY_MAP, true));
                         <div class="yui3-u-19-24">
                             <div id="main-panel">
 
-                                    <h2> Logon </h2>
+                                    <h2> User Logon </h2>
 
 
                                     <p class="help-text">

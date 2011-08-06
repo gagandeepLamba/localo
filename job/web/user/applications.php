@@ -25,14 +25,12 @@ $userId = $userVO->uuid ;
         <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
 
         <link rel="stylesheet" type="text/css" href="/css/grids-min.css">
-        <!-- app css here -->
-        <link rel="stylesheet" type="text/css" href="/css/main.css">
         <link rel="stylesheet" type="text/css" href="/css/jquery/flick/jquery-ui-1.8.14.custom.css">
         <!-- app css here -->
-        <!-- include any javascript here -->
+        <link rel="stylesheet" type="text/css" href="/css/main.css">
+        
         <script type="text/javascript" src="/js/jquery-1.6.2.min.js"></script>
         <!-- jquery UI and css -->
-
         <script type="text/javascript" src="/js/jquery-ui-1.8.14.custom.min.js"></script>
         <script type="text/javascript" src="/js/main.js"></script>
 
@@ -76,17 +74,18 @@ $userId = $userVO->uuid ;
                     </div>
                         <div class="yui3-u-19-24">
                             <div id="main-panel">
+                                
                                 <!-- include opening details -->
-                                     <h3> Applications sent by <?php echo $userVO->email ; ?></h3>
-
                                         <?php
                                         //applications
                                         $applicationDao = new webgloo\job\dao\Application();
                                         $rows = $applicationDao->getRecordsOnUserId($userVO->uuid);
-                                        
+                                        $count = 0 ;
                                         foreach ($rows as $row) {
-                                            $html = webgloo\job\html\template\Application::getUserDetail($row);
+                                            $flag = ($count == 0 ) ? true : false ;
+                                            $html = webgloo\job\html\template\Application::getUserSummary($row, array("header" => $flag , "user" => $userVO->email));
                                             echo $html;
+                                            $count++ ;
                                         }
                                     ?>
 
@@ -106,8 +105,7 @@ $userId = $userVO->uuid ;
                 <?php include($_SERVER['APP_WEB_DIR'] . '/inc/site-footer.inc'); ?>
             </div>
 
-            <!-- code for common UI dialog box -->
-
+        <!-- code for common UI dialog box -->
         <div id="gui-dialog" title="">
             <div id="gui-dialog-results"> </div>
         </div>

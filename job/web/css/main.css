@@ -2,40 +2,44 @@
 body {
     margin: auto; /* center in viewport */
     width: 960px;
-    font-family: Arial ;
-    font-size: 12px;
+    font-family: 'Georgia' , 'Trebuchet MS', 'Verdana', 'Arial' , 'Sans Serif' ;
+    font-size: 15px;
+    /* background : #EAEAEA; */
 }
 
 #site-banner {
-    height:200px;
+    /* height:160px; */
     margin:0;
     width:100%;
-    background-color :#263C52;
+    /* background-color: #EEE; */
+    /* background-color :#263C52; */
     /* background-color: #EEF4F8 ;*/
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #ccc ;
 
 }
 
 #site-banner h1 {
     font-size:30px;
     text-align:center;
-    font-family: 'Trebuchet MS','Lucida Grande','Verdana','Arial','Sans-Serif';
+    /* font-family: 'Trebuchet MS','Lucida Grande','Verdana','Arial','Sans-Serif'; */
     font-weight: bold;
-    padding-top: 70px;
-    padding-bottom: 20px;
+    /*padding-top: 30px; 
+    padding-bottom: 20px; */
 }
 
 #site-banner h1 a {
-      color: #FFFFFF;
+      /* color: #FFFFFF; */
       text-decoration: none ;
 }
 
 #site-banner .description {
-    color:white ;
+    /* color:white ; */
     text-align: center ;
     font-size :18px;
     font-family:'Trebuchet MS','Lucida Grande','Verdana','Arial','Sans-Serif';
     font-weight: bold;
+    margin-bottom :20px;
 
 }
 
@@ -51,3 +55,76 @@ div #preview {
     border: 1px solid blue ;
     margin-bottom: 20px;
 }
+
+div .opening {
+    margin-left: 10px;
+    padding:10px ;
+    border-bottom: 1px solid #ccc;
+}
+
+div .opening a {
+   text-decoration: none ;
+}
+
+div .bounty {
+    font-size: 14px;
+    font-weight: bold;
+    padding:10px;
+    color:green;
+}
+
+div .action-links {
+    margin-top: 20px;
+}
+
+div .action-links a {
+    text-decoration: none ;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+div .application {
+    padding:10px;
+    margin-left: 10px;
+}
+
+div  .header {
+    color : #AAA ;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+div .help {
+    border-bottom : 2px solid green;
+    padding:10px;
+    
+}
+
+div .application-box {
+    border-top: 2px solid green ;
+    /* border-bottom : 2px solid green; */
+}
+
+.toolbar {
+    margin-top:10px;
+    padding:20px;
+    border-bottom: 2px solid green;
+    
+}
+
+.toolbar a {
+    text-decoration: none ;
+}
+
+div #left-panel {
+    
+}
+
+
+div #left-panel a {
+    text-decoration: none ;
+    font-weight: bold;
+    font-size :16px;
+}
+
+

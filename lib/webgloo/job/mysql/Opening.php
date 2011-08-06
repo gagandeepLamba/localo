@@ -14,6 +14,14 @@ namespace webgloo\job\mysql {
             return $rows;
         }
 
+        static function getRecordsOnOrgId($organizationId) {
+            $mysqli = MySQL\Connection::getInstance()->getHandle();
+            $sql = " select * from job_opening where org_id = {orgId} order by created_on desc" ;
+            $sql = str_replace("{orgId}",$organizationId, $sql);
+            $rows = MySQL\Helper::fetchRows($mysqli, $sql);
+            return $rows;
+        }
+        
         static function getRecordOnId($openingId) {
             $mysqli = MySQL\Connection::getInstance()->getHandle();
             $sql = " select * from job_opening where id = ".$openingId ;

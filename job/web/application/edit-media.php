@@ -16,7 +16,7 @@ Util::isEmpty('applicatonId', $applicationId);
 
 $applicationDao = new webgloo\job\dao\Application();
 $applicationDBRow = $applicationDao->getRecordOnId($applicationId);
-$applicationHtml = webgloo\job\html\template\Application::getUserSummary($applicationDBRow,false);
+$applicationHtml = webgloo\job\html\template\Application::getUserSummary($applicationDBRow,array());
 
 //find document id and names
 $documentDBRows = $applicationDao->getDocuments($applicationId);
@@ -52,13 +52,14 @@ $userVO = FormAuthentication::getLoggedInUser();
 
         <!-- swfupload related stuff -->
         <link href="/swfupload/default.css" rel="stylesheet" type="text/css" />
-        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.3.0/build/cssgrids/grids-min.css">
+        <link rel="stylesheet" type="text/css" href="/css/grids-min.css">
+        <link rel="stylesheet" type="text/css" href="/css/jquery/flick/jquery-ui-1.8.14.custom.css">
         <link rel="stylesheet" type="text/css" href="/css/main.css">
 
         <!-- app css here -->
         <!-- include any javascript here -->
         <script type="text/javascript" src="/js/jquery-1.6.2.min.js"></script>
-        <script type="text/javascript" src="/js/jquery.validate.min.js"></script>
+        <script type="text/javascript" src="/js/jquery-ui-1.8.14.custom.min.js"></script>
         <script type="text/javascript" src="/js/json2.js"></script>
         <!-- main.js uses jquery and json -->
         <script type="text/javascript" src="/js/main.js"></script>
@@ -71,6 +72,8 @@ $userVO = FormAuthentication::getLoggedInUser();
 
         
         <script type="text/javascript">
+
+           
             //attach events
             $(document).ready(function(){
                 $("a.removeMedia").live("click", function(event){
@@ -81,8 +84,16 @@ $userVO = FormAuthentication::getLoggedInUser();
                 }) ;
 
                 //initialize gMedia table with documentId coming from server
-                webgloo.gMedia.debug = true ;
+                webgloo.gMedia.debug = false ;
                 webgloo.gMedia.table.load();
+
+                 //create dialog box
+                $("#gui-dialog").dialog({
+                    autoOpen: false,
+                    modal: true,
+                    draggable: true,
+                    position: 'center',
+                    width: '310px'}) ;
 
             });
             
@@ -155,10 +166,12 @@ $userVO = FormAuthentication::getLoggedInUser();
 
                     <div class="yui3-u-19-24">
                         <div id="main-panel">
-
-                            <div>
+                            <h2> Edit documents for application </h2>
+                            <br>
+                            
+                            <div class="help">
                                 You can add or remove documents for your application here. You can also do that later.
-                                <a href="/"> I will attach the documents later.</a>
+                                <a href="/"> Fine, I will attach the documents later.</a>
                             </div>
                             <div>
                                 <!-- include application summary  -->
@@ -218,10 +231,13 @@ $userVO = FormAuthentication::getLoggedInUser();
         </div> <!-- body wrapper -->
 
         <div id="ft">
-        <?php include($_SERVER['APP_WEB_DIR'] . '/inc/site-footer.inc'); ?>
-
-
+            <?php include($_SERVER['APP_WEB_DIR'] . '/inc/site-footer.inc'); ?>
         </div>
 
+        <!-- code for common UI dialog box -->
+        <div id="gui-dialog" title="">
+            <div id="gui-dialog-results"> </div>
+        </div>
+        
     </body>
 </html>

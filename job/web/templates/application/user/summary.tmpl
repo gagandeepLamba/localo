@@ -1,9 +1,39 @@
 
-<div style="border-bottom:1px solid #ccc;">
-  
-    <h3> Name: {cvName} &nbsp; Email: {cvEmail} &nbsp; Phone: {cvPhone} </h3>
-    <p> Compnay: {cvCompany} &nbsp; Education : {cvEducation} &nbsp; Location : {cvLocation} </p>
-    <p> Skills: &nbsp; {cvSkill} </p>
-    <p> {cvDescription} </p>
-    
+<div>
+    {if:header}
+     <span class="header"> Applications sent by {user} </span>
+    {end:}
+</div>
+
+<div class="application-box">
+
+    <div class="opening">
+
+        <h2> {title:h} </h2>
+        <span> Posted by:&nbsp;{createdBy:h} </span>
+        <span> of &nbsp;{organizationName:h} </span>
+        <span> (&nbsp;{createdOn:h}) </span>
+        <p> {openingDescription:h} </p>
+        <p> Skills:&nbsp;{skill:h} </p>
+        <div class="bounty"> Reward&nbsp;{bounty:h}&nbsp;&#36;</div>
+
+    </div>
+
+    <div class="application">
+        {if:header}
+            <span class="header"> My Applications </span>
+        {end:}
+
+        <h3> {cvName} &nbsp;(Email &nbsp;{cvEmail} &nbsp; Phone &nbsp;{cvPhone}) </h3>
+        <p> Company: {cvCompany} &nbsp; Education : {cvEducation} &nbsp; Location : {cvLocation} </p>
+        <p> Skills: &nbsp; {cvSkill} </p>
+        <p> {cvDescription} </p>
+
+        <div class="action-links">
+             <a href="#" class="show-detail" onClick="javascript:webgloo.gui.Dialog.loadApplicationDetail({applicationId})"> view details</a>
+
+        </div>
+
+    </div>
+
 </div>

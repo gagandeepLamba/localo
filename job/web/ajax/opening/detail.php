@@ -7,13 +7,8 @@ webgloo\common\Util::isEmpty('openingId', $openingId);
 
 $openingDao = new webgloo\job\dao\Opening();
 $openingDBRow = $openingDao->getRecordOnId($openingId);
+$html = webgloo\job\html\template\Opening::getUserDetail($openingDBRow,false);
 
-$html = '' ;
-if(\webgloo\auth\FormAuthentication::tryAdminRole()){
-    $html = webgloo\job\html\template\Opening::getOrganizationDetail($openingDBRow);
-} else {
-    $html = webgloo\job\html\template\Opening::getUserDetail($openingDBRow);
-}
 echo $html;
 
 ?>

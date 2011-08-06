@@ -124,7 +124,7 @@ webgloo.gui.Dialog = {
         $('#gui-dialog').dialog('option', 'title', title);
         $('#gui-dialog').dialog('option', 'width', 640);
         $('#gui-dialog').dialog('option', 'height', 510);
-        $('#gui-dialog').dialog('option', 'position', 'center');
+        $('#gui-dialog').dialog('option', 'position', 'top');
         $('#gui-dialog').dialog('option', 'modal', true);
         //Buttons for this dialog box
         $('#gui-dialog').dialog('option', 'buttons',
