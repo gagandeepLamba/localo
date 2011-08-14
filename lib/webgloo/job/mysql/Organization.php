@@ -6,7 +6,7 @@ namespace webgloo\job\mysql {
     use webgloo\common\mysql as MySQL ;
 
     class Organization {
-        const MODULE_NAME = 'webgloo\common\mysql\Organization';
+        const MODULE_NAME = 'webgloo\job\mysql\Organization';
 
         static function getRecords() {
             $mysqli = MySQL\Connection::getInstance()->getHandle();

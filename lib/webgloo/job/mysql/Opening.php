@@ -5,7 +5,7 @@ namespace webgloo\job\mysql {
     use webgloo\common\mysql as MySQL;
 
     class Opening {
-        const MODULE_NAME = 'webgloo\common\mysql\Opening';
+        const MODULE_NAME = 'webgloo\job\mysql\Opening';
 
         static function getAllRecords() {
             $mysqli = MySQL\Connection::getInstance()->getHandle();

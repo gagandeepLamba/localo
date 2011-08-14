@@ -5,7 +5,7 @@ namespace webgloo\job\mysql {
     use webgloo\common\mysql as MySQL;
 
     class Admin {
-        const MODULE_NAME = 'webgloo\common\mysql\Admin';
+        const MODULE_NAME = 'webgloo\job\mysql\Admin';
 
         static function getRecords() {
             $mysqli = MySQL\Connection::getInstance()->getHandle();

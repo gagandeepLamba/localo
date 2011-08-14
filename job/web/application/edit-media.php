@@ -50,10 +50,11 @@ $userVO = FormAuthentication::getLoggedInUser();
 
         <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
 
-        <!-- swfupload related stuff -->
+       
         <link href="/swfupload/default.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" type="text/css" href="/css/grids-min.css">
         <link rel="stylesheet" type="text/css" href="/css/jquery/flick/jquery-ui-1.8.14.custom.css">
+        <link rel="stylesheet" type="text/css" href="/swfupload/default.css">
         <link rel="stylesheet" type="text/css" href="/css/main.css">
 
         <!-- app css here -->
@@ -64,7 +65,7 @@ $userVO = FormAuthentication::getLoggedInUser();
         <!-- main.js uses jquery and json -->
         <script type="text/javascript" src="/js/main.js"></script>
 
-        
+         <!-- swfupload related stuff -->
         <script type="text/javascript" src="/swfupload/swfupload.js"></script>
         <script type="text/javascript" src="/swfupload/js/swfupload.queue.js"></script>
         <script type="text/javascript" src="/swfupload/js/fileprogress.js"></script>

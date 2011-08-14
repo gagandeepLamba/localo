@@ -5,7 +5,7 @@ namespace webgloo\job\mysql {
     use webgloo\common\mysql as MySQL;
 
     class Application {
-        const MODULE_NAME = 'webgloo\common\mysql\Application';
+        const MODULE_NAME = 'webgloo\job\mysql\Application';
 
         static function getDocuments($applicationId){
             $mysqli = MySQL\Connection::getInstance()->getHandle();

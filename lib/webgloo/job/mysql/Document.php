@@ -5,7 +5,7 @@ namespace webgloo\job\mysql {
     use webgloo\common\mysql as MySQL;
 
     class Document {
-        const MODULE_NAME = 'webgloo\common\mysql\Document';
+        const MODULE_NAME = 'webgloo\job\mysql\Document';
 
         static function create($document) {
 
