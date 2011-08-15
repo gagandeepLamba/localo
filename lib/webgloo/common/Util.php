@@ -65,13 +65,26 @@ namespace webgloo\common {
          * PHP string time functions
          *
          */
-        static function format_date($original, $format=Gloo_Constants::DDMONYYYY) {
+        static function formatDBTime($original, $format) {
             //@todo date time can be expensive, profile please
             if (!isset($original) || is_null($original) || empty($original)) {
                 return '';
             }
             $dt = strftime($format, strtotime($original));
             return $dt;
+        }
+        
+        static function secondsInDBTimeFromNow($original) {
+
+            if (!isset($original) || is_null($original) || empty($original)) {
+                return 0;
+            }
+
+            //calculate base time stamp
+            $basets = strtotime("now");
+            $ts = strtotime($original);
+            $interval = $ts - $basets;
+            return $interval;
         }
 
         static function squeeze($input) {
@@ -84,7 +97,7 @@ namespace webgloo\common {
             $input = preg_replace('/\s+/', '', $input);
             return ctype_alnum($input);
         }
-        
+
         //@todo - even a valid value zero triggers this error
         static function isEmpty($name, $value) {
             if (empty($value)) {

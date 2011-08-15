@@ -17,7 +17,8 @@ namespace webgloo\job\view {
         public $description;
         public $bounty;
         public $location ;
-        
+        public $expireOn ;
+
         //open/suspended/closed
         //default status is open
         public $status;
@@ -42,6 +43,7 @@ namespace webgloo\job\view {
             $opening->createdBy = $row['created_by'];
             $opening->location = $row['location'];
             $opening->applicationCount = $row['application_count'];
+            $opening->expireOn = $row['expire_on'];
             
             return $opening ;
         }

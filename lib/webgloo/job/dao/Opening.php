@@ -27,7 +27,7 @@ namespace webgloo\job\dao {
             return $rows ;
         }
         
-        function create($organizationId,$organizationName,$createdBy,$title, $description,$skill, $bounty,$location) {
+        function create($organizationId,$organizationName,$createdBy,$title, $description,$skill, $bounty,$location,$expireOn) {
             $openingVO = new view\Opening();
             $openingVO->title = $title;
             $openingVO->description = $description;
@@ -38,6 +38,7 @@ namespace webgloo\job\dao {
             $openingVO->skill = $skill;
             $openingVO->createdBy = $createdBy;
             $openingVO->location = $location;
+            $openingVO->expireOn = $expireOn;
 
             //store into DB layer
             mysql\Opening::create($openingVO);

@@ -17,8 +17,9 @@
 
 namespace webgloo\core {
 
-    use webgloo\common\Configuration as Config ;
-    use webgloo\common\Logger as Logger ;
+    use webgloo\common\Configuration as Config;
+    use webgloo\common\Logger as Logger;
+    use webgloo\common\Util ;
     
     class Web {
 
@@ -35,7 +36,7 @@ namespace webgloo\core {
             }
             return self::$instance;
         }
-        
+
         function getRequest() {
             return $this->request;
         }
@@ -44,7 +45,7 @@ namespace webgloo\core {
         function getRequestParam($param) {
             return $this->request->getParam($param);
         }
-        
+
         function getRequestAttribute($key) {
             return $this->request->getAttribute($key);
         }
@@ -53,41 +54,54 @@ namespace webgloo\core {
             return $this->request->setAttribute($key, $value);
         }
 
-        function store($key,$value) {
-            if(isset($_SESSION)){
-                $_SESSION[$key] = $value ;
+        function store($key, $value) {
+           
+            if (isset($_SESSION)) {
+                $_SESSION[$key] = $value;
+                
+                if (Config::getInstance()->is_debug()) {
+                    Logger::getInstance()->debug('web >> storing in session >> key is:: ' . $key);
+                    Logger::getInstance()->debug($value);
+                }
             }
         }
-        
-        function find($key,$destroy=false) {
-            $value = NULL ;
-            if(isset($_SESSION[$key]) && !empty($_SESSION[$key])){
+
+        function find($key, $destroy=false) {
+            $value = NULL;
+
+            if (isset($_SESSION[$key]) && !empty($_SESSION[$key])) {
                 $value = $_SESSION[$key];
-                if($destroy) {
+                if (Config::getInstance()->is_debug()) {             
+                    Logger::getInstance()->debug('web >> fetching from session >> key is:: ' . $key);
+                    Logger::getInstance()->debug($value);
+                }
+
+                if ($destroy) {
                     //remove this from session
-                    $_SESSION[$key] = NULL ;
+                    $_SESSION[$key] = NULL;
+                    if (Config::getInstance()->is_debug()) {
+                        Logger::getInstance()->debug('web >> removed from session >> key is:: ' . $key);
+                    }
                 }
             }
             return $value;
-
         }
-        
+
         //@todo - pass a class with a well defined interface
         // we need to call a particular method on that class
 
         function start() {
-            
+
             if (Config::getInstance()->is_debug()) {
                 Logger::getInstance()->debug('web >> start >> hash is:: ' . spl_object_hash(self::$instance));
             }
-            
         }
 
         function end() {
             if (Config::getInstance()->is_debug()) {
                 Logger::getInstance()->debug('web >> end >> hash is:: ' . spl_object_hash(self::$instance));
             }
-            
+
             /*
               Gloo_DB::getInstance()->closeConnection();
               if (Gloo_Config::getInstance()->is_debug()) {

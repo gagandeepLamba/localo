@@ -3,11 +3,11 @@
 namespace webgloo\common\ui\form {
 
     use webgloo\common\Configuration as Config;
-    use webgloo\common\Logger as Logger;
-    use webgloo\common\Util as Util;
+use webgloo\common\Logger as Logger;
+use webgloo\common\Util as Util;
 
     class Handler {
-        
+
         private $post;
         private $fname;
         private $ferrors;
@@ -65,6 +65,12 @@ namespace webgloo\common\ui\form {
                 // but we should add the sanitized version for our consumption
 
                 $this->fvalues[$name] = self::getSecureHtml($value);
+            } else {
+                if (Config::getInstance()->is_debug()) {
+                    Logger::getInstance()->debug("Form processed $name and rules :: ");
+                    Logger::getInstance()->debug($rules);
+                    Logger::getInstance()->debug("Errors found :: " . ($errorSize2 - $errorSize1));
+                }
             }
         }
 

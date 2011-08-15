@@ -24,6 +24,9 @@ create table job_org(
         description TEXT ,
 	is_active int not null default 1,
 	p_email varchar(128) ,
+        p_address varchar(1024) ,
+        p_phone varchar(256),
+        website varchar(128),
         created_on timestamp default '0000-00-00 00:00:00',
 	updated_on timestamp default '0000-00-00 00:00:00' ,
 	PRIMARY KEY (id)) ENGINE = MYISAM;
@@ -38,11 +41,12 @@ create table job_opening(
         skill varchar(512),
         organization_name varchar(128),
         created_by varchar(128) not null ,
-	status varchar(8) not null default 'OPEN',
+	status varchar(1) not null default 'A',
 	bounty  int(11) ,
         org_id  int(11) not null ,
         location varchar(32) not null,
         application_count int default 0 ,
+        expire_on timestamp default '0000-00-00 00:00:00',
         created_on timestamp default '0000-00-00 00:00:00',
 	updated_on timestamp default '0000-00-00 00:00:00' ,
 	PRIMARY KEY (id)) ENGINE = MYISAM;
@@ -142,4 +146,3 @@ CREATE TRIGGER trg_job_application_count AFTER INSERT ON job_application
 
     END;//
 delimiter ;
-

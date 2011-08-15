@@ -87,19 +87,12 @@ $sticky = new Form\Sticky($gWeb->find(Constants::STICKY_MAP, true));
                                             
                                             <div class="button-container">
 
-                                                <div class="submit">
-                                                    <div>
-                                                        <button type="submit" name="login" value="Login" onclick="this.setAttribute('value','Login');" ><span>Login</span></button>
-                                                    </div>
+                                                <button type="submit" name="login" value="Login" onclick="this.setAttribute('value','Login');" ><span>Login</span></button>
+                                                <button type="button" name="cancel" onClick="javascript:go_back('http://www.test2.com');"><span>Cancel</span></button>
+                                                    
                                                 </div>
 
-                                                <div class="button">
-                                                    <div>
-                                                        <button type="button" name="cancel" onClick="javascript:go_back('http://www.test2.com');"><span>Cancel</span></button>
-                                                    </div>
-                                                </div>
-
-                                            </div>
+                                            
                                             
                                             <div style="clear: both;"></div>
 

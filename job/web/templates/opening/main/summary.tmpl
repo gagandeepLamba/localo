@@ -1,10 +1,12 @@
 
-<div class="opening">
+<div class="opening grey-line-bottom">
     
     <h2> <a href="/opening/detail.php?g_opening_id={uuid}&g_org_id={organizationId}"> {title:h} </a> </h2>
-    <span> Posted by:&nbsp;{createdBy:h} </span>
-    <span> of &nbsp;{organizationName:h} </span>
-    <span> (&nbsp;{location:h}) </span>
+    <p>
+     <span> Posted by:&nbsp;{organizationName:h} </span> on {createdOn}
+     <span> (&nbsp;{location:h}) </span>
+    </p>
+    <p> <span> Closing On {expireOn} - Days left ({lifeInDays})</span> </p>
     <p> {description:h} </p>
     <p> Skills:&nbsp;{skill:h} </p>
     <div class="bounty"> Reward&nbsp;{bounty:h}&nbsp;&#36;</div>

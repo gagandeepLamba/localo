@@ -16,7 +16,8 @@
 namespace webgloo\common {
 
     use webgloo\common\Configuration as Config ;
-    
+    use webgloo\common\Util ;
+
     class Logger {
 
         static private $instance = NULL;
@@ -98,11 +99,9 @@ namespace webgloo\common {
                 return;
             }
             // keep the original backtrace of caller
-
             if ($this->isDebug) {
                 if (intval(Logger::DEBUG_PRIORITY) >= $this->priority) {
-                    $message = Gloo_Util::stringify($message);
-                    //$bt = debug_backtrace();
+                    $message = Util::stringify($message);
                     $this->logIt(NULL, $message, 'debug');
                 }
             }

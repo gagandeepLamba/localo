@@ -7,6 +7,7 @@ body {
     /* background : #EAEAEA; */
 }
 
+
 #site-banner {
     /* height:160px; */
     margin:0;
@@ -24,7 +25,7 @@ body {
     text-align:center;
     /* font-family: 'Trebuchet MS','Lucida Grande','Verdana','Arial','Sans-Serif'; */
     font-weight: bold;
-    /*padding-top: 30px; 
+    /*padding-top: 30px;
     padding-bottom: 20px; */
 }
 
@@ -43,11 +44,8 @@ body {
 
 }
 
-div #left-panel {
-    padding:10px;
-}
 div #main-panel {
-    padding:10px;
+    padding:20px;
 }
 
 div #preview {
@@ -59,7 +57,6 @@ div #preview {
 div .opening {
     margin-left: 10px;
     padding:10px ;
-    border-bottom: 1px solid #ccc;
 }
 
 div .opening a {
@@ -88,6 +85,18 @@ div .application {
     margin-left: 10px;
 }
 
+div .organization {
+    padding:10px;
+    margin-left: 10px;
+}
+
+ div .description{
+    padding:20px;
+    font-size: 13px;
+    margin-top: 20px;
+}
+
+
 div  .header {
     color : #AAA ;
     font-size: 14px;
@@ -97,7 +106,7 @@ div  .header {
 div .help {
     border-bottom : 2px solid green;
     padding:10px;
-    
+
 }
 
 div .application-box {
@@ -109,7 +118,7 @@ div .application-box {
     margin-top:10px;
     padding:20px;
     border-bottom: 2px solid green;
-    
+
 }
 
 .toolbar a {
@@ -117,7 +126,7 @@ div .application-box {
 }
 
 div #left-panel {
-    
+
 }
 
 
@@ -127,4 +136,100 @@ div #left-panel a {
     font-size :16px;
 }
 
+
+.form-table {
+    padding:10px;
+    background-color: #fef ;
+    margin-top : 20px;
+    margin-bottom: 20px;
+}
+
+.form-table  input{
+    word-spacing: 1px;
+    line-height: 1.8em;
+    color: #333;
+    border: 1px solid #bbb;
+    width: 400px;
+    height: 28px;
+    padding-top:4px;
+
+}
+
+
+.form-table  .width-1{
+    width: 300px;
+}
+
+.form-table  .width-2{
+    width: 600px;
+}
+
+.form-table  .width-3{
+    width: 800px;
+}
+
+.form-table  .height-1{
+    height: 140px;
+}
+
+.form-table  .height-2{
+    height: 450px;
+}
+
+
+.form-table  textarea{
+    word-spacing: 1px;
+    line-height: 1.8em;
+    color: #333;
+    border: 1px solid #ccc;
+    width: 510px;
+    height :310px;
+    padding-top:10px
+}
+
+.web-form button {
+    width :100px;
+    padding:5px;
+    font-weight: bold ;
+    font-size: 16px;
+}
+
+div .error {
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+div .error label {
+    width: 500px;
+    text-align: left;
+    display: block;
+    margin-left: 10px;
+    color:red ;
+}
+
+.blue-rectangle {
+    border :1px solid blue ;
+}
+
+
+.green-line-bottom {
+    border-bottom: 2px solid green ;
+    padding-bottom: 10px;
+}
+
+
+.grey-line-bottom {
+    border-bottom: 1px solid #ccc ;
+    padding-bottom: 10px;
+}
+
+
+
+div #preview {
+    padding:10px;
+}
+
+p .help-text {
+
+}
 

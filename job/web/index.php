@@ -5,16 +5,13 @@
 <html>
 
     <head><title> www.job.com - All the job openings </title>
-       
+
 
         <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
 
         <link rel="stylesheet" type="text/css" href="/css/grids-min.css">
         <link rel="stylesheet" type="text/css" href="/css/main.css">
         
-        <!-- app css here -->
-        <!-- include any javascript here -->
-
 
     </head>
 
@@ -41,12 +38,12 @@
                         <!-- include opening list -->
                         <div id="main-panel"
                         <?php
-                            $openingDao = new webgloo\job\dao\Opening();
-                            $rows = $openingDao->getAllRecords();
-                            foreach ($rows as $row) {
-                                $html = webgloo\job\html\template\Opening::getMainSummary($row);
-                                echo $html;
-                            }
+                        $openingDao = new webgloo\job\dao\Opening();
+                        $rows = $openingDao->getAllRecords();
+                        foreach ($rows as $row) {
+                            $html = webgloo\job\html\template\Opening::getMainSummary($row);
+                            echo $html;
+                        }
                         ?>
                     </div>
 
@@ -62,7 +59,7 @@
 
     <div id="ft">
         <?php include($_SERVER['APP_WEB_DIR'] . '/inc/site-footer.inc'); ?>
-       
+
     </div>
 
 </body>
