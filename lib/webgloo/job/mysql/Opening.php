@@ -15,11 +15,38 @@ namespace webgloo\job\mysql {
             return $rows;
         }
 
-        static function getRecordsOnOrgId($organizationId) {
+        static function getRecordsOnOrgId($organizationId,$filter) {
             $mysqli = MySQL\Connection::getInstance()->getHandle();
             //show all records for organization
-            $sql = " select * from job_opening where org_id = {orgId} order by expire_on" ;
-            $sql = str_replace("{orgId}",$organizationId, $sql);
+            $status = $filter["status"];
+
+            $sql = NULL ;
+            switch($status) {
+                //All
+                case '*' :
+                    $sql .= " select * from job_opening where org_id = {orgId} order by expire_on " ;
+                    $sql = str_replace(array(0 => "{orgId}"), array(0 => $organizationId), $sql);
+                    break ;
+                 //active,
+                 case 'A' : 
+                    $sql .= " select * from job_opening where org_id = {orgId} and (expire_on > now()) order by expire_on " ;
+                    $sql = str_replace(array(0 => "{orgId}"), array(0 => $organizationId), $sql);
+                    break ;
+                  // suspended, closed
+                  case 'S' : case 'C' :
+                    $sql .= " select * from job_opening where org_id = {orgId} and status = '{status}' order by expire_on " ;
+                    $sql = str_replace(array(0 => "{orgId}" , 1 => "{status}"), array(0 => $organizationId, 1 => $status), $sql);
+                    break ;
+                  case 'E' :
+                    $sql .= " select * from job_opening where org_id = {orgId} and (expire_on < now()) order by expire_on " ;
+                    $sql = str_replace(array(0 => "{orgId}"), array(0 => $organizationId), $sql);
+                    break ;
+                  default:
+                      \trigger_error("Unknown opening status ", E_USER_ERROR);
+
+            }
+            
+            
             $rows = MySQL\Helper::fetchRows($mysqli, $sql);
             return $rows;
         }

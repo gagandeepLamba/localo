@@ -16,8 +16,8 @@ namespace webgloo\job\dao {
             return $row ;
         }
 
-        function getRecordsOnOrgId($organizationId) {
-            $rows = mysql\Opening::getRecordsOnOrgId($organizationId);
+        function getRecordsOnOrgId($organizationId,$filter) {
+            $rows = mysql\Opening::getRecordsOnOrgId($organizationId,$filter);
             return $rows ;
         }
 
