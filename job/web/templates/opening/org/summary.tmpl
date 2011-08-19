@@ -4,13 +4,27 @@
     <span> Posted by:&nbsp;{createdBy:h} on {createdOn} </span>
     <span> (&nbsp;{location:h}) </span>
     <p> Active for <b> {lifeInDays} </b> more days </p>
-    <p> {description:h} </p>
+
+    {if:hasSummary}
+        <p id="summary-{uuid}">
+            {summary:h}
+            &nbsp; <a href="#" id="{uuid}" class="more-link">more&nbsp;&gt;</a>
+        </p>
+    
+    {end:}
+
+    <p id="description-{uuid}" class="{descriptionClass}">
+        {description:h}
+        {if:hasSummary}
+            &nbsp; <a href="#" id="{uuid}" class="less-link">less&nbsp;&gt;</a>
+        {end:}
+    </p>
+    
     <p> Skills:&nbsp;{skill:h} </p>
     <div class="bounty"> Reward&nbsp;{bounty:h}&nbsp;&#36;</div>
      <div class="action-links">
-        <a href="#"> Edit </a>
+        <a href="/opening/edit.php?g_opening_id={uuid}"> Edit </a>
          &nbsp;|&nbsp;
-        <a href="#" id="{uuid}" class="show-detail" onClick="javascript:webgloo.gui.Dialog.loadOpeningDetail({uuid})"> View Details</a>
         {if:showApplication}
         &nbsp;|&nbsp;
         <a href="/application/list.php?g_opening_id={uuid}">   Applications &nbsp;({applicationCount})</a>

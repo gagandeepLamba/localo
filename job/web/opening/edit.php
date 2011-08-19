@@ -1,36 +1,44 @@
 <?php
 include 'job-app.inc';
 include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
+include($_SERVER['APP_LIB_DIR'] . '/error.inc');
+
 //check if user has customer admin role or not
 include($_SERVER['APP_WEB_DIR'] . '/inc/admin/role.inc');
 
 use webgloo\auth\FormAuthentication;
 use webgloo\job\html\Link;
 use webgloo\common\Url;
+use webgloo\common\Util ;
+use webgloo\common\ui\form\Sticky ;
+use webgloo\job\Constants ;
+use webgloo\job\html\UIData ;
 
 //This method will throw an error
 $adminVO = FormAuthentication::getLoggedInAdmin();
 $organizationId = $adminVO->organizationId;
 
-$gstatus = $gWeb->getRequestParam('g_status');
-if (empty($gstatus)) {
-    $gstatus = '*';
+//find and destroy sticky map
+$sticky = new Sticky($gWeb->find(Constants::STICKY_MAP,true));
+$openingId = $gWeb->getRequestParam('g_opening_id');
+Util::isEmpty('openingId',$openingId);
+
+$openingDao = new webgloo\job\dao\Opening();
+$openingDBRow = $openingDao->getRecordOnId($openingId);
+
+$uifilters = UIData::getStatusFilters();
+// see if it expired?
+$seconds = Util::secondsInDBTimeFromNow($openingDBRow['expire_on']);
+if($seconds < 0 ) {
+    //expired
+    $openingDBRow['status'] = 'E';
+    $displayStatus = 'Expired on '.Util::formatDBTime($openingDBRow['expire_on']);
+} else {
+    $displayStatus = $uifilters[$openingDBRow['status']].' (Expiring on '.Util::formatDBTime($openingDBRow['expire_on']).')';
 }
 
-//all ui status filters
-$uifilters = array('*' => 'All', 'A' => 'Active', 'E' => 'Expired', 'S' => 'Suspended', 'C' => 'Closed');
+//status display strings
 
-//input sanity check
-if (!in_array($gstatus, array_keys($uifilters))) {
-    trigger_error('Unknown status filter on UI', E_USER_ERROR);
-}
-
-
-$flinks = array();
-foreach ($uifilters as $code => $name) {
-    $link = Url::addQueryParameters($_SERVER['REQUEST_URI'], array('g_status' => $code));
-    $flinks[$code] = $link;
-}
 
 ?>
 
@@ -93,41 +101,40 @@ foreach ($uifilters as $code => $name) {
 
                                     <table class="form-table">
 
+                                          <tr>
+                                            <td class="field"> Status </td>
+                                            <td> <?php echo $displayStatus; ?></td>
+                                        </tr>
 
                                         <tr>
                                             <td class="field"> Bounty<span class="red-label">*</span></td>
                                             <td>
-                                                <input type="text" name="bounty" maxlength="6" class="required width-1" title="&gt;&nbsp;Bounty is a required field" value="<?php echo $sticky->get('bounty','10000'); ?>"/>
+                                                <input type="text" name="bounty" maxlength="6" class="required width-1" title="&gt;&nbsp;Bounty is a required field" value="<?php echo $sticky->get('bounty',$openingDBRow['bounty']); ?>"/>
                                             </td>
                                         </tr>
-
-                                         <tr>
-                                            <td> Valid for</td>
-                                            <td> <?php echo $comboBox;  ?> </td>
-                                        </tr>
-
+                                        
                                         <!-- location - fill in with default company location -->
                                         <tr>
                                             <td class="field"> Location<span class="red-label">*</span></td>
                                             <td>
-                                                <input type="text" name="location" maxlength="32" class="required width-1" title="&gt;&nbsp;Location is a required field" value="<?php echo $sticky->get('location', 'Bangalore'); ?>"/>
+                                                <input type="text" name="location" maxlength="32" class="required width-1" title="&gt;&nbsp;Location is a required field" value="<?php echo $sticky->get('location',$openingDBRow['location']); ?>"/>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="field"> Title<span class="red-label">*</span></td>
                                             <td>
-                                                <input type="text" name="title" maxlength="100" class="required width-2" title="&gt;&nbsp;Title is a required field" value="<?php echo $sticky->get('title'); ?>"/>
+                                                <input type="text" name="title" maxlength="100" class="required width-2" title="&gt;&nbsp;Title is a required field" value="<?php echo $sticky->get('title',$openingDBRow['title']); ?>"/>
                                             </td>
                                         </tr>
 
                                         <tr>
                                             <td> &nbsp; </td>
-                                            <td>  <span> Must have skills </span> <br> <textarea  name="skill" class="height-1 width-2" cols="50" rows="4" ><?php echo $sticky->get('skill'); ?></textarea> </td>
+                                            <td>  <span> Must have skills </span> <br> <textarea  name="skill" class="height-1 width-2" cols="50" rows="4" ><?php echo $sticky->get('skill',$openingDBRow['skill']); ?></textarea> </td>
                                         </tr>
 
                                         <tr>
                                             <td> &nbsp; </td>
-                                            <td><span> Description </span> <br>  <textarea  name="description" class="width-2" cols="50" rows="10" ><?php echo $sticky->get('description'); ?></textarea> </td>
+                                            <td><span> Description </span> <br>  <textarea  name="description" class="width-2" cols="50" rows="10" ><?php echo $sticky->get('description',$openingDBRow['description']); ?></textarea> </td>
                                         </tr>
 
 
@@ -145,7 +152,7 @@ foreach ($uifilters as $code => $name) {
 
                                     <!-- hidden fields -->
                                     <input type="hidden" name="organization_id" value="<?php echo $adminVO->organizationId ?>" />
-                                    <input type="hidden" name="created_by" value="<?php echo $adminVO->email; ?>" />
+                                    <input type="hidden" name="updated_by" value="<?php echo $adminVO->email; ?>" />
                                     <input type="hidden" name="organization_name" value="<?php echo $adminVO->company; ?>" />
 
                                     <div style="clear: both;"></div>

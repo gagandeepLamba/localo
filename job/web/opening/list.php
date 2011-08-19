@@ -7,6 +7,8 @@ include($_SERVER['APP_WEB_DIR'] . '/inc/admin/role.inc');
 use webgloo\auth\FormAuthentication;
 use webgloo\job\html\Link;
 use webgloo\common\Url;
+use webgloo\job\html\UIData ;
+
 
 //This method will throw an error
 $adminVO = FormAuthentication::getLoggedInAdmin();
@@ -17,8 +19,7 @@ if (empty($gstatus)) {
     $gstatus = '*';
 }
 
-//all ui status filters
-$uifilters = array('*' => 'All', 'A' => 'Active', 'E' => 'Expired', 'S' => 'Suspended', 'C' => 'Closed');
+$uifilters = UIData::getStatusFilters();
 
 //input sanity check
 if (!in_array($gstatus, array_keys($uifilters))) {
@@ -31,6 +32,7 @@ foreach ($uifilters as $code => $name) {
     $link = Url::addQueryParameters($_SERVER['REQUEST_URI'], array('g_status' => $code));
     $flinks[$code] = $link;
 }
+
 
 ?>
 
@@ -59,17 +61,34 @@ foreach ($uifilters as $code => $name) {
 
             $(document).ready(function(){
 
-                //create dialog box
-                $("#gui-dialog").dialog({
-                    autoOpen: false,
-                    modal: true,
-                    draggable: true,
-                    position: 'center',
-                    width: '310px'}) ;
+                //Attach a live event to removeLink
+                // live event is required to attach event to future DOM elements
+                $("a.more-link").live("click", function(event){
+                    event.preventDefault();
+                    var paragraphId = $(this).attr("id");
+                     //hide summary
+                    $("#summary-"+paragraphId).hide();
+                    //show description
+                    $("#description-"+paragraphId).slideDown("slow");
+                    
+
+                }) ;
+
+                $("a.less-link").live("click", function(event){
+                    event.preventDefault();
+                    var paragraphId = $(this).attr("id");
+                    //hide description
+                    $("#description-"+paragraphId).slideUp("slow");
+                    //show summary
+                    $("#summary-"+paragraphId).show();
+                }) ;
+
+                //show all shy hide-me containers on document load!
+                $(".hide-me").hide();
+
 
             });
 
-            //show on demand
 
 
         </script>

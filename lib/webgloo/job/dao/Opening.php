@@ -8,9 +8,7 @@ namespace webgloo\job\dao {
     use webgloo\job\mysql as mysql;
 
     class Opening {
-
-       
-
+        
         function getRecordOnId($openingId) {
             $row = mysql\Opening::getRecordOnId($openingId);
             return $row ;
@@ -32,7 +30,7 @@ namespace webgloo\job\dao {
             $openingVO->title = $title;
             $openingVO->description = $description;
             $openingVO->bounty = $bounty;
-            $openingVO->status = 'OPEN';
+            //$openingVO->status = 'OPEN';
             $openingVO->organizationId = $organizationId;
             $openingVO->organizationName = $organizationName;
             $openingVO->skill = $skill;

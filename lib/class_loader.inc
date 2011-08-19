@@ -29,7 +29,7 @@ function __autoload($className) {
         }
     }
     
-    trigger_error(" JOB App cannot load class " . $className, E_USER_ERROR);
+    trigger_error(" JOB App cannot load class $className " , E_USER_ERROR);
 }
 
 ?>

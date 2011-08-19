@@ -55,12 +55,17 @@ namespace webgloo\job\html\template {
             $flexy->compile('/opening/org/summary.tmpl');
             $opening = new view\Opening();
             $view = $opening->create($row);
-
+            $view->descriptionClass = 'normal';
+            
              if (strlen($view->description) > 340) {
-                $view->description = substr($view->description, 0, 340);
-                $view->description .= ' ...';
+                //we need to print a summary
+                $view->summary = substr($view->description, 0, 340);
+                $view->summary .= '...' ;
+                $view->hasSummary = true ;
+                //hide long descriptions on page load
+                $view->descriptionClass = 'hide-me';
             }
-
+            
             //number of days left to expire
             //calculate interval in seconds for expire_on date from now
             $interval = Util::secondsInDBTimeFromNow($row['expire_on']);

@@ -65,7 +65,7 @@ namespace webgloo\common {
          * PHP string time functions
          *
          */
-        static function formatDBTime($original, $format) {
+        static function formatDBTime($original, $format="%d %b %Y") {
             //@todo date time can be expensive, profile please
             if (!isset($original) || is_null($original) || empty($original)) {
                 return '';
