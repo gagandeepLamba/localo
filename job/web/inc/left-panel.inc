@@ -14,7 +14,7 @@
 
     <div style="border-bottom: 1px solid #ccc;padding:10px;">
         <p> Access company dashboard to view applications for posted jobs. </p>
-        <a href="/opening/list.php"> Company dashboard</a>
+        <a href="/opening/list.php?g_status=A"> Company dashboard</a>
     </div>
 
 </div>

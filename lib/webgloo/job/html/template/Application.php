@@ -176,6 +176,10 @@ namespace webgloo\job\html\template {
             $flexy->compile('/application/org/summary.tmpl');
             $application = new view\Application();
             $view = $application->create($row);
+
+            if(empty($view->cvCompany)) {
+                 $view->cvCompany = 'N/A' ;
+            }
             
             $view->descriptionClass = 'normal';
 

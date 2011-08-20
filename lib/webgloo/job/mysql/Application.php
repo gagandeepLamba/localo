@@ -2,7 +2,7 @@
 
 namespace webgloo\job\mysql {
 
-    use webgloo\common\mysql as MySQL;
+	use webgloo\common\mysql as MySQL;
 
     class Application {
         const MODULE_NAME = 'webgloo\job\mysql\Application';

@@ -239,3 +239,21 @@ p .help-text {
 
 }
 
+.opening-actions {
+    line-height : 20px;
+}
+
+.opening-actions li {
+
+    border-bottom : 1px dotted #CCC ;
+    padding: 2px 0px 2px 15px ;
+    text-align: left ;
+}
+
+.opening-actions li a{
+
+    font-size: 14px;
+    /* font-weight:bold; */
+   
+
+}

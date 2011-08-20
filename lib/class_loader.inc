@@ -1,7 +1,7 @@
 <?php
 
-//News application class loader
-function __autoload($className) {
+	//class loader
+	function __autoload($className) {
 
     //replace double slashes in class name (PHP 5.3 namespace convention)
     // with a forrward slash (or PATH_SEPARATOR on your box)

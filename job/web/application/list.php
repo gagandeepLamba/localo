@@ -1,20 +1,20 @@
 <?php
-include 'job-app.inc';
-include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
-//check if user has customer admin role or not
-include($_SERVER['APP_WEB_DIR'] . '/inc/admin/role.inc');
+    include 'job-app.inc';
+    include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
+    //check if user has customer admin role or not
+    include($_SERVER['APP_WEB_DIR'] . '/inc/admin/role.inc');
 
-use webgloo\auth\FormAuthentication ;
-use webgloo\common\Util ;
+    use webgloo\auth\FormAuthentication ;
+    use webgloo\common\Util ;
 
-//This method will throw an error
-$adminVO = FormAuthentication::getLoggedInAdmin();
+    //This method will throw an error
+    $adminVO = FormAuthentication::getLoggedInAdmin();
 
-$openingId = $gWeb->getRequestParam('g_opening_id');
-Util::isEmpty('openingId', $openingId);
+    $openingId = $gWeb->getRequestParam('g_opening_id');
+    Util::isEmpty('openingId', $openingId);
 
-$openingDao = new webgloo\job\dao\Opening();
-$openingDBRow = $openingDao->getRecordOnId($openingId);
+    $openingDao = new webgloo\job\dao\Opening();
+    $openingDBRow = $openingDao->getRecordOnId($openingId);
 
 
 
@@ -152,16 +152,18 @@ $openingDBRow = $openingDao->getRecordOnId($openingId);
                         <div class="yui3-u-19-24">
                             <div id="main-panel">
 
-                                <div>
-                                    <span class="header"> Applications for <?php echo $openingDBRow['title'] ; ?> (Total&nbsp;<?php echo $openingDBRow['application_count'] ; ?>)</span>
-                                </div>
+                                
                                     <!-- include opening details -->
                                 
                                     <?php
                                         $html = webgloo\job\html\template\Opening::getOrganizationSummary2($openingDBRow);
                                         echo $html;
                                         ?>
-                                        
+
+                                        <div>
+                                            <span class="header"> Total Applications &dash;<?php echo $openingDBRow['application_count'] ; ?> </span>
+                                        </div>
+
                                         <?php
                                         //applications
                                         $applicationDao = new webgloo\job\dao\Application();

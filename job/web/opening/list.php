@@ -19,7 +19,7 @@
         $gstatus = '*';
     }
 
-    $uifilters = UIData::getStatusFilters();
+    $uifilters = UIData::getOpeningFilters();
 
     //input sanity check
     if (!in_array($gstatus, array_keys($uifilters))) {
@@ -116,13 +116,13 @@
                     <div class="yui3-u-19-24">
                         <div id="main-panel">
                             <div>
-                                <span class="header">  <?php echo $adminVO->company; ?> Job Openings </span>
-                                <span>&nbsp;<b>Filter:</b> </span>
+                                <p> <span class="header">  <?php echo $adminVO->company; ?> Job Openings </span> </p>
+                                <div> <span>&nbsp;Filter&nbsp; </span>
                                     <?php
                                         foreach ($flinks as $code => $link) {
                                             //does the name match?
                                             if ($code == $gstatus) {
-                                                echo $uifilters[$code];
+                                                echo "<b> $uifilters[$code] </b> ";
                                             } else {
                                                 $msg = '&nbsp;<a href="{link}">{name}</a> &nbsp;';
                                                 $name = $uifilters[$code];
@@ -131,7 +131,8 @@
                                             }
                                         }
                                     ?>
-
+                                </div>
+                                
                             </div>
                                 <!-- include opening list -->
                                 <?php
