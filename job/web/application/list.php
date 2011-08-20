@@ -40,9 +40,40 @@
         <script type="text/javascript" src="/js/jquery-ui-1.8.14.custom.min.js"></script>
         <script type="text/javascript" src="/js/main.js"></script>
 
-       <!-- include any javascript here -->
+        <!-- include any javascript here -->
         <script type="text/javascript">
 
+            var applicationObject = {};
+            applicationObject.postData = function (postURI,applicationId) {
+                try{
+                    //show spinner
+                    $("#message-"+applicationId).html('<img src="/css/images/ajax_loader.gif" alt="spinner" />');
+                    var dataObj = new Object();
+                    dataObj.applicationId = applicationId;
+
+                    //ajax call start
+                    $.ajax({
+                        url: postURI ,
+                        type: 'POST',
+                        dataType: 'html',
+                        data : dataObj,
+                        timeout: 9000,
+
+                        error: function(XMLHttpRequest, textStatus){
+                            $("#message-"+applicationId).html(textStatus);
+                        },
+                        success: function(html){
+                            $("#message-"+applicationId).html(html);
+                            //disable approval link after success?
+                            
+                        }
+                    }); //ajax call end
+                } catch(ex) {
+                    $("#message-"+applicationId).html(ex.toString());
+                }
+            }
+
+            //attach jquery events
             $(document).ready(function(){
 
                 //Attach a live event to removeLink
@@ -56,11 +87,11 @@
 
                 }) ;
 
-                  // live event is required to attach event to future DOM elements
+                // live event is required to attach event to future DOM elements
                 $("a.application-more-link").live("click", function(event){
                     event.preventDefault();
                     var applicationId = $(this).attr("id");
-                     //hide summary
+                    //hide summary
                     $("#application-summary-"+applicationId).hide();
                     //show application details
                     $("#application-detail-"+applicationId).slideDown("slow");
@@ -80,56 +111,28 @@
                 //show all shy hide-me containers on document load!
                 $(".hide-me").hide();
 
-                //wire up the dialog box
-
-                $("#gui-dialog").dialog({
-                    autoOpen: false,
-                    modal: true,
-                    draggable: false,
-                    position: 'center',
-                    width: '310px'}) ;
-
-                $("a.approval-form-link").live("click", function(event){
+                $("a.application-approve-link").live("click", function(event){
                     event.preventDefault();
                     var applicationId = $(this).attr("id");
-                    //post to ajax URL
-                    //close dialog box
-                    //change indicator style for application
-                    
-                    var loadURI = "/ajax/application/approval.php?g_application_id=" + applicationId ;
-                    if(webgloo.gui.debug){
-                        alert(" load application approval form :: id :: " + applicationId);
-                    }
+                    applicationObject.postData('/ajax/application/approval.php', applicationId);
 
-                    //load dialog box with content of data URI
-                    $("#gui-dialog").load(loadURI);
-                    $('#gui-dialog').dialog('option', 'title', "Application Approval Form");
-                    $('#gui-dialog').dialog('option', 'width', 510);
-                    $('#gui-dialog').dialog('option', 'position', 'center');
-                    $('#gui-dialog').dialog('option', 'modal', true);
-                    //Buttons for this dialog box
-                    $('#gui-dialog').dialog('option', 'buttons',
-                    {
-                        "Close": function() {
-                            $(this).dialog("close");
-                            $(this).html("");
-                        }
+                }) ;
 
-                    });
-
-                    $("#gui-dialog").dialog("open");
+                $("a.application-reject-link").live("click", function(event){
+                    event.preventDefault();
+                    var applicationId = $(this).attr("id");
+                    applicationObject.postData('/ajax/application/approval.php', applicationId);
 
                 }) ;
 
                 
-
             });
 
 
 
         </script>
 
-        
+
 
 
     </head>

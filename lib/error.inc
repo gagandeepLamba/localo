@@ -37,7 +37,7 @@ function webgloo_error_handler($errorno,$errorstr,$file,$line) {
             webgloo\common\Logger::getInstance()->trace($file,$line,$errorstr,$trace);
             //send generic json encoded message back to UI
             $message =  'Internal server error happened.Please check log for details!';
-            $error = array('code' => -1, 'error' => 'yes', 'message' => $message);
+            $error = array('code' => 500, 'message' => $message);
             $message =  json_encode($error) ;
             echo $message ;
             
