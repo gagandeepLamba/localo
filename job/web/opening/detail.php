@@ -14,6 +14,7 @@ webgloo\common\Util::isEmpty('$organizationId', $organizationId);
 $openingDao = new webgloo\job\dao\Opening();
 $openingDBRow = $openingDao->getRecordOnId($openingId);
 $applicationRows = array();
+$applicationCount = 0 ;
 
 if(FormAuthentication::tryUserRole()) {
     //This method will throw an error
@@ -23,6 +24,7 @@ if(FormAuthentication::tryUserRole()) {
 
     $applicationDao = new webgloo\job\dao\Application();
     $applicationRows = $applicationDao->getRecordsOnUserAndOpeningId($userId,$openingId);
+    $applicationCount = sizeof($applicationRows);
     
 }
 
@@ -64,7 +66,7 @@ if(FormAuthentication::tryUserRole()) {
 
                 });
 
-                //show on demand
+               
 
 
         </script>
@@ -104,20 +106,30 @@ if(FormAuthentication::tryUserRole()) {
                             }
                             echo $html;
                             ?>
+
+                            <!-- applications sent by a user -->
+
+                            <?php if($applicationCount > 0 ) { ?>
+
+                             
+                                 <div style="margin-left:30px;"> <h3> Applications &nbsp;(<?php echo $applicationCount ; ?>)</h3>
+
+                                     <?php
+
+                                        foreach($applicationRows as $applicationRow) {
+                                            //get vanilla application summary
+                                            echo webgloo\job\html\template\Application::getUserSummary2($applicationRow,array());
+
+                                        }
+                                    ?>
+                                    
+                                 </div>
+                                 
+                             <?php } ?>
+
                         </div>
 
-                        <!-- applications sent by a user -->
-                        <?php
-                            $count = 0 ;
-                            
-                            foreach($applicationRows as $applicationRow) {
-                                $flag = ($count == 0 ) ? true : false ;
-                                //get vanilla application summary
-                                echo webgloo\job\html\template\Application::getSummary($applicationRow,array("header" => $flag));
-                                $count++ ;
-                            }
-                        ?>
-
+                       
 
                     </div> <!-- main unit -->
                 </div> <!-- GRID -->

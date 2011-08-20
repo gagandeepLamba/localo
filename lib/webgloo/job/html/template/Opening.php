@@ -40,8 +40,8 @@ namespace webgloo\job\html\template {
             $flexy->compile('/opening/user/summary.tmpl');
             $opening = new view\Opening();
             $view = $opening->create($row);
-            //shorten the description for summary?
-            //@todo pull directly from DB?
+
+            
             $view->description = substr($view->description, 0, 340);
             $view->description .= ' ...';
             $html = $flexy->bufferedOutputObject($view);
@@ -85,6 +85,24 @@ namespace webgloo\job\html\template {
             return $html;
         }
 
+        static function getOrganizationSummary2($row){
+            $flexy = Flexy::getInstance();
+            $flexy->compile('/opening/org/summary2.tmpl');
+            $opening = new view\Opening();
+            $view = $opening->create($row);
+            
+            //number of days left to expire
+            //calculate interval in seconds for expire_on date from now
+            $interval = Util::secondsInDBTimeFromNow($row['expire_on']);
+            $view->lifeInDays = ($interval > 0) ? ceil($interval / (24 * 3600)) : 'N/A';
+            //DD - Month - YYYY
+            $view->createdOn = Util::formatDBTime($row['created_on'], "%d %b %Y");
+            $view->expireOn = Util::formatDBTime($row['expire_on'], "%d %b %Y");
+
+            $html = $flexy->bufferedOutputObject($view);
+            return $html;
+        }
+        
         //used on POST CV page
         //action controls whether or not to show
         // post cv and share action links

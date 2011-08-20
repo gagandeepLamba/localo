@@ -7,6 +7,9 @@ body {
     /* background : #EAEAEA; */
 }
 
+body  a {
+    text-decoration: none ;
+}
 
 #site-banner {
     /* height:160px; */
@@ -63,6 +66,11 @@ div .opening a {
    text-decoration: none ;
 }
 
+
+div .application  a {
+   text-decoration: none ;
+}
+
 div .bounty {
     font-size: 14px;
     font-weight: bold;
@@ -109,11 +117,6 @@ div .help {
 
 }
 
-div .application-box {
-    border-top: 2px solid green ;
-    /* border-bottom : 2px solid green; */
-}
-
 .toolbar {
     margin-top:10px;
     padding:20px;
@@ -136,6 +139,9 @@ div #left-panel a {
     font-size :16px;
 }
 
+div #form-wrapper {
+    margin-left: 20px;
+}
 
 .form-table {
     padding:10px;

@@ -1,18 +1,31 @@
-<div class="application-box">
-    <div class="application">
+
+    <div class="application green-line-bottom">
         {if:header}
             <span class="header"> My Applications </span>
         {end:}
 
-        <h3> {cvName} &nbsp;(Email &nbsp;{cvEmail} &nbsp; Phone &nbsp;{cvPhone}) </h3>
+        <p> {cvName} &nbsp;(Email &nbsp;{cvEmail} &nbsp; Phone &nbsp;{cvPhone}) </p>
         <p> Company: {cvCompany} &nbsp; Education : {cvEducation} &nbsp; Location : {cvLocation} </p>
         <p> Skills: &nbsp; {cvSkill} </p>
-        <p> {cvDescription} </p>
 
+        {if:hasSummary}
+            <p id="application-summary-{uuid}">
+                {summary:h}
+                &nbsp; <a href="#" id="{uuid}" class="application-more-link">more&nbsp;&gt;</a>
+            </p>
+
+        {end:}
+
+        <p id="application-detail-{uuid}" class="{descriptionClass}">
+            {cvDescription:h}
+            {if:hasSummary}
+                &nbsp; <a href="#" id="{uuid}" class="application-less-link">less&nbsp;&gt;</a>
+            {end:}
+        </p>
+        
         <div class="action-links">
-             <a href="#" class="show-detail" onClick="javascript:webgloo.gui.Dialog.loadApplicationDetail({uuid})"> view details</a>
-             &nbsp;|&nbsp;
-             <a href="#"> Approve</a>
+             
+             <a href="#" id="{uuid}" class="approval-form-link"> Approve</a>
              &nbsp;|&nbsp;
              <a href="#"> Reject</a>
 
@@ -20,4 +33,3 @@
 
     </div>
 
-</div>

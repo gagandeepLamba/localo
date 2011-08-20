@@ -75,7 +75,8 @@ $userId = $userVO->uuid ;
                         <div class="yui3-u-19-24">
                             <div id="main-panel">
                                 
-                                <!-- include opening details -->
+                                <span class="header"> Applications sent by <?php echo $userVO->email; ?> </span>
+                                
                                         <?php
                                         //applications
                                         $applicationDao = new webgloo\job\dao\Application();

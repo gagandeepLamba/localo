@@ -96,10 +96,9 @@ $userVO = FormAuthentication::getLoggedInUser();
                                         <?php  echo $openingHtml; ?>
                                             
                                     </div>
-
-                                    <h2> Send Application </h2>
+                                    
                                     <p class="help-text">
-                                       Please fill in the details below and post your job opening.
+                                       Please fill in the details below and click Save. You can attach documents on the next screen.
 
                                     </p>
                                     <?php include($_SERVER['APP_WEB_DIR'] . '/inc/form/message.inc'); ?>
@@ -160,38 +159,26 @@ $userVO = FormAuthentication::getLoggedInUser();
                                                         <input type="text" name="cv_location" maxlength="32" class="required" title="&gt;&nbsp;Location is a required field" value="<?php echo $sticky->get('cv_location','Bangalore'); ?>"/>
                                                     </td>
                                                 </tr>
+                                                  <tr>
+                                                    <td colspan="2">
+                                                        <span> Skills </span> <br>
+                                                        <textarea  name="cv_skill" class="height-1 width-2" cols="50" rows="4" ><?php echo $sticky->get('cv_skill'); ?></textarea>
+                                                    </td>
+                                                </tr>
 
-                                                
+                                                <tr>
+                                                    <td colspan="2">
+                                                        <span> Description (why you recommend this candidate) </span> <br>
+                                                        <textarea  name="cv_description" class="width-2" cols="50" rows="10" ><?php echo $sticky->get('cv_description'); ?></textarea>
+                                                    </td>
+                                                </tr>
+
                                             </table>
-
-                                            <br>
                                             
-
-                                            <span> Description (why you recommend this candidate) </span>
-                                            <div class="text-container">
-                                                <textarea  name="cv_description" cols="50" rows="10" ><?php echo $sticky->get('cv_description'); ?></textarea>
-                                            </div>
-
-
-                                            <span> Skills </span>
-                                            <div class="text-container">
-                                                <textarea  name="cv_skill" cols="50" rows="4" ><?php echo $sticky->get('cv_skill'); ?></textarea>
-                                            </div>
                                           
                                             <div class="button-container">
-
-                                                <div class="submit">
-                                                    <div>
-                                                        <button type="submit" name="save" value="Save" onclick="this.setAttribute('value','Save');" ><span>Save</span></button>
-                                                    </div>
-                                                </div>
-
-                                                <div class="button">
-                                                    <div>
-                                                        <button type="button" name="cancel" onClick="javascript:go_back('http://www.test2.com');"><span>Cancel</span></button>
-                                                    </div>
-                                                </div>
-
+                                                <button type="submit" name="save" value="Save" onclick="this.setAttribute('value','Save');" ><span>Save</span></button>
+                                                <button type="button" name="cancel" onClick="javascript:go_back('http://www.test2.com');"><span>Cancel</span></button>
                                             </div>
 
 

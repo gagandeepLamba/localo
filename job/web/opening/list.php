@@ -1,37 +1,37 @@
 <?php
-include 'job-app.inc';
-include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
-//check if user has customer admin role or not
-include($_SERVER['APP_WEB_DIR'] . '/inc/admin/role.inc');
+    include 'job-app.inc';
+    include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
+    //check if user has customer admin role or not
+    include($_SERVER['APP_WEB_DIR'] . '/inc/admin/role.inc');
 
-use webgloo\auth\FormAuthentication;
-use webgloo\job\html\Link;
-use webgloo\common\Url;
-use webgloo\job\html\UIData ;
-
-
-//This method will throw an error
-$adminVO = FormAuthentication::getLoggedInAdmin();
-$organizationId = $adminVO->organizationId;
-
-$gstatus = $gWeb->getRequestParam('g_status');
-if (empty($gstatus)) {
-    $gstatus = '*';
-}
-
-$uifilters = UIData::getStatusFilters();
-
-//input sanity check
-if (!in_array($gstatus, array_keys($uifilters))) {
-    trigger_error('Unknown status filter on UI', E_USER_ERROR);
-}
+    use webgloo\auth\FormAuthentication;
+    use webgloo\job\html\Link;
+    use webgloo\common\Url;
+    use webgloo\job\html\UIData ;
 
 
-$flinks = array();
-foreach ($uifilters as $code => $name) {
-    $link = Url::addQueryParameters($_SERVER['REQUEST_URI'], array('g_status' => $code));
-    $flinks[$code] = $link;
-}
+    //This method will throw an error
+    $adminVO = FormAuthentication::getLoggedInAdmin();
+    $organizationId = $adminVO->organizationId;
+
+    $gstatus = $gWeb->getRequestParam('g_status');
+    if (empty($gstatus)) {
+        $gstatus = '*';
+    }
+
+    $uifilters = UIData::getStatusFilters();
+
+    //input sanity check
+    if (!in_array($gstatus, array_keys($uifilters))) {
+        trigger_error('Unknown status filter on UI', E_USER_ERROR);
+    }
+
+
+    $flinks = array();
+    foreach ($uifilters as $code => $name) {
+        $link = Url::addQueryParameters($_SERVER['REQUEST_URI'], array('g_status' => $code));
+        $flinks[$code] = $link;
+    }
 
 
 ?>

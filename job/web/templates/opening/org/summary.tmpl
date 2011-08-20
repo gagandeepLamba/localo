@@ -1,8 +1,8 @@
 <div class="opening green-line-bottom">
 
     <h2> {title:h} </h2>
-    <span> Posted by:&nbsp;{createdBy:h} on {createdOn} </span>
-    <span> (&nbsp;{location:h}) </span>
+    <span> Posted by&nbsp;{createdBy:h} on {createdOn} </span>
+    <span> (Location&nbsp;&dash;&nbsp;{location:h}) </span>
     <p> Active for <b> {lifeInDays} </b> more days </p>
 
     {if:hasSummary}
@@ -24,7 +24,6 @@
     <div class="bounty"> Reward&nbsp;{bounty:h}&nbsp;&#36;</div>
      <div class="action-links">
         <a href="/opening/edit.php?g_opening_id={uuid}"> Edit </a>
-         &nbsp;|&nbsp;
         {if:showApplication}
         &nbsp;|&nbsp;
         <a href="/application/list.php?g_opening_id={uuid}">   Applications &nbsp;({applicationCount})</a>

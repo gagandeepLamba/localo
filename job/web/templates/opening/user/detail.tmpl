@@ -3,11 +3,8 @@
 <div class="opening green-line-bottom">
 
    <h2> {title:h}</h2>
-   <p>
-     <span> Posted by:&nbsp;{organizationName:h} </span> on {createdOn}
-     <span> (&nbsp;{location:h}) </span>
-    </p>
-    <p> <span> Closing On {expireOn} - Days left ({lifeInDays})</span> </p>
+    <p> <span> {organizationName:h} </span> posted  on {createdOn} (closing in {lifeInDays} days)   </p>
+    <p> <span> Location </span> &nbsp;&dash;&nbsp;{location:h}  </p>
     
     <p> {description:h} </p>
     <p> Skills:&nbsp;{skill:h} </p>
@@ -22,9 +19,9 @@
 
 </div>
 
-<div class="organization">
+<div class="organization green-line-bottom">
     <h2> About {organizationName} </h2>
-    <b> website </b> &nbsp; <a href="http://www.citrix.com" target="_blank"> http://www.citrix.com </a>
+    &nbsp; <a href="http://www.citrix.com" target="_blank"> http://www.citrix.com </a>
     <div class="description">
         {organizationDescription}
         Scorsese originally intended to direct Goodfellas before The Last Temptation of Christ,
