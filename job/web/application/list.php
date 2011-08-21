@@ -44,13 +44,27 @@
         <script type="text/javascript">
 
             var applicationObject = {};
-            applicationObject.postData = function (postURI,applicationId) {
+            //insert message DIV
+            applicationObject.insertMessage = function(applicationId){
+                //remove existing message DIV
+                $("div#message-"+applicationId).remove();
+                //insert after application DIV
+                var buffer = '<div class="ajax-toolbar" id="message-' + applicationId +  '"></div>' ;
+                $("div#application-"+applicationId).append(buffer);
+
+            };
+
+            applicationObject.postApprovalData = function (postURI,applicationId,code) {
+                
                 try{
+                    //insert message DIV
+                    applicationObject.insertMessage(applicationId);
                     //show spinner
                     $("#message-"+applicationId).html('<img src="/css/images/ajax_loader.gif" alt="spinner" />');
                     var dataObj = new Object();
                     dataObj.applicationId = applicationId;
-
+                    dataObj.code = code ;
+                    
                     //ajax call start
                     $.ajax({
                         url: postURI ,
@@ -71,7 +85,7 @@
                 } catch(ex) {
                     $("#message-"+applicationId).html(ex.toString());
                 }
-            }
+            };
 
             //attach jquery events
             $(document).ready(function(){
@@ -114,14 +128,14 @@
                 $("a.application-approve-link").live("click", function(event){
                     event.preventDefault();
                     var applicationId = $(this).attr("id");
-                    applicationObject.postData('/ajax/application/approval.php', applicationId);
+                    applicationObject.postApprovalData('/ajax/application/approval.php', applicationId,'YES');
 
                 }) ;
 
                 $("a.application-reject-link").live("click", function(event){
                     event.preventDefault();
                     var applicationId = $(this).attr("id");
-                    applicationObject.postData('/ajax/application/approval.php', applicationId);
+                    applicationObject.postApprovalData('/ajax/application/approval.php', applicationId,'NO');
 
                 }) ;
 
@@ -168,15 +182,15 @@
                                         </div>
 
                                         <?php
-                                        //applications
-                                        $applicationDao = new webgloo\job\dao\Application();
-                                        $rows = $applicationDao->getRecords($adminVO->organizationId, $openingId);
+                                            //applications
+                                            $applicationDao = new webgloo\job\dao\Application();
+                                            $rows = $applicationDao->getRecords($adminVO->organizationId, $openingId);
 
-                                        foreach ($rows as $row) {
+                                            foreach ($rows as $row) {
 
-                                            $html = webgloo\job\html\template\Application::getOrganizationSummary($row);
-                                            echo $html;
-                                        }
+                                                $html = webgloo\job\html\template\Application::getOrganizationSummary($row);
+                                                echo $html;
+                                            }
                                     ?>
 
                             </div>

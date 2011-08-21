@@ -48,7 +48,7 @@ namespace webgloo\job\mysql {
             $sql = " select opp.organization_name , opp.bounty, opp.title as opp_title,opp.expire_on as opp_expire_on, " ;
             $sql .= " opp.description as opp_description, opp.skill as opp_skill, app.* " ;
             $sql .= " from job_application app, job_opening opp " ;
-            $sql .= " where app.user_id = {userId} and app.opening_id = opp.id" ;
+            $sql .= " where app.user_id = {userId} and app.opening_id = opp.id order by opp_title" ;
            
             $sql = str_replace("{userId}", $userId, $sql);
             $rows = MySQL\Helper::fetchRows($mysqli, $sql);
@@ -65,6 +65,18 @@ namespace webgloo\job\mysql {
             
             $rows = MySQL\Helper::fetchRows($mysqli, $sql);
             return $rows;
+        }
+
+         static function getCountOnUserAndOpeningId($userId,$openingId){
+            $mysqli = MySQL\Connection::getInstance()->getHandle();
+            $userId = $mysqli->real_escape_string($userId);
+            $openingId = $mysqli->real_escape_string($openingId);
+
+            $sql = " select count(id) as total_count from job_application where user_id =  ".$userId  ;
+            $sql .= " and opening_id = ".$openingId ;
+
+            $row = MySQL\Helper::fetchRow($mysqli, $sql);
+            return $row;
         }
 
         static function create($applicationVO) {

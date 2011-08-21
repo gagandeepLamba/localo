@@ -59,6 +59,73 @@
         <!-- include any javascript here -->
         <script type="text/javascript">
 
+            var openingObject = {
+                debug :  false ,
+                actions : function(status){
+                    var data = new Array();
+                    switch (status){
+                        case 'A' :
+                            data["C"] = "close";
+                            data["S"] = "suspend" ;
+                            data["EX2W"] = "Extend for 2 weeks" ;
+                            data["EX4W"] = "Extend for 4 weeks" ;
+                            
+                            break ;
+                        case 'C' :
+                            data["A"] = "activate";
+                            break ;
+                        case 'E' :
+                            data["A"] = "activate";
+                            break ;
+                        default :
+                            break ;
+                    }
+
+                    return data ;
+                }
+                
+
+            };
+
+            openingObject.closeToolbar = function(toolbarId) {
+                if(openingObject.debug){
+                    alert("removing toolbar div :: " + toolbarId);
+                }
+                $("div#"+toolbarId).remove();
+            } ;
+
+            openingObject.addEditLinks = function(openingId,status) {
+                if(openingObject.debug){
+                    alert("add edit links for opening " + openingId + " and status " + status);
+                }
+                
+                //get associative array of status code and display names
+                var actions = openingObject.actions(status);
+                var toolbarId = "opening-toolbar-" + openingId ;
+                openingObject.closeToolbar(toolbarId);
+                
+                //iterate thorugh array and print it
+                var template = '<a href="/opening/post/quick-action.php?g_opening_id={gOpeningId}&action={gCode}">{name} </a> &nbsp;&nbsp;';
+                var buffer = '' ;
+                for (var key in actions) {
+                    var params = {gOpeningId: openingId ,gCode: key, name:actions[key]};
+                    if(openingObject.debug){
+                        alert("Adding actions link :: code " + key + " name :: " + actions[key]);
+                    }
+                    
+                    buffer = buffer + template.supplant(params);
+                    
+                }
+
+                //add close toolbar link
+                buffer = buffer + '<a href="#" id="' +toolbarId + '" class="opening-toolbar-close"> <img src="/css/images/cross.png" alt="x"> </a>&nbsp;' ;
+                //wrap links in toolbar DIV
+                buffer = '<div class="ajax-toolbar" id="' + toolbarId + '">' + buffer + '</div>';
+                $("div#opening-"+openingId).append(buffer);
+                
+            };
+
+
             $(document).ready(function(){
 
                 //Attach a live event to removeLink
@@ -66,7 +133,7 @@
                 $("a.more-link").live("click", function(event){
                     event.preventDefault();
                     var paragraphId = $(this).attr("id");
-                     //hide summary
+                    //hide summary
                     $("#summary-"+paragraphId).hide();
                     //show description
                     $("#description-"+paragraphId).slideDown("slow");
@@ -83,12 +150,27 @@
                     $("#summary-"+paragraphId).show();
                 }) ;
 
+                $("a.opening-action-link").live("click", function(event){
+                    event.preventDefault();
+                    var openingId = $(this).attr("id");
+                    openingObject.addEditLinks(openingId, 'A');
+                    
+                }) ;
+
+                $("a.opening-toolbar-close").live("click", function(event){
+                    event.preventDefault();
+                    var toolbarId = $(this).attr("id");
+                    openingObject.closeToolbar(toolbarId);
+
+                }) ;
+
                 //show all shy hide-me containers on document load!
                 $(".hide-me").hide();
 
 
             });
 
+            openingObject.debug = false ;
 
 
         </script>

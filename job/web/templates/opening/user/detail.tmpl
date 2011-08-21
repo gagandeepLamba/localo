@@ -11,8 +11,10 @@
     <div class="bounty"> Reward&nbsp;{bounty:h}&nbsp;&#36;</div>
     {if:action}
      <div class="action-links">
-        <a href="/application/new.php?g_opening_id={uuid}&g_org_id={organizationId}"> Post CV </a>
-        &nbsp;|&nbsp;
+        {if:showPostCVAction}
+            <a href="/application/new.php?g_opening_id={uuid}&g_org_id={organizationId}"> Post CV </a>
+            &nbsp;|&nbsp;
+        {end:}
         <a href="#"> Share </a>
     </div>
     {end:}

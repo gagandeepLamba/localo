@@ -1,9 +1,9 @@
 <?php
-include ('job-app.inc');
-include ($_SERVER['APP_WEB_DIR'].'/inc/header.inc');
-use webgloo\job\Constants ;
-use webgloo\common\ui\form as Form;
-$sticky = new Form\Sticky($gWeb->find(Constants::STICKY_MAP, true));
+    include ('job-app.inc');
+    include ($_SERVER['APP_WEB_DIR'].'/inc/header.inc');
+    use webgloo\job\Constants ;
+    use webgloo\common\ui\form as Form;
+    $sticky = new Form\Sticky($gWeb->find(Constants::STICKY_MAP, true));
 
 ?>  
 
@@ -14,8 +14,7 @@ $sticky = new Form\Sticky($gWeb->find(Constants::STICKY_MAP, true));
          
 
         <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
-
-        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.3.0/build/cssgrids/grids-min.css">
+        <link rel="stylesheet" type="text/css" href="/css/grids-min.css">
         <!-- app css here -->
         <link rel="stylesheet" type="text/css" href="/css/main.css">
         <!-- include any javascript here -->
@@ -82,25 +81,11 @@ $sticky = new Form\Sticky($gWeb->find(Constants::STICKY_MAP, true));
                                              
                                             </table>
 
-                                            
-
-
                                             <div class="button-container">
-
-                                                <div class="submit">
-                                                    <div>
-                                                        <button type="submit" name="login" value="Login" onclick="this.setAttribute('value','Login');" ><span>Login</span></button>
-                                                    </div>
-                                                </div>
-
-                                                <div class="button">
-                                                    <div>
-                                                        <button type="button" name="cancel" onClick="javascript:go_back('http://www.test2.com');"><span>Cancel</span></button>
-                                                    </div>
-                                                </div>
-
+                                                <button type="submit" name="login" value="Login" onclick="this.setAttribute('value','Login');" ><span>Login</span></button>
+                                                <button type="button" name="cancel" onClick="javascript:go_back('http://www.test2.com');"><span>Cancel</span></button>
                                             </div>
-                                            
+
                                             <div style="clear: both;"></div>
 
                                         </form>

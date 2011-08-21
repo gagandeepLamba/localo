@@ -1,32 +1,32 @@
 <?php
-include ('job-app.inc');
-include ($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
+    include ('job-app.inc');
+    include ($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
 
-use webgloo\auth\FormAuthentication;
+    use webgloo\auth\FormAuthentication;
 
-$openingId = $gWeb->getRequestParam('g_opening_id');
-webgloo\common\Util::isEmpty('openingId', $openingId);
+    $openingId = $gWeb->getRequestParam('g_opening_id');
+    webgloo\common\Util::isEmpty('openingId', $openingId);
 
-$organizationId = $gWeb->getRequestParam('g_org_id');
-webgloo\common\Util::isEmpty('$organizationId', $organizationId);
+    $organizationId = $gWeb->getRequestParam('g_org_id');
+    webgloo\common\Util::isEmpty('$organizationId', $organizationId);
 
 
-$openingDao = new webgloo\job\dao\Opening();
-$openingDBRow = $openingDao->getRecordOnId($openingId);
-$applicationRows = array();
-$applicationCount = 0 ;
+    $openingDao = new webgloo\job\dao\Opening();
+    $openingDBRow = $openingDao->getRecordOnId($openingId);
+    $applicationRows = array();
+    $applicationCount = 0 ;
 
-if(FormAuthentication::tryUserRole()) {
-    //This method will throw an error
-    $userVO = FormAuthentication::getLoggedInUser();
-    $userId = $userVO->uuid ;
-    //Now get applications already sent by this user
+    if(FormAuthentication::tryUserRole()) {
+        //This method will throw an error
+        $userVO = FormAuthentication::getLoggedInUser();
+        $userId = $userVO->uuid ;
+        //Now get applications already sent by this user
 
-    $applicationDao = new webgloo\job\dao\Application();
-    $applicationRows = $applicationDao->getRecordsOnUserAndOpeningId($userId,$openingId);
-    $applicationCount = sizeof($applicationRows);
-    
-}
+        $applicationDao = new webgloo\job\dao\Application();
+        $applicationRows = $applicationDao->getRecordsOnUserAndOpeningId($userId,$openingId);
+        $applicationCount = sizeof($applicationRows);
+
+    }
 
 ?>
 
@@ -96,15 +96,16 @@ if(FormAuthentication::tryUserRole()) {
                         <div id="main-panel">
                             <!-- include opening details -->
                             <?php
-                            $html = '' ;
-                            if(\webgloo\auth\FormAuthentication::tryAdminRole()){
-                                //we do not want action links for admins
-                                $html = webgloo\job\html\template\Opening::getUserDetail($openingDBRow,false);
-                            } else {
-                                //we want action links on user opening details
-                                $html = webgloo\job\html\template\Opening::getUserDetail($openingDBRow,true);
-                            }
-                            echo $html;
+                                $html = '' ;
+                                $action = true ;
+
+                                if(\webgloo\auth\FormAuthentication::tryAdminRole()){
+                                    $action = false ;
+                                }
+
+                                $html = webgloo\job\html\template\Opening::getUserDetail($openingDBRow,$applicationCount,$action);
+                                echo $html;
+                                
                             ?>
 
                             <!-- applications sent by a user -->
@@ -112,7 +113,7 @@ if(FormAuthentication::tryUserRole()) {
                             <?php if($applicationCount > 0 ) { ?>
 
                              
-                                 <div style="margin-left:30px;"> <h3> Applications &nbsp;(<?php echo $applicationCount ; ?>)</h3>
+                                 <div style="margin-left:20px;"> <h3> Applications &nbsp;(<?php echo $applicationCount ; ?>)</h3>
 
                                      <?php
 

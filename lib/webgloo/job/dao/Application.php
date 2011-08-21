@@ -22,6 +22,16 @@ use webgloo\job\mysql as mysql;
             return $rows ;
         }
 
+         function getCountOnUserAndOpeningId($userId,$openingId) {
+            $row = mysql\Application::getCountOnUserAndOpeningId($userId,$openingId);
+            $count = 0 ;
+            if(!empty($row)){
+                $count = $row['total_count'];
+            }
+
+            return $count;
+        }
+
         function getRecordsOnUserId($userId) {
             $rows = mysql\Application::getRecordsOnUserId($userId);
             return $rows ;

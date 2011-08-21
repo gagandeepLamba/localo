@@ -86,28 +86,9 @@
 
                     <div class="yui3-u-19-24">
                         <div id="main-panel">
-                            <h2> Edit &dash;&nbsp;<?php echo  $openingDBRow['title']; ?> </h2>
-
-
+                            <h2> Edit &dash;&nbsp;<?php echo  $openingDBRow['title']; ?> </h2> 
+                            <p> status &nbsp;&dash;&nbsp; <?php echo $displayStatus; ?> </p>
                             <?php include($_SERVER['APP_WEB_DIR'] . '/inc/form/message.inc'); ?>
-
-                            <div>
-                                <p> status &nbsp;&dash;&nbsp; <?php echo $displayStatus; ?> </p>
-                                <b> Quick Actions </b>
-                                <ul class="opening-actions">
-                                    <?php
-                                        $link = ' <li> <a href="/opening/post/quick-action.php?g_opening_id={openingId}&action={code}">{display}</a> </li>';
-                                        foreach($actions as $code => $display) {
-                                            
-                                            $li = str_replace(array("{openingId}","{code}", "{display}"), array($openingId,$code,$display), $link);
-                                            echo $li ;
-                                        }
-
-                                    ?>
-                                    
-                                </ul>
-                            </div>
-
                              
                             <div id="form-wrapper">
                                 <form id="web-form1" class="web-form" name="web-form1" action="/opening/post/edit.php" enctype="multipart/form-data"  method="POST">

@@ -62,19 +62,18 @@ div .opening {
     padding:10px ;
 }
 
-div .opening a {
-   text-decoration: none ;
+
+div .opening-summary {
+    margin-left: 10px;
+    padding:10px ;
 }
 
 
-div .application  a {
-   text-decoration: none ;
-}
 
 div .bounty {
     font-size: 14px;
     font-weight: bold;
-    padding:10px;
+    padding:5px;
     color:green;
 }
 
@@ -91,6 +90,14 @@ div .action-links a {
 div .application {
     padding:10px;
     margin-left: 10px;
+}
+
+
+div .application-summary {
+    padding:5px;
+    margin-left: 60px;
+    font-size: 13px;
+
 }
 
 div .organization {
@@ -229,8 +236,6 @@ div .error label {
     padding-bottom: 10px;
 }
 
-
-
 div #preview {
     padding:10px;
 }
@@ -239,21 +244,10 @@ p .help-text {
 
 }
 
-.opening-actions {
-    line-height : 20px;
-}
-
-.opening-actions li {
-
-    border-bottom : 1px dotted #CCC ;
-    padding: 2px 0px 2px 15px ;
-    text-align: left ;
-}
-
-.opening-actions li a{
-
-    font-size: 14px;
-    /* font-weight:bold; */
-   
-
+.ajax-toolbar {
+    font-size :13px;
+    /* border: 1px #ccc solid ; */
+    padding:5px;
+    margin-top:5px;
+    padding:5px;
 }

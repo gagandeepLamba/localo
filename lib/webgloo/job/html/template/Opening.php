@@ -107,7 +107,7 @@ namespace webgloo\job\html\template {
         //action controls whether or not to show
         // post cv and share action links
         // ajax opening detail is also using this method
-        static function getUserDetail($row, $action=false) {
+        static function getUserDetail($row,$applicationCount,$action=false) {
             $flexy = Flexy::getInstance();
             $flexy->compile('/opening/user/detail.tmpl');
             $opening = new view\Opening();
@@ -121,8 +121,11 @@ namespace webgloo\job\html\template {
             //DD - Month - YYYY
             $view->createdOn = Util::formatDBTime($row['created_on'], "%d %b %Y");
             $view->expireOn = Util::formatDBTime($row['expire_on'], "%d %b %Y");
-
+            //@todo - populate organization description
             $view->organizationDescription = 'abcd';
+
+            //turn off post CV when application count >= 2
+            $view->showPostCVAction = ($applicationCount >= 2 ) ? false : true ;
             
             $html = $flexy->bufferedOutputObject($view);
             return $html;
