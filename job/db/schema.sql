@@ -81,19 +81,32 @@ CREATE TABLE job_user (
         id int(11) NOT NULL auto_increment,
 	email varchar(128) not null,
 	password varchar(64) not null,
-	first_name varchar(64) not null,
-	last_name varchar(64) not null,
-        phone varchar(16) not null ,
+	name varchar(128) not null,
         is_active int not null default 1,
-        company varchar(128) ,
-        title varchar(128) ,
-	org_id int default NULL,
 	salt varchar(16) not null,
 	created_on TIMESTAMP  default '0000-00-00 00:00:00',
 	updated_on TIMESTAMP   default '0000-00-00 00:00:00',
 	PRIMARY KEY (id)) ENGINE =MYISAM ;
 
 alter table  job_user add constraint UNIQUE uniq_user_email (email);
+
+
+drop table if exists job_user_profile ;
+create table job_user_profile (
+    id int(11) NOT NULL auto_increment,
+    user_id int not null,
+    title varchar(128) ,
+    phone varchar(16) not null ,
+    description TEXT ,
+    linkedin_page varchar(256),
+    education varchar(256),
+    company varchar(128) ,
+    experience_year int ,
+    experience_month  int,
+    location varchar(32),
+    updated_on TIMESTAMP   default '0000-00-00 00:00:00',
+    PRIMARY KEY (id)) ENGINE =MYISAM ;
+
 
 
 

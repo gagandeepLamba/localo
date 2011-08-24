@@ -50,6 +50,17 @@ namespace webgloo\common {
             return $params;
         }
 
+        static function tryUrls($urls) {
+            foreach($urls as $url) {
+                if(!empty($url)) {
+                    return $url ;
+                }
+            }
+            
+            \trigger_error('Wrong url input',E_USER_ERROR);
+        }
+
+
     }
 
 }

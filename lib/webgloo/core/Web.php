@@ -19,15 +19,18 @@ namespace webgloo\core {
 
     use webgloo\common\Configuration as Config;
     use webgloo\common\Logger as Logger;
-    use webgloo\common\Util ;
-    
+    use webgloo\common\Util;
+
     class Web {
 
         private $request;
+        private $urls;
         static private $instance = NULL;
-
+        const CORE_URL_STACK = "core.url.stack";
+        
         private function __construct() {
             $this->request = new \webgloo\core\Request();
+            $this->urls = array();
         }
 
         static function getInstance() {
@@ -35,6 +38,53 @@ namespace webgloo\core {
                 self::$instance = new Web();
             }
             return self::$instance;
+        }
+
+        function addCurrentUrlToStack() {
+            $url = $_SERVER['REQUEST_URI'];
+            
+            if (isset($_SESSION)) {
+                $stack = array();
+                if (!empty($_SESSION[self::CORE_URL_STACK])) {
+                    $stack = $_SESSION[self::CORE_URL_STACK];
+                    //user hit F5?
+                    if(md5($url) == md5($stack[sizeof($stack) -1])) {
+                        return ;
+                    }
+                }
+
+                //do not let the stack grow beyond 3
+                if (sizeof($stack) >= 3) {
+                    //remove oldest element
+                    \array_shift($stack);
+                }
+
+                //add new element to the end
+                \array_push($stack, $url);
+                $_SESSION[self::CORE_URL_STACK] = $stack;
+
+                if (Config::getInstance()->is_debug()) {
+                    $message = Util::stringify($stack);
+                    Logger::getInstance()->debug('web >> url stack is >> ' . $message);
+                }
+            } else {
+                \trigger_error("session not set", E_USER_ERROR);
+            }
+        }
+
+        function getPreviousUrl() {
+            $url = NULL;
+            //session is set and there are some elements in the url stack
+            if (isset($_SESSION) && !empty($_SESSION[self::CORE_URL_STACK])) {
+                $stack = $_SESSION[self::CORE_URL_STACK];
+                $url = $stack[sizeof($stack)-1];
+            }
+
+            if (Config::getInstance()->is_debug()) {
+                Logger::getInstance()->debug('web >> previous url on stack is >> ' . $url);
+            }
+
+            return $url;
         }
 
         function getRequest() {
@@ -55,10 +105,10 @@ namespace webgloo\core {
         }
 
         function store($key, $value) {
-           
+
             if (isset($_SESSION)) {
                 $_SESSION[$key] = $value;
-                
+
                 if (Config::getInstance()->is_debug()) {
                     Logger::getInstance()->debug('web >> storing in session >> key is:: ' . $key);
                     Logger::getInstance()->debug($value);
@@ -71,7 +121,7 @@ namespace webgloo\core {
 
             if (isset($_SESSION[$key]) && !empty($_SESSION[$key])) {
                 $value = $_SESSION[$key];
-                if (Config::getInstance()->is_debug()) {             
+                if (Config::getInstance()->is_debug()) {
                     Logger::getInstance()->debug('web >> fetching from session >> key is:: ' . $key);
                     Logger::getInstance()->debug($value);
                 }

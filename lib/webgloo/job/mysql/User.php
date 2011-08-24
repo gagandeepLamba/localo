@@ -58,22 +58,18 @@ namespace webgloo\job\mysql {
             $message = $password . $salt;
             $digest = sha1($message);
             
-            $sql = " insert into job_user(first_name,last_name,email,password,phone,company,title,salt,created_on) ";
-            $sql .= " values(?,?,?,?,?,?,?,?,now()) ";
+            $sql = " insert into job_user(name,email,password,salt,created_on) ";
+            $sql .= " values(?,?,?,?,now()) ";
 
             $dbCode = MySQL\Connection::ACK_OK;
 
             //store computed password and random salt
             $stmt = $mysqli->prepare($sql);
             if ($stmt) {
-                $stmt->bind_param("ssssssss",
-                        $userVO->firstName,
-                        $userVO->lastName,
+                $stmt->bind_param("ssss",
+                        $userVO->name,
                         $userVO->email,
                         $digest,
-                        $userVO->phone,
-                        $userVO->company,
-                        $userVO->title,
                         $salt);
 
                 $stmt->execute();

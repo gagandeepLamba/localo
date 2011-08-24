@@ -1,5 +1,12 @@
-<?php include 'job-app.inc'; ?>
-<?php include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc'); ?>
+<?php
+
+    include 'job-app.inc';
+    include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
+    //add current url to stack
+    $gWeb->addCurrentUrlToStack();
+
+
+?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>

@@ -181,6 +181,11 @@ div #form-wrapper {
     width: 800px;
 }
 
+
+.form-table  .width-number{
+    width: 80px;
+}
+
 .form-table  .height-1{
     height: 140px;
 }
@@ -195,7 +200,7 @@ div #form-wrapper {
     line-height: 1.8em;
     color: #333;
     border: 1px solid #ccc;
-    width: 510px;
+    width: 400px;
     height :310px;
     padding-top:10px
 }

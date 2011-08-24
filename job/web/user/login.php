@@ -5,6 +5,7 @@
     use webgloo\common\ui\form as Form;
     $sticky = new Form\Sticky($gWeb->find(Constants::STICKY_MAP, true));
 
+    $previousUrl = $gWeb->getPreviousUrl();
 ?>  
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -29,7 +30,7 @@
                 });
 
             });
-
+            
         </script>
 
     </head>
@@ -83,7 +84,10 @@
 
                                             <div class="button-container">
                                                 <button type="submit" name="login" value="Login" onclick="this.setAttribute('value','Login');" ><span>Login</span></button>
-                                                <button type="button" name="cancel" onClick="javascript:go_back('http://www.test2.com');"><span>Cancel</span></button>
+                                                <a href="<?php echo $previousUrl; ?>">
+                                                    <button type="button" name="cancel"><span>Cancel</span></button>
+                                                </a>
+                                                
                                             </div>
 
                                             <div style="clear: both;"></div>
@@ -91,7 +95,13 @@
                                         </form>
                                     </div> <!-- form wrapper -->
 
+                                    <div class="action-links">
+                                        <a href="/user/register.php"> No account? Register</a>
+                                        &nbsp;|&nbsp;forgot password? mail to <a href="mailto:support@job.indigloo.net">support@job.indigloo.net</a>
+                                    </div> <!-- action links -->
+
                             </div>
+                            
 
 
                         </div> <!-- main unit -->

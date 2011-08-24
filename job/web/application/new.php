@@ -3,7 +3,7 @@
     //set the global variables
     include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
     include($_SERVER['APP_WEB_DIR'] . '/inc/user/role.inc');
-
+    
     use webgloo\common\Util ;
     use webgloo\common\ui\form\Sticky ;
     use webgloo\job\Constants ;
@@ -14,22 +14,29 @@
 
     $openingId = $gWeb->getRequestParam('g_opening_id');
     Util::isEmpty('openingId', $openingId);
+    
 
     $openingDao = new webgloo\job\dao\Opening();
     $openingDBRow = $openingDao->getRecordOnId($openingId);
     $openingHtml = webgloo\job\html\template\Opening::getUserSummary($openingDBRow);
 
+    
+    
     //find and destroy sticky map
     $sticky = new Sticky($gWeb->find(Constants::STICKY_MAP,true));
+    
     //This method will throw an error
     $userVO = FormAuthentication::getLoggedInUser();
-
     $userId = $userVO->uuid ;
     //Now get applications already sent by this user
 
     $applicationDao = new webgloo\job\dao\Application();
     $applicationCount = $applicationDao->getCountOnUserAndOpeningId($userId,$openingId);
-
+    
+    $previousUrl = $gWeb->getPreviousUrl();
+    //add current url to stack
+    $gWeb->addCurrentUrlToStack();
+    
 ?>
 
 

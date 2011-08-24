@@ -2,8 +2,9 @@
 
 namespace webgloo\job\dao {
 
-use webgloo\job\view as view;
-use webgloo\job\mysql as mysql;
+    use webgloo\job\view as view;
+    use webgloo\job\mysql as mysql;
+    use webgloo\common\Util ;
 
     class Application {
         
@@ -23,6 +24,9 @@ use webgloo\job\mysql as mysql;
         }
 
          function getCountOnUserAndOpeningId($userId,$openingId) {
+            Util::isEmpty('userId', $userId);
+            Util::isEmpty('openingId', $openingId);
+            
             $row = mysql\Application::getCountOnUserAndOpeningId($userId,$openingId);
             $count = 0 ;
             if(!empty($row)){

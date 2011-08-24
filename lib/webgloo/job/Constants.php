@@ -5,11 +5,8 @@ namespace webgloo\job {
     class Constants {
         const FORM_ERRORS = "form.errors"   ;
         const FORM_MESSAGES = "form.messages" ;
-        const LAST_URI = "last.uri" ;
-        const LAST_REQUEST = "last.request";
-        const STICKY_MAP = "sticky.map" ;
-        
+        const PROTECTED_RESOURCE_URI = "protected.request.uri";
+        const STICKY_MAP = "sticky.map" ;   
     }
-
 }
 ?>

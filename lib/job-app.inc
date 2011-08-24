@@ -9,8 +9,4 @@ $_SERVER['CLASS_LOADER_FILE'] = '/var/www/lib/class_loader.inc' ;
 $_SERVER['TEMPLATE_FILE_DIR'] = '/var/www/htdocs/templates' ;
 $_SERVER['TEMPLATE_COMPILE_DIR'] = '/var/www/htdocs/templates_c' ;
 
-
-//include class loader code 
-require_once ($_SERVER['CLASS_LOADER_FILE']);
-
 ?>

@@ -6,27 +6,24 @@ include ($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
 use webgloo\auth\FormAuthentication;
 use webgloo\common\ui\form as Form;
 use webgloo\job\Constants;
+use webgloo\common\Url ;
 
 if (isset($_POST['register']) && ($_POST['register'] == 'Register')) {
-
-
+    
     $fhandler = new Form\Handler('web-form-1', $_POST);
 
     $fhandler->addRule('email', 'Email', array('required' => 1));
     $fhandler->addRule('password', 'Password', array('required' => 1, 'minlength' => 8));
-    $fhandler->addRule('first_name', 'First name', array('required' => 1));
-    $fhandler->addRule('last_name', 'Last name', array('required' => 1));
-
+    $fhandler->addRule('name', 'Name', array('required' => 1));
+    
     $fvalues = $fhandler->getValues();
 
     $locationOnError = '/user/register.php';
-
+    $locationOnSuccess = Url::tryUrls(array($gWeb->find(Constants::PROTECTED_RESOURCE_URI,true),$gWeb->getPreviousUrl(), '/'));
     //try to create this user
     $userDao = new webgloo\job\dao\User();
-    $dbCode = $userDao->create($fvalues['first_name'], $fvalues['last_name'], $fvalues['email'],
-                    $fvalues['password'], $fvalues['phone'], $fvalues['company'], $fvalues['title']);
-
-
+    $dbCode = $userDao->create($fvalues['name'], $fvalues['email'],$fvalues['password']);
+    
     if ($dbCode == webgloo\common\mysql\Connection::ACK_OK) {
         //user created
         //log in this user please!
@@ -36,7 +33,7 @@ if (isset($_POST['register']) && ($_POST['register'] == 'Register')) {
         }
         
         //go back to main page
-        header("location: / " );
+        header("location: ".$locationOnSuccess );
         
     } else if ($dbCode == webgloo\common\mysql\Connection::DUPLICATE_KEY) {
         //this user already exists

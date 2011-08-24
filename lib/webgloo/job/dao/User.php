@@ -13,15 +13,10 @@ namespace webgloo\job\dao {
             return $rows;
         }
 
-        function create($firstName, $lastName,$email,$password,$phone,$company,$title) {
+        function create($name,$email,$password) {
             $userVO = new view\User();
-            $userVO->firstName = $firstName;
-            $userVO->lastName = $lastName;
-
+            $userVO->name = $name;
             $userVO->email = $email;
-            $userVO->phone = $phone;
-            $userVO->company = $company;
-            $userVO->title = $title;
             
             //store into DB layer
             //password is not part of userVO

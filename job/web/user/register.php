@@ -1,10 +1,12 @@
 <?php
-include ('job-app.inc');
-include ($_SERVER['APP_WEB_DIR'].'/inc/header.inc');
-use webgloo\job\Constants ;
-use webgloo\common\ui\form as Form;
-$sticky = new Form\Sticky($gWeb->find(Constants::STICKY_MAP, true));
+    include ('job-app.inc');
+    include ($_SERVER['APP_WEB_DIR'].'/inc/header.inc');
+    use webgloo\job\Constants ;
+    use webgloo\common\ui\form as Form;
+    $sticky = new Form\Sticky($gWeb->find(Constants::STICKY_MAP, true));
 
+    $previousUrl = $gWeb->getPreviousUrl();
+    
 ?>  
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -15,7 +17,7 @@ $sticky = new Form\Sticky($gWeb->find(Constants::STICKY_MAP, true));
 
         <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
 
-        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.3.0/build/cssgrids/grids-min.css">
+        <link rel="stylesheet" type="text/css" href="/css/grids-min.css">
         <!-- app css here -->
         <link rel="stylesheet" type="text/css" href="/css/main.css">
         <!-- include any javascript here -->
@@ -68,7 +70,7 @@ $sticky = new Form\Sticky($gWeb->find(Constants::STICKY_MAP, true));
 
 
                                     <p class="help-text">
-                                       Please provide details below to continue
+                                       Please provide details below to register.
 
                                     </p>
                                      <?php include($_SERVER['APP_WEB_DIR'] . '/inc/form/message.inc'); ?>
@@ -81,73 +83,37 @@ $sticky = new Form\Sticky($gWeb->find(Constants::STICKY_MAP, true));
                                             <table class="form-table">
 
                                                  <tr>
-                                                    <td class="field"> First Name<span class="red-label">*</span></td>
+                                                    <td class="field"> Name<span class="red-label">*</span></td>
                                                     <td>
-                                                        <input type="text" name="first_name" maxlength="100" class="required" title="&gt;&nbsp;First name is a required field" value="<?php echo $sticky->get('first_name'); ?>"/>
-                                                    </td>
-                                                 </tr>
-                                                 <tr>
-                                                    <td class="field"> Last Name<span class="red-label">*</span></td>
-                                                    <td>
-                                                        <input type="text" name="last_name" maxlength="100" class="required" title="&gt;&nbsp;Last name is a required field" value="<?php echo $sticky->get('last_name'); ?>"/>
-                                                    </td>
-                                                 </tr>
-                                                <tr>
-                                                    <td class="field"> Phone</td>
-                                                    <td>
-                                                        <input type="text" name="phone" maxlength="16" value="<?php echo $sticky->get('phone'); ?>"/>
-                                                    </td>
-                                                 </tr>
-                                                  <tr>
-                                                    <td class="field"> Company</td>
-                                                    <td>
-                                                        <input type="text" name="company" maxlength="64" value="<?php echo $sticky->get('compnay'); ?>"/>
-                                                    </td>
-                                                 </tr>
-                                                  <tr>
-                                                    <td class="field"> Job title</td>
-                                                    <td>
-                                                        <input type="text" name="title" maxlength="64" value="<?php echo $sticky->get('title'); ?>"/>
+                                                        <input type="text" name="name" maxlength="64" class="required" title="&gt;&nbsp;Name is a required field" value="<?php echo $sticky->get('name'); ?>"/>
                                                     </td>
                                                  </tr>
 
-                                                <tr>
+                                                  <tr>
                                                     <td class="field"> Email<span class="red-label">*</span></td>
                                                     <td>
                                                         <input type="text" id="email" name="email" maxlength="64" class="required mail" title="&gt;&nbsp;wrong email" value="<?php echo $sticky->get('email'); ?>"/>
                                                     </td>
                                                 </tr>
-
-                                                <tr>
+                                                 <tr>
                                                     <td class="field">Password<span class="red-label">*</span> &nbsp; </td>
                                                     <td> <input id="password" type="password" name="password" maxlength="32" class="required" minlength="8" title="password should be atleast 8 chars!" value="" /></td>
                                                 </tr>
-                                                
-                                                <tr>
-                                                    <td class="field">Retype Password <span class="red-label">*</span> &nbsp;</td>
-                                                    <td> <input id="password_again" type="password" name="password_again" maxlength="32" class="required" minlength="8"  title="passwords do not match" value="" /></td>
-                                                </tr> 
-                                                
 
+                                                <tr>
+                                                    <td class="field">Confirm Password <span class="red-label">*</span> &nbsp;</td>
+                                                    <td> <input id="password_again" type="password" name="password_again" maxlength="32" class="required" minlength="8"  title="passwords do not match" value="" /></td>
+                                                </tr>
+
+                                                
                                             </table>
 
-                                            
-
-
                                             <div class="button-container">
-
-                                                <div class="submit">
-                                                    <div>
-                                                        <button type="submit" name="register" value="Register" onclick="this.setAttribute('value','Register');" ><span>Register</span></button>
-                                                    </div>
-                                                </div>
-
-                                                <div class="button">
-                                                    <div>
-                                                        <button type="button" name="cancel" onClick="javascript:go_back('http://www.test2.com');"><span>Cancel</span></button>
-                                                    </div>
-                                                </div>
-
+                                                <button type="submit" name="register" value="Register" onclick="this.setAttribute('value','Register');" ><span>Register</span></button>
+                                                 <a href="<?php echo $previousUrl; ?>">
+                                                    <button type="button" name="cancel"><span>Cancel</span></button>
+                                                </a>
+                                                
                                             </div>
                                             
                                             <div style="clear: both;"></div>

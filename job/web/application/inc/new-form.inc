@@ -79,7 +79,9 @@
 
         <div class="button-container">
             <button type="submit" name="save" value="Save" onclick="this.setAttribute('value','Save');" ><span>Save</span></button>
-            <button type="button" name="cancel" onClick="javascript:go_back('http://www.test2.com');"><span>Cancel</span></button>
+            <a href="<?php echo $previousUrl; ?>">
+                <button type="button" name="cancel"><span>Cancel</span></button>
+            </a>
         </div>
 
 
