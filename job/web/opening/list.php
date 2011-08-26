@@ -16,7 +16,7 @@
 
     $gstatus = $gWeb->getRequestParam('g_status');
     if (empty($gstatus)) {
-        $gstatus = '*';
+        $gstatus = 'A';
     }
 
     $uifilters = UIData::getOpeningFilters();

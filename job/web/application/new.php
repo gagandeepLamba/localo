@@ -9,18 +9,22 @@
     use webgloo\job\Constants ;
     use webgloo\auth\FormAuthentication ;
 
+    //incoming parameter check
     $organizationId = $gWeb->getRequestParam('g_org_id');
     Util::isEmpty('organizationId', $organizationId);
 
     $openingId = $gWeb->getRequestParam('g_opening_id');
     Util::isEmpty('openingId', $openingId);
-    
 
     $openingDao = new webgloo\job\dao\Opening();
     $openingDBRow = $openingDao->getRecordOnId($openingId);
-    $openingHtml = webgloo\job\html\template\Opening::getUserSummary($openingDBRow);
 
-    
+    //check1 /check2
+    $openingDao->checkNull($openingDBRow);
+    $openingDao->checkActive($openingDBRow);
+
+
+    $openingHtml = webgloo\job\html\template\Opening::getUserSummary($openingDBRow);
     
     //find and destroy sticky map
     $sticky = new Sticky($gWeb->find(Constants::STICKY_MAP,true));
@@ -32,6 +36,11 @@
 
     $applicationDao = new webgloo\job\dao\Application();
     $applicationCount = $applicationDao->getCountOnUserAndOpeningId($userId,$openingId);
+    
+    //There is no navigation to new application if application count >2
+    // throw error if someone tries to spoof the URL
+    //check3
+    $openingDao->checkApplicationCount($applicationCount);
     
     $previousUrl = $gWeb->getPreviousUrl();
     //add current url to stack
@@ -50,15 +59,11 @@
 
         <link rel="stylesheet" type="text/css" href="/css/grids-min.css">
         <link rel="stylesheet" type="text/css" href="/css/main.css">
-        <link rel="stylesheet" type="text/css" href="/css/jquery/flick/jquery-ui-1.8.14.custom.css">
-        <!-- app css here -->
+       
         <!-- include any javascript here -->
+        <!-- jquery UI and css -->
         <script type="text/javascript" src="/js/jquery-1.6.2.min.js"></script>
         <script type="text/javascript" src="/js/jquery.validate.min.js"></script>
-        <!-- jquery UI and css -->
-
-        <script type="text/javascript" src="/js/jquery-ui-1.8.14.custom.min.js"></script>
-        <script type="text/javascript" src="/js/main.js"></script>
 
         <script type="text/javascript">
             
@@ -67,18 +72,6 @@
                 $("#web-form1").validate({
                     errorLabelContainer: $("#web-form1 div.error")
                 });
-                
-                //create dialog box
-                $("#gui-dialog").dialog({
-                    autoOpen: false,
-                    modal: true,
-                    draggable: true,
-                    position: 'center',
-                    width: '310px'}) ;
-
-                });
-
-                //show on demand
                 
             
         </script>
@@ -108,14 +101,10 @@
                                 <?php echo $openingHtml; ?>
 
                             </div>
-
+                                    
                             <?php
-                                if ($applicationCount >= 2) {
-                                    echo "&nbsp;warning &dash; Quota of 2 jobs per opening is over!";
-                                } else {
-                                    include($_SERVER['APP_WEB_DIR'] . '/inc/form/message.inc');
-                                    include($_SERVER['APP_WEB_DIR'] . '/application/inc/new-form.inc');
-                                }
+                                include($_SERVER['APP_WEB_DIR'] . '/inc/form/message.inc');
+                                include($_SERVER['APP_WEB_DIR'] . '/application/inc/new-form.inc');
                             ?>
 
                             </div>

@@ -1,10 +1,11 @@
 <?php
-include ('job-app.inc');
-include ($_SERVER['APP_WEB_DIR'].'/inc/header.inc');
-use webgloo\job\Constants ;
-use webgloo\common\ui\form as Form;
-$sticky = new Form\Sticky($gWeb->find(Constants::STICKY_MAP, true));
-
+    include ('job-app.inc');
+    include ($_SERVER['APP_WEB_DIR'].'/inc/header.inc');
+    use webgloo\job\Constants ;
+    use webgloo\common\ui\form as Form;
+    
+    $sticky = new Form\Sticky($gWeb->find(Constants::STICKY_MAP, true));
+    $previousUrl = $gWeb->getPreviousUrl();
 ?>
 
 
@@ -15,11 +16,9 @@ $sticky = new Form\Sticky($gWeb->find(Constants::STICKY_MAP, true));
        <head><title> Customer Admin logon page</title>
        
         <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
-
-        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.3.0/build/cssgrids/grids-min.css">
-        <!-- app css here -->
+        <link rel="stylesheet" type="text/css" href="/css/grids-min.css">
         <link rel="stylesheet" type="text/css" href="/css/main.css">
-
+        
         <!-- include any javascript here -->
         <script type="text/javascript" src="/js/jquery-1.6.2.min.js"></script>
         <script type="text/javascript" src="/js/jquery.validate.min.js"></script>
@@ -57,7 +56,7 @@ $sticky = new Form\Sticky($gWeb->find(Constants::STICKY_MAP, true));
 
 
                                     <p class="help-text">
-                                       Please provide details below to continue
+                                       Please provide your credentials to continue
 
                                     </p>
                                     <?php include($_SERVER['APP_WEB_DIR'] . '/inc/form/message.inc'); ?>
@@ -88,8 +87,10 @@ $sticky = new Form\Sticky($gWeb->find(Constants::STICKY_MAP, true));
                                             <div class="button-container">
 
                                                 <button type="submit" name="login" value="Login" onclick="this.setAttribute('value','Login');" ><span>Login</span></button>
-                                                <button type="button" name="cancel" onClick="javascript:go_back('http://www.test2.com');"><span>Cancel</span></button>
-                                                    
+                                                 <a href="<?php echo $previousUrl; ?>">
+                                                    <button type="button" name="cancel"><span>Cancel</span></button>
+                                                </a>
+                                                
                                                 </div>
 
                                             

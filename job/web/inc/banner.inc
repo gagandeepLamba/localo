@@ -5,7 +5,7 @@
              <img src="/css/images/communityservice2.jpg" alt="logo" />
         </div>
          <div class="yui3-u-19-24">
-            <h1> <a href="/"> Your Job Board</a></h1>
+            <h1> <a href="/pub/index.php"> Your Job Board</a></h1>
             <div class="description">  The best job board in the world! </div>
         </div>
 

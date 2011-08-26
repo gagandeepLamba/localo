@@ -2,6 +2,7 @@
 
 namespace webgloo\common {
 
+    use webgloo\common\Util ;
 
     class Url {
 
@@ -31,7 +32,7 @@ namespace webgloo\common {
             }
             return $path;
         }
-
+        
         static function getQueryParams($url) {
             $query = \parse_url($url, PHP_URL_QUERY);
             $params = array();

@@ -46,9 +46,23 @@ namespace webgloo\job\dao {
             return $row ;
         }
 
-        function create($organizationId,
-                $openingId, $userId, $forwarderEmail, $cvName,$cvTitle, $cvPhone,
-                $cvEmail, $cvDescription,$cvCompany, $cvEducation,$cvLocation,$cvSkill) {
+        function create(
+                $organizationId,
+                $openingId,
+                $userId,
+                $forwarderEmail,
+                $cvName,
+                $cvTitle,
+                $cvPhone,
+                $cvEmail,
+                $cvDescription,
+                $cvCompany,
+                $cvEducation,
+                $cvLocation,
+                $cvSkill,
+                $cvLinkedInPage,
+                $cvExperienceInYear,
+                $cvExperienceInMonth) {
 
             $applicationVO = new view\Application();
             $applicationVO->organizationId = $organizationId;
@@ -68,6 +82,10 @@ namespace webgloo\job\dao {
             $applicationVO->cvCompany = $cvCompany;
             $applicationVO->cvLocation = $cvLocation;
             $applicationVO->cvSkill = $cvSkill;
+
+             $applicationVO->cvLinkedInPage = $cvLinkedInPage;
+             $applicationVO->cvExperienceInYear = $cvExperienceInYear;
+             $applicationVO->cvExperienceInMonth = $cvExperienceInMonth ;
 
 
             //store into DB layer

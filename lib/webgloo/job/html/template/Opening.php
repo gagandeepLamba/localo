@@ -5,13 +5,13 @@ namespace webgloo\job\html\template {
     use webgloo\common\html\template\Flexy as Flexy;
     use webgloo\job\view as view;
     use webgloo\common\Util;
-
+    
     class Opening {
 
-        //used on main site page
-        static function getMainSummary($row) {
+        //used on public site page
+        static function getPublicSummary($row) {
             $flexy = Flexy::getInstance();
-            $flexy->compile('/opening/main/summary.tmpl');
+            $flexy->compile('/opening/pub/summary.tmpl');
             $opening = new view\Opening();
             $view = $opening->create($row);
             //shorten the description for summary?
@@ -30,6 +30,8 @@ namespace webgloo\job\html\template {
             $view->createdOn = Util::formatDBTime($row['created_on'], "%d %b %Y");
             $view->expireOn = Util::formatDBTime($row['expire_on'], "%d %b %Y");
 
+            //Fix links
+
             $html = $flexy->bufferedOutputObject($view);
             return $html;
         }
@@ -41,9 +43,23 @@ namespace webgloo\job\html\template {
             $opening = new view\Opening();
             $view = $opening->create($row);
 
-            
-            $view->description = substr($view->description, 0, 340);
-            $view->description .= ' ...';
+            $view->descriptionClass = 'normal';
+            $view->hasSummary = false;
+
+            if (strlen($view->description) > 340) {
+                //we need to print a summary
+                $view->summary = substr($view->description, 0, 340);
+                $view->summary .= '...';
+                $view->hasSummary = true;
+                //hide long descriptions on page load
+                $view->descriptionClass = 'hide-me';
+            }
+
+            //number of days left to expire
+            //calculate interval in seconds for expire_on date from now
+            $interval = Util::secondsInDBTimeFromNow($row['expire_on']);
+            $view->lifeInDays = ($interval > 0) ? ceil($interval / (24 * 3600)) : 'N/A';
+
             $html = $flexy->bufferedOutputObject($view);
             return $html;
         }
@@ -55,17 +71,19 @@ namespace webgloo\job\html\template {
             $flexy->compile('/opening/org/summary.tmpl');
             $opening = new view\Opening();
             $view = $opening->create($row);
+
             $view->descriptionClass = 'normal';
-            
-             if (strlen($view->description) > 340) {
+            $view->hasSummary = false;
+
+            if (strlen($view->description) > 340) {
                 //we need to print a summary
                 $view->summary = substr($view->description, 0, 340);
-                $view->summary .= '...' ;
-                $view->hasSummary = true ;
+                $view->summary .= '...';
+                $view->hasSummary = true;
                 //hide long descriptions on page load
                 $view->descriptionClass = 'hide-me';
             }
-            
+
             //number of days left to expire
             //calculate interval in seconds for expire_on date from now
             $interval = Util::secondsInDBTimeFromNow($row['expire_on']);
@@ -85,12 +103,12 @@ namespace webgloo\job\html\template {
             return $html;
         }
 
-        static function getOrganizationSummary2($row){
+        static function getOrganizationSummary2($row) {
             $flexy = Flexy::getInstance();
             $flexy->compile('/opening/org/summary2.tmpl');
             $opening = new view\Opening();
             $view = $opening->create($row);
-            
+
             //number of days left to expire
             //calculate interval in seconds for expire_on date from now
             $interval = Util::secondsInDBTimeFromNow($row['expire_on']);
@@ -102,16 +120,17 @@ namespace webgloo\job\html\template {
             $html = $flexy->bufferedOutputObject($view);
             return $html;
         }
-        
+
         //used on POST CV page
         //action controls whether or not to show
         // post cv and share action links
         // ajax opening detail is also using this method
-        static function getUserDetail($row,$applicationCount,$action=false) {
+        static function getUserDetail($row, $applicationCount, $action=false) {
             $flexy = Flexy::getInstance();
             $flexy->compile('/opening/user/detail.tmpl');
             $opening = new view\Opening();
             $view = $opening->create($row);
+
             $view->action = $action;
 
             //number of days left to expire
@@ -125,8 +144,8 @@ namespace webgloo\job\html\template {
             $view->organizationDescription = 'abcd';
 
             //turn off post CV when application count >= 2
-            $view->showPostCVAction = ($applicationCount >= 2 ) ? false : true ;
-            
+            $view->showPostCVAction = ($applicationCount >= 2 ) ? false : true;
+
             $html = $flexy->bufferedOutputObject($view);
             return $html;
         }

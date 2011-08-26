@@ -6,6 +6,7 @@ include ($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
 use webgloo\auth\FormAuthentication;
 use webgloo\common\ui\form as Form;
 use webgloo\job\Constants;
+use webgloo\common\Url ;
 
 if (isset($_POST['login']) && ($_POST['login'] == 'Login')) {
 
@@ -35,13 +36,7 @@ if (isset($_POST['login']) && ($_POST['login'] == 'Login')) {
             exit;
         } else {
             //logon success
-            //create redirect uri using saved request object
-            //destroy after reading this value
-            $lastRequest = $gWeb->find(Constants::LAST_REQUEST, true);
-            $locationOnSuccess = '/';
-            if (!empty($lastRequest)) {
-                $locationOnSuccess = $lastRequest->getAttribute(Constants::LAST_URI);
-            }
+             $locationOnSuccess = Url::tryUrls(array($gWeb->find(Constants::PROTECTED_RESOURCE_URI,true),$gWeb->getPreviousUrl(), '/'));
             //successful logon
             header("location: " . $locationOnSuccess);
         }

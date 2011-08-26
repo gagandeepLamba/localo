@@ -13,6 +13,12 @@
 
     $openingDao = new webgloo\job\dao\Opening();
     $openingDBRow = $openingDao->getRecordOnId($openingId);
+    
+    //sanity checks
+    $openingDao->checkNull($openingDBRow);
+    $openingDao->checkActive($openingDBRow);
+
+
     $applicationRows = array();
     $applicationCount = 0 ;
 

@@ -27,6 +27,10 @@ namespace webgloo\job\view {
         //review | dupilcate | rejected
         public $status;
 
+        public $cvLinkedInPage;
+        public $cvExperienceInYear;
+        public $cvExperienceInMonth  ;
+        
         //create one from DB Row
         function create($row) {
             $application = new Application();
@@ -51,6 +55,10 @@ namespace webgloo\job\view {
             $application->createdOn = $row['created_on'];
             $application->stage = $row['stage'];
             $application->status = $row['status'];
+
+            $application->cvLinkedInPage = $row['cv_linkedin_page'];
+            $application->cvExperienceInYear = $row['cv_experience_year'];
+            $application->cvExperienceInMonth = $row['cv_experience_month'];
 
             return $application;
         }

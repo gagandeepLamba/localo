@@ -1,11 +1,9 @@
 <?php
     include 'job-app.inc';
     include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
-    include($_SERVER['APP_LIB_DIR'] . '/error.inc');
-
     //check if user has customer admin role or not
     include($_SERVER['APP_WEB_DIR'] . '/inc/admin/role.inc');
-
+    
     use webgloo\auth\FormAuthentication;
     use webgloo\job\html\Link;
     use webgloo\common\Url;
@@ -17,14 +15,17 @@
     //This method will throw an error
     $adminVO = FormAuthentication::getLoggedInAdmin();
     $organizationId = $adminVO->organizationId;
-
+    
     //find and destroy sticky map
     $sticky = new Sticky($gWeb->find(Constants::STICKY_MAP,true));
     $openingId = $gWeb->getRequestParam('g_opening_id');
     Util::isEmpty('openingId',$openingId);
 
     $openingDao = new webgloo\job\dao\Opening();
-    $openingDBRow = $openingDao->getRecordOnId($openingId);
+    $openingDBRow = $openingDao->getEditRecordOnId($adminVO->organizationId,$openingId);
+
+    //sanity test
+    $openingDao->checkNull($openingDBRow);
 
     $uifilters = UIData::getOpeningFilters();
     // see if it expired?
@@ -40,7 +41,7 @@
 
     //get actions array of code vs display name for DB status
     $actions = UIData::getOpeningActions($openingDBRow['status']);
-
+    $previousUrl = $gWeb->getPreviousUrl();
 		
 ?>
 
@@ -118,14 +119,27 @@
                                             </td>
                                         </tr>
 
-                                        <tr>
-                                            <td> &nbsp; </td>
-                                            <td>  <span> Must have skills </span> <br> <textarea  name="skill" class="height-1 width-2" cols="50" rows="4" ><?php echo $sticky->get('skill', $openingDBRow['skill']); ?></textarea> </td>
+                                         <tr>
+                                            <td class="field"> Experience</td>
+                                            <td>
+                                                <input type="text" name="min_experience" class="width-number" maxlength="2" value="<?php echo $sticky->get('min_experience',$openingDBRow['min_experience']); ?>"/>
+                                                &nbsp;to&nbsp;
+                                                <input type="text" name="max_experience" class="width-number" maxlength="2" value="<?php echo $sticky->get('max_experience',$openingDBRow['max_experience']); ?>"/>
+                                                &nbsp;years&nbsp;
+
+                                            </td>
+
                                         </tr>
 
                                         <tr>
                                             <td> &nbsp; </td>
-                                            <td><span> Description </span> <br>  <textarea  name="description" class="width-2" cols="50" rows="10" ><?php echo $sticky->get('description', $openingDBRow['description']); ?></textarea> </td>
+                                            <td>  <span> Desired skills </span> <br> <textarea  name="skill" class="height-1 width-2" cols="50" rows="4" ><?php echo $sticky->get('skill', $openingDBRow['skill']); ?></textarea> </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td> &nbsp; </td>
+                                            <td><span> Details </span> <br>
+                                                <textarea  name="description" class="width-2" cols="50" rows="10" ><?php echo $sticky->get('description', $openingDBRow['description']); ?></textarea> </td>
                                         </tr>
 
 
@@ -137,7 +151,9 @@
 
                                     <div class="button-container">
                                         <button type="submit" name="save" value="Save" onclick="this.setAttribute('value','Save');" ><span>Save</span></button>
-                                        <button type="button" name="cancel" onClick="javascript:go_back('http://www.test2.com');"><span>Cancel</span></button>
+                                        <a href="<?php echo $previousUrl; ?>">
+                                            <button type="button" name="cancel"><span>Cancel</span></button>
+                                        </a>
                                     </div>
 
 

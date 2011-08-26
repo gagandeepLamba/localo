@@ -1,23 +1,26 @@
 <?php
-include ('job-app.inc');
-include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
-//check if user has customer admin role or not
-include($_SERVER['APP_WEB_DIR'] . '/inc/admin/role.inc');
+    include ('job-app.inc');
+    include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
+    //check if user has customer admin role or not
+    include($_SERVER['APP_WEB_DIR'] . '/inc/admin/role.inc');
 
-use webgloo\common\Util;
-use webgloo\common\ui\form\Sticky;
-use webgloo\job\Constants;
-use webgloo\auth\FormAuthentication;
-use webgloo\job\html as Html;
+    use webgloo\common\Util;
+    use webgloo\common\ui\form\Sticky;
+    use webgloo\job\Constants;
+    use webgloo\auth\FormAuthentication;
+    use webgloo\job\html as Html;
 
-$comboValues = array ( '2W' => 'Two Weeks', '1M' => 'One Month', '2M' => 'Two Months');
-$comboBox = Html\ComboBox::render('expire_on',$comboValues, '1M') ;
+    $comboValues = array ( '2W' => 'Two Weeks', '1M' => 'One Month', '2M' => 'Two Months');
+    $comboBox = Html\ComboBox::render('expire_on',$comboValues, '1M') ;
 
-//find and destroy sticky map
-$sticky = new Sticky($gWeb->find(Constants::STICKY_MAP,true));
+    //find and destroy sticky map
+    $sticky = new Sticky($gWeb->find(Constants::STICKY_MAP,true));
 
-//This method will throw an error
-$adminVO = FormAuthentication::getLoggedInAdmin();
+    //This method will throw an error
+    $adminVO = FormAuthentication::getLoggedInAdmin();
+    $previousUrl = $gWeb->getPreviousUrl();
+    
+    
 ?>
 
 
@@ -25,7 +28,7 @@ $adminVO = FormAuthentication::getLoggedInAdmin();
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 
-    <head><title> Post a job opening </title>
+    <head><title> Post a job</title>
 
         <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
 
@@ -112,15 +115,26 @@ $adminVO = FormAuthentication::getLoggedInAdmin();
                                                 <input type="text" name="title" maxlength="100" class="required width-2" title="&gt;&nbsp;Title is a required field" value="<?php echo $sticky->get('title'); ?>"/>
                                             </td>
                                         </tr>
-
                                         <tr>
-                                            <td> &nbsp; </td>
-                                            <td>  <span> Must have skills </span> <br> <textarea  name="skill" class="height-1 width-2" cols="50" rows="4" ><?php echo $sticky->get('skill'); ?></textarea> </td>
+                                            <td class="field"> Experience</td>
+                                            <td>
+                                                <input type="text" name="min_experience" class="width-number" maxlength="2" value="<?php echo $sticky->get('min_experience','1'); ?>"/>
+                                                &nbsp;to&nbsp;
+                                                <input type="text" name="max_experience" class="width-number" maxlength="2" value="<?php echo $sticky->get('max_experience','3'); ?>"/>
+                                                &nbsp;years&nbsp;
+
+                                            </td>
+
                                         </tr>
 
                                         <tr>
                                             <td> &nbsp; </td>
-                                            <td><span> Description </span> <br>  <textarea  name="description" class="width-2" cols="50" rows="10" ><?php echo $sticky->get('description'); ?></textarea> </td>
+                                            <td>  <span> Desired skills </span> <br> <textarea  name="skill" class="height-1 width-2" cols="50" rows="4" ><?php echo $sticky->get('skill'); ?></textarea> </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td> &nbsp; </td>
+                                            <td><span> Details (about this opportunity) </span> <br>  <textarea  name="description" class="width-2" cols="50" rows="10" ><?php echo $sticky->get('description'); ?></textarea> </td>
                                         </tr>
 
 
@@ -132,7 +146,9 @@ $adminVO = FormAuthentication::getLoggedInAdmin();
 
                                     <div class="button-container">
                                         <button type="submit" name="save" value="Save" onclick="this.setAttribute('value','Save');" ><span>Save</span></button>
-                                        <button type="button" name="cancel" onClick="javascript:go_back('http://www.test2.com');"><span>Cancel</span></button>
+                                        <a href="<?php echo $previousUrl; ?>">
+                                            <button type="button" name="cancel"><span>Cancel</span></button>
+                                        </a>
                                     </div>
 
 

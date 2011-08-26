@@ -66,18 +66,19 @@ namespace webgloo\common {
          *
          */
         static function formatDBTime($original, $format="%d %b %Y") {
-            //@todo date time can be expensive, profile please
-            if (!isset($original) || is_null($original) || empty($original)) {
-                return '';
+
+             if (!isset($original) || empty($original)) {
+                trigger_error("Empty or Null timestamp supplied to utility function",E_USER_ERROR);
             }
+            
             $dt = strftime($format, strtotime($original));
             return $dt;
         }
         
         static function secondsInDBTimeFromNow($original) {
 
-            if (!isset($original) || is_null($original) || empty($original)) {
-                return 0;
+            if (!isset($original) || empty($original)) {
+                trigger_error("Empty or Null timestamp supplied to utility function",E_USER_ERROR);
             }
 
             //calculate base time stamp

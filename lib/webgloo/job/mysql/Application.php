@@ -84,15 +84,16 @@ namespace webgloo\job\mysql {
             $mysqli = MySQL\Connection::getInstance()->getHandle();
 
             $sql = " insert into job_application(org_id,user_id,opening_id,forwarder_email,cv_name, cv_title, " ;
-            $sql .= " cv_description,cv_email, cv_phone, cv_education,cv_company,cv_location,cv_skill,created_on) ";
-            $sql .= " values(?,?,?,?,?,?,?,?,?,?,?,?,?,now()) ";
+            $sql .= " cv_description,cv_email, cv_phone, cv_education,cv_company,cv_location,cv_skill,created_on,";
+            $sql .= " cv_linkedin_page,cv_experience_year, cv_experience_month)" ;
+            $sql .= " values(?,?,?,?,?,?,?,?,?,?,?,?,?,now(),?,?,?) ";
 
             $code = MySQL\Connection::ACK_OK;
             $lastInsertId = NULL ;
             
             $stmt = $mysqli->prepare($sql);
             if ($stmt) {
-                $stmt->bind_param("iiissssssssss",
+                $stmt->bind_param("iiisssssssssssii",
                         $applicationVO->organizationId,
                         $applicationVO->userId,
                         $applicationVO->openingId,
@@ -105,8 +106,10 @@ namespace webgloo\job\mysql {
                         $applicationVO->cvEducation,
                         $applicationVO->cvCompnay,
                         $applicationVO->cvLocation,
-                        $applicationVO->cvSkill);
-
+                        $applicationVO->cvSkill,
+                        $applicationVO->cvLinkedInPage,
+                        $applicationVO->cvExperienceInYear,
+                        $applicationVO->cvExperienceInMonth);
 
                 $stmt->execute();
 

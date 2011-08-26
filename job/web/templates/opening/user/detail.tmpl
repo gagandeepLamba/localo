@@ -9,17 +9,26 @@
     <p> {description:h} </p>
     <p> Skills:&nbsp;{skill:h} </p>
     <div class="bounty"> Reward&nbsp;{bounty:h}&nbsp;&#36;</div>
-    {if:action}
-     <div class="action-links">
-        {if:showPostCVAction}
-            <a href="/application/new.php?g_opening_id={uuid}&g_org_id={organizationId}"> Post CV </a>
-            &nbsp;|&nbsp;
-        {end:}
-        <a href="#"> Share </a>
-    </div>
+    {if:showPostCVAction}
+        <div class="action-links">
+            <a href="/application/new.php?g_opening_id={uuid}&g_org_id={organizationId}"> Send a Resume</a>
+        </div>
     {end:}
 
 </div>
+
+<div class="ajax-toolbar">
+
+    <div class="addthis_toolbox addthis_default_style ">
+    <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    <a class="addthis_button_tweet"></a>
+    <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    <a class="addthis_counter addthis_pill_style"></a>
+    </div>
+    <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4e57380d63c7f2a1"></script>
+
+</div>
+
 
 <div class="organization green-line-bottom">
     <h2> About {organizationName} </h2>

@@ -12,13 +12,9 @@
 <html>
 
     <head><title> www.job.com - All the job openings </title>
-
-
         <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
-
         <link rel="stylesheet" type="text/css" href="/css/grids-min.css">
         <link rel="stylesheet" type="text/css" href="/css/main.css">
-        
 
     </head>
 
@@ -48,7 +44,7 @@
                         $openingDao = new webgloo\job\dao\Opening();
                         $rows = $openingDao->getAllRecords();
                         foreach ($rows as $row) {
-                            $html = webgloo\job\html\template\Opening::getMainSummary($row);
+                            $html = webgloo\job\html\template\Opening::getPublicSummary($row);
                             echo $html;
                         }
                         ?>

@@ -10,7 +10,7 @@ namespace webgloo\job\mysql {
         static function getAllRecords() {
             $mysqli = MySQL\Connection::getInstance()->getHandle();
             //filter on status = 'A (ACTIVE) and expire_on > now()
-            $sql = " select * from job_opening where status = 'A' and ( expire_on > now() ) order by expire_on" ;
+            $sql = " select * from job_opening where status = 'A' and ( expire_on > now() ) order by created_on DESC" ;
             $rows = MySQL\Helper::fetchRows($mysqli, $sql);
             return $rows;
         }
@@ -57,7 +57,14 @@ namespace webgloo\job\mysql {
             $row = MySQL\Helper::fetchRow($mysqli, $sql);
             return $row;
         }
-        
+
+        static function getEditRecordOnId($organizationId,$openingId) {
+            $mysqli = MySQL\Connection::getInstance()->getHandle();
+            $sql = " select * from job_opening where id = ".$openingId. " and org_id =".$organizationId ;
+            $row = MySQL\Helper::fetchRow($mysqli, $sql);
+            return $row;
+        }
+
         static function create($openingVO) {
 
             $mysqli = MySQL\Connection::getInstance()->getHandle();
@@ -78,16 +85,15 @@ namespace webgloo\job\mysql {
             }
 
             $sql = " insert into job_opening(title,description,bounty,status,org_id,created_by, " ;
-            $sql .= " organization_name, skill, location,created_on,expire_on) ";
-            $sql .= " values(?,?,?,?,?,?,?,?,?,now(), {expireOn} ) ";
+            $sql .= " organization_name, skill, location,created_on,expire_on, min_experience,max_experience) ";
+            $sql .= " values(?,?,?,?,?,?,?,?,?,now(), {expireOn} ,?,?) ";
+            
             $sql = str_replace("{expireOn}", $expireOnValue, $sql);
-
-
             $dbCode = MySQL\Connection::ACK_OK;
             
             $stmt = $mysqli->prepare($sql);
             if ($stmt) {
-                $stmt->bind_param("ssssissss",
+                $stmt->bind_param("ssssissssss",
                         $openingVO->title,
                         $openingVO->description,
                         $openingVO->bounty,
@@ -96,7 +102,9 @@ namespace webgloo\job\mysql {
                         $openingVO->createdBy,
                         $openingVO->organizationName,
                         $openingVO->skill,
-                        $openingVO->location);
+                        $openingVO->location,
+                        $openingVO->minExperience,
+                        $openingVO->maxExperience);
 
                 $stmt->execute();
 

@@ -22,7 +22,9 @@ namespace webgloo\job\view {
         //open/suspended/closed
         //default status is open
         public $status;
-        
+        public $minExperience ;
+        public $maxExperience ;
+
         function __construct() {
             
         }
@@ -44,7 +46,9 @@ namespace webgloo\job\view {
             $opening->location = $row['location'];
             $opening->applicationCount = $row['application_count'];
             $opening->expireOn = $row['expire_on'];
-            
+            $opening->minExperience = $row['min_experience'] ;
+            $opening->maxExperience = $row['max_experience'] ;
+
             return $opening ;
         }
 

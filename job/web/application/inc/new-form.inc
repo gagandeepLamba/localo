@@ -26,33 +26,51 @@
             </tr>
 
             <tr>
-                <td class="field"> Phone<span class="red-label">*</span></td>
-                <td>
-                    <input type="text" name="cv_phone" maxlength="16" class="required" title="&gt;&nbsp;Phone is a required field" value="<?php echo $sticky->get('cv_phone'); ?>"/>
-                </td>
-            </tr>
-
-            <tr>
-                <td class="field"> Education<span class="red-label">*</span></td>
-                <td>
-                    <input type="text" name="cv_education" maxlength="128" class="required" title="&gt;&nbsp;Phone is a required field" value="<?php echo $sticky->get('cv_education'); ?>"/>
-                </td>
-            </tr>
-
-            <tr>
-                <td class="field">Title (blank for freshers)</td>
-                <td>
-                    <input type="text" name="cv_title" maxlength="128" value="<?php echo $sticky->get('cv_title'); ?>"/>
-                </td>
-            </tr>
-
-            <tr>
                 <td class="field"> Company</td>
                 <td>
                     <input type="text" name="cv_company" maxlength="128" value="<?php echo $sticky->get('cv_company'); ?>"/>
                 </td>
             </tr>
 
+            <tr>
+                <td class="field">Job title</td>
+                <td>
+                    <input type="text" name="cv_title" maxlength="128" value="<?php echo $sticky->get('cv_title'); ?>"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="field"> Education<span class="red-label">*</span></td>
+                <td>
+                    <textarea name="cv_education" class="height-1" cols="25" rows="5"><?php echo $sticky->get('cv_education'); ?></textarea>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="field"> Experience</td>
+                <td>
+                    <input type="text" name="cv_experience_year" class="width-number" maxlength="2" value="<?php echo $sticky->get('cv_experience_year'); ?>"/>
+                    &nbsp;Years&nbsp;
+                    <input type="text" name="cv_experience_month" class="width-number" maxlength="2" value="<?php echo $sticky->get('cv_experience_month'); ?>"/>
+                    &nbsp;months&nbsp;
+
+                </td>
+
+            </tr>
+
+            <tr>
+                <td class="field"> linkedIn page</td>
+                <td>
+                    <input type="text"  name="cv_linkedin_page" maxlength="128" value="<?php echo $sticky->get('cv_linkedin_page'); ?>"/>
+                </td>
+            </tr>
+            <tr>
+                <td class="field"> Phone<span class="red-label">*</span></td>
+                <td>
+                    <input type="text" name="cv_phone" maxlength="16" class="required" title="&gt;&nbsp;Phone is a required field" value="<?php echo $sticky->get('cv_phone'); ?>"/>
+                </td>
+            </tr>
+            
             <!-- location - fill in with  candidate location -->
             <tr>
                 <td class="field"> Location<span class="red-label">*</span></td>
@@ -69,7 +87,7 @@
 
             <tr>
                 <td colspan="2">
-                    <span> Description (why you recommend this candidate) </span> <br>
+                    <span> Details (on why you recommend this candidate) </span> <br>
                     <textarea  name="cv_description" class="width-2" cols="50" rows="10" ><?php echo $sticky->get('cv_description'); ?></textarea>
                 </td>
             </tr>

@@ -20,10 +20,7 @@ if (isset($_POST['save']) && ($_POST['save'] == 'Save')) {
 
     $fvalues = $fhandler->getValues();
     $ferrors = $fhandler->getErrors();
-    
-    
-    
-    
+
     
     if ($fhandler->hasErrors()) {
         $locationOnError = '/application/new.php?g_opening_id='.$_POST['opening_id'];
@@ -34,7 +31,7 @@ if (isset($_POST['save']) && ($_POST['save'] == 'Save')) {
     } else {
         //push values in DB
         //@todo - after success - attach a TxID to this application
-        //@todo - linkedIN profile for application
+        
         $applicationDao = new webgloo\job\dao\Application();
         $data = $applicationDao->create($fvalues['organization_id'],
                             $fvalues['opening_id'],
@@ -48,7 +45,10 @@ if (isset($_POST['save']) && ($_POST['save'] == 'Save')) {
                             $fvalues['cv_company'],
                             $fvalues['cv_education'],
                             $fvalues['cv_location'],
-                            $fvalues['cv_skill']);
+                            $fvalues['cv_skill'],
+                            $fvalues['cv_linkedin_page'],
+                            $fvalues['cv_experience_year'],
+                            $fvalues['cv_experience_month']);
 
         $code = $data['code'];
         if ($code != webgloo\common\mysql\Connection::ACK_OK ) {

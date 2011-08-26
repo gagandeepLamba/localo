@@ -254,5 +254,15 @@ p .help-text {
     /* border: 1px #ccc solid ; */
     padding:5px;
     margin-top:5px;
-    padding:5px;
+    
 }
+
+.small-box {
+    font-size :13px;
+    /* border: 1px #ccc solid ; */
+    padding:5px;
+    margin-top:5px;
+    
+}
+
+

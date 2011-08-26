@@ -118,7 +118,7 @@ namespace webgloo\job\html\template {
 
 
 
-        //summary for user pages - with opening summary
+        //displayed on user - my applications page - with opening data
          static function getUserSummary($row,$optional) {
             $flexy = Flexy::getInstance();
             $flexy->compile('/application/user/summary.tmpl');
@@ -155,8 +155,9 @@ namespace webgloo\job\html\template {
             }
             
             $view->cvPostedOn = $row['created_on'];
-
-
+            $view->status = $row['status'];
+            $view->cvLinkedInPage = $row['cv_linkedin_page'];
+            
             $view->openingId = $row['opening_id'] ;
             $view->applicationId = $row['id'] ;
             $view->organizationId = $row['org_id'];

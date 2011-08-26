@@ -75,18 +75,17 @@
                         <div class="yui3-u-19-24">
                             <div id="main-panel">
                                 
-                                <span class="header"> Applications sent by <?php echo $userVO->email; ?> </span>
+                                <span class="header"> My Applications (<?php echo $userVO->email; ?>) </span>
                                 
                                         <?php
                                         //applications
                                         $applicationDao = new webgloo\job\dao\Application();
                                         $rows = $applicationDao->getRecordsOnUserId($userVO->uuid);
-                                        $count = 0 ;
+                                        
                                         foreach ($rows as $row) {
-                                            $flag = ($count == 0 ) ? true : false ;
-                                            $html = webgloo\job\html\template\Application::getUserSummary($row, array("header" => $flag , "user" => $userVO->email));
+                                            $html = webgloo\job\html\template\Application::getUserSummary($row, array("user" => $userVO->email));
                                             echo $html;
-                                            $count++ ;
+                                            
                                         }
                                     ?>
 

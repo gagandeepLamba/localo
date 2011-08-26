@@ -6,14 +6,40 @@ namespace webgloo\job\dao {
 
     use webgloo\job\view as view;
     use webgloo\job\mysql as mysql;
-
+    use webgloo\common\Util ;
+    
     class Opening {
+        
+        function checkNull($row) {
+            //sanity check - cannot send applications for closed/expired openings
+            if (is_null($row)) {
+                trigger_error("No table row in database for this opening", E_USER_ERROR);
+            }
+        }
+
+        function checkActive($row) {
+            $interval = Util::secondsInDBTimeFromNow($row['expire_on']);
+            if ($interval <= 0 || ($row['status'] != 'A')) {
+                trigger_error("Job opening is not active or has expired", E_USER_ERROR);
+            }
+        }
+
+        function checkApplicationCount($count) {
+            if ($count >= 2) {
+                trigger_error("You have already sent two applications for this opening", E_USER_ERROR);
+            }
+        }
         
         function getRecordOnId($openingId) {
             $row = mysql\Opening::getRecordOnId($openingId);
             return $row ;
         }
 
+        function getEditRecordOnId($organizationId,$openingId){
+            $row = mysql\Opening::getEditRecordOnId($organizationId,$openingId);
+            return $row ;
+        }
+        
         function getRecordsOnOrgId($organizationId,$filter) {
             $rows = mysql\Opening::getRecordsOnOrgId($organizationId,$filter);
             return $rows ;
@@ -25,7 +51,19 @@ namespace webgloo\job\dao {
             return $rows ;
         }
         
-        function create($organizationId,$organizationName,$createdBy,$title, $description,$skill, $bounty,$location,$expireOn) {
+        function create(
+                $organizationId,
+                $organizationName,
+                $createdBy,
+                $title,
+                $description,
+                $skill,
+                $bounty,
+                $location,
+                $expireOn,
+                $minExperience,
+                $maxExperience) {
+            
             $openingVO = new view\Opening();
             $openingVO->title = $title;
             $openingVO->description = $description;
@@ -37,9 +75,12 @@ namespace webgloo\job\dao {
             $openingVO->createdBy = $createdBy;
             $openingVO->location = $location;
             $openingVO->expireOn = $expireOn;
+            $openingVO->minExperience = $minExperience ;
+            $openingVO->maxExperience = $maxExperience ;
 
             //store into DB layer
             mysql\Opening::create($openingVO);
+
         }
 
         function update($openingId, $title, $description, $bounty, $status) {

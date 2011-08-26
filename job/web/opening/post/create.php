@@ -19,13 +19,14 @@ if (isset($_POST['save']) && ($_POST['save'] == 'Save')) {
     $fhandler->addRule('skill', 'Required Skills', array('required' => 1));
     $fhandler->addRule('location', 'Location', array('required' => 1, 'maxlength' => 32));
     $fhandler->addRule('expire_on', 'Valid for', array('required' => 1));
+    $fhandler->addRule('min_experience', 'Minimum experience', array('required' => 1));
 
     
     $fvalues = $fhandler->getValues();
     $ferrors = $fhandler->getErrors();
     
     $locationOnError = '/opening/create.php';
-    $locationOnSuccess = '/';
+    $locationOnSuccess = '/opening/list.php';
     
 
     if ($fhandler->hasErrors()) {
@@ -36,7 +37,6 @@ if (isset($_POST['save']) && ($_POST['save'] == 'Save')) {
         
     } else {
         //push values in DB
-        
         $openingDao = new webgloo\job\dao\Opening();
         $openingDao->create($fvalues['organization_id'],
                             $fvalues['organization_name'],
@@ -46,7 +46,9 @@ if (isset($_POST['save']) && ($_POST['save'] == 'Save')) {
                             $fvalues['skill'],
                             $fvalues['bounty'],
                             $fvalues['location'],
-                            $fvalues['expire_on']);
+                            $fvalues['expire_on'],
+                            $fvalues['min_experience'],
+                            $fvalues['max_experience']);
         header("location: " . $locationOnSuccess);
     }
 }
