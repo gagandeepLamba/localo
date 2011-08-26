@@ -1,10 +1,7 @@
 
     <div id="application-{uuid}" class="application green-line-bottom">
-        {if:header}
-            <span class="header"> My Applications </span>
-        {end:}
-
-        <p> {cvName} &nbsp;({cvEmail} &nbsp; Phone &nbsp;{cvPhone}) </p>
+        Rating (3/5) <span class="rating-static rating-30"> </span>
+        <p> {cvName} &nbsp;({cvEmail} &nbsp; Phone &nbsp;{cvPhone}&nbsp;<a href="{cvLinkedInPage}">{cvLinkedInPage}</a>) </p>
         <p> Company: {cvCompany} &nbsp; Education : {cvEducation} &nbsp; current location: {cvLocation} </p>
         <p> Skills: &nbsp; {cvSkill} </p>
 

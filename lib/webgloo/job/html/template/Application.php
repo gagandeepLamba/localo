@@ -183,6 +183,8 @@ namespace webgloo\job\html\template {
             }
             
             $view->descriptionClass = 'normal';
+            $view->cvLinkedInPage = $row['cv_linkedin_page'];
+            $view->hasSummary = false ;
 
              if (strlen($view->cvDescription) > 340) {
                 //we need to print a summary

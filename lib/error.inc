@@ -9,8 +9,6 @@ function webgloo_error_handler($errorno,$errorstr,$file,$line) {
         return true ;
     }
     
-    
-
     switch($errorno) {
 
         case E_STRICT :
@@ -22,12 +20,12 @@ function webgloo_error_handler($errorno,$errorstr,$file,$line) {
         case E_USER_NOTICE :
             webgloo\common\Logger::getInstance()->error(" $file :: $line :: $errorstr");
             break ;
+
+        //E_USER_ERROR are not necessarily well defined errors
+        //so we cannot just display back those errors
+        //Also we cannot assume that loggin has been done.
+        //so we just let it be the default error case!
         case E_USER_ERROR:
-            //E_USER_ERROR are not necessarily well defined errors
-            //so we cannot just display back those errors
-            //Also we cannot assume that loggin has been done.
-            //so we just let it be the default error case!
-            
         default:
             ob_start();
             debug_print_backtrace();
@@ -36,25 +34,51 @@ function webgloo_error_handler($errorno,$errorstr,$file,$line) {
             //debug_print_backtrace();
             webgloo\common\Logger::getInstance()->trace($file,$line,$errorstr,$trace);
             //send generic json encoded message back to UI
-            $message =  'Internal server error happened.Please check log for details!';
-            $error = array('code' => 500, 'message' => $message);
-            $message =  json_encode($error) ;
-            echo $message ;
+            // 302 to error page
+            $errorPageUrl = "/error.php?message=".base64_encode($errorstr) ;
+            header('Location: '.$errorPageUrl);
             
             //Imp:Finally error handler should die
             exit(1);
-            break ;
-
+            
     }
-
+    
     //do not execute PHP error handler
     return true ;
 }
 
-//set our own error handler
-set_error_handler('webgloo_error_handler');
+function webgloo_ajax_error_handler($errorno,$errorstr,$file,$line) {
+
+    if(error_reporting() == 0 ) { return true ; }
+
+    switch($errorno) {
+        case E_STRICT : return true;
+        case E_NOTICE :
+        case E_USER_NOTICE :
+            webgloo\common\Logger::getInstance()->error(" $file :: $line :: $errorstr");
+            break ;
+
+        case E_USER_ERROR:
+        default:
+            ob_start();
+            debug_print_backtrace();
+            $trace = ob_get_contents();
+            @ ob_end_clean();
+            webgloo\common\Logger::getInstance()->trace($file,$line,$errorstr,$trace);
+            //send ajax error message back to UI
+            $message =  'Internal server error happened. Please check log for details!';
+            $error = array('code' => 500, 'message' => $message);
+            $message =  json_encode($error) ;
+            echo $message ;
+            //Imp:Finally error handler should die
+            exit(1);
+    }
+    
+    return true ;
+}
+
 ob_start();
-
-
+//set default error handler
+set_error_handler('webgloo_error_handler');
 
 ?>

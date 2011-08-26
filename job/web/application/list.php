@@ -31,14 +31,10 @@
         <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
 
        <link rel="stylesheet" type="text/css" href="/css/grids-min.css">
-        <link rel="stylesheet" type="text/css" href="/css/jquery/flick/jquery-ui-1.8.14.custom.css">
         <!-- app css here -->
         <link rel="stylesheet" type="text/css" href="/css/main.css">
-
         <script type="text/javascript" src="/js/jquery-1.6.2.min.js"></script>
-        <!-- jquery UI and css -->
-        <script type="text/javascript" src="/js/jquery-ui-1.8.14.custom.min.js"></script>
-        <script type="text/javascript" src="/js/main.js"></script>
+       
 
         <!-- include any javascript here -->
         <script type="text/javascript">
