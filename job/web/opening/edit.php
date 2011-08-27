@@ -21,12 +21,13 @@
     $openingId = $gWeb->getRequestParam('g_opening_id');
     Util::isEmpty('openingId',$openingId);
 
+    //security - do not show opening_id not belonging to user organization
     $openingDao = new webgloo\job\dao\Opening();
     $openingDBRow = $openingDao->getEditRecordOnId($adminVO->organizationId,$openingId);
 
-    //sanity test
+    //sanity test - we should have a record to edit
     $openingDao->checkNull($openingDBRow);
-
+    
     $uifilters = UIData::getOpeningFilters();
     // see if it expired?
     $seconds = Util::secondsInDBTimeFromNow($openingDBRow['expire_on']);
@@ -49,7 +50,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 
-    <head><title> <?php echo $adminVO->company; ?> Job Openings</title>
+    <head><title> <?php echo $adminVO->organizationName; ?> Job Openings</title>
 
 
         <meta http-equiv="content-type" content="text/html;" />
@@ -159,8 +160,10 @@
 
                                     <!-- hidden fields -->
                                     <input type="hidden" name="organization_id" value="<?php echo $adminVO->organizationId ?>" />
+                                    <input type="hidden" name="opening_id" value="<?php echo $openingId;  ?>" />
+
                                     <input type="hidden" name="updated_by" value="<?php echo $adminVO->email; ?>" />
-                                    <input type="hidden" name="organization_name" value="<?php echo $adminVO->company; ?>" />
+                                    <input type="hidden" name="organization_name" value="<?php echo $adminVO->organizationName; ?>" />
 
                                     <div style="clear: both;"></div>
 

@@ -41,12 +41,12 @@
                         <!-- include opening list -->
                         <div id="main-panel"
                         <?php
-                        $openingDao = new webgloo\job\dao\Opening();
-                        $rows = $openingDao->getAllRecords();
-                        foreach ($rows as $row) {
-                            $html = webgloo\job\html\template\Opening::getPublicSummary($row);
-                            echo $html;
-                        }
+                            $openingDao = new webgloo\job\dao\Opening();
+                            $rows = $openingDao->getAllRecords();
+                            foreach ($rows as $row) {
+                                $html = webgloo\job\html\template\Opening::getPublicSummary($row);
+                                echo $html;
+                            }
                         ?>
                     </div>
 

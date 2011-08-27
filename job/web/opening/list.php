@@ -33,6 +33,8 @@
         $flinks[$code] = $link;
     }
 
+    $previousUrl = $gWeb->getPreviousUrl();
+    $gWeb->addCurrentUrlToStack();
 
 ?>
 
@@ -40,7 +42,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 
-    <head><title> <?php echo $adminVO->company; ?> Job Openings</title>
+    <head><title> <?php echo $adminVO->organizationName; ?> Job Openings</title>
 
 
         <meta http-equiv="content-type" content="text/html;" />
@@ -198,7 +200,7 @@
                     <div class="yui3-u-19-24">
                         <div id="main-panel">
                             <div>
-                                <p> <span class="header">  <?php echo $adminVO->company; ?> Job Openings </span> </p>
+                                <p> <span class="header">  <?php echo $adminVO->organizationName; ?> Job Openings </span> </p>
                                 <div> <span>&nbsp;Filter&nbsp; </span>
                                     <?php
                                         foreach ($flinks as $code => $link) {

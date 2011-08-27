@@ -8,19 +8,16 @@ namespace webgloo\job\dao {
     
     class Admin {
 
-         function getRecords() {
-            $rows = mysql\Admin::getRecords();
+         function getRecords($organizationId) {
+            $rows = mysql\Admin::getRecords($organizationId);
             return $rows;
         }
         
-        function create($organizationId,$firstName, $lastName,$email,$password,$phone,$company,$title) {
+        function create($organizationId,$name,$email,$password,$phone,$title) {
             $adminVO = new view\Admin();
-            $adminVO->firstName = $firstName;
-            $adminVO->lastName = $lastName;
-
+            $adminVO->name = $name;
             $adminVO->email = $email;
             $adminVO->phone = $phone;
-            $adminVO->company = $company;
             $adminVO->title = $title;
             $adminVO->organizationId = $organizationId;
             //store into DB layer

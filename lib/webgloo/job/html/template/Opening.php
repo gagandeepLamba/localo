@@ -140,9 +140,16 @@ namespace webgloo\job\html\template {
             //DD - Month - YYYY
             $view->createdOn = Util::formatDBTime($row['created_on'], "%d %b %Y");
             $view->expireOn = Util::formatDBTime($row['expire_on'], "%d %b %Y");
-            //@todo - populate organization description
-            $view->organizationDescription = 'abcd';
 
+            //populate organization description
+            $organizationId = $row['org_id'];
+            $organizationDao = new \webgloo\job\dao\Organization();
+            $organization = $organizationDao->getRecordOnId($organizationId);
+            //print_r($organization); exit ;
+            $view->orgName = $organization['name'];
+            $view->orgWebsite = $organization['website'];
+            $view->orgDescription = $organization['description'];
+            
             //turn off post CV when application count >= 2
             $view->showPostCVAction = ($applicationCount >= 2 ) ? false : true;
 

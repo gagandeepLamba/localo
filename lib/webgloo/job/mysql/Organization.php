@@ -8,11 +8,11 @@ namespace webgloo\job\mysql {
     class Organization {
         const MODULE_NAME = 'webgloo\job\mysql\Organization';
 
-        static function getRecords() {
+        static function getRecordOnId($organizationId) {
             $mysqli = MySQL\Connection::getInstance()->getHandle();
-            $sql = " select * from job_org" ;
-            $rows = MySQL\Helper::fetchRows($mysqli, $sql);
-            return $rows;
+            $sql = " select * from job_org where id = ".$organizationId ;
+            $row = MySQL\Helper::fetchRow($mysqli, $sql);
+            return $row;
         }
 
         static function create($organizationVO) {
@@ -45,6 +45,31 @@ namespace webgloo\job\mysql {
             return $dbCode;
         }
 
+        static function update($organizationId, $name, $website, $description) {
+            $mysqli = MySQL\Connection::getInstance()->getHandle();
+
+            $sql = " update job_org set name = ?,website = ?,description = ? where id = ?";
+            $dbCode = MySQL\Connection::ACK_OK;
+            
+            $stmt = $mysqli->prepare($sql);
+            //returns FALSE if prepare flopped
+            if ($stmt) {
+                $stmt->bind_param("sssi",
+                        $name,
+                        $website,
+                        $description,
+                        $organizationId);
+
+                $stmt->execute();
+                if ($mysqli->affected_rows != 1) {
+                    $dbCode = MySQL\Error::handle(self::MODULE_NAME, $stmt);
+                }
+                $stmt->close();
+            } else {
+                $dbCode = MySQL\Error::handle(self::MODULE_NAME, $mysqli);
+            }
+            return $dbCode;
+        }
     }
 
 }

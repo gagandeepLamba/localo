@@ -1,8 +1,12 @@
 <?php
-    $error = $_GET['message'];
-    $error = base64_decode($error);
-    
 
+    if(isset($_GET['debug']) && ($_GET['debug'] == '1')){
+        $error = $_GET['message'];
+        $error = base64_decode($error);
+    } else {
+        $error = '' ; //donot show
+    }
+    
 ?>
 
 <html>  

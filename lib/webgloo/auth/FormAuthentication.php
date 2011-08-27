@@ -19,7 +19,6 @@ namespace webgloo\auth {
             } else {
                 //logon success
                 //start of a new session
-                //@todo - clear the last session
                 $randomToken = Util::getBase36GUID();
                 $_SESSION['LOGON_TOKEN'] = $randomToken;
                 $_SESSION['LOGON_ROLE'] = Util::base64Encrypt('CUSTOMER_ADMIN');

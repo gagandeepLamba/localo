@@ -9,15 +9,18 @@
     use webgloo\job\Constants;
     use webgloo\auth\FormAuthentication;
     use webgloo\job\html as Html;
-
-    $comboValues = array ( '2W' => 'Two Weeks', '1M' => 'One Month', '2M' => 'Two Months');
-    $comboBox = Html\ComboBox::render('expire_on',$comboValues, '1M') ;
-
+    
     //find and destroy sticky map
     $sticky = new Sticky($gWeb->find(Constants::STICKY_MAP,true));
 
     //This method will throw an error
     $adminVO = FormAuthentication::getLoggedInAdmin();
+    
+    $organizationDao = new webgloo\job\dao\Organization();
+    $organization = $organizationDao->getRecordOnId($adminVO->organizationId);
+    //sanity check
+    $organizationDao->checkNull($organization);
+    
     $previousUrl = $gWeb->getPreviousUrl();
     
     
@@ -28,15 +31,13 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 
-    <head><title> Post a job</title>
+    <head><title> Organization Details</title>
 
         <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
 
         <link rel="stylesheet" type="text/css" href="/css/grids-min.css">
         <link rel="stylesheet" type="text/css" href="/css/main.css">
-
-        <!-- app css here -->
-        <!-- include any javascript here -->
+        
         <script type="text/javascript" src="/js/jquery-1.6.2.min.js"></script>
         <script type="text/javascript" src="/js/jquery.validate.min.js"></script>
 
@@ -72,18 +73,18 @@
                     <div class="yui3-u-19-24">
 
                         <div id="main-panel">
-                            <h2> Post a job </h2>
+                            <h2> Organization Details</h2>
 
 
                             <p class="help-text">
-                                Please fill in the details below and post your job opening.
+                                Please fill in the details below and click on Save.
 
                             </p>
                             <?php include($_SERVER['APP_WEB_DIR'] . '/inc/form/message.inc'); ?>
 
 
                             <div id="form-wrapper">
-                                <form id="web-form1" class="web-form" name="web-form1" action="/opening/post/create.php" enctype="multipart/form-data"  method="POST">
+                                <form id="web-form1" class="web-form" name="web-form1" action="/organization/post/profile.php" enctype="multipart/form-data"  method="POST">
 
                                     <div class="error">    </div>
 
@@ -91,62 +92,28 @@
 
 
                                         <tr>
-                                            <td class="field"> Bounty<span class="red-label">*</span></td>
+                                            <td class="field"> Name<span class="red-label">*</span></td>
                                             <td>
-                                                <input type="text" name="bounty" maxlength="6" class="required width-1" title="&gt;&nbsp;Bounty is a required field" value="<?php echo $sticky->get('bounty','10000'); ?>"/>
+                                                <input type="text" name="name" maxlength="100" class="required" title="&gt;&nbsp;name is a required field" value="<?php echo $sticky->get('name', $organization['name']); ?>"/>
                                             </td>
                                         </tr>
 
                                          <tr>
-                                            <td> Valid for</td>
-                                            <td> <?php echo $comboBox;  ?> </td>
-                                        </tr>
-                                        
-                                        <!-- location - fill in with default company location -->
-                                        <tr>
-                                            <td class="field"> Location<span class="red-label">*</span></td>
+                                            <td class="field"> Website<span class="red-label">*</span></td>
                                             <td>
-                                                <input type="text" name="location" maxlength="32" class="required width-1" title="&gt;&nbsp;Location is a required field" value="<?php echo $sticky->get('location', 'Bangalore'); ?>"/>
+                                                <input type="text" name="website" maxlength="100" class="required" title="&gt;&nbsp;website is a required field" value="<?php echo $sticky->get('website', $organization['website']); ?>"/>
                                             </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="field"> Title<span class="red-label">*</span></td>
-                                            <td>
-                                                <input type="text" name="title" maxlength="100" class="required width-2" title="&gt;&nbsp;Title is a required field" value="<?php echo $sticky->get('title'); ?>"/>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="field"> Experience</td>
-                                            <td>
-                                                <input type="text" name="min_experience" class="width-number" maxlength="2" value="<?php echo $sticky->get('min_experience','1'); ?>"/>
-                                                &nbsp;to&nbsp;
-                                                <input type="text" name="max_experience" class="width-number" maxlength="2" value="<?php echo $sticky->get('max_experience','3'); ?>"/>
-                                                &nbsp;years&nbsp;
-
-                                            </td>
-
                                         </tr>
 
                                         <tr>
                                             <td> &nbsp; </td>
-                                            <td>  <span> Desired skills </span> <br> <textarea  name="skill" class="height-1 width-2" cols="50" rows="4" ><?php echo $sticky->get('skill'); ?></textarea> </td>
+                                            <td><span> About us</span> <br>  <textarea  name="description" class="width-3 height-2" cols="50" rows="10" ><?php echo $sticky->get('description',$organization['description']); ?></textarea> </td>
                                         </tr>
-
-                                        <tr>
-                                            <td> &nbsp; </td>
-                                            <td><span> Details (about this opportunity) </span> <br>  <textarea  name="description" class="width-2" cols="50" rows="10" ><?php echo $sticky->get('description'); ?></textarea> </td>
-                                        </tr>
-
-
 
 
                                     </table>
 
-                                    <div class="tc">
-                                        By posting information here you agree to the <a href="/help/tc.php" target="_blank"> Terms and Conditions </a>
-                                        imposed by this website. Please read them carefully.
-                                    </div>
-            
+
 
                                     <div class="button-container">
                                         <button type="submit" name="save" value="Save" onclick="this.setAttribute('value','Save');" ><span>Save</span></button>
@@ -158,9 +125,6 @@
 
                                     <!-- hidden fields -->
                                     <input type="hidden" name="organization_id" value="<?php echo $adminVO->organizationId ?>" />
-                                    <input type="hidden" name="created_by" value="<?php echo $adminVO->email; ?>" />
-                                    <input type="hidden" name="organization_name" value="<?php echo $adminVO->organizationName; ?>" />
-
                                     <div style="clear: both;"></div>
 
                                 </form>

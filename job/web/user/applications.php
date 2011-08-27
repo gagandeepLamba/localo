@@ -11,6 +11,9 @@
     $userVO = FormAuthentication::getLoggedInUser();
     $userId = $userVO->uuid ;
 
+    $previousUrl = $gWeb->getPreviousUrl();
+    $gWeb->addCurrentUrlToStack();
+
 
 ?>
 

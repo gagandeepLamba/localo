@@ -4,29 +4,35 @@
 
 namespace webgloo\job\dao {
 
-use webgloo\job\view as view ;
-use webgloo\job\mysql as mysql ;
-
+    use webgloo\job\view as view ;
+    use webgloo\job\mysql as mysql ;
+    
     class Organization {
 
-         function getRecords() {
-            $rows = mysql\Organization::getRecords();
-            return $rows ;
-        }
-        
-        function create($name, $email, $domain, $description) {
-            $organizationVO = new view\Organization() ;
-            $organizationVO->name = $name ;
-            $organizationVO->email = $email ;
-            $organizationVO->domain = $domain ;
-            $organizationVO->description = $description ;
-            //store into DB layer
-            mysql\Organization::create($organizationVO);
-            
+        function checkNull($row) {
+            if (is_null($row)) {
+                trigger_error("No table row in database for this organization", E_USER_ERROR);
+            }
         }
 
-        
-        function update($status) {
+        function getRecordOnId($organizationId) {
+            $row = mysql\Organization::getRecordOnId($organizationId);
+            return $row;
+        }
+
+        function create($name, $email, $domain, $description) {
+            $organizationVO = new view\Organization();
+            $organizationVO->name = $name;
+            $organizationVO->email = $email;
+            $organizationVO->domain = $domain;
+            $organizationVO->description = $description;
+            //store into DB layer
+            mysql\Organization::create($organizationVO);
+        }
+
+        function update($organizationId,$name,$website,$description) {
+            //store into DB layer
+            mysql\Organization::update($organizationId,$name,$website,$description);
 
         }
 

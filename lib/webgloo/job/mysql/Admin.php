@@ -7,9 +7,9 @@ namespace webgloo\job\mysql {
     class Admin {
         const MODULE_NAME = 'webgloo\job\mysql\Admin';
 
-        static function getRecords() {
+        static function getRecords($organizationId) {
             $mysqli = MySQL\Connection::getInstance()->getHandle();
-            $sql = " select * from job_admin";
+            $sql = " select * from job_admin where org_id =".$organizationId ;
             $rows = MySQL\Helper::fetchRows($mysqli, $sql);
             return $rows;
         }
@@ -26,7 +26,9 @@ namespace webgloo\job\mysql {
                 $password = "123456789000000000";
             }
 
-            $sql = " select * from job_admin where email ='" . $email . "'";
+            $sql = " select admin.*, org.name as organization_name from job_admin admin, job_org org " ;
+            $sql .= " where admin.org_id = org.id and admin.email ='" . $email . "'";
+            
             $row = MySQL\Helper::fetchRow($mysqli, $sql);
             
             //no result case - email does not exist
@@ -59,22 +61,20 @@ namespace webgloo\job\mysql {
             $message = $password . $salt;
             $digest = sha1($message);
             
-            $sql = " insert into job_admin(org_id,first_name,last_name,email,password,phone,company,title,salt,created_on) ";
-            $sql .= " values(?,?,?,?,?,?,?,?,?,now()) ";
+            $sql = " insert into job_admin(org_id,name,email,password,phone,title,salt,created_on) ";
+            $sql .= " values(?,?,?,?,?,?,?,now()) ";
 
             $dbCode = MySQL\Connection::ACK_OK;
 
             //store computed password and random salt
             $stmt = $mysqli->prepare($sql);
             if ($stmt) {
-                $stmt->bind_param("issssssss",
+                $stmt->bind_param("issssss",
                         $adminVO->organizationId,
-                        $adminVO->firstName,
-                        $adminVO->lastName,
+                        $adminVO->name,
                         $adminVO->email,
                         $digest,
                         $adminVO->phone,
-                        $adminVO->company,
                         $adminVO->title,
                         $salt);
 

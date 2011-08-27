@@ -92,8 +92,13 @@
                 </td>
             </tr>
 
-        </table>
 
+        </table>
+        
+        <div class="tc">
+            By posting information here you agree to the <a href="/help/tc.php" target="_blank"> Terms and Conditions </a>
+            imposed by this website. Please read them carefully.
+        </div>
 
         <div class="button-container">
             <button type="submit" name="save" value="Save" onclick="this.setAttribute('value','Save');" ><span>Save</span></button>

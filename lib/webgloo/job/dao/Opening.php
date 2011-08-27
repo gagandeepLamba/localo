@@ -83,13 +83,28 @@ namespace webgloo\job\dao {
 
         }
 
-        function update($openingId, $title, $description, $bounty, $status) {
-            $openingId = $mysqli->real_escape_string($openingId);
-            $openingVO = new view\Opening();
+        function update(
+                $organizationId,
+                $openingId,
+                $title,
+                $description,
+                $skill,
+                $bounty,
+                $location,
+                $minExperience,
+                $maxExperience) {
+
+            $openingVO->uuid = $openingId;
+            $openingVO->organizationId = $organizationId;
             $openingVO->title = $title;
             $openingVO->description = $description;
+
+            $openingVO->skill = $skill;
             $openingVO->bounty = $bounty;
-            $openingVO->status = $status;
+            $openingVO->location = $location;
+            
+            $openingVO->minExperience = $minExperience ;
+            $openingVO->maxExperience = $maxExperience ;
 
             //store into DB layer
             mysql\Opening::update($openingId, $openingVO);

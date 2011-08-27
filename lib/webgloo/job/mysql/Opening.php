@@ -123,17 +123,21 @@ namespace webgloo\job\mysql {
 
             $mysqli = MySQL\Connection::getInstance()->getHandle();
 
-            $sql = " update job_opening set title = ?, description = ? , bounty = ? , status = ? where id = ? and org_id =? ";
+            $sql = " update job_opening set title = ?, description = ?, skill =?, bounty = ?, " ;
+            $sql .= " location = ?, min_experience =?, max_experience = ? where id = ? and org_id = ? ";
             $dbCode = MySQL\Connection::ACK_OK;
 
             $stmt = $mysqli->prepare($sql);
             //returns FALSE if prepare flopped
             if ($stmt) {
-                $stmt->bind_param("ssssii",
+                $stmt->bind_param("sssisiiii",
                         $openingVO->title,
                         $openingVO->description,
+                        $openingVO->skill,
                         $openingVO->bounty,
-                        $openingVO->status,
+                        $openingVO->location,
+                        $openingVO->minExperience,
+                        $openingVO->maxExperience,
                         $openingId,
                         $openingVO->organizationId);
 

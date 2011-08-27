@@ -5,6 +5,7 @@ body {
     font-family: 'Georgia' , 'Trebuchet MS', 'Verdana', 'Arial' , 'Sans Serif' ;
     font-size: 15px;
     /* background : #EAEAEA; */
+   
 }
 
 body  a {
@@ -289,4 +290,9 @@ p .help-text {
 .rating-45 { background-position: 0 -16px; }
 
 
-
+div .tc {
+    width: 610px;
+    padding:10px;
+    border : 1px solid blue ;
+    margin-bottom: 10px;
+}
