@@ -47,6 +47,7 @@ namespace webgloo\job\dao {
 
         //@todo - getAllRecords should accept filters
         function getAllRecords() {
+	    echo " inside DAO \n" ;
             $rows = mysql\Opening::getAllRecords();
             return $rows ;
         }
@@ -68,7 +69,8 @@ namespace webgloo\job\dao {
             $openingVO->title = $title;
             $openingVO->description = $description;
             $openingVO->bounty = $bounty;
-            //$openingVO->status = 'OPEN';
+	    //create new opening with status 'A'
+            $openingVO->status = 'A';
             $openingVO->organizationId = $organizationId;
             $openingVO->organizationName = $organizationName;
             $openingVO->skill = $skill;

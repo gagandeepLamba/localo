@@ -32,10 +32,10 @@ namespace webgloo\job\mysql {
             $mysqli = MySQL\Connection::getInstance()->getHandle();
             $applicationId = $mysqli->real_escape_string($applicationId);
 
-            $sql = " select opening.organization_name, opening.created_by, opening.bounty, opening.title, " ;
-            $sql .= " opening.description as opening_description,opening.skill as opening_skill, app.* " ;
-            $sql .= " from job_application app, job_opening opening " ;
-            $sql .= " where app.id = {applicationId} and app.opening_id = opening.id" ;
+            $sql = " select opp.organization_name, opp.bounty, opp.created_by,opp.title as opp_title,opp.expire_on as opp_expire_on, " ;
+            $sql .= " opp.description as opp_description,opp.skill as opp_skill, app.* " ;
+            $sql .= " from job_application app, job_opening opp " ;
+            $sql .= " where app.id = {applicationId} and app.opening_id = opp.id" ;
             $sql = str_replace("{applicationId}", $applicationId, $sql);
             $row = MySQL\Helper::fetchRow($mysqli, $sql);
             return $row;
