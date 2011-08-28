@@ -14,11 +14,11 @@
     $adminVO = FormAuthentication::getLoggedInAdmin();
     $organizationId = $adminVO->organizationId;
 
+    
     $gstatus = $gWeb->getRequestParam('g_status');
-    if (empty($gstatus)) {
+    if (empty($gstatus)) 
         $gstatus = 'A';
-    }
-
+        
     $uifilters = UIData::getOpeningFilters();
 
     //input sanity check
@@ -69,15 +69,15 @@
                         case 'A' :
                             data["C"] = "close";
                             data["S"] = "suspend" ;
-                            data["EX2W"] = "Extend for 2 weeks" ;
-                            data["EX4W"] = "Extend for 4 weeks" ;
+                            data["EX2W"] = "extend for 2 weeks" ;
+                            data["EX4W"] = "extend for 4 weeks" ;
                             
                             break ;
                         case 'C' :
-                            data["A"] = "activate";
+                            data["A"] = "make active";
                             break ;
                         case 'E' :
-                            data["A"] = "activate";
+                            data["A"] = "make active";
                             break ;
                         default :
                             break ;
@@ -107,10 +107,10 @@
                 openingObject.closeToolbar(toolbarId);
                 
                 //iterate thorugh array and print it
-                var template = '<a href="/opening/post/quick-action.php?g_opening_id={gOpeningId}&action={gCode}">{name} </a> &nbsp;&nbsp;';
+                var template = '<a href="/opening/post/quick-action.php?g_opening_id={gOpeningId}&action={gCode}&g_status={gstatus}">{name} </a> &nbsp;&nbsp;';
                 var buffer = '' ;
                 for (var key in actions) {
-                    var params = {gOpeningId: openingId ,gCode: key, name:actions[key]};
+                    var params = {gOpeningId: openingId ,gCode: key, name:actions[key], gstatus :status};
                     if(openingObject.debug){
                         alert("Adding actions link :: code " + key + " name :: " + actions[key]);
                     }
@@ -155,7 +155,7 @@
                 $("a.opening-action-link").live("click", function(event){
                     event.preventDefault();
                     var openingId = $(this).attr("id");
-                    openingObject.addEditLinks(openingId, 'A');
+                    openingObject.addEditLinks(openingId,"<?php echo $gstatus; ?>");
                     
                 }) ;
 

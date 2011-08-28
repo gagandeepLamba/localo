@@ -46,6 +46,8 @@ create table job_opening(
         org_id  int(11) not null ,
         location varchar(32) not null,
         application_count int default 0 ,
+        min_experience int ,
+        max_experience int ,
         expire_on timestamp default '0000-00-00 00:00:00',
         created_on timestamp default '0000-00-00 00:00:00',
 	updated_on timestamp default '0000-00-00 00:00:00' ,

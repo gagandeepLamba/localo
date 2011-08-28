@@ -152,6 +152,49 @@ namespace webgloo\job\mysql {
             return $dbCode;
         }
 
+        static function updateStatus($organizationId, $openingId,$status) {
+            $mysqli = MySQL\Connection::getInstance()->getHandle();
+
+            $sql = " update job_opening set status = ? where id = ? and org_id = ? " ;
+            $dbCode = MySQL\Connection::ACK_OK;
+
+            $stmt = $mysqli->prepare($sql);
+            
+            if ($stmt) {
+                $stmt->bind_param("sii",$openingId,$organizationId,$status);
+                $stmt->execute();
+                if ($mysqli->affected_rows != 1) {
+                    $dbCode = MySQL\Error::handle(self::MODULE_NAME, $stmt);
+                }
+                $stmt->close();
+            } else {
+                $dbCode = MySQL\Error::handle(self::MODULE_NAME, $mysqli);
+            }
+            return $dbCode;
+        }
+
+        static function extendLife($organizationId, $openingId,$days) {
+            $mysqli = MySQL\Connection::getInstance()->getHandle();
+
+            $sql = " update job_opening set expire_on = {expireOn} where id = ? and org_id = ? " ;
+            $sql = \str_replace("{expireOn}" , "(expire_on + INTERVAL ".$days. " DAY )", $sql);
+            $dbCode = MySQL\Connection::ACK_OK;
+
+            $stmt = $mysqli->prepare($sql);
+            
+            if ($stmt) {
+                $stmt->bind_param("ii",$openingId,$organizationId);
+                $stmt->execute();
+                if ($mysqli->affected_rows != 1) {
+                    $dbCode = MySQL\Error::handle(self::MODULE_NAME, $stmt);
+                }
+                $stmt->close();
+            } else {
+                $dbCode = MySQL\Error::handle(self::MODULE_NAME, $mysqli);
+            }
+            return $dbCode;
+        }
+
     }
 
 }

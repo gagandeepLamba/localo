@@ -101,7 +101,7 @@
                                          <tr>
                                             <td class="field"> Website<span class="red-label">*</span></td>
                                             <td>
-                                                <input type="text" name="website" maxlength="100" class="required" title="&gt;&nbsp;website is a required field" value="<?php echo $sticky->get('website', $organization['website']); ?>"/>
+                                                <input type="text" name="website" maxlength="100" class="required" title="&gt;&nbsp;website is a required field" value="<?php echo $sticky->get('website', $organization['domain']); ?>"/>
                                             </td>
                                         </tr>
 
