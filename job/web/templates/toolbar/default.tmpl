@@ -1,7 +1,24 @@
 
- <div class="toolbar">
-                 <a href="/user/login.php"> Login </a>
-                 &nbsp;|&nbsp;Do not have an acocunt?&nbsp;
-                 <a href="/user/register.php"> Registration </a>
+<div id="header">
+	<div class="h-content">
+		<div rel="home" id="logo">
+		<a href="#" title="{Title}"> <img src="/css/images/logo.png" alt="{Title}" /> </a>
+		</div>
 
-        </div>
+		<div id="search-top">
+		<form method="get" id="searchform" action="">	
+		<input type="text" onblur="if (this.value == '') {this.value = 'Search';}" onfocus="if (this.value == 'Search') {this.value = '';}" value="Search" class="text" name="s" id="s"> 
+		<input type="image" class="but" src="/css/images/search-btn.png" value=" "> 
+		</form>
+		<div id="login">
+		<span class="loginout"><a href="/user/login.php">Log in</a></span> |
+		<span class="register"><a href="/user/register.php">Register</a></span>
+		</div>
+		</div>
+
+		<div id="hcenter">
+		<strong>Companies2</strong>
+		</div>
+
+	</div>
+</div>

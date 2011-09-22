@@ -1,0 +1,419 @@
+@charset "utf-8";
+
+/* Global resets */
+
+html, html#nojs {
+    height: 100%;
+}
+
+html#js {
+    height: 100%;
+}
+
+body {
+	font-size: 12px;	
+	font-family: Tahoma, Arial, sans-serif;
+	min-height: 100%;
+    margin: 0;
+    padding: 0;
+	position: relative;
+	background: #f0f0f0 url('images/bg.png') repeat-x 0 85px;;
+	color: #494949;
+	min-height:100%;
+	
+	
+}
+
+#body-wrapper {
+	width:960px;
+	margin-left:80px;
+	background:#FFF;
+	border-left: 1px solid #bfbebe;
+	border-right: 1px solid #bfbebe;
+	border-bottom: 1px solid #bfbebe;
+	padding: 15px;
+	-webkit-border-radius: 0 0 5px 5px;
+	-moz-border-radius: 0 0 5px 5px;
+	border-radius: 0 0 5px 5px;
+
+	
+}
+
+
+a {
+	color: #2288cc;
+	text-decoration:none;
+}
+	a img {
+		border: 0;
+	}
+a:hover {text-decoration:underline;}
+
+form {
+	margin: 0;
+	padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-weight: normal;
+	margin: 0 0 1em;
+	padding: 0;
+}
+h3, h4 {
+	font-size:20px;
+	margin:0 0 2px;
+	color:#494949;
+}
+h4 {
+	font-size:18px;
+}
+
+input, select, textarea {
+	font-family: inherit;
+	font-size: inherit;
+    margin: 0;
+}
+
+p {
+	margin: 0 0 1em 0;
+	padding: 0;
+}
+
+/* - Global resets */
+
+
+/* + Common classes */
+
+.error {
+	color: #ff0000;	
+}
+
+.no-border {
+    border: 0 !important;
+}
+
+div.hr {
+	font-size: 1px;
+	height: 1px;
+	line-height: 1px;
+	background: #a1a1a1;
+}
+
+input.text {
+}
+
+input.submit {
+}
+
+table.reset {
+	border: 0;
+	border-collapse: collapse;
+}
+	table.reset td,
+	table.reset th {
+		padding: 0;
+	}
+
+ul.reset {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+	ul.reset li {
+		margin: 0;
+		padding: 0;
+	}
+
+
+.clear {clear:both;}
+.floatl {float:left;}
+.floatr {float:right;}
+
+.red {color:#f80813;}
+.green {color:#88cc44;}
+.grey {color:#808080;}
+
+
+/* - Common classes */
+
+#wrap,
+.h-content,
+.f-content {
+	width: 960px;
+	margin: 0 auto;
+}
+
+#header {
+	background:#2288cc;
+	padding: 10px;
+	height: 67px;
+	color:#FFF;
+}
+
+#wrap {
+	background:#FFF;
+	border-left: 1px solid #bfbebe;
+	border-right: 1px solid #bfbebe;
+	border-bottom: 1px solid #bfbebe;
+	padding: 15px;
+	-webkit-border-radius: 0 0 5px 5px;
+	-moz-border-radius: 0 0 5px 5px;
+	border-radius: 0 0 5px 5px;
+}
+	#head {
+		background:url('images/head-bg.jpg') no-repeat center 0;
+		height:207px;
+	}
+	#content {
+		width:600px;
+		float:left;
+		border:1px solid #bbbbbb;
+		margin-top:7px;
+		padding:14px;
+	}
+	#sidebar {
+		width: 300px;
+		float:right;
+		margin-top:7px;
+	}
+
+#footer {
+	background:#000000;
+	padding:16px 0 6px;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #bfbebe;
+	margin-top:28px;
+}
+
+/* --------------- Header --------------- */
+
+#head h3 {
+	color:#2288cc;
+	font-size: 36px;
+	float:right;
+	margin-top: 88px;
+	font-family:"Myriad Pro",Arial,Helvetica,Tahoma,sans-serif;
+}
+
+#logo {
+	margin-top:18px;
+	float: left;
+}
+/*#logo a {
+	background: url("../images/logo.png") no-repeat scroll center 0 transparent;
+    display: block;
+    height: 35px;
+    outline: 0 none;
+    text-indent: -9999px;
+    width: 152px;
+}*/
+
+#search-top {
+	float: right;
+    height: 24px;
+    width: 308px;
+    font-family:Arial,Helvetica,Tahoma,sans-serif;
+    padding-top: 28px;
+}
+#searchform {
+	float:right;
+	background:#FFF;
+	height:16px;
+	width:175px;
+}
+#searchform #s {
+	border:none;
+	background:transparent;
+	font-family:"Myriad Pro",Arial,Helvetica,Tahoma,sans-serif;
+	color:#949494;
+	padding: 1px 5px;
+	width: 140px;
+	outline:none;
+}
+#searchform .but {
+	border:none;
+	background:transparent;
+	cursor:pointer;
+	vertical-align:top;
+}
+#login {
+	font-size:11px;
+	padding-top: 2px;
+}
+#login a {color:#FFF;}
+#login .loginout {
+    background: url("images/login-bg.png") no-repeat scroll 0 0 transparent;
+    padding: 0 2px 0 14px;
+}
+#login .register {
+	background: url('images/login-bg.png') no-repeat right bottom;
+	padding:0 14px 0 2px;
+}
+
+#hcenter {
+	margin:0 0 0 260px;
+	font-size:16px;
+	font-family:Arial,Helvetica,Tahoma,sans-serif;
+	padding-top:27px;
+}
+
+
+/* --------------- Content --------------- */
+
+.joblist {
+	padding:0 90px;
+	font-size: 14px;
+	font-family:"Myriad Pro",Arial,Helvetica,Tahoma,sans-serif;
+}
+.joblist .item {
+	padding-bottom:30px;
+	margin-bottom:15px;
+	border-bottom:1px solid #ebebeb;
+}
+.joblist .price {
+	float:right;
+	font-size:18px;
+	color:#88cc44;
+	margin-top: 7px;
+	margin-left: 30px;
+	line-height: 28px;
+}
+.joblist .photos {
+	float:right;
+	margin-top: 7px;
+}
+.joblist .photos img {
+	margin-right: 5px;
+}
+
+.pagenavi {
+	text-align:center;
+	margin-top:40px;
+	margin-bottom:50px;
+}
+.pagenavi .page {
+	border:1px solid #9c9997;
+	padding:3px 6px;
+	font-size:11px;
+}
+.pagenavi .current {
+	text-decoration:underline;
+}
+
+
+/* --------------- Sidebar --------------- */
+
+.widget {
+	margin-bottom:26px;
+	
+}
+.access-btn {
+	display:block;
+	border:none;
+	width:195px;
+	height:46px;
+	background:url('images/access-btn.png') no-repeat 0 0;
+	margin:0 auto;
+}
+
+#news-widget .item {
+	background:url('images/news-bg.png') no-repeat center bottom;
+	padding-bottom:10px;
+	margin:15px 0;
+}
+#news-widget .thumb {
+	float:left;
+	margin-right:10px;
+}
+#news-widget .date {
+	background:url('images/date-bg.png') no-repeat right 0;
+	color: #066193;
+    font-size: 10px;
+    height: 11px;
+    line-height: 10px;
+    padding-right: 4px;
+    text-align: right;
+    clear:both;
+    margin-top: 5px;
+}
+
+
+/* --------------- Footer --------------- */
+
+.f-content {
+	text-align:right;
+}
+#copyright {
+	color:#777777;
+	font-size: 10px;
+}
+#social a {
+    background: url("images/social.png") no-repeat scroll 0 0 transparent;
+    display: block;
+    float: left;
+    height: 18px;
+    margin: 0 3px;
+    width: 18px;
+}
+#social .yt {
+    background-position: 0 -18px;
+}
+#social .fb {
+    background-position: 0 -36px;
+}
+
+
+/* --------------- Menu --------------- */
+
+#main-menu {
+	/* background: url('images/menu-bg.jpg') no-repeat left center; */
+	height: 60px;
+	font-size: 20px;
+	font-family:"Myriad Pro",Arial,Helvetica,Tahoma,sans-serif;
+	line-height: 60px;
+}
+#main-menu ul {
+	list-style:none;
+	margin:0;
+	padding:0;
+	text-align: center;
+	color: #b9b9b9;
+	width:662px;
+}
+#main-menu ul li {
+	display:inline;
+	
+}
+#main-menu ul li a {
+	margin: 0 12px;
+}
+
+#f-menu {}
+#f-menu ul {
+	list-style:none;
+	margin:8px 0 0;
+	padding:0;
+	font-size:14px;
+}
+#f-menu ul li {
+	display:inline;
+}
+#f-menu ul li a {
+	color:#dbdada;
+	font-weight:bold;
+	margin:0 7px;
+}
+
+
+/* ------------------------- */
+
+
+
+
+
+
+
+
+
+
+
