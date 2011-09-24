@@ -11,14 +11,12 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 
-       <head><title> User logon page</title>
+       <head><title> User logon</title>
          
 
         <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
         <link rel="stylesheet" type="text/css" href="/css/grids-min.css">
-        <!-- app css here -->
-        <link rel="stylesheet" type="text/css" href="/css/main.css">
-        <!-- include any javascript here -->
+        <link rel="stylesheet" type="text/css" href="/css/style.css">
         <script type="text/javascript" src="/js/jquery-1.6.2.min.js"></script>
         <script type="text/javascript" src="/js/jquery.validate.min.js"></script>
 
@@ -36,7 +34,7 @@
     </head>
 
     <body>
-        
+        <?php include($_SERVER['APP_WEB_DIR'] . '/inc/toolbar.inc'); ?>
         <div id="body-wrapper">
 
                 <div id="hd">
@@ -45,11 +43,11 @@
                 <div id="bd">
 
                     <div class="yui3-g">
-                        <div class="yui3-u-5-24">
+                        <div class="yui3-u-1-3">
                             
-                        </div> <!-- left unit -->
-                        <div class="yui3-u-19-24">
-                            <div id="main-panel">
+                        </div>
+                        <div class="yui3-u-2-3">
+                            <div id="content">
 
                                     <h2> User Logon </h2>
 
@@ -104,22 +102,15 @@
                             
 
 
-                        </div> <!-- main unit -->
+                        </div> <!-- content -->
                     </div> <!-- GRID -->
 
 
                 </div> <!-- bd -->
 
-
-
         </div> <!-- body wrapper -->
-
-        <div id="ft">
-
-             <?php include($_SERVER['APP_WEB_DIR'] . '/inc/site-footer.inc'); ?>
-
-
-        </div>
+        
+        <?php include($_SERVER['APP_WEB_DIR'] . '/inc/site-footer.inc'); ?>
 
     </body>
 </html>

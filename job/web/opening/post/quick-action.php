@@ -28,9 +28,9 @@
 
     //send to DAO
     switch ($action) {
+        case 'A' :
         case 'C' :
         case 'S' :
-        case 'A' :
             $openingDao->updateStatus($adminVO->organizationId, $openingId, $action);
             break;
         case 'EX2W' :

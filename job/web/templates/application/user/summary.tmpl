@@ -1,18 +1,35 @@
+<div class="item">
+	<div class="price">{bounty:h}</div>
+	<div class="photos">
+		<img src="/css/images/_photo.jpg" alt="" />
+		<img src="/css/images/_photo.jpg" alt="" />
+		<img src="/css/images/_photo.jpg" alt="" />
+	</div>
+    <div class="status"> <span> {status} </span> </div>
+	<h4><a href="/opening/detail.php?g_opening_id={openingId}&g_org_id={organizationId}">{title:h}</a></h4>
+	<span class="link"> <a href="/opening/detail.php?g_opening_id={uuid}&g_org_id={organizationId}#organization">{organizationName:h} </a> </span>
+     <span class="location">{location:h}</span>
+     
+  </div>
+  
+ <div class="item">
+     <span class="name"> {cvName} </span>
+     <span class="email"> <a href="mailto:{cvEmail:h}"> {cvEmail} </a> </span>
+     <span class="link"> <a href="{cvLinkedInPage}">{cvLinkedInPage}</a> </span>
+     <span class="orgnization">  {cvCompany} </span>
+     <span class="education">  {cvEducation} </span>
+     <span class="location"> {cvLocation} </span>
+     
+    
+	<div class="description">
+		{cvDescription:h}
+	</div>
+	<div class="skill">
+		{cvSkill}
+	</div>
+    <span class="date"> application sent  on {cvPostedOn}, closing on {expireOn}</span>
 
- <div class="application green-line-bottom">
-    <p> <a href="/opening/detail.php?g_opening_id={openingId}&g_org_id={organizationId}" target="_blank"> <b> {title:h} opening in {organizationName:h} </b> </a> </p>
-    <span class="bounty"> Reward&nbsp;{bounty:h}&nbsp;&#36;</span>
-    <p> <span class="label"> Status </span> {status} </p>
-    <p> {cvName} &nbsp;(<a href="mailto:{cvEmail:h}"> {cvEmail} </a>&nbsp; phone &dash; &nbsp;{cvPhone}&nbsp;<a href="{cvLinkedInPage}">{cvLinkedInPage}</a>) </p>
-    <p> Company {cvCompany} &nbsp; Education  {cvEducation} &nbsp; current location  {cvLocation} </p>
-    <p> Skills &nbsp; {cvSkill} </p>
-    <p> {cvDescription} </p>
-    <p> Application sent on {cvPostedOn}, closing on {expireOn}</p>
-    <div>
-        <a href="#">Edit</a>
-    </div>
- </div>
-
+</div>
 
    
 

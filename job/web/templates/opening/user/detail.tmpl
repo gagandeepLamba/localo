@@ -1,23 +1,48 @@
 
-
-<div class="opening green-line-bottom">
-
-   <h2> {title:h}</h2>
-    <p> <span> {organizationName:h} </span> posted  on {createdOn} (closing in {lifeInDays} days)   </p>
-    <p> <span> Location </span> &nbsp;&dash;&nbsp;{location:h}  </p>
+<div class="item">
+	<div class="price">2500$</div>
+	<div class="photos">
+		<img src="/css/images/_photo.jpg" alt="" />
+		<img src="/css/images/_photo.jpg" alt="" />
+		<img src="/css/images/_photo.jpg" alt="" />
+	</div>
     
-    <p> {description:h} </p>
-    <p> Skills:&nbsp;{skill:h} </p>
-    <div class="bounty"> Reward&nbsp;{bounty:h}&nbsp;&#36;</div>
-    {if:showPostCVAction}
-        <div class="action-links">
-            <a href="/application/new.php?g_opening_id={uuid}&g_org_id={organizationId}"> Send a Resume</a>
-        </div>
-    {end:}
+	<h2> {title:h} </h2>
+    <span class="organization"> {organizationName:h} </span>
+	<span class="location">{location:h}</span>
+	<div class="description">
+		{description:h}
+	</div>
+	<div class="skill">
+		{skill}
+	</div>
+    <span class="date"> posted  on {createdOn} (closing in {lifeInDays} days) </span>
+   
+    
+</div>
+
+{if:showPostCVAction}
+     <div class="action-links">
+         <a href="/application/new.php?g_opening_id={uuid}&g_org_id={organizationId}"> Send a Resume</a>
+     </div>
+{end:}
+    
+
+
+<div class="organization">
+    <h2><a name="#organization"> About {orgName} </a> </h2>
+    <span class="link"> <a href="{orgWebsite}" target="_blank"> {orgWebsite} </a> </span>
+    <div class="description">
+        {orgDescription}
+        
+    </div>
+
 
 </div>
 
-<div class="ajax-toolbar">
+
+
+<div class="share-toolbar">
 
     <div class="addthis_toolbox addthis_default_style ">
     <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
@@ -29,13 +54,4 @@
 
 </div>
 
-<div class="organization green-line-bottom">
-    <h2><a name="#organization"> About {orgName} </a> </h2>
-    &nbsp; <a href="{orgWebsite}" target="_blank"> {orgWebsite} </a>
-    <div class="description">
-        {orgDescription}
-        
-    </div>
 
-
-</div>

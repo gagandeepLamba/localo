@@ -160,22 +160,23 @@ ul.reset {
 	-moz-border-radius: 0 0 5px 5px;
 	border-radius: 0 0 5px 5px;
 }
-	#head {
-		background:url('images/head-bg.jpg') no-repeat center 0;
-		height:207px;
-	}
-	#content {
-		width:600px;
-		float:left;
-		border:1px solid #bbbbbb;
-		margin-top:7px;
-		padding:14px;
-	}
-	#sidebar {
-		width: 300px;
-		float:right;
-		margin-top:7px;
-	}
+#head {
+	background:url('images/head-bg.jpg') no-repeat center 0;
+	height:207px;
+}
+#content {
+	/* width:600px; */
+	/* float:left; */
+	border:1px solid #bbbbbb;
+	margin-top:7px;
+	padding:14px;
+	min-height : 800px;
+}
+#sidebar {
+	width: 300px;
+	float:right;
+	margin-top:7px;
+}
 
 #footer {
 	background:#000000;
@@ -404,7 +405,118 @@ ul.reset {
 	margin:0 7px;
 }
 
+/* -----  new code starts --------------- */
+/* web forms stuff */
 
+div #form-wrapper {
+    margin-left: 20px;
+}
+
+.form-table {
+    padding:10px;
+    /* background-color: #fef ; */
+    margin-top : 20px;
+    margin-bottom: 20px;
+}
+
+.form-table  input{
+    word-spacing: 1px;
+    line-height: 1.8em;
+    color: #333;
+    border: 1px solid #bbb;
+    width: 400px;
+    height: 28px;
+    padding-top:4px;
+
+}
+
+
+.form-table  .width-1{
+    width: 300px;
+}
+
+.form-table  .width-2{
+    width: 600px;
+}
+
+.form-table  .width-3{
+    width: 800px;
+}
+
+
+.form-table  .width-number{
+    width: 80px;
+}
+
+.form-table  .height-1{
+    height: 140px;
+}
+
+.form-table  .height-2{
+    height: 450px;
+}
+
+
+.form-table  textarea{
+    word-spacing: 1px;
+    line-height: 1.8em;
+    color: #333;
+    border: 1px solid #ccc;
+    width: 400px;
+    height :310px;
+    padding-top:10px
+}
+
+.web-form button {
+    width :80px;
+    padding:5px;
+    font-weight: normal ;
+    font-size: 16px;
+}
+
+div .error {
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+div .error label {
+    width: 500px;
+    text-align: left;
+    display: block;
+    margin-left: 10px;
+    color:red ;
+}
+
+
+div .share-toolbar {
+	margin-top:40px;
+	padding: 10px;
+	border:1px solid #EBEBEB ;
+	
+}
+
+div .organization {
+	margin-top: 40px;
+	padding:10px;
+	
+}
+
+div .candidate {
+	
+	border: 1px solid red;
+	
+}
+
+div .description{
+	padding:10px;
+	border:1px solid green ;
+}
+
+div .skill {
+	padding:10px;
+	border:1px solid green ;
+	
+}
 /* ------------------------- */
 
 

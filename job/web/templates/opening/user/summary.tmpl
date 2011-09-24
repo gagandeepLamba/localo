@@ -1,15 +1,23 @@
 
-
-<div class="opening green-line-bottom">
-
-    <h2> Application &dash; {title:h} </h2>
-    <p> <span> <a href="/opening/detail.php?g_opening_id={uuid}&g_org_id={organizationId}#organization" target="_blank"> {organizationName:h} </a> </span> posted  on {createdOn} (closing in {lifeInDays} days)
-    </p>
-    <p> <span> Location </span> &nbsp;&dash;&nbsp;{location:h}  </p>
+<div class="item">
+	<div class="price">{bounty:h}</div>
+	<div class="photos">
+		<img src="/css/images/_photo.jpg" alt="" />
+		<img src="/css/images/_photo.jpg" alt="" />
+		<img src="/css/images/_photo.jpg" alt="" />
+	</div>
     
-    <p> {description:h} </p>
-    <p> Skills:&nbsp;{skill:h} </p>
-    <div class="bounty"> Reward&nbsp;{bounty:h}&nbsp;&#36;</div>
+	<h2> Apply &dash; {title:h} </a> </h2>
+    <span class="link"> <a href="/opening/detail.php?g_opening_id={uuid}&g_org_id={organizationId}#organization" target="_blank"> {organizationName:h} </a> </span>
+    <span class="location">{location:h} </span>
     
-
+	<div class="description">
+		{description:h}
+	</div>
+	<div class="skill">
+		{skill}
+	</div>
+    <span class="date">posted  on {createdOn}, closing in {lifeInDays} days </span>
+   
+    
 </div>

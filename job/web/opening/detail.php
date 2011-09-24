@@ -48,8 +48,7 @@
 
         <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
         <link rel="stylesheet" type="text/css" href="/css/grids-min.css">
-         <!-- app css here -->
-        <link rel="stylesheet" type="text/css" href="/css/main.css">
+        <link rel="stylesheet" type="text/css" href="/css/style.css">
         
     </head>
 
@@ -61,37 +60,39 @@
         <div id="body-wrapper">
 
             <div id="hd">
-                <?php include($_SERVER['APP_WEB_DIR'] . '/inc/banner.inc') ?>
+                <!-- no banner -->
             </div>
             <div id="bd">
                 <!-- grid DIV -->
                 <div class="yui3-g">
-                    <div class="yui3-u-5-24">
+                    <div class="yui3-u-1-3">
                         <?php include($_SERVER['APP_WEB_DIR'] . '/inc/left-panel.inc') ?>
                     </div> <!-- left unit -->
 
-                    <div class="yui3-u-19-24">
-                        <div id="main-panel">
-                            <!-- include opening details -->
-                            <?php
-                                $html = '' ;
-                                $action = true ;
-
-                                if(\webgloo\auth\FormAuthentication::tryAdminRole()){
-                                    $action = false ;
-                                }
-
-                                $html = webgloo\job\html\template\Opening::getUserDetail($openingDBRow,$applicationCount,$action);
-                                echo $html;
-                                
-                            ?>
-
+                    <div class="yui3-u-2-3">
+                        <div id="content">
+                            <div class="joblist">
+                                <!-- include opening details -->
+                                <?php
+                                    $html = '' ;
+                                    $action = true ;
+    
+                                    if(\webgloo\auth\FormAuthentication::tryAdminRole()){
+                                        $action = false ;
+                                    }
+    
+                                    $html = webgloo\job\html\template\Opening::getUserDetail($openingDBRow,$applicationCount,$action);
+                                    echo $html;
+                                    
+                                ?>
+                            </div>
+                            
                             <!-- applications sent by a user -->
 
                             <?php if($applicationCount > 0 ) { ?>
 
                              
-                                 <div style="margin-left:20px;"> <h3> Applications &nbsp;(<?php echo $applicationCount ; ?>)</h3>
+                                    <h3> Applications &nbsp;(<?php echo $applicationCount ; ?>)</h3>
 
                                      <?php
 
@@ -102,7 +103,6 @@
                                         }
                                     ?>
                                     
-                                 </div>
                                  
                              <?php } ?>
 
@@ -110,7 +110,7 @@
 
                        
 
-                    </div> <!-- main unit -->
+                    </div> <!-- content -->
                 </div> <!-- GRID -->
 
 
@@ -119,10 +119,9 @@
 
 
         </div> <!-- body wrapper -->
-
-        <div id="ft">
-           <?php include($_SERVER['APP_WEB_DIR'].'/inc/site-footer.inc') ?>
-        </div>
+        
+        <?php include($_SERVER['APP_WEB_DIR'].'/inc/site-footer.inc') ?>
+        
             
     </body>
 </html>

@@ -1,5 +1,29 @@
-<div class="toolbar">     
-    Hello, &nbsp;{name} &nbsp; ({email})&nbsp; <a href="/logout.php"> logout </a>
-    &nbsp; &nbsp;
-    <a href="/user/applications.php"> my applications </a>
+
+<div id="header">
+	<div class="h-content">
+		<div rel="home" id="logo">
+				<a href="/" title="{Title}"> <img src="/css/images/logo.png" alt="{Title}" /> </a>
+		</div>
+
+		<div id="search-top">
+				<form method="get" id="searchform" action="">	
+						<input type="text" onblur="if (this.value == '') {this.value = 'Search';}" onfocus="if (this.value == 'Search') {this.value = '';}" value="Search" class="text" name="s" id="s"> 
+						<input type="image" class="but" src="/css/images/search-btn.png" value=" "> 
+				</form>
+				
+		</div>
+
+		<div id="hcenter">
+            
+				<strong>Hello&nbsp;{name} &nbsp;</strong>
+                <div id="login">
+                        
+						<span class="loginout"><a href="/">Home</a></span> |
+						<span class="register"><a href="/user/applications.php">Your applications</a></span> |
+                        <span class="loginout"><a href="/logout.php">Logout</a></span>
+                        
+				</div>
+		</div>
+
+	</div>
 </div>

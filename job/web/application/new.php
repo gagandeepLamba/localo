@@ -58,7 +58,7 @@
         <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
 
         <link rel="stylesheet" type="text/css" href="/css/grids-min.css">
-        <link rel="stylesheet" type="text/css" href="/css/main.css">
+        <link rel="stylesheet" type="text/css" href="/css/style.css">
        
         <!-- include any javascript here -->
         <!-- jquery UI and css -->
@@ -84,19 +84,19 @@
         <div id="body-wrapper">
 
             <div id="hd">
-                <?php include($_SERVER['APP_WEB_DIR'] . '/inc/banner.inc'); ?>
+                <!-- no banner -->
             </div>
             <div id="bd">
 
                 <div class="yui3-g">
-                    <div class="yui3-u-5-24">
+                    <div class="yui3-u-1-3">
                         <?php include($_SERVER['APP_WEB_DIR'] . '/inc/left-panel.inc'); ?>
                     </div> <!-- left unit -->
-                    <div class="yui3-u-19-24">
-                        <div id="main-panel">
+                    <div class="yui3-u-2-3">
+                        <div id="content">
 
 
-                            <div>
+                            <div class="joblist">
                                 <!-- include opening details -->
                                 <?php echo $openingHtml; ?>
 
@@ -109,7 +109,7 @@
 
                             </div>
                                     
-                        </div> <!-- main unit -->
+                        </div>
                     </div> <!-- GRID -->
 
 
@@ -119,17 +119,7 @@
 
             </div> <!-- body wrapper -->
 
-            <div id="ft">
             <?php include($_SERVER['APP_WEB_DIR'] . '/inc/site-footer.inc'); ?>
-
-
-        </div>
-
-        <!-- code for common UI dialog box -->
-
-        <div id="gui-dialog" title="">
-            <div id="gui-dialog-results"> </div>
-        </div>
 
     </body>
 </html>

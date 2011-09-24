@@ -1,7 +1,21 @@
 
- <div class="toolbar">
-                Hello &nbsp;{email}&nbsp; 
-                    <a href="/logout.php"> logout </a>
-                    <a href="/organization/profile.php"> About {organizationName}</a>
+        
+<div id="header">
+	<div class="h-content">
+		<div rel="home" id="logo">
+				<a href="/opening/list.php" title="{Title}"> <img src="/css/images/logo.png" alt="{Title}" /> </a>
+		</div>
 
-        </div>
+		<div id="hcenter">
+            
+				<strong>Hello&nbsp;{name} &nbsp;</strong>
+                <div id="login">
+						<span class="loginout"><a href="/opening/list.php">Home</a></span> |
+						<span class="register"><a href="/organization/profile.php">About {organizationName}</a></span> |
+                        <span class="loginout"><a href="/logout.php">Logout</a></span>
+                        
+				</div>
+		</div>
+
+	</div>
+</div>

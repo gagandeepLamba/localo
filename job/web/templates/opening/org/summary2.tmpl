@@ -1,13 +1,21 @@
-<div class="opening">
-    <h3> {title:h} </h3>
-    <span> Posted by:&nbsp;<a href="mailto:{createdBy:h}"> {createdBy} </a> on {createdOn} </span>
-    <span> (&nbsp;{location:h}) </span>
-    <p> Active for <b> {lifeInDays} </b> more days  &nbsp; <a href="#" id="{uuid}" class="opening-more-link">more&nbsp;&gt;</a> </p>
 
-    <div class="bounty"> Reward&nbsp;{bounty:h}&nbsp;&#36;</div>
+<div class="item">
+    <div class="price">{bounty:h}</div>
     
-    <p id="opening-{uuid}" class="hide-me">
+	<div class="photos">
+		<img src="/css/images/_photo.jpg" alt="" />
+		<img src="/css/images/_photo.jpg" alt="" />
+		<img src="/css/images/_photo.jpg" alt="" />
+	</div>
+    
+    <h2> {title:h} </h2>
+    <span class="email"> Posted by&nbsp;<a href="mailto:{createdBy:h}"> {createdBy} </a> </span>
+    <span class="date"> {createdOn}, Active for {lifeInDays} more days </span>
+    <span class="location"> {location:h}</span>
+    <span class="link"> <a href="#" id="{uuid}" class="opening-more-link">more&nbsp;&gt;</a> </span>
+    
+    <div id="opening-{uuid}" class="hide-me">
         {description:h}
-    </p>
+    </div>
     
 </div>

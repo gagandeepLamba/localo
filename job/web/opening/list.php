@@ -33,7 +33,7 @@
         $flinks[$code] = $link;
     }
 
-    $previousUrl = $gWeb->getPreviousUrl();
+	$previousUrl = $gWeb->getPreviousUrl();
     $gWeb->addCurrentUrlToStack();
 
 ?>
@@ -48,15 +48,10 @@
         <meta http-equiv="content-type" content="text/html;" />
 
         <link rel="stylesheet" type="text/css" href="/css/grids-min.css">
-        <link rel="stylesheet" type="text/css" href="/css/jquery/flick/jquery-ui-1.8.14.custom.css">
-        <!-- app css here -->
-        <link rel="stylesheet" type="text/css" href="/css/main.css">
+        <link rel="stylesheet" type="text/css" href="/css/style.css">
 
         <script type="text/javascript" src="/js/jquery-1.6.2.min.js"></script>
-        <!-- jquery UI and css -->
-        <script type="text/javascript" src="/js/jquery-ui-1.8.14.custom.min.js"></script>
         <script type="text/javascript" src="/js/main.js"></script>
-
 
         <!-- include any javascript here -->
         <script type="text/javascript">
@@ -156,6 +151,7 @@
                     event.preventDefault();
                     var openingId = $(this).attr("id");
                     openingObject.addEditLinks(openingId,"<?php echo $gstatus; ?>");
+					
                     
                 }) ;
 
@@ -172,7 +168,7 @@
 
             });
 
-            openingObject.debug = false ;
+            openingObject.debug = true ;
 
 
         </script>
@@ -186,19 +182,19 @@
         <div id="body-wrapper">
 
             <div id="hd">
-            <?php include($_SERVER['APP_WEB_DIR'] . '/inc/banner.inc'); ?>
+            <!-- no banner -->
             </div>
             <div id="bd">
-                <!-- grid DIV -->
+                
                 <div class="yui3-g">
-                    <div class="yui3-u-5-24">
+                    <div class="yui3-u-1-3">
                     <?php include($_SERVER['APP_WEB_DIR'] . '/inc/left-panel.inc'); ?>
 
                     </div> <!-- left unit -->
 
 
-                    <div class="yui3-u-19-24">
-                        <div id="main-panel">
+                    <div class="yui3-u-2-3">
+                        <div id="content">
                             <div>
                                 <p> <span class="header">  <?php echo $adminVO->organizationName; ?> Job Openings </span> </p>
                                 <div> <span>&nbsp;Filter&nbsp; </span>
@@ -219,18 +215,21 @@
                                 
                             </div>
                                 <!-- include opening list -->
-                                <?php
-                                    $openingDao = new webgloo\job\dao\Opening();
-                                    $rows = $openingDao->getRecordsOnOrgId($organizationId, array("status" => $gstatus));
-                                    foreach ($rows as $row) {
-                                        $html = webgloo\job\html\template\Opening::getOrganizationSummary($row);
-                                        echo $html;
-                                    }
-                                ?>
+								<div class="joblist">
+									<?php
+										$openingDao = new webgloo\job\dao\Opening();
+										$rows = $openingDao->getRecordsOnOrgId($organizationId, array("status" => $gstatus));
+										foreach ($rows as $row) {
+											$html = webgloo\job\html\template\Opening::getOrganizationSummary($row);
+											echo $html;
+										}
+									?>
+								</div>
+								
                         </div>
 
 
-                    </div> <!-- main unit -->
+                    </div> <!-- content -->
                 </div> <!-- GRID -->
 
 
@@ -240,15 +239,8 @@
 
         </div> <!-- body wrapper -->
 
-        <div id="ft">
         <?php include($_SERVER['APP_WEB_DIR'] . '/inc/site-footer.inc'); ?>
 
-        </div>
-
-        <!-- code for common UI dialog box -->
-        <div id="gui-dialog" title="">
-            <div id="gui-dialog-results"> </div>
-        </div>
 
     </body>
 </html>

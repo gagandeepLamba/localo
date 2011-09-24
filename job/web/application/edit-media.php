@@ -1,43 +1,43 @@
 <?php
-include 'job-app.inc';
-//set the global variables
-include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
-include($_SERVER['APP_WEB_DIR'] . '/inc/user/role.inc');
+	include 'job-app.inc';
+	//set the global variables
+	include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
+	include($_SERVER['APP_WEB_DIR'] . '/inc/user/role.inc');
 
 
-use webgloo\common\Util ;
-use webgloo\common\ui\form\Sticky ;
-use webgloo\job\Constants ;
-use webgloo\auth\FormAuthentication ;
+	use webgloo\common\Util ;
+	use webgloo\common\ui\form\Sticky ;
+	use webgloo\job\Constants ;
+	use webgloo\auth\FormAuthentication ;
 
-//attching media for this application.
-$applicationId = $gWeb->getRequestParam('g_application_id');
-Util::isEmpty('applicatonId', $applicationId);
+	//attching media for this application.
+	$applicationId = $gWeb->getRequestParam('g_application_id');
+	Util::isEmpty('applicatonId', $applicationId);
 
-$applicationDao = new webgloo\job\dao\Application();
-$applicationDBRow = $applicationDao->getRecordOnId($applicationId);
-$applicationHtml = webgloo\job\html\template\Application::getUserSummary($applicationDBRow,array());
+	$applicationDao = new webgloo\job\dao\Application();
+	$applicationDBRow = $applicationDao->getRecordOnId($applicationId);
+	$applicationHtml = webgloo\job\html\template\Application::getUserSummary($applicationDBRow,array());
 
-//find document id and names
-$documentDBRows = $applicationDao->getDocuments($applicationId);
-$documentArray = array();
-foreach($documentDBRows as $documentDBRow){
-    array_push($documentArray,array('id' => $documentDBRow['id'], 'name' => $documentDBRow['original_name']));
-}
+	//find document id and names
+	$documentDBRows = $applicationDao->getDocuments($applicationId);
+	$documentArray = array();
+	foreach($documentDBRows as $documentDBRow){
+		array_push($documentArray,array('id' => $documentDBRow['id'], 'name' => $documentDBRow['original_name']));
+	}
 
-//json encode the $docs array
-// this value is written to docs_array element of form
+	//json encode the $docs array
+	// this value is written to docs_array element of form
 
-$documentArrayAsJson = json_encode($documentArray);
-//@todo fix json encoding issue - right now if we put this string as
-// frm.element.value = "json_string" then we have escaping issues since the json_string
-// itself contains double quotes.
+	$documentArrayAsJson = json_encode($documentArray);
+	//@todo fix json encoding issue - right now if we put this string as
+	// frm.element.value = "json_string" then we have escaping issues since the json_string
+	// itself contains double quotes.
 
 
-//find and destroy sticky map
-$sticky = new Sticky($gWeb->find(Constants::STICKY_MAP,true));
-//This method will throw an error
-$userVO = FormAuthentication::getLoggedInUser();
+	//find and destroy sticky map
+	$sticky = new Sticky($gWeb->find(Constants::STICKY_MAP,true));
+	//This method will throw an error
+	$userVO = FormAuthentication::getLoggedInUser();
 
 
 ?>
@@ -46,18 +46,15 @@ $userVO = FormAuthentication::getLoggedInUser();
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 
-    <head><title> Edit documents for an application </title>
+    <head><title> Attach  documents</title>
 
         <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
-
-       
-        <link href="/swfupload/default.css" rel="stylesheet" type="text/css" />
+		
         <link rel="stylesheet" type="text/css" href="/css/grids-min.css">
-        <link rel="stylesheet" type="text/css" href="/css/jquery/flick/jquery-ui-1.8.14.custom.css">
+			<!-- swfupload style interferes with our grids -->
         <link rel="stylesheet" type="text/css" href="/swfupload/default.css">
-        <link rel="stylesheet" type="text/css" href="/css/main.css">
-
-        <!-- app css here -->
+        <link rel="stylesheet" type="text/css" href="/css/style.css">
+		
         <!-- include any javascript here -->
         <script type="text/javascript" src="/js/jquery-1.6.2.min.js"></script>
         <script type="text/javascript" src="/js/jquery-ui-1.8.14.custom.min.js"></script>
@@ -88,19 +85,20 @@ $userVO = FormAuthentication::getLoggedInUser();
                 webgloo.gMedia.debug = false ;
                 webgloo.gMedia.table.load();
 
-                 //create dialog box
-                $("#gui-dialog").dialog({
-                    autoOpen: false,
-                    modal: true,
-                    draggable: true,
-                    position: 'center',
-                    width: '310px'}) ;
 
             });
             
             //swffileupload related javascript
             var swfu;
-
+            /*
+             * we have to consider following settings
+             * 1. php.ini settings 
+             *    memory_limit > post_max_size > upload_max_filesize
+             * 2. nginx.conf client_mx_body_size
+             * 3. swfupload limits (in this file)
+             * 4. our max.file.size application setting in config.ini file
+             * 
+             */
             window.onload = function() {
                 var settings = {
                     flash_url : "/swfupload/swfupload.swf",
@@ -110,7 +108,7 @@ $userVO = FormAuthentication::getLoggedInUser();
                         "entity_id" : "<?php echo $applicationId;  ?>",
                         "entity_name" : "APPLICATION"
                     },
-                    file_size_limit : "10 MB",
+                    file_size_limit : "100 MB",
                     file_types : "*.*",
                     file_types_description : "All Files",
                     file_upload_limit : 100,
@@ -156,25 +154,24 @@ $userVO = FormAuthentication::getLoggedInUser();
         <div id="body-wrapper">
 
             <div id="hd">
-            <?php include($_SERVER['APP_WEB_DIR'] . '/inc/banner.inc'); ?>
+            <!-- no banner -->
             </div>
             <div id="bd">
 
                 <div class="yui3-g">
-                    <div class="yui3-u-5-24">
+                    <div class="yui3-u-1-3">
                         <?php include($_SERVER['APP_WEB_DIR'] . '/inc/left-panel.inc'); ?>
                     </div> <!-- left unit -->
 
-                    <div class="yui3-u-19-24">
-                        <div id="main-panel">
-                            <h2> Edit documents for application </h2>
-                            <br>
+                    <div class="yui3-u-2-3">
+                        <div id="content">
+                            <h2> Attach documents</h2>
                             
-                            <div class="help">
+                            <p class="help-text">
                                 You can add or remove documents for your application here. You can also do that later.
                                 <a href="/"> Fine, I will attach the documents later.</a>
-                            </div>
-                            <div>
+                            </p>
+                            <div class="joblist">
                                 <!-- include application summary  -->
                                 <?php echo $applicationHtml; ?>
 
@@ -231,14 +228,7 @@ $userVO = FormAuthentication::getLoggedInUser();
 
         </div> <!-- body wrapper -->
 
-        <div id="ft">
-            <?php include($_SERVER['APP_WEB_DIR'] . '/inc/site-footer.inc'); ?>
-        </div>
+		<?php include($_SERVER['APP_WEB_DIR'] . '/inc/site-footer.inc'); ?>
 
-        <!-- code for common UI dialog box -->
-        <div id="gui-dialog" title="">
-            <div id="gui-dialog-results"> </div>
-        </div>
-        
     </body>
 </html>

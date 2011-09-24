@@ -4,7 +4,6 @@
     use webgloo\job\Constants ;
     use webgloo\common\ui\form as Form;
     $sticky = new Form\Sticky($gWeb->find(Constants::STICKY_MAP, true));
-
     $previousUrl = $gWeb->getPreviousUrl();
     
 ?>  
@@ -18,8 +17,7 @@
         <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
 
         <link rel="stylesheet" type="text/css" href="/css/grids-min.css">
-        <!-- app css here -->
-        <link rel="stylesheet" type="text/css" href="/css/main.css">
+        <link rel="stylesheet" type="text/css" href="/css/style.css">
         <!-- include any javascript here -->
         <script type="text/javascript" src="/js/jquery-1.6.2.min.js"></script>
         <script type="text/javascript" src="/js/jquery.validate.min.js"></script>
@@ -51,20 +49,21 @@
     </head>
 
     <body>
-        
+        <?php include($_SERVER['APP_WEB_DIR'] . '/inc/toolbar.inc'); ?>
         <div id="body-wrapper">
 
                 <div id="hd">
-                     <?php include($_SERVER['APP_WEB_DIR'] . '/inc/banner.inc'); ?>
+                     <!-- no banner -->
                 </div>
                 <div id="bd">
 
                     <div class="yui3-g">
-                        <div class="yui3-u-5-24">
-                            
+                        <div class="yui3-u-1-3">
+                            <?php include($_SERVER['APP_WEB_DIR'] . '/inc/left-panel.inc'); ?>
                         </div> <!-- left unit -->
-                        <div class="yui3-u-19-24">
-                            <div id="main-panel">
+                
+                        <div class="yui3-u-2-3">
+                            <div id="content">
 
                                     <h2> User Registration </h2>
 
@@ -124,7 +123,7 @@
                             </div>
 
 
-                        </div> <!-- main unit -->
+                        </div> <!-- content -->
                     </div> <!-- GRID -->
 
 
@@ -134,12 +133,8 @@
 
         </div> <!-- body wrapper -->
 
-        <div id="ft">
+        <?php include($_SERVER['APP_WEB_DIR'] . '/inc/site-footer.inc'); ?>
 
-             <?php include($_SERVER['APP_WEB_DIR'] . '/inc/site-footer.inc'); ?>
-
-
-        </div>
 
     </body>
 </html>

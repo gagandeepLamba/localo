@@ -1,26 +1,36 @@
-<div id="opening-{uuid}" class="opening green-line-bottom">
-    <h2> {title:h} </h2>
-    <span> Posted by&nbsp;<a href="mailto:{createdBy:h}"> {createdBy} </a> on {createdOn} </span>
-    <span> (Location&nbsp;&dash;&nbsp;{location:h}) </span>
-    <p> Active for <b> {lifeInDays} </b> more days </p>
-
-    {if:hasSummary}
-        <p id="summary-{uuid}">
+<div class="item"  id="opening-{uuid}">
+	<div class="price">{bounty:h}</div>
+	<div class="photos">
+		<img src="/css/images/_photo.jpg" alt="" />
+		<img src="/css/images/_photo.jpg" alt="" />
+		<img src="/css/images/_photo.jpg" alt="" />
+	</div>
+    
+	<h2> {title:h} </h2>
+	
+    <span class="location">{location:h}</span>
+    <span class="email"> Posted by&nbsp;<a href="mailto:{createdBy:h}"> {createdBy} </a> </span>
+    <span class="date"> {createdOn}, Active for {lifeInDays} more days </span>
+    
+     {if:hasSummary}
+        <div id="summary-{uuid}" class="description">
             {summary:h}
-            &nbsp; <a href="#" id="{uuid}" class="more-link">more&nbsp;&gt;</a>
-        </p>
+            <span class="link"> <a href="#" id="{uuid}" class="more-link">more&nbsp;&gt;</a> </span>
+        </div>
     
     {end:}
 
-    <p id="description-{uuid}" class="{descriptionClass}">
+    <div id="description-{uuid}" class="description">
         {description:h}
         {if:hasSummary}
-            &nbsp; <a href="#" id="{uuid}" class="less-link">less&nbsp;&gt;</a>
+            <span class="link"> <a href="#" id="{uuid}" class="less-link">less&nbsp;&gt;</a> </span>
         {end:}
-    </p>
+    </div>
     
-    <p> Skills:&nbsp;{skill:h} </p>
-    <div class="bounty"> Reward&nbsp;{bounty:h}&nbsp;&#36;</div>
+    <div class="skill">
+        {skill:h}
+    </div>
+    
      <div class="action-links">
         <a href="#" class="opening-action-link" id="{uuid}">Actions</a>
         &nbsp;|&nbsp;
@@ -32,5 +42,7 @@
         {end:}
         
     </div>
-
+    
+  </div>
+  
 </div>

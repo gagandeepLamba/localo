@@ -1,12 +1,11 @@
 <?php
 
 include ('job-app.inc');
-include ($_SERVER['APP_LIB_DIR'] . '/error.inc');
+include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
 
 //upload job FileUpload to process document!
-use webgloo\job\FileUpload;
 
-$uploader = new FileUpload();
+$uploader = new webgloo\job\FileUpload();
 $uploader->process("Filedata");
 
 
