@@ -164,6 +164,13 @@
 
                 //show all shy hide-me containers on document load!
                 $(".hide-me").hide();
+			
+
+	
+				$('.fb_top .afilter').click(function(){
+					$(this).next().toggle();
+					return false;
+				});
 
 
             });
@@ -195,39 +202,34 @@
 
                     <div class="yui3-u-2-3">
                         <div id="content">
-                            <div>
-                                <p> <span class="header">  <?php echo $adminVO->organizationName; ?> Job Openings </span> </p>
-                                <div> <span>&nbsp;Filter&nbsp; </span>
-                                    <?php
-                                        foreach ($flinks as $code => $link) {
-                                            //does the name match?
-                                            if ($code == $gstatus) {
-                                                echo "<b> $uifilters[$code] </b> ";
-                                            } else {
-                                                $msg = '&nbsp;<a href="{link}">{name}</a> &nbsp;';
-                                                $name = $uifilters[$code];
-                                                $msg = str_replace(array(0 => "{name}", 1 => "{link}"), array(0 => $name, 1 => $link), $msg);
-                                                echo $msg;
-                                            }
-                                        }
-                                    ?>
-                                </div>
-                                
-                            </div>
-                                <!-- include opening list -->
-								<div class="joblist">
-									<?php
-										$openingDao = new webgloo\job\dao\Opening();
-										$rows = $openingDao->getRecordsOnOrgId($organizationId, array("status" => $gstatus));
-										foreach ($rows as $row) {
-											$html = webgloo\job\html\template\Opening::getOrganizationSummary($row);
-											echo $html;
-										}
-									?>
+                            
+							<div class="fb_top">
+								<div class="fb_name navy floatl">Openings</div>
+								<div class="fb_filter floatl">
+									Filter: <a href="#" class="afilter navy">Active</a>
+									<div class="fb_selector">
+										<a href="/opening/list.php?g_status=*">All</a>
+										<a class="current" href="/opening/list.php?g_status=A">Active</a>
+										<a href="/opening/list.php?g_status=E">Expired</a>
+										<a href="/opening/list.php?g_status=S">Suspended</a>
+										<a href="/opening/list.php?g_status=C">Closed</a>
+									</div>
 								</div>
-								
-                        </div>
-
+								<div class="clear"></div>
+							</div> <!-- fb_top -->
+                                
+						
+							 <!-- include opening list -->
+							 <div class="joblist">
+								 <?php
+									 $openingDao = new webgloo\job\dao\Opening();
+									 $rows = $openingDao->getRecordsOnOrgId($organizationId, array("status" => $gstatus));
+									 foreach ($rows as $row) {
+										 $html = webgloo\job\html\template\Opening::getOrganizationSummary($row);
+										 echo $html;
+									 }
+								 ?>
+							 </div>
 
                     </div> <!-- content -->
                 </div> <!-- GRID -->

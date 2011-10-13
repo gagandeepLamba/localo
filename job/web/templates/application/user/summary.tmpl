@@ -1,35 +1,31 @@
-<div class="item">
+<div class="item mt20">
 	<div class="price">{bounty:h}</div>
 	<div class="photos">
 		<img src="/css/images/_photo.jpg" alt="" />
 		<img src="/css/images/_photo.jpg" alt="" />
 		<img src="/css/images/_photo.jpg" alt="" />
 	</div>
-    <div class="status"> <span> {status} </span> </div>
-	<h4><a href="/opening/detail.php?g_opening_id={openingId}&g_org_id={organizationId}">{title:h}</a></h4>
-	<span class="link"> <a href="/opening/detail.php?g_opening_id={uuid}&g_org_id={organizationId}#organization">{organizationName:h} </a> </span>
-     <span class="location">{location:h}</span>
+   
+	<h4 class="title"><a href="/opening/detail.php?g_opening_id={openingId}&g_org_id={organizationId}">{title:h}</a></h4>
+	
+    <span class="link"> <a href="/opening/detail.php?g_opening_id={uuid}&g_org_id={organizationId}#organization">{organizationName:h} </a> </span>
+    <span class="location">{location:h}</span>
+    <span class="date"> closing on {expireOn}</span>
+    <h4 class="f13 b red"> {status} </h4>
      
   </div>
   
- <div class="item">
-     <span class="name"> {cvName} </span>
-     <span class="email"> <a href="mailto:{cvEmail:h}"> {cvEmail} </a> </span>
-     <span class="link"> <a href="{cvLinkedInPage}">{cvLinkedInPage}</a> </span>
-     <span class="orgnization">  {cvCompany} </span>
-     <span class="education">  {cvEducation} </span>
-     <span class="location"> {cvLocation} </span>
-     
-    
-	<div class="description">
-		{cvDescription:h}
-	</div>
-	<div class="skill">
-		{cvSkill}
-	</div>
-    <span class="date"> application sent  on {cvPostedOn}, closing on {expireOn}</span>
+  <div class="details pt10 grey">
+    <span class="ditem d-name b"> <a href="#"> {cvName} </a> </span>
+    <span class="ditem d-email"> <a href="mailto:{cvEmail:h}"> {cvEmail} </a> </span>
+    <span class="ditem d-phone">  {cvPhone}</span>
+    <span class="ditem d-company">  {cvCompany}</span>
+    <span class="ditem d-edu">  {cvEducation}</span>
+    <span class="ditem d-address">  {cvLocation}</span>
+    <span class="date"> sent  on {cvPostedOn}</span>
+ </div>
 
-</div>
+
 
    
 

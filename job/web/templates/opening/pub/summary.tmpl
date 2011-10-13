@@ -6,16 +6,21 @@
 		<img src="/css/images/_photo.jpg" alt="" />
 		<img src="/css/images/_photo.jpg" alt="" />
 	</div>
-	<h4><a href="/opening/detail.php?g_opening_id={uuid}&g_org_id={organizationId}">{title:h}</a></h4>
-	<span class="organization"> <a href="/opening/detail.php?g_opening_id={uuid}&g_org_id={organizationId}#organization">{organizationName:h} </a> </span>
-	<span class="location">{location:h}</span>
+	<br>
+	<h4 class="title"><a href="/opening/detail.php?g_opening_id={uuid}&g_org_id={organizationId}">{title:h}</a></h4>
+	<div class="details pt10 grey">
+		<span class="ditem d-company"> <a href="/opening/detail.php?g_opening_id={uuid}&g_org_id={organizationId}#organization">{organizationName:h} </a> </span>
+		<span class="ditem d-address">{location:h}</span>
+		<span class="date"> closing in {lifeInDays} days</span>
+    </div>
+	
 	<div class="description">
 		{description:h}
 	</div>
 	<div class="skill">
 		{skill} 
 	</div>
-    <span class="date"> posted  on {createdOn} (closing in {lifeInDays} days) </span>
+    
 	
 </div>
 

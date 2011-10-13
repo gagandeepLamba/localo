@@ -66,8 +66,9 @@
                         <div class="yui3-u-2-3">
                             <div id="content">
                                 
-                                <h2> My Applications (<?php echo $userVO->email; ?>) </h2>
+                                <h2> My Applications </h2>
                                         
+                                    <div class="joblist">
                                         <?php
                                         //applications
                                         $applicationDao = new webgloo\job\dao\Application();
@@ -79,6 +80,8 @@
                                             
                                         }
                                     ?>
+                                    </div>
+                                    
 
                             </div>
 

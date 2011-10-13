@@ -90,9 +90,9 @@
                             <!-- applications sent by a user -->
 
                             <?php if($applicationCount > 0 ) { ?>
-
-                             
-                                    <h3> Applications &nbsp;(<?php echo $applicationCount ; ?>)</h3>
+                                    
+                                    <div class="joblist">
+                                    <h4> Applications &nbsp;(<?php echo $applicationCount ; ?>)</h4> 
 
                                      <?php
 
@@ -102,6 +102,8 @@
 
                                         }
                                     ?>
+                                    
+                                    </div>
                                     
                                  
                              <?php } ?>

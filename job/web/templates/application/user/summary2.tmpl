@@ -1,9 +1,12 @@
 
- <div class="application-summary grey-line-bottom">
-    <p> {cvName} &nbsp;(<a href="mailto:{cvEmail:h}"> {cvEmail} </a> &nbsp;phone&dash;&nbsp;{cvPhone}) </p>
-    <p> Company {cvCompany} &nbsp; Education  {cvEducation} &nbsp; current location  {cvLocation} </p>
-    <p> sent on {createdOn}</p>
-
+ <div class="details pt10 grey">
+    <span class="ditem d-name b"> <a href="#"> {cvName} </a> </span>
+    <span class="ditem d-email"> <a href="mailto:{cvEmail:h}"> {cvEmail} </a> </span>
+    <span class="ditem d-phone">  {cvPhone}</span>
+    <span class="ditem d-company">  {cvCompany}</span>
+    <span class="ditem d-edu">  {cvEducation}</span>
+    <span class="ditem d-address">  {cvLocation}</span>
+    <span class="date">  sent on {createdOn}</span>
  </div>
 
 

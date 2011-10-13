@@ -301,7 +301,6 @@ ul.reset {
 	text-decoration:underline;
 }
 
-
 /* --------------- Sidebar --------------- */
 
 .widget {
@@ -496,30 +495,171 @@ div .share-toolbar {
 }
 
 div .organization {
-	margin-top: 40px;
-	padding:10px;
-	
+	margin-top : 20px;
 }
 
 div .candidate {
 	
-	border: 1px solid red;
+	
 	
 }
 
-div .description{
-	padding:10px;
-	border:1px solid green ;
+
+/* ----- new styles ------ */
+
+.joblist item .title {
+	padding-top:20px;	
 }
 
-div .skill {
-	padding:10px;
-	border:1px solid green ;
+
+.details .ditem {
+	padding:0 7px 0 16px;
+	background:url('images/details_sprite.png') no-repeat 0 0;
+	line-height: 18px;
+}
+.details .d-name {background-position:0 0;}
+.details .d-email {background-position:0 -14px;}
+.details .d-phone {background-position:0 -28px;}
+.details .d-address {background-position:0 -42px;}
+.details .d-edu {background-position:0 -56px;}
+.details .d-company {background-position:0 -70px;}
+
+.skill {
+	color:#727272;
+	margin: 20px 14px;
+    padding: 10px 0;
+	border-bottom:1px solid #A1A1A1;
+	text-align:justify;
 	
 }
-/* ------------------------- */
+
+.description {
+	color:#727272;
+	margin: 20px 14px;
+    padding: 10px 0;
+	text-align:justify;
+	
+}
+
+.date {
+	font-weight:bold;
+	color: gray;
+}
+
+.b {
+	font-weight : bold ;
+}
+
+.gray {
+	color : gray;
+}
 
 
+.pt10 {padding-top:10px;}
+
+
+/* 100 percent big orange button */
+div .orange-button {
+    margin-bottom:10px;
+	margin-top:20px;
+	background-color:#FF7906;
+	color:#FFFFFF;
+	
+	padding:7px 20px;
+	border-radius:5px;
+	text-decoration:none;
+	 text-align:center;
+
+}
+
+div .orange-button a {
+     color:#FFFFFF;
+     font-size:13px;
+     font-weight:bold;
+	 text-align:center;
+
+}
+
+
+.f13 {
+	font-size :13px;
+}
+
+.mt20 {
+	margin-top :20px;
+}
+
+.meta {
+		
+	font-size: 12px;
+	padding: 5px 0;
+	color: gray;
+}
+
+.action-links {
+	font-weight: bold;
+	font-size: 14px;
+	color: #28C;
+	padding: 10px 0;
+
+}
+
+/* ------ top filter ------ */
+
+.fb_top {
+	font-size:14px;
+	font-weight:bold;
+	font-family:Arial;
+	height:18px;
+	line-height:18px;
+	padding-bottom:20px;
+	border-bottom :3px solid #3E71B5;
+}
+
+.fb_top .fb_name {
+	
+	padding-left:25px;
+	padding-right: 8px;
+}
+.fb_top .fb_filter {
+	padding-left:8px;
+	padding-right: 10px;
+	position:relative;
+}
+.fb_top .afilter {
+	
+	padding-right:15px;
+	color: #3E71B5;
+	/* text-decoration :underline; */
+}
+.fb_top .fb_selector {
+	border: 1px solid #BBBBBB;
+	position:absolute;
+	right: 0;
+	background:#FFF;
+	padding:5px 10px;
+	display: none;
+}
+.fb_top .fb_selector a {
+	color: #3E71B5;
+	display:block;
+	padding: 0 10px;
+}
+.fb_top .fb_selector a:hover {
+	background: #3E71B5;
+	color:#FFF;
+	text-decoration:none;
+}
+.fb_selector a.current {
+	color:#111;
+	cursor:default;
+}
+.fb_selector a.current:hover {
+	color:#111;
+	background:transparent;
+}
+
+/* --- top filter --- */
 
 
 

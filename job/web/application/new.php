@@ -72,6 +72,7 @@
                 $("#web-form1").validate({
                     errorLabelContainer: $("#web-form1 div.error")
                 });
+            });
                 
             
         </script>
