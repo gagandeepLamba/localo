@@ -51,8 +51,9 @@
         <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
 		
         <link rel="stylesheet" type="text/css" href="/css/grids-min.css">
-			<!-- swfupload style interferes with our grids -->
-        <link rel="stylesheet" type="text/css" href="/swfupload/default.css">
+		<!-- swfupload style interferes with our grids -->
+        <!-- <link rel="stylesheet" type="text/css" href="/swfupload/default.css"> -->
+		
         <link rel="stylesheet" type="text/css" href="/css/style.css">
 		
         <!-- include any javascript here -->
@@ -165,12 +166,17 @@
 
                     <div class="yui3-u-2-3">
                         <div id="content">
-                            <h2> Attach documents</h2>
-                            
+							<div class="fb_top">
+								   <div class="fb_name navy floatl">Attach Documents </div>
+							   
+								   <div class="clear"></div>
+							</div> <!-- fb_top -->
+                           
                             <p class="help-text">
                                 You can add or remove documents for your application here. You can also do that later.
                                 <a href="/"> Fine, I will attach the documents later.</a>
                             </p>
+							
                             <div class="joblist">
                                 <!-- include application summary  -->
                                 <?php echo $applicationHtml; ?>
@@ -178,14 +184,12 @@
                             </div>
                             
 
-                            <h2> Documents  </h2>
+                            <h3 class="mt20"> Documents  </h3>
                             
                             <?php include($_SERVER['APP_WEB_DIR'] . '/inc/form/message.inc'); ?>
 
                             <div id="preview">
-                                &nbsp; <br>
-                                
-                                <table class="form-table">
+                                <table class="doc-table pt10">
 
 
                                 </table>
@@ -201,7 +205,7 @@
                                         <span class="legend">Upload Queue</span>
                                     </div>
                                     <div id="divStatus">No Files Uploaded</div>
-                                    <div>
+                                    <div class="pt10">
                                         <span id="spanButtonPlaceHolder"></span>
                                         <input id="btnCancel" type="button" value="Cancel All Uploads" onclick="swfu.cancelQueue();" disabled="disabled" style="margin-left: 2px; font-size: 8pt; height: 29px;" />
                                     </div>

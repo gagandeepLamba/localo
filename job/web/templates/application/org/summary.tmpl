@@ -1,12 +1,16 @@
 <div id="application-{uuid}" class="item">
-    <div class="rating"> Rating (3/5) <span class="rating-static rating-30"> </span> </div>
-    <span class="name">  {cvName} </span>
-    <span class="email"> <a href="mailto:{cvEmail:h}"> {cvEmail} </a> </span>
-    <span class="phone">{cvPhone} </span>
-    <span class="link"> <a href="{cvLinkedInPage}">{cvLinkedInPage}</a> </span>
-    <span class="location"> {cvLocation} </span>
-    <span class="education"> {cvEducation} </span>
-    <span class="organization"> {cvCompany} </span>
+    <div class="rating grey pt10"> Rating (3/5)<span class="rating-static rating-30"> </span> </div>
+    
+    <div class="details pt10 grey">
+        <span class="ditem d-name b"> <a href="#"> {cvName} </a> </span>
+        <span class="ditem d-email"> <a href="mailto:{cvEmail:h}"> {cvEmail} </a> </span>
+        <span class="ditem d-phone">  {cvPhone}</span>
+        <span class="ditem d-company">  {cvCompany}</span>
+        <span class="ditem d-edu">  {cvEducation}</span>
+        <span class="ditem d-address">  {cvLocation}</span>
+        <span class="link"> <a href="{cvLinkedInPage}">{cvLinkedInPage}</a> </span>
+        
+    </div>
     
     <div class="skill"> {cvSkill} </div>
     
@@ -18,7 +22,7 @@
 
     {end:}
     
-     <div id="application-detail-{uuid}" class="{descriptionClass}">
+     <div id="application-detail-{uuid}" class="{descriptionClass} description">
             {cvDescription:h}
             {if:hasSummary}
                 &nbsp; <a href="#" id="{uuid}" class="application-less-link">less&nbsp;&gt;</a>

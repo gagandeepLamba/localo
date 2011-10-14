@@ -164,31 +164,36 @@
                     </div>
                         <div class="yui3-u-2-3">
                             <div id="content">
-                                <h2> Total Applications &dash;<?php echo $openingDBRow['application_count'] ; ?> </h2>
+                                <div class="fb_top">
+                                    <div class="fb_name navy floatl">Total Applications &dash;<?php echo $openingDBRow['application_count'] ; ?> </div>
+								
+                                    <div class="clear"></div>
+                                </div> <!-- fb_top -->
                                 
-                                    <div class="joblist">
-                                        
-                                    <?php
-                                        $html = webgloo\job\html\template\Opening::getOrganizationSummary2($openingDBRow);
-                                        echo $html;
-                                        ?>
-                                        
-                                        <?php
-                                            //applications
-                                            $applicationDao = new webgloo\job\dao\Application();
-                                            $rows = $applicationDao->getRecords($adminVO->organizationId, $openingId);
-
-                                            foreach ($rows as $row) {
-
-                                                $html = webgloo\job\html\template\Application::getOrganizationSummary($row);
-                                                echo $html;
-                                            }
+                
+                                <div class="joblist">
+                                
+                                <?php
+                                    $html = webgloo\job\html\template\Opening::getOrganizationSummary2($openingDBRow);
+                                    echo $html;
                                     ?>
-                                    </div>
+                                    
+                                    <?php
+                                        //applications
+                                        $applicationDao = new webgloo\job\dao\Application();
+                                        $rows = $applicationDao->getRecords($adminVO->organizationId, $openingId);
+    
+                                        foreach ($rows as $row) {
+    
+                                            $html = webgloo\job\html\template\Application::getOrganizationSummary($row);
+                                            echo $html;
+                                        }
+                                ?>
+                                </div> <!-- content -->
                                     
                             </div>
 
-                        </div> <!-- content -->
+                        </div> 
                     </div> <!-- GRID -->
 
 

@@ -8,13 +8,19 @@
 		<img src="/css/images/_photo.jpg" alt="" />
 	</div>
     
-    <h2> {title:h} </h2>
-    <span class="email"> Posted by&nbsp;<a href="mailto:{createdBy:h}"> {createdBy} </a> </span>
-    <span class="date"> {createdOn}, Active for {lifeInDays} more days </span>
-    <span class="location"> {location:h}</span>
-    <span class="link"> <a href="#" id="{uuid}" class="opening-more-link">more&nbsp;&gt;</a> </span>
+    <h4 class="title"> {title:h} </h4>
+    <div class="clear"> </div>
     
-    <div id="opening-{uuid}" class="hide-me">
+	<div class="meta">
+      
+        <span> Posted by&nbsp;<a href="mailto:{createdBy:h}"> {createdBy} </a> </span>
+        <span> on {createdOn}, Active for {lifeInDays} more days </span>
+        <span>{location:h}</span>
+        <span class="link"> <a href="#" id="{uuid}" class="opening-more-link">more&nbsp;&gt;</a> </span>
+    </div>
+    
+    
+    <div id="opening-{uuid}" class="description hide-me">
         {description:h}
     </div>
     

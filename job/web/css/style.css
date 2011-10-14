@@ -659,13 +659,72 @@ div .orange-button a {
 	background:transparent;
 }
 
-/* --- top filter --- */
+/* --- end top filter --- */
 
 
+/* star rating */
+
+.rating-static {
+  width: 60px;
+  height: 16px;
+  display: block;
+  background: url('images/star-rating.png') 0 0 no-repeat;
+}
 
 
+.rating-50 { background-position: 0 0; }
+.rating-40 { background-position: -12px 0; }
+.rating-30 { background-position: -24px 0; }
+.rating-20 { background-position: -36px 0; }
+.rating-10 { background-position: -48px 0; }
+.rating-0 { background-position: -60px 0; }
+
+.rating-5  { background-position: -48px -16px; }
+.rating-15 { background-position: -36px -16px; }
+.rating-25 { background-position: -24px -16px; }
+.rating-35 { background-position: -12px -16px; }
+.rating-45 { background-position: 0 -16px; }
+
+/* end - star rating */
+
+.doc-table {
+	font-weight : normal ;
+	font-size :12px;
+	
+}
+
+.mt20 {
+	margin-top :20px;
+}
+
+/* style - swfupload */
+#form-wrapper #fsUploadProgress .legend {
+	color: #8C4;
+	font-size: 14px;
+	font-family: "Myriad Pro",Arial,Helvetica,Tahoma,sans-serif;
+	font-weight: bold;
+	padding-top:10px;
+
+}
 
 
+#form-wrapper .fieldset {
+	
+	border: 1px solid #A1A1A1;
+	padding: 10px;
+	width: 300px;
 
+}
+
+#form-wrapper #divStatus {
+	padding:20px;
+	
+}
+
+#form-wrapper #spanButtonPlaceHolder {
+	width:120px;
+	height:70px;
+	border:1px solid black;
+}
 
 
