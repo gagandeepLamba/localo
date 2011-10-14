@@ -4,7 +4,8 @@
     include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
     //add current url to stack
     $gWeb->addCurrentUrlToStack();
-
+    $config = webgloo\common\Configuration::getInstance();
+    $siteName = $config->getFarmName();
 
 ?>
 
@@ -12,7 +13,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" id="nojs">
 
 
-    <head><title> www.job.com - All the job openings </title>
+    <head><title> <?php echo $siteName; ?> </title>
         <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
         <link rel="stylesheet" type="text/css" href="/css/grids-min.css">
 		<link rel="stylesheet" type="text/css" href="/css/style.css" />

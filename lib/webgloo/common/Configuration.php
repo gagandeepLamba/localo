@@ -146,6 +146,10 @@ namespace webgloo\common {
             return $this->ini_array['log.location'];
         }
 
+        function getFarmName() {
+            return $this->ini_array['farm.name'];
+        }
+        
     }
 
 }

@@ -95,7 +95,7 @@
 
                                     <div>
                                         No account? <a href="/user/register.php"> Register</a>
-                                        &nbsp;|&nbsp;forgot password? mail <a href="mailto:support@job.indigloo.net">support@3mik.com</a>
+                                        &nbsp;|&nbsp;forgot password? mail <a href="mailto:support@3mik.com">support@3mik.com</a>
                                     </div> <!-- action links -->
 
                             </div>
