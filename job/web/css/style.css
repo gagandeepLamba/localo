@@ -416,6 +416,7 @@ div #form-wrapper {
     /* background-color: #fef ; */
     margin-top : 20px;
     margin-bottom: 20px;
+	font-size:13px;
 }
 
 .form-table  input{
@@ -431,15 +432,15 @@ div #form-wrapper {
 
 
 .form-table  .width-1{
-    width: 300px;
+    width: 280px;
 }
 
 .form-table  .width-2{
-    width: 600px;
+    width: 580px;
 }
 
 .form-table  .width-3{
-    width: 800px;
+    width: 780px;
 }
 
 
@@ -448,11 +449,11 @@ div #form-wrapper {
 }
 
 .form-table  .height-1{
-    height: 140px;
+    height: 130px;
 }
 
 .form-table  .height-2{
-    height: 450px;
+    height: 430px;
 }
 
 
@@ -466,12 +467,24 @@ div #form-wrapper {
     padding-top:10px
 }
 
-.web-form button {
-    width :80px;
-    padding:5px;
-    font-weight: normal ;
-    font-size: 16px;
+.button-container {
+	padding:10px;
 }
+
+.form-button {
+	background:url('/css/images/btn-bg.png') repeat-x 0 0;
+	border:none;
+	border-left:1px solid #344b86;
+	border-right:1px solid #445a8f;
+	height:25px;
+	line-height:25px;
+	padding:0 15px;
+	font-family:"Myriad Pro",Arial,Helvetica,Tahoma,sans-serif;
+	color:#FFF;
+	text-shadow:1px 1px 1px #333;
+	cursor : hand ;
+}
+
 
 div .error {
     margin-bottom: 10px;

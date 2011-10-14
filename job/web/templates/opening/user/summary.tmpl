@@ -7,17 +7,12 @@
 		<img src="/css/images/_photo.jpg" alt="" />
 	</div>
     
-	<h2> Apply &dash; {title:h} </a> </h2>
-    <span class="link"> <a href="/opening/detail.php?g_opening_id={uuid}&g_org_id={organizationId}#organization" target="_blank"> {organizationName:h} </a> </span>
-    <span class="location">{location:h} </span>
+	<h4 class="title b"><a href="#"> {title:h} </a> </h4>
+    <div class="clear"> </div>
+      <div class="details pt10 grey">
+      <span class="ditem d-company"> <a href="/opening/detail.php?g_opening_id={uuid}&g_org_id={organizationId}#organization" target="_blank"> {organizationName:h} </a> </span>
+      <span class="ditem d-address"> {location:h} </span>
+    </div>
     
-	<div class="description">
-		{description:h}
-	</div>
-	<div class="skill">
-		{skill}
-	</div>
-    <span class="date">posted  on {createdOn}, closing in {lifeInDays} days </span>
-   
-    
+	
 </div>

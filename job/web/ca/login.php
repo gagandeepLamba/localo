@@ -86,9 +86,9 @@
                                             
                                             <div class="button-container">
 
-                                                <button type="submit" name="login" value="Login" onclick="this.setAttribute('value','Login');" ><span>Login</span></button>
+                                                <button class="form-button" type="submit" name="login" value="Login" onclick="this.setAttribute('value','Login');" ><span>Login</span></button>
                                                  <a href="<?php echo $previousUrl; ?>">
-                                                    <button type="button" name="cancel"><span>Cancel</span></button>
+                                                    <button class="form-button" type="button" name="cancel"><span>Cancel</span></button>
                                                 </a>
                                                 
                                                 </div>

@@ -6,7 +6,7 @@
 </p>
 
 <div id="form-wrapper">
-    <form id="web-form1" class="web-form" name="web-form1" action="/application/post/new.php" enctype="multipart/form-data"  method="POST">
+    <form id="web-form1" name="web-form1" action="/application/post/new.php" enctype="multipart/form-data"  method="POST">
 
         <div class="error">    </div>
 
@@ -101,9 +101,10 @@
         </div>
 
         <div class="button-container">
-            <button type="submit" name="save" value="Save" onclick="this.setAttribute('value','Save');" ><span>Save</span></button>
+            
+            <button class="form-button" value="Save" name="save" type="submit" onclick="this.setAttribute('value','Save');">Save</button>
             <a href="<?php echo $previousUrl; ?>">
-                <button type="button" name="cancel"><span>Cancel</span></button>
+                <button class="form-button" type="button" name="cancel">Cancel</button>
             </a>
         </div>
 

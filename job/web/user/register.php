@@ -75,7 +75,7 @@
                                      <?php include($_SERVER['APP_WEB_DIR'] . '/inc/form/message.inc'); ?>
 
                                     <div id="form-wrapper">
-                                        <form id="web-form1" class="web-form" name="web-form1" action="/user/post/register.php" enctype="multipart/form-data"  method="POST">
+                                        <form id="web-form1"  name="web-form1" action="/user/post/register.php" enctype="multipart/form-data"  method="POST">
 
                                             <div class="error">    </div>
 
@@ -108,9 +108,9 @@
                                             </table>
 
                                             <div class="button-container">
-                                                <button type="submit" name="register" value="Register" onclick="this.setAttribute('value','Register');" ><span>Register</span></button>
+                                                <button class="form-button" type="submit" name="register" value="Register" onclick="this.setAttribute('value','Register');" ><span>Register</span></button>
                                                  <a href="<?php echo $previousUrl; ?>">
-                                                    <button type="button" name="cancel"><span>Cancel</span></button>
+                                                    <button class="form-button" type="button" name="cancel"><span>Cancel</span></button>
                                                 </a>
                                                 
                                             </div>

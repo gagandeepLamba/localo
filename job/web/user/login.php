@@ -59,7 +59,7 @@
                                      <?php include($_SERVER['APP_WEB_DIR'] . '/inc/form/message.inc'); ?>
 
                                     <div id="form-wrapper">
-                                        <form id="web-form1" class="web-form" name="web-form1" action="/user/post/login.php" enctype="multipart/form-data"  method="POST">
+                                        <form id="web-form1"  name="web-form1" action="/user/post/login.php" enctype="multipart/form-data"  method="POST">
 
                                             <div class="error">    </div>
 
@@ -81,9 +81,9 @@
                                             </table>
 
                                             <div class="button-container">
-                                                <button type="submit" name="login" value="Login" onclick="this.setAttribute('value','Login');" ><span>Login</span></button>
+                                                <button class="form-button" type="submit" name="login" value="Login" onclick="this.setAttribute('value','Login');" ><span>Login</span></button>
                                                 <a href="<?php echo $previousUrl; ?>">
-                                                    <button type="button" name="cancel"><span>Cancel</span></button>
+                                                    <button class="form-button" type="button" name="cancel"><span>Cancel</span></button>
                                                 </a>
                                                 
                                             </div>
@@ -93,9 +93,9 @@
                                         </form>
                                     </div> <!-- form wrapper -->
 
-                                    <div class="action-links">
-                                        <a href="/user/register.php"> No account? Register</a>
-                                        &nbsp;|&nbsp;forgot password? mail to <a href="mailto:support@job.indigloo.net">support@job.indigloo.net</a>
+                                    <div>
+                                        No account? <a href="/user/register.php"> Register</a>
+                                        &nbsp;|&nbsp;forgot password? mail <a href="mailto:support@job.indigloo.net">support@3mik.com</a>
                                     </div> <!-- action links -->
 
                             </div>
