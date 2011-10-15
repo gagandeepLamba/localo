@@ -766,13 +766,13 @@ div .orange-button a {
 }
 /* Error */
 .red {
-	border: solid 1px #B50000;
+ /* 	border: solid 1px #B50000; */
 	background-color: #FFEBEB;
 }
 
 /* Current */
 .green {
-	border: solid 1px #DDF0DD;
+	/* border: solid 1px #DDF0DD; */
 	background-color: #EBFFEB;
 }
 

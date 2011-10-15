@@ -36,7 +36,7 @@
         <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
 
         <link rel="stylesheet" type="text/css" href="/css/grids-min.css">
-        <link rel="stylesheet" type="text/css" href="/css/main.css">
+        <link rel="stylesheet" type="text/css" href="/css/style.css">
         
         <script type="text/javascript" src="/js/jquery-1.6.2.min.js"></script>
         <script type="text/javascript" src="/js/jquery.validate.min.js"></script>
@@ -116,9 +116,9 @@
 
 
                                     <div class="button-container">
-                                        <button type="submit" name="save" value="Save" onclick="this.setAttribute('value','Save');" ><span>Save</span></button>
+                                        <button class="form-button" type="submit" name="save" value="Save" onclick="this.setAttribute('value','Save');" ><span>Save</span></button>
                                         <a href="<?php echo $previousUrl; ?>">
-                                            <button type="button" name="cancel"><span>Cancel</span></button>
+                                            <button class="form-button" type="button" name="cancel"><span>Cancel</span></button>
                                         </a>
                                     </div>
 

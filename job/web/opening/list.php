@@ -204,7 +204,10 @@
                         <div id="content">
                             
 							<div class="fb_top">
-								<div class="fb_name navy floatl">Openings</div>
+								<div class="fb_name navy floatl">
+									Openings
+									|<a href="/opening/create.php">Create </a>
+								</div>
 								<div class="fb_filter floatl">
 									Filter: <a href="#" class="afilter navy">Active</a>
 									<div class="fb_selector">
