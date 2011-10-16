@@ -67,14 +67,17 @@
             <div id="bd">
 
                 <div class="yui3-g">
-                    <div class="yui3-u-5-24">
+                    <div class="yui3-u-1-3">
                         <?php include($_SERVER['APP_WEB_DIR'] . '/inc/left-panel.inc'); ?>
-                    </div> <!-- left unit -->
-                    <div class="yui3-u-19-24">
+                    </div> 
+                    <div class="yui3-u-2-3">
 
-                        <div id="main-panel">
-                            <h2> Organization Details</h2>
-
+                        <div id="content">
+                             <div class="fb_top">
+                                    <div class="fb_name navy floatl">Organization Profile</div>
+								
+                                    <div class="clear"></div>
+                                </div> <!-- fb_top -->
 
                             <p class="help-text">
                                 Please fill in the details below and click on Save.
@@ -106,8 +109,10 @@
                                         </tr>
 
                                         <tr>
-                                            <td> &nbsp; </td>
-                                            <td><span> About us</span> <br>  <textarea  name="description" class="width-3 height-2" cols="50" rows="10" ><?php echo $sticky->get('description',$organization['description']); ?></textarea> </td>
+                                            <td colspan="2">
+                                                <span> About us</span> <br>
+                                                <textarea  name="description" class="h430 w580" cols="50" rows="10" ><?php echo $sticky->get('description',$organization['description']); ?></textarea>
+                                            </td>
                                         </tr>
 
 

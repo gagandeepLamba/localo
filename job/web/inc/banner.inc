@@ -6,8 +6,8 @@
 <div id="main-menu">
     <ul>
         <li><a class="" href="#"> 120 Jobs </a> | </li>
-        <li><a class="green" href="#"> 77500$ </a> | </li>
-        <li><a class="red" href="#"> BONUS </a></li>
+        <li><a class="color-green" href="#"> 77500$ </a> | </li>
+        <li><a class="color-red" href="#"> BONUS </a></li>
     </ul>
 </div> <!-- statistics -->
 <div class="hr"></div>

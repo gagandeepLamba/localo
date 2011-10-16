@@ -21,7 +21,7 @@ if (isset($_POST['login']) && ($_POST['login'] == 'Login')) {
     $code = FormAuthentication::logonUser($fvalues['email'], $fvalues['password']);
     
     if ($code < 0) {
-        $fhandler->addError("logon or password is incorrect!");
+        $fhandler->addError("Wrong email or password. Please try again!");
         $gWeb->store(Constants::FORM_ERRORS, $fhandler->getErrors());
         $gWeb->store(Constants::STICKY_MAP,$fvalues);
         //set role - depending on code

@@ -159,20 +159,22 @@
             <div id="bd">
                 
                 <div class="yui3-g">
+                    
                     <div class="yui3-u-1-3">
                         <?php include($_SERVER['APP_WEB_DIR'] . '/inc/left-panel.inc'); ?>
                     </div>
-                        <div class="yui3-u-2-3">
-                            <div id="content">
-                                <div class="fb_top">
-                                    <div class="fb_name navy floatl">Total Applications &dash;<?php echo $openingDBRow['application_count'] ; ?> </div>
-								
-                                    <div class="clear"></div>
-                                </div> <!-- fb_top -->
-                                
-                
-                                <div class="joblist">
-                                
+                    
+                    <div class="yui3-u-2-3">
+                        <div id="content">
+                            <div class="fb_top">
+                                <div class="fb_name navy floatl">Total Applications &dash;<?php echo $openingDBRow['application_count'] ; ?> </div>
+                            
+                                <div class="clear"></div>
+                            </div> <!-- fb_top -->
+                            
+            
+                            <div class="opening">
+                            
                                 <?php
                                     $html = webgloo\job\html\template\Opening::getOrganizationSummary2($openingDBRow);
                                     echo $html;
@@ -189,21 +191,21 @@
                                             echo $html;
                                         }
                                 ?>
-                                </div> <!-- content -->
-                                    
                             </div>
-
-                        </div> 
-                    </div> <!-- GRID -->
-
-
-                </div> <!-- bd -->
-
+                            
+                        </div> <!-- content -->
+                      
+                    </div> 
+                </div> <!-- GRID -->
 
 
-            </div> <!-- body wrapper -->
-            
+            </div> <!-- bd -->
+
+        </div> <!-- body wrapper -->
+        
+        <div id="ft">
             <?php include($_SERVER['APP_WEB_DIR'] . '/inc/site-footer.inc'); ?>
+        </div>
             
 
     </body>

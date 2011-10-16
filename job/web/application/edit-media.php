@@ -171,11 +171,11 @@
 							</div> <!-- fb_top -->
                            
                             <p class="help-text">
-                                You can add or remove documents for your application here. You can also do that later.
-                                <a href="/"> Fine, I will attach the documents later.</a>
+                                Attach documents for your application here.
+                                <a href="/"> You can also attach the documents later.</a>
                             </p>
 							
-                            <div class="joblist">
+                            <div class="opening">
                                 <!-- include application summary  -->
                                 <?php echo $applicationHtml; ?>
 

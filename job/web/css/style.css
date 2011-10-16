@@ -39,15 +39,17 @@ body {
 	
 }
 
-
 a {
 	color: #2288cc;
 	text-decoration:none;
 }
-	a img {
-		border: 0;
-	}
+
+a img {
+	border: 0;
+}
+
 a:hover {text-decoration:underline;}
+
 
 form {
 	margin: 0;
@@ -63,9 +65,6 @@ h3, h4 {
 	font-size:20px;
 	margin:0 0 2px;
 	color:#494949;
-}
-h4 {
-	font-size:18px;
 }
 
 input, select, textarea {
@@ -109,39 +108,65 @@ table.reset {
 	border: 0;
 	border-collapse: collapse;
 }
-	table.reset td,
-	table.reset th {
-		padding: 0;
-	}
+
+table.reset td,
+table.reset th {
+	padding: 0;
+}
 
 ul.reset {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
 }
-	ul.reset li {
-		margin: 0;
-		padding: 0;
-	}
+
+ul.reset li {
+	margin: 0;
+	padding: 0;
+}
 
 
 .clear {clear:both;}
 .floatl {float:left;}
 .floatr {float:right;}
 
-.red {color:#f80813;}
-.green {color:#88cc44;}
+/*
+  * generic red and green will interfere with
+  * .green and .red classes used by swfupload progress bar
+  * (see swfupload/js/fileprogress.js)
+  * and that is kind of stupid..
+  * 
+  */
+
+.color-red {color:#f80813;}
+.color-green {color:#88cc44;}
+
+/* gray is #D3D3D3 and grey is #808080 */
+
 .grey {color:#808080;}
+
+.w200 {width:200px; }
+.f13 {font-size :13px;}
+.mt20 {margin-top :20px; }
+
+.b {font-weight : bold ;}
+.gray {color : gray; }
+.pt10 {padding-top:10px;}
+.bbd5 {
+	border-bottom : 1px solid #D5D5D5 ;
+}
 
 
 /* - Common classes */
 
-#wrap,
+
+
 .h-content,
 .f-content {
 	width: 960px;
 	margin: 0 auto;
 }
+
 
 #header {
 	background:#2288cc;
@@ -150,33 +175,19 @@ ul.reset {
 	color:#FFF;
 }
 
-#wrap {
-	background:#FFF;
-	border-left: 1px solid #bfbebe;
-	border-right: 1px solid #bfbebe;
-	border-bottom: 1px solid #bfbebe;
-	padding: 15px;
-	-webkit-border-radius: 0 0 5px 5px;
-	-moz-border-radius: 0 0 5px 5px;
-	border-radius: 0 0 5px 5px;
-}
+
 #head {
 	background:url('images/head-bg.jpg') no-repeat center 0;
 	height:207px;
 }
+
 #content {
-	/* width:600px; */
-	/* float:left; */
-	border:1px solid #bbbbbb;
+	/* border:1px solid #bbbbbb; */
 	margin-top:7px;
 	padding:14px;
-	min-height : 800px;
+	min-height : 600px;
 }
-#sidebar {
-	width: 300px;
-	float:right;
-	margin-top:7px;
-}
+
 
 #footer {
 	background:#000000;
@@ -200,14 +211,7 @@ ul.reset {
 	margin-top:18px;
 	float: left;
 }
-/*#logo a {
-	background: url("../images/logo.png") no-repeat scroll center 0 transparent;
-    display: block;
-    height: 35px;
-    outline: 0 none;
-    text-indent: -9999px;
-    width: 152px;
-}*/
+
 
 #search-top {
 	float: right;
@@ -216,6 +220,7 @@ ul.reset {
     font-family:Arial,Helvetica,Tahoma,sans-serif;
     padding-top: 28px;
 }
+
 #searchform {
 	float:right;
 	background:#FFF;
@@ -237,15 +242,18 @@ ul.reset {
 	cursor:pointer;
 	vertical-align:top;
 }
+
 #login {
 	font-size:11px;
 	padding-top: 2px;
 }
+
 #login a {color:#FFF;}
 #login .loginout {
     background: url("images/login-bg.png") no-repeat scroll 0 0 transparent;
     padding: 0 2px 0 14px;
 }
+
 #login .register {
 	background: url('images/login-bg.png') no-repeat right bottom;
 	padding:0 14px 0 2px;
@@ -261,17 +269,18 @@ ul.reset {
 
 /* --------------- Content --------------- */
 
-.joblist {
-	padding:0 90px;
+.opening {
+	padding:0 20px;
 	font-size: 14px;
 	font-family:"Myriad Pro",Arial,Helvetica,Tahoma,sans-serif;
 }
-.joblist .item {
+.opening .item {
 	padding-bottom:30px;
 	margin-bottom:15px;
-	border-bottom:1px solid #ebebeb;
+	/* border-bottom:1px solid #ebebeb; */
 }
-.joblist .price {
+
+.opening .price {
 	float:right;
 	font-size:18px;
 	color:#88cc44;
@@ -279,11 +288,11 @@ ul.reset {
 	margin-left: 30px;
 	line-height: 28px;
 }
-.joblist .photos {
+.opening .photos {
 	float:right;
 	margin-top: 7px;
 }
-.joblist .photos img {
+.opening .photos img {
 	margin-right: 5px;
 }
 
@@ -343,6 +352,7 @@ ul.reset {
 .f-content {
 	text-align:right;
 }
+
 #copyright {
 	color:#777777;
 	font-size: 10px;
@@ -404,8 +414,8 @@ ul.reset {
 	margin:0 7px;
 }
 
-/* -----  new code starts --------------- */
-/* web forms stuff */
+
+/* forms stuff */
 
 div #form-wrapper {
     margin-left: 20px;
@@ -413,7 +423,6 @@ div #form-wrapper {
 
 .form-table {
     padding:10px;
-    /* background-color: #fef ; */
     margin-top : 20px;
     margin-bottom: 20px;
 	font-size:13px;
@@ -430,33 +439,6 @@ div #form-wrapper {
 
 }
 
-
-.form-table  .width-1{
-    width: 280px;
-}
-
-.form-table  .width-2{
-    width: 580px;
-}
-
-.form-table  .width-3{
-    width: 780px;
-}
-
-
-.form-table  .width-number{
-    width: 80px;
-}
-
-.form-table  .height-1{
-    height: 130px;
-}
-
-.form-table  .height-2{
-    height: 430px;
-}
-
-
 .form-table  textarea{
     word-spacing: 1px;
     line-height: 1.8em;
@@ -466,6 +448,16 @@ div #form-wrapper {
     height :310px;
     padding-top:10px
 }
+
+
+
+.form-table .w280{width: 280px; }
+.form-table .w580{ width: 580px;}
+.form-table .w780{ width: 780px;}
+.form-table .w80{ width: 80px;}
+.form-table .h130{ height: 130px;}
+.form-table .h430{ height: 430px;}
+
 
 .button-container {
 	padding:10px;
@@ -511,18 +503,8 @@ div .organization {
 	margin-top : 20px;
 }
 
-div .candidate {
-	
-	
-	
-}
-
 
 /* ----- new styles ------ */
-
-.joblist item .title {
-	padding-top:20px;	
-}
 
 
 .details .ditem {
@@ -559,16 +541,6 @@ div .candidate {
 	color: gray;
 }
 
-.b {
-	font-weight : bold ;
-}
-
-.gray {
-	color : gray;
-}
-
-
-.pt10 {padding-top:10px;}
 
 
 /* 100 percent big orange button */
@@ -593,14 +565,26 @@ div .orange-button a {
 
 }
 
+div .grey-button {
+    margin-bottom:10px;
+	margin-top:20px;
+	background-color:#E9E9E9;
+	color:#FFFFFF;
+	padding:7px 20px;
+	border-radius:5px;
+	text-decoration:none;
+	 text-align:center;
 
-.f13 {
-	font-size :13px;
 }
 
-.mt20 {
-	margin-top :20px;
+div .grey-button a {
+     color:black;
+     font-size:13px;
+     font-weight:bold;
+	 text-align:center;
+
 }
+
 
 .meta {
 		
@@ -614,7 +598,7 @@ div .orange-button a {
 	font-size: 14px;
 	color: #28C;
 	padding: 10px 0;
-
+	margin-left:30px;
 }
 
 /* ------ top filter ------ */
@@ -706,9 +690,7 @@ div .orange-button a {
 	
 }
 
-.mt20 {
-	margin-top :20px;
-}
+
 
 /* style - swfupload */
 #form-wrapper #fsUploadProgress .legend {
@@ -741,7 +723,6 @@ div .orange-button a {
 	font-weight: bold ;
 	padding:1px;
 	
-	/* border:1px solid red; */
 }
 
 .progressWrapper {
@@ -756,7 +737,7 @@ div .orange-button a {
 	background-color: #F7F7F7;
 	overflow: hidden;
 }
-/* Message */
+
 .message {
 	margin: 1em 0;
 	padding: 10px 20px;
@@ -765,14 +746,15 @@ div .orange-button a {
 	overflow: hidden;
 }
 /* Error */
+
 .red {
- /* 	border: solid 1px #B50000; */
+    border: solid 1px #B50000;
 	background-color: #FFEBEB;
 }
 
 /* Current */
 .green {
-	/* border: solid 1px #DDF0DD; */
+	border: solid 1px #DDF0DD;
 	background-color: #EBFFEB;
 }
 
@@ -839,8 +821,6 @@ a.progressCancel:hover {
 	background-position: 0px 0px;
 }
 
-
-/* -- SWFUpload Object Styles ------------------------------- */
 .swfupload {
 	vertical-align: top;
 }

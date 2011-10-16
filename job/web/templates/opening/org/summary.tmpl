@@ -36,13 +36,14 @@
     </div>
     
      <div class="action-links">
-        <a href="#" class="opening-action-link" id="{uuid}">Actions</a>
-        &nbsp;|&nbsp;
-        <a href="/opening/edit.php?g_opening_id={uuid}">Edit</a>
+        <span class="grey-button"> <a href="#" class="opening-action-link" id="{uuid}">Actions</a></span>
+         &nbsp;
+         <span class="grey-button"> <a href="/opening/edit.php?g_opening_id={uuid}">Edit</a> </span>
 
         {if:showApplication}
-            &nbsp;|&nbsp;
-            <a href="/application/list.php?g_opening_id={uuid}"> Applications&nbsp({applicationCount})</a>
+            &nbsp;
+            <span class="grey-button"> <a href="/application/list.php?g_opening_id={uuid}"> Applications&nbsp({applicationCount})</a> </span>
+            
         {end:}
         
     </div>

@@ -49,12 +49,11 @@
                         <div class="yui3-u-2-3">
                             <div id="content">
 
-                                    <h2> User Logon </h2>
+                                    <h3> Sign In</h3>
 
 
                                     <p class="help-text">
-                                       Please provide details below to continue
-
+                                    
                                     </p>
                                      <?php include($_SERVER['APP_WEB_DIR'] . '/inc/form/message.inc'); ?>
 

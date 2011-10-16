@@ -28,7 +28,7 @@ if (isset($_POST['login']) && ($_POST['login'] == 'Login')) {
         $code = FormAuthentication::logonAdmin($fvalues['email'], $fvalues['password']);
         if ($code < 0) {
             $locationOnError = '/ca/login.php';
-            $fhandler->addError("admin logon or password is incorrect!");
+            $fhandler->addError("wrong email or password. Please try again!");
             $gWeb->store(Constants::FORM_ERRORS, $fhandler->getErrors());
             $gWeb->store(Constants::STICKY_MAP, $fvalues);
             //set role - depending on code

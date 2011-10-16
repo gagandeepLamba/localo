@@ -41,7 +41,7 @@
         
 			    <div class="yui3-u-2-3">
 				<div id="content">
-				    <div class="joblist">
+				    <div class="opening">
     
                         <?php
                             $openingDao = new webgloo\job\dao\Opening();

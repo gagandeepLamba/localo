@@ -4,7 +4,7 @@
 
 
 {if:hasErrors}
-<div class="script-error" >
+<div class="error" >
     <ul>
         {foreach:errors,error}
             <li> {error} </li>
@@ -16,7 +16,7 @@
 {end:}
 
 {if:hasMessages}
-<div class="script-message" >
+<div class="message" >
     <ul>
         {foreach:messages,message}
             <li> {message} </li>

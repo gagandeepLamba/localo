@@ -71,7 +71,7 @@
 
                     <div class="yui3-u-2-3">
                         <div id="content">
-                            <div class="joblist">
+                            <div class="opening">
                                 <!-- include opening details -->
                                 <?php
                                     $html = '' ;
@@ -91,7 +91,7 @@
 
                             <?php if($applicationCount > 0 ) { ?>
                                     
-                                    <div class="joblist">
+                                    <div class="opening">
                                     <h4> Applications &nbsp;(<?php echo $applicationCount ; ?>)</h4> 
 
                                      <?php

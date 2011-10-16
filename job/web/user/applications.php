@@ -66,16 +66,21 @@
                         <div class="yui3-u-2-3">
                             <div id="content">
                                 
-                                <h2> My Applications </h2>
+                                    <div class="fb_top">
+                                        <div class="fb_name navy floatl">My Applications </div>
+                                    
+                                        <div class="clear"></div>
+                                    </div> <!-- fb_top -->
+                                    
                                         
-                                    <div class="joblist">
+                                    <div class="opening">
                                         <?php
                                         //applications
                                         $applicationDao = new webgloo\job\dao\Application();
                                         $rows = $applicationDao->getRecordsOnUserId($userVO->uuid);
                                         
                                         foreach ($rows as $row) {
-                                            $html = webgloo\job\html\template\Application::getUserSummary($row, array("user" => $userVO->email));
+                                            $html = webgloo\job\html\template\Application::getUserSummary($row, array("itemCss" => "mt20 bbd5"));
                                             echo $html;
                                             
                                         }

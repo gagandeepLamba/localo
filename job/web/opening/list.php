@@ -206,7 +206,8 @@
 							<div class="fb_top">
 								<div class="fb_name navy floatl">
 									Openings
-									|<a href="/opening/create.php">Create </a>
+									&nbsp;|&nbsp;
+									<a href="/opening/create.php">Create </a>
 								</div>
 								<div class="fb_filter floatl">
 									Filter: <a href="#" class="afilter navy">Active</a>
@@ -223,7 +224,7 @@
                                 
 						
 							 <!-- include opening list -->
-							 <div class="joblist">
+							 <div class="opening">
 								 <?php
 									 $openingDao = new webgloo\job\dao\Opening();
 									 $rows = $openingDao->getRecordsOnOrgId($organizationId, array("status" => $gstatus));

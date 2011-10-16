@@ -52,7 +52,7 @@
                         <div class="yui3-u-2-3">
                             <div id="content">
 
-                                    <h2> Admin Logon </h2>
+                                    <h2> Company Sign In </h2>
 
 
                                     <p class="help-text">

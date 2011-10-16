@@ -1,7 +1,7 @@
 
 
 <p class="help-text">
-    Please fill in the details below and click Save. You can attach documents on the next screen.
+    Please provide details about your resume. You can attach documents on the next screen.
 
 </p>
 
@@ -42,16 +42,16 @@
             <tr>
                 <td class="field"> Education<span class="red-label">*</span></td>
                 <td>
-                    <textarea name="cv_education" class="height-1" cols="25" rows="5"><?php echo $sticky->get('cv_education'); ?></textarea>
+                    <textarea name="cv_education" class="h130" cols="25" rows="5"><?php echo $sticky->get('cv_education'); ?></textarea>
                 </td>
             </tr>
 
             <tr>
                 <td class="field"> Experience</td>
                 <td>
-                    <input type="text" name="cv_experience_year" class="width-number" maxlength="2" value="<?php echo $sticky->get('cv_experience_year'); ?>"/>
+                    <input type="text" name="cv_experience_year" class="w80" maxlength="2" value="<?php echo $sticky->get('cv_experience_year'); ?>"/>
                     &nbsp;Years&nbsp;
-                    <input type="text" name="cv_experience_month" class="width-number" maxlength="2" value="<?php echo $sticky->get('cv_experience_month'); ?>"/>
+                    <input type="text" name="cv_experience_month" class="w80" maxlength="2" value="<?php echo $sticky->get('cv_experience_month'); ?>"/>
                     &nbsp;months&nbsp;
 
                 </td>
@@ -81,14 +81,14 @@
             <tr>
                 <td colspan="2">
                     <span> Skills </span> <br>
-                    <textarea  name="cv_skill" class="height-1 width-2" cols="50" rows="4" ><?php echo $sticky->get('cv_skill'); ?></textarea>
+                    <textarea  name="cv_skill" class="h130 w580" cols="50" rows="4" ><?php echo $sticky->get('cv_skill'); ?></textarea>
                 </td>
             </tr>
 
             <tr>
                 <td colspan="2">
                     <span> Details (on why you recommend this candidate) </span> <br>
-                    <textarea  name="cv_description" class="width-2" cols="50" rows="10" ><?php echo $sticky->get('cv_description'); ?></textarea>
+                    <textarea  name="cv_description" class="w580" cols="50" rows="10" ><?php echo $sticky->get('cv_description'); ?></textarea>
                 </td>
             </tr>
 

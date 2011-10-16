@@ -96,13 +96,13 @@
                     <div class="yui3-u-2-3">
                         <div id="content">
                             <div class="fb_top">
-                                   <div class="fb_name navy floatl">Application </div>
+                                   <div class="fb_name navy floatl">Send Resume </div>
                                
                                    <div class="clear"></div>
                                </div> <!-- fb_top -->
                                
 
-                            <div class="joblist">
+                            <div class="opening">
                                 <!-- include opening details -->
                                 <?php echo $openingHtml; ?>
 

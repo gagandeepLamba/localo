@@ -64,7 +64,7 @@ namespace webgloo\job\html\template {
                 $view->cvDescription .= ' ...';
             }
 
-
+            $view->openingId = $row['opening_id'] ;
             $view->applicationId = $row['id'];
 
             foreach($optional as $key => $value) {
@@ -77,6 +77,8 @@ namespace webgloo\job\html\template {
 
         }
         
+        //shows resumes sent by a user on opening details page
+        //when a user is logged in
         static function getUserSummary2($row,$optional) {
             $flexy = Flexy::getInstance();
             $flexy->compile('/application/user/summary2.tmpl');

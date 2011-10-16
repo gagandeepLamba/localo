@@ -1,4 +1,4 @@
-<div id="application-{uuid}" class="item">
+<div id="application-{uuid}">
     <div class="rating grey pt10"> Rating (3/5)<span class="rating-static rating-30"> </span> </div>
     
     <div class="details pt10 grey">
@@ -12,27 +12,28 @@
         
     </div>
     
-    <div class="skill"> {cvSkill} </div>
-    
+   
     {if:hasSummary}
-            <div id="application-summary-{uuid}" class="description">
-                {summary:h}
-                &nbsp; <a href="#" id="{uuid}" class="application-more-link">more&nbsp;&gt;</a>
-            </div>
+        <div id="application-summary-{uuid}" class="description">
+            {summary:h}
+            &nbsp; <a href="#" id="{uuid}" class="application-more-link">more&nbsp;&gt;</a>
+        </div>
 
     {end:}
     
      <div id="application-detail-{uuid}" class="{descriptionClass} description">
-            {cvDescription:h}
-            {if:hasSummary}
-                &nbsp; <a href="#" id="{uuid}" class="application-less-link">less&nbsp;&gt;</a>
-            {end:}
+        {cvDescription:h}
+        {if:hasSummary}
+            &nbsp; <a href="#" id="{uuid}" class="application-less-link">less&nbsp;&gt;</a>
+        {end:}
     </div>
-        
+    
+    <div class="skill"> {cvSkill} </div>
+    
     <div class="action-links"> 
-             <a href="#" id="{uuid}" class="application-approve-link"> Approve</a>
+             <span class="grey-button"> <a href="#" id="{uuid}" class="application-approve-link"> Approve</a> </span>
              &nbsp;|&nbsp;
-            <a href="#" id="{uuid}" class="application-reject-link"> Reject</a>
+            <span class="grey-button"> <a href="#" id="{uuid}" class="application-reject-link"> Reject</a> </span>
     </div>
         
 

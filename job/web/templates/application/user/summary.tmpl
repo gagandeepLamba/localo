@@ -1,31 +1,34 @@
-<div class="item mt20">
+<div class="item {itemCss}">
 	<div class="price">{bounty:h}</div>
 	<div class="photos">
 		<img src="/css/images/_photo.jpg" alt="" />
 		<img src="/css/images/_photo.jpg" alt="" />
 		<img src="/css/images/_photo.jpg" alt="" />
 	</div>
-   
+    <h4 class="f13 b color-green"> {status} </h4>
 	<h4 class="title"><a href="/opening/detail.php?g_opening_id={openingId}&g_org_id={organizationId}">{title:h}</a></h4>
 	<div class="clear"> </div>
-    
-    <span class="link"> <a href="/opening/detail.php?g_opening_id={uuid}&g_org_id={organizationId}#organization">{organizationName:h} </a> </span>
-    <span class="location">{location:h}</span>
-    <span class="date"> closing on {expireOn}</span>
-    <h4 class="f13 b green"> {status} </h4>
+    <div class="meta">
+     <span class="link"> <a href="/opening/detail.php?g_opening_id={openingId}&g_org_id={organizationId}#organization">{organizationName:h} </a> </span>
+     <span>{location:h}</span>
+     <span> , closing on {expireOn}</span>
+    </div>
      
+    
+     
+   
+   <div class="details pt10 grey">
+     <span class="ditem d-name b"> <a href="#"> {cvName} </a> </span>
+     <span class="ditem d-email"> <a href="mailto:{cvEmail:h}"> {cvEmail} </a> </span>
+     <span class="ditem d-phone">  {cvPhone}</span>
+     <span class="ditem d-company">  {cvCompany}</span>
+     <span class="ditem d-edu">  {cvEducation}</span>
+     <span class="ditem d-address">  {cvLocation}</span>
+     <span class="date"> sent  on {cvPostedOn}</span>
   </div>
-  
-  <div class="details pt10 grey">
-    <span class="ditem d-name b"> <a href="#"> {cvName} </a> </span>
-    <span class="ditem d-email"> <a href="mailto:{cvEmail:h}"> {cvEmail} </a> </span>
-    <span class="ditem d-phone">  {cvPhone}</span>
-    <span class="ditem d-company">  {cvCompany}</span>
-    <span class="ditem d-edu">  {cvEducation}</span>
-    <span class="ditem d-address">  {cvLocation}</span>
-    <span class="date"> sent  on {cvPostedOn}</span>
- </div>
 
+ </div>
+ 
 
 
    
