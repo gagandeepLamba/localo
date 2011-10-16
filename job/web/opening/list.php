@@ -189,13 +189,13 @@
         <div id="body-wrapper">
 
             <div id="hd">
-            <!-- no banner -->
+				<!-- no banner -->
             </div>
             <div id="bd">
                 
                 <div class="yui3-g">
                     <div class="yui3-u-1-3">
-                    <?php include($_SERVER['APP_WEB_DIR'] . '/inc/left-panel.inc'); ?>
+						<?php include($_SERVER['APP_WEB_DIR'] . '/inc/left-panel.inc'); ?>
 
                     </div> <!-- left unit -->
 
@@ -235,18 +235,20 @@
 								 ?>
 							 </div>
 
-                    </div> <!-- content -->
+						</div> <!-- content -->
+					</div>
+					
                 </div> <!-- GRID -->
 
 
             </div> <!-- bd -->
 
-
-
         </div> <!-- body wrapper -->
-
-        <?php include($_SERVER['APP_WEB_DIR'] . '/inc/site-footer.inc'); ?>
-
+	
+		<div id="ft">
+			<?php include($_SERVER['APP_WEB_DIR'] . '/inc/site-footer.inc'); ?>
+		</div>
+		
 
     </body>
 </html>
