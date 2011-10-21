@@ -1,11 +1,11 @@
 <?php
 
-namespace com\3mik\mysql {
+namespace com\mik3\mysql {
 
     use com\indigloo\common\mysql as MySQL;
 
     class Document {
-        const MODULE_NAME = 'webgloo\job\mysql\Document';
+        const MODULE_NAME = 'com\mik3\mysql\Document';
 
         static function create($document) {
 

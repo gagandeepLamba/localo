@@ -4,11 +4,11 @@
     //check if user has customer admin role or not
     include($_SERVER['APP_WEB_DIR'] . '/inc/admin/role.inc');
 
-    use webgloo\common\Util;
-    use webgloo\common\ui\form\Sticky;
-    use webgloo\job\Constants;
-    use webgloo\auth\FormAuthentication;
-    use webgloo\job\html as Html;
+    use com\indigloo\common\Util;
+    use com\indigloo\common\ui\form\Sticky;
+    use com\mik3\Constants;
+    use com\indigloo\auth\FormAuthentication;
+    use com\mik3\html as Html;
     
     //find and destroy sticky map
     $sticky = new Sticky($gWeb->find(Constants::STICKY_MAP,true));
@@ -16,7 +16,7 @@
     //This method will throw an error
     $adminVO = FormAuthentication::getLoggedInAdmin();
     
-    $organizationDao = new webgloo\job\dao\Organization();
+    $organizationDao = new com\mik3\dao\Organization();
     $organization = $organizationDao->getRecordOnId($adminVO->organizationId);
     //sanity check
     $organizationDao->checkNull($organization);

@@ -1,9 +1,9 @@
 <?php
 
-namespace com\3mik\html\template {
+namespace com\mik3\html\template {
 
     use com\indigloo\common\html\template\Flexy as Flexy ;
-    use com\3mik\view as view ;
+    use com\mik3\view as view ;
     use com\indigloo\common\Util ;
     
     class Opening {
@@ -143,7 +143,7 @@ namespace com\3mik\html\template {
 
             //populate organization description
             $organizationId = $row['org_id'];
-            $organizationDao = new \webgloo\job\dao\Organization();
+            $organizationDao = new \com\mik3\dao\Organization();
             $organization = $organizationDao->getRecordOnId($organizationId);
             //print_r($organization); exit ;
             $view->orgName = $organization['name'];

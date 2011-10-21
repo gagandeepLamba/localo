@@ -9,7 +9,7 @@ include($_SERVER['APP_CLASS_LOADER']);
 include($_SERVER['APP_ROOT_DIR'] . '/htdocs/inc/session.inc');
 include($_SERVER['APP_ROOT_DIR'] . '/lib/error.inc');
 
-use webgloo\core\Web  ;
+use com\indigloo\core\Web  ;
 
 $gWeb = Web::getInstance();
 $gWeb->start();

@@ -1,7 +1,7 @@
 
 <?php
-    use webgloo\auth\FormAuthentication ;
-    use webgloo\common\html\template\Flexy ;
+    use com\indigloo\auth\FormAuthentication ;
+    use com\indigloo\common\html\template\Flexy ;
 
 
     if(FormAuthentication::tryUserRole()) {

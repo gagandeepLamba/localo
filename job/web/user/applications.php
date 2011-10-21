@@ -4,8 +4,8 @@
     //check if user has customer admin role or not
     include($_SERVER['APP_WEB_DIR'] . '/inc/user/role.inc');
 
-    use webgloo\auth\FormAuthentication ;
-    use webgloo\common\Util ;
+    use com\indigloo\auth\FormAuthentication ;
+    use com\indigloo\common\Util ;
 
     //This method will throw an error
     $userVO = FormAuthentication::getLoggedInUser();
@@ -76,11 +76,11 @@
                                     <div class="opening">
                                         <?php
                                         //applications
-                                        $applicationDao = new webgloo\job\dao\Application();
+                                        $applicationDao = new com\mik3\dao\Application();
                                         $rows = $applicationDao->getRecordsOnUserId($userVO->uuid);
                                         
                                         foreach ($rows as $row) {
-                                            $html = webgloo\job\html\template\Application::getUserSummary($row, array("itemCss" => "mt20 bbd5"));
+                                            $html = com\mik3\html\template\Application::getUserSummary($row, array("itemCss" => "mt20 bbd5"));
                                             echo $html;
                                             
                                         }

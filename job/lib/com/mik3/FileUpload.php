@@ -16,12 +16,12 @@
  *
  */
 
-namespace com\3mik {
+namespace com\mik3 {
 
     use com\indigloo\common\Configuration as Config;
     use com\indigloo\common\Logger;
     
-    class FileUpload extends \webgloo\common\Upload {
+    class FileUpload extends \com\indigloo\common\Upload {
 
         private $storeName ;
 

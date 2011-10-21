@@ -4,13 +4,13 @@
     //check if user has customer admin role or not
     include($_SERVER['APP_WEB_DIR'] . '/inc/admin/role.inc');
     
-    use webgloo\auth\FormAuthentication;
-    use webgloo\job\html\Link;
-    use webgloo\common\Url;
-    use webgloo\common\Util ;
-    use webgloo\common\ui\form\Sticky ;
-    use webgloo\job\Constants ;
-    use webgloo\job\html\UIData ;
+    use com\indigloo\auth\FormAuthentication;
+    use com\mik3\html\Link;
+    use com\indigloo\common\Url;
+    use com\indigloo\common\Util ;
+    use com\indigloo\common\ui\form\Sticky ;
+    use com\mik3\Constants ;
+    use com\mik3\html\UIData ;
 
     //This method will throw an error
     $adminVO = FormAuthentication::getLoggedInAdmin();
@@ -22,7 +22,7 @@
     Util::isEmpty('openingId',$openingId);
 
     //security - do not show opening_id not belonging to user organization
-    $openingDao = new webgloo\job\dao\Opening();
+    $openingDao = new com\mik3\dao\Opening();
     $openingDBRow = $openingDao->getEditRecordOnId($adminVO->organizationId,$openingId);
 
     //sanity test - we should have a record to edit

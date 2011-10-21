@@ -1,12 +1,12 @@
 <?php
 
 
-namespace com\3mik\mysql {
+namespace com\mik3\mysql {
 
     use com\indigloo\common\mysql as MySQL ;
 
     class Organization {
-        const MODULE_NAME = 'webgloo\job\mysql\Organization';
+        const MODULE_NAME = 'com\mik3\mysql\Organization';
 
         static function getRecordOnId($organizationId) {
             $mysqli = MySQL\Connection::getInstance()->getHandle();

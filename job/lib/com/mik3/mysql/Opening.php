@@ -1,11 +1,11 @@
 <?php
 
-namespace com\3mik\mysql {
+namespace com\mik3\mysql {
 
     use com\indigloo\common\mysql as MySQL;
 
     class Opening {
-        const MODULE_NAME = 'webgloo\job\mysql\Opening';
+        const MODULE_NAME = 'com\mik3\mysql\Opening';
 
         static function getAllRecords() {
             $mysqli = MySQL\Connection::getInstance()->getHandle();

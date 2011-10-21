@@ -4,10 +4,10 @@
     include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
     include($_SERVER['APP_WEB_DIR'] . '/inc/user/role.inc');
     
-    use webgloo\common\Util ;
-    use webgloo\common\ui\form\Sticky ;
-    use webgloo\job\Constants ;
-    use webgloo\auth\FormAuthentication ;
+    use com\indigloo\common\Util ;
+    use com\indigloo\common\ui\form\Sticky ;
+    use com\mik3\Constants ;
+    use com\indigloo\auth\FormAuthentication ;
 
     //incoming parameter check
     $organizationId = $gWeb->getRequestParam('g_org_id');
@@ -16,7 +16,7 @@
     $openingId = $gWeb->getRequestParam('g_opening_id');
     Util::isEmpty('openingId', $openingId);
 
-    $openingDao = new webgloo\job\dao\Opening();
+    $openingDao = new com\mik3\dao\Opening();
     $openingDBRow = $openingDao->getRecordOnId($openingId);
 
     //check1 /check2
@@ -24,7 +24,7 @@
     $openingDao->checkActive($openingDBRow);
 
 
-    $openingHtml = webgloo\job\html\template\Opening::getUserSummary($openingDBRow);
+    $openingHtml = com\mik3\html\template\Opening::getUserSummary($openingDBRow);
     
     //find and destroy sticky map
     $sticky = new Sticky($gWeb->find(Constants::STICKY_MAP,true));
@@ -34,7 +34,7 @@
     $userId = $userVO->uuid ;
     //Now get applications already sent by this user
 
-    $applicationDao = new webgloo\job\dao\Application();
+    $applicationDao = new com\mik3\dao\Application();
     $applicationCount = $applicationDao->getCountOnUserAndOpeningId($userId,$openingId);
     
     //There is no navigation to new application if application count >2

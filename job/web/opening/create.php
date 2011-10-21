@@ -4,11 +4,11 @@
     //check if user has customer admin role or not
     include($_SERVER['APP_WEB_DIR'] . '/inc/admin/role.inc');
 
-    use webgloo\common\Util;
-    use webgloo\common\ui\form\Sticky;
-    use webgloo\job\Constants;
-    use webgloo\auth\FormAuthentication;
-    use webgloo\job\html as Html;
+    use com\indigloo\common\Util;
+    use com\indigloo\common\ui\form\Sticky;
+    use com\mik3\Constants;
+    use com\indigloo\auth\FormAuthentication;
+    use com\mik3\html as Html;
 
     $comboValues = array ( '2W' => 'Two Weeks', '1M' => 'One Month', '2M' => 'Two Months');
     $comboBox = Html\ComboBox::render('expire_on',$comboValues, '1M') ;

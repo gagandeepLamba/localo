@@ -1,8 +1,8 @@
 <?php
 
-use webgloo\common\html\template\Flexy ;
-use webgloo\job\Constants ;
-use webgloo\core\Web ;
+use com\indigloo\common\html\template\Flexy ;
+use com\mik3\Constants ;
+use com\indigloo\core\Web ;
 
 $view = new stdClass;
 

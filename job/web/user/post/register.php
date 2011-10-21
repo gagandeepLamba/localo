@@ -3,10 +3,10 @@
 include ('job-app.inc');
 include ($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
 
-use webgloo\auth\FormAuthentication;
-use webgloo\common\ui\form as Form;
-use webgloo\job\Constants;
-use webgloo\common\Url ;
+use com\indigloo\auth\FormAuthentication;
+use com\indigloo\common\ui\form as Form;
+use com\mik3\Constants;
+use com\indigloo\common\Url ;
 
 if (isset($_POST['register']) && ($_POST['register'] == 'Register')) {
     
@@ -21,10 +21,10 @@ if (isset($_POST['register']) && ($_POST['register'] == 'Register')) {
     $locationOnError = '/user/register.php';
     $locationOnSuccess = Url::tryUrls(array($gWeb->find(Constants::PROTECTED_RESOURCE_URI,true),$gWeb->getPreviousUrl(), '/'));
     //try to create this user
-    $userDao = new webgloo\job\dao\User();
+    $userDao = new com\mik3\dao\User();
     $dbCode = $userDao->create($fvalues['name'], $fvalues['email'],$fvalues['password']);
     
-    if ($dbCode == webgloo\common\mysql\Connection::ACK_OK) {
+    if ($dbCode == com\indigloo\common\mysql\Connection::ACK_OK) {
         //user created
         //log in this user please!
         $logonCode = FormAuthentication::logonUser($fvalues['email'], $fvalues['password']);
@@ -35,7 +35,7 @@ if (isset($_POST['register']) && ($_POST['register'] == 'Register')) {
         //go back to main page
         header("location: ".$locationOnSuccess );
         
-    } else if ($dbCode == webgloo\common\mysql\Connection::DUPLICATE_KEY) {
+    } else if ($dbCode == com\indigloo\common\mysql\Connection::DUPLICATE_KEY) {
         //this user already exists
         $fhandler->addError("Duplicate key error: User with same email already exists!");
         $gWeb->store(Constants::FORM_ERRORS, $fhandler->getErrors());

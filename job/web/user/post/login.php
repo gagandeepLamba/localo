@@ -3,10 +3,10 @@
 include ('job-app.inc');
 include ($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
 
-use webgloo\auth\FormAuthentication;
-use webgloo\common\ui\form as Form;
-use webgloo\job\Constants;
-use webgloo\common\Url ;
+use com\indigloo\auth\FormAuthentication;
+use com\indigloo\common\ui\form as Form;
+use com\mik3\Constants;
+use com\indigloo\common\Url ;
 
 if (isset($_POST['login']) && ($_POST['login'] == 'Login')) {
 

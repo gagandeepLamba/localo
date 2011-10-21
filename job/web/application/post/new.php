@@ -5,7 +5,7 @@ include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
 include($_SERVER['APP_WEB_DIR'] . '/inc/user/role.inc');
 
 
-use webgloo\common\ui\form as Form;
+use com\indigloo\common\ui\form as Form;
 
 if (isset($_POST['save']) && ($_POST['save'] == 'Save')) {
     
@@ -32,7 +32,7 @@ if (isset($_POST['save']) && ($_POST['save'] == 'Save')) {
         //push values in DB
         //@todo - after success - attach a TxID to this application
         
-        $applicationDao = new webgloo\job\dao\Application();
+        $applicationDao = new com\mik3\dao\Application();
         $data = $applicationDao->create($fvalues['organization_id'],
                             $fvalues['opening_id'],
                             $fvalues['user_id'],
@@ -51,7 +51,7 @@ if (isset($_POST['save']) && ($_POST['save'] == 'Save')) {
                             $fvalues['cv_experience_month']);
 
         $code = $data['code'];
-        if ($code != webgloo\common\mysql\Connection::ACK_OK ) {
+        if ($code != com\indigloo\common\mysql\Connection::ACK_OK ) {
             //we are not prepared to handle any other code!
             trigger_error("Error in Database operation");
         }

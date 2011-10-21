@@ -5,8 +5,8 @@
     //@todo override default error handler
     include($_SERVER['APP_WEB_DIR'] . '/inc/admin/role.inc');
 
-    use webgloo\common\Util;
-    use webgloo\auth\FormAuthentication;
+    use com\indigloo\common\Util;
+    use com\indigloo\auth\FormAuthentication;
     
     //extract parameters
     $openingId = $gWeb->getRequestParam('g_opening_id');
@@ -24,7 +24,7 @@
     
     //get organizationId from loggedIn user information
     $adminVO = FormAuthentication::getLoggedInAdmin();
-    $openingDao = new webgloo\job\dao\Opening();
+    $openingDao = new com\mik3\dao\Opening();
 
     //send to DAO
     switch ($action) {

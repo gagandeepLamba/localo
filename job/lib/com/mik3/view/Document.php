@@ -1,7 +1,7 @@
 <?php
 
 
-namespace com\3mik\view {
+namespace com\mik3\view {
 
     class Document {
          //unique ID for this user

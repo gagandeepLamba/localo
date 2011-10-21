@@ -29,7 +29,7 @@ namespace com\indigloo\core {
         const CORE_URL_STACK = "core.url.stack";
         
         private function __construct() {
-            $this->request = new \webgloo\core\Request();
+            $this->request = new \com\indigloo\core\Request();
             $this->urls = array();
         }
 

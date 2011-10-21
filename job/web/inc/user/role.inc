@@ -1,7 +1,7 @@
 <?php
 
-use webgloo\auth\FormAuthentication;
-use webgloo\job\Constants;
+use com\indigloo\auth\FormAuthentication;
+use com\mik3\Constants;
 
 //pages that need user logon need to include this information
 if(!FormAuthentication::tryUserRole()){

@@ -5,18 +5,18 @@
 	include($_SERVER['APP_WEB_DIR'] . '/inc/user/role.inc');
 
 
-	use webgloo\common\Util ;
-	use webgloo\common\ui\form\Sticky ;
-	use webgloo\job\Constants ;
-	use webgloo\auth\FormAuthentication ;
+	use com\indigloo\common\Util ;
+	use com\indigloo\common\ui\form\Sticky ;
+	use com\mik3\Constants ;
+	use com\indigloo\auth\FormAuthentication ;
 
 	//attching media for this application.
 	$applicationId = $gWeb->getRequestParam('g_application_id');
 	Util::isEmpty('applicatonId', $applicationId);
 
-	$applicationDao = new webgloo\job\dao\Application();
+	$applicationDao = new com\mik3\dao\Application();
 	$applicationDBRow = $applicationDao->getRecordOnId($applicationId);
-	$applicationHtml = webgloo\job\html\template\Application::getUserSummary($applicationDBRow,array());
+	$applicationHtml = com\mik3\html\template\Application::getUserSummary($applicationDBRow,array());
 
 	//find document id and names
 	$documentDBRows = $applicationDao->getDocuments($applicationId);

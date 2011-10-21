@@ -2,16 +2,16 @@
     include ('job-app.inc');
     include ($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
 
-    use webgloo\auth\FormAuthentication;
+    use com\indigloo\auth\FormAuthentication;
 
     $openingId = $gWeb->getRequestParam('g_opening_id');
-    webgloo\common\Util::isEmpty('openingId', $openingId);
+    com\indigloo\common\Util::isEmpty('openingId', $openingId);
 
     $organizationId = $gWeb->getRequestParam('g_org_id');
-    webgloo\common\Util::isEmpty('$organizationId', $organizationId);
+    com\indigloo\common\Util::isEmpty('$organizationId', $organizationId);
 
 
-    $openingDao = new webgloo\job\dao\Opening();
+    $openingDao = new com\mik3\dao\Opening();
     $openingDBRow = $openingDao->getRecordOnId($openingId);
     
     //sanity checks
@@ -28,7 +28,7 @@
         $userId = $userVO->uuid ;
         //Now get applications already sent by this user
 
-        $applicationDao = new webgloo\job\dao\Application();
+        $applicationDao = new com\mik3\dao\Application();
         $applicationRows = $applicationDao->getRecordsOnUserAndOpeningId($userId,$openingId);
         $applicationCount = sizeof($applicationRows);
 
@@ -77,11 +77,11 @@
                                     $html = '' ;
                                     $action = true ;
     
-                                    if(\webgloo\auth\FormAuthentication::tryAdminRole()){
+                                    if(\com\indigloo\auth\FormAuthentication::tryAdminRole()){
                                         $action = false ;
                                     }
     
-                                    $html = webgloo\job\html\template\Opening::getUserDetail($openingDBRow,$applicationCount,$action);
+                                    $html = com\mik3\html\template\Opening::getUserDetail($openingDBRow,$applicationCount,$action);
                                     echo $html;
                                     
                                 ?>
@@ -98,7 +98,7 @@
 
                                         foreach($applicationRows as $applicationRow) {
                                             //get vanilla application summary
-                                            echo webgloo\job\html\template\Application::getUserSummary2($applicationRow,array());
+                                            echo com\mik3\html\template\Application::getUserSummary2($applicationRow,array());
 
                                         }
                                     ?>

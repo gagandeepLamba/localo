@@ -5,7 +5,7 @@ include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
 
 //upload job FileUpload to process document!
 
-$uploader = new webgloo\job\FileUpload();
+$uploader = new com\mik3\FileUpload();
 $uploader->process("Filedata");
 
 
@@ -22,7 +22,7 @@ if ($uploader->hasError()) {
     $applicationId = $_POST['application_id'];
     //send a json encoded response to JAVASCRIPT handler
     //send back document data
-    $document = new webgloo\job\view\Document();
+    $document = new com\mik3\view\Document();
    
     $document->originalName = $uploader->getName();
     $document->storeName = $uploader->getStoreName();
@@ -32,7 +32,7 @@ if ($uploader->hasError()) {
     $document->entityName = $_POST['entity_name'];
     $document->entityId = $_POST['entity_id'];
     //save in DB
-    $documentDao = new webgloo\job\dao\Document();
+    $documentDao = new com\mik3\dao\Document();
     $data = $documentDao->create($document);
     //get last insert id
     $document->uuid = $data['lastInsertId'];

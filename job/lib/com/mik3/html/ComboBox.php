@@ -1,6 +1,6 @@
 <?php
 
-namespace com\3mik\html {
+namespace com\mik3\html {
 
     class ComboBox {
 

@@ -1,5 +1,5 @@
 <?php
-namespace com\3mik {
+namespace com\mik3 {
 
     //define all the constants for job application here
     class Constants {

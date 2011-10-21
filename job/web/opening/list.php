@@ -4,10 +4,10 @@
     //check if user has customer admin role or not
     include($_SERVER['APP_WEB_DIR'] . '/inc/admin/role.inc');
 
-    use webgloo\auth\FormAuthentication;
-    use webgloo\job\html\Link;
-    use webgloo\common\Url;
-    use webgloo\job\html\UIData ;
+    use com\indigloo\auth\FormAuthentication;
+    use com\mik3\html\Link;
+    use com\indigloo\common\Url;
+    use com\mik3\html\UIData ;
 
 
     //This method will throw an error
@@ -226,10 +226,10 @@
 							 <!-- include opening list -->
 							 <div class="opening">
 								 <?php
-									 $openingDao = new webgloo\job\dao\Opening();
+									 $openingDao = new com\mik3\dao\Opening();
 									 $rows = $openingDao->getRecordsOnOrgId($organizationId, array("status" => $gstatus));
 									 foreach ($rows as $row) {
-										 $html = webgloo\job\html\template\Opening::getOrganizationSummary($row);
+										 $html = com\mik3\html\template\Opening::getOrganizationSummary($row);
 										 echo $html;
 									 }
 								 ?>

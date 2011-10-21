@@ -4,7 +4,7 @@
     include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
     //add current url to stack
     $gWeb->addCurrentUrlToStack();
-    $config = webgloo\common\Configuration::getInstance();
+    $config = com\indigloo\common\Configuration::getInstance();
     $siteName = $config->getFarmName();
 
 ?>
@@ -46,10 +46,10 @@
 				    <div class="opening">
     
                         <?php
-                            $openingDao = new webgloo\job\dao\Opening();
+                            $openingDao = new com\mik3\dao\Opening();
                             $rows = $openingDao->getAllRecords();
                             foreach ($rows as $row) {
-                                $html = webgloo\job\html\template\Opening::getPublicSummary($row);
+                                $html = com\mik3\html\template\Opening::getPublicSummary($row);
                                 echo $html;
                             }
                         ?>

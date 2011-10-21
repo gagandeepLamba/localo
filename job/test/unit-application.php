@@ -2,7 +2,7 @@
 include 'job-app.inc';
 require_once ($_SERVER['APP_CLASS_LOADER']);
 
-$applicationDao = new webgloo\job\dao\Application();
+$applicationDao = new com\mik3\dao\Application();
 $applicationDao->create(2,
         6,
         1,

@@ -1,11 +1,11 @@
 <?php
 
-namespace com\3mik\mysql {
+namespace com\mik3\mysql {
 
     use com\indigloo\common\mysql as MySQL;
 
     class Admin {
-        const MODULE_NAME = 'webgloo\job\mysql\Admin';
+        const MODULE_NAME = 'com\mik3\mysql\Admin';
 
         static function getRecords($organizationId) {
             $mysqli = MySQL\Connection::getInstance()->getHandle();

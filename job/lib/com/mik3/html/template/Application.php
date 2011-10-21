@@ -1,9 +1,9 @@
 <?php
 
-namespace com\3mik\html\template {
+namespace com\mik3\html\template {
 
     use com\indigloo\common\html\template\Flexy as Flexy ;
-    use com\3mik\view as view ;
+    use com\mik3\view as view ;
     use com\indigloo\common\Util ;
     
     class Application {

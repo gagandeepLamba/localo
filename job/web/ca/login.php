@@ -1,8 +1,8 @@
 <?php
     include ('job-app.inc');
     include ($_SERVER['APP_WEB_DIR'].'/inc/header.inc');
-    use webgloo\job\Constants ;
-    use webgloo\common\ui\form as Form;
+    use com\mik3\Constants ;
+    use com\indigloo\common\ui\form as Form;
     
     $sticky = new Form\Sticky($gWeb->find(Constants::STICKY_MAP, true));
     $previousUrl = $gWeb->getPreviousUrl();

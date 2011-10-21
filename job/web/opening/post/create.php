@@ -5,9 +5,9 @@ include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
 //check if user has customer admin role or not
 include($_SERVER['APP_WEB_DIR'] . '/inc/admin/role.inc');
 
-use webgloo\common\ui\form as Form;
-use webgloo\core\Web as web ;
-use webgloo\job\Constants;
+use com\indigloo\common\ui\form as Form;
+use com\indigloo\core\Web as web ;
+use com\mik3\Constants;
 
 $gWeb = web::getInstance();
 
@@ -37,7 +37,7 @@ if (isset($_POST['save']) && ($_POST['save'] == 'Save')) {
         
     } else {
         //push values in DB
-        $openingDao = new webgloo\job\dao\Opening();
+        $openingDao = new com\mik3\dao\Opening();
         $openingDao->create($fvalues['organization_id'],
                             $fvalues['organization_name'],
                             $fvalues['created_by'],

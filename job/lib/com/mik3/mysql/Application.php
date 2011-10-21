@@ -1,11 +1,11 @@
 <?php
 
-namespace webgloo\job\mysql {
+namespace com\mik3\mysql {
 
 	use com\indigloo\common\mysql as MySQL;
 
     class Application {
-        const MODULE_NAME = 'webgloo\job\mysql\Application';
+        const MODULE_NAME = 'com\mik3\mysql\Application';
 
         static function getDocuments($applicationId){
             $mysqli = MySQL\Connection::getInstance()->getHandle();

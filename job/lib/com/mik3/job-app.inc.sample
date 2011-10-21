@@ -10,7 +10,7 @@
 //
   
 $_SERVER['APP_ROOT_DIR'] = '/var/www/vhosts/www.job.com';
-$_SERVER['APP_LIB_PATH'] = array('/var/www/vhosts/www.job.com/lib') ;
+$_SERVER['APP_LIB_PATH'] = array('/var/www/vhosts/www.job.com/webgloo/lib' ,'/var/www/vhosts/www.job.com/job/lib') ;
 $_SERVER['APP_CONFIG_PATH'] = '/var/www/apps/job_config.ini' ;
 $_SERVER['APP_CLASS_LOADER'] = '/var/www/vhosts/www.job.com/lib/class_loader.inc' ;
 $_SERVER['APP_WEB_DIR'] = '/var/www/vhosts/www.job.com/htdocs' ;

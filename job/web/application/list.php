@@ -4,8 +4,8 @@
     //check if user has customer admin role or not
     include($_SERVER['APP_WEB_DIR'] . '/inc/admin/role.inc');
 
-    use webgloo\auth\FormAuthentication ;
-    use webgloo\common\Util ;
+    use com\indigloo\auth\FormAuthentication ;
+    use com\indigloo\common\Util ;
 
     //This method will throw an error
     $adminVO = FormAuthentication::getLoggedInAdmin();
@@ -13,7 +13,7 @@
     $openingId = $gWeb->getRequestParam('g_opening_id');
     Util::isEmpty('openingId', $openingId);
 
-    $openingDao = new webgloo\job\dao\Opening();
+    $openingDao = new com\mik3\dao\Opening();
     $openingDBRow = $openingDao->getRecordOnId($openingId);
 
 
@@ -176,18 +176,18 @@
                             <div class="opening">
                             
                                 <?php
-                                    $html = webgloo\job\html\template\Opening::getOrganizationSummary2($openingDBRow);
+                                    $html = com\mik3\html\template\Opening::getOrganizationSummary2($openingDBRow);
                                     echo $html;
                                     ?>
                                     
                                     <?php
                                         //applications
-                                        $applicationDao = new webgloo\job\dao\Application();
+                                        $applicationDao = new com\mik3\dao\Application();
                                         $rows = $applicationDao->getRecords($adminVO->organizationId, $openingId);
     
                                         foreach ($rows as $row) {
     
-                                            $html = webgloo\job\html\template\Application::getOrganizationSummary($row);
+                                            $html = com\mik3\html\template\Application::getOrganizationSummary($row);
                                             echo $html;
                                         }
                                 ?>

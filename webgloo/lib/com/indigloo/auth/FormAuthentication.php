@@ -3,7 +3,7 @@
 namespace com\indigloo\auth {
     
     use \com\indigloo\common\Util as Util;
-    use \com\3mik\job\dao as Dao;
+    use \com\mik3\job\dao as Dao;
 
     class FormAuthentication {
 
@@ -28,7 +28,7 @@ namespace com\indigloo\auth {
                     trigger_error('No data found for Admin :: '.$email, E_USER_ERROR);
                 }
 
-                $adminVO = new \com\3mik\view\Admin();
+                $adminVO = new \com\mik3\view\Admin();
                 $admin = $adminVO->create($row);
                 $_SESSION['LOGON_USER_DATA'] = $admin;
             }
@@ -58,7 +58,7 @@ namespace com\indigloo\auth {
                     trigger_error('No data found for user :: '.$email, E_USER_ERROR);
                 }
                 
-                $userVO = new \com\3mik\view\User();
+                $userVO = new \com\mik3\view\User();
                 $user = $userVO->create($row);
                 $_SESSION['LOGON_USER_DATA'] = $user;
             }

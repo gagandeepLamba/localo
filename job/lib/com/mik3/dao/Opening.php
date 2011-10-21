@@ -2,10 +2,10 @@
 
 //some comments
 
-namespace com\3mik\dao {
+namespace com\mik3\dao {
 
-    use com\3mik\view as view;
-    use com\3mik\mysql as mysql;
+    use com\mik3\view as view;
+    use com\mik3\mysql as mysql;
     use com\indigloo\common\Util ;
     
     class Opening {

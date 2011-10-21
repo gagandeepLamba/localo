@@ -1,6 +1,6 @@
 <?php
 
-namespace com\3mik\view {
+namespace com\mik3\view {
 
     class Application {
 
