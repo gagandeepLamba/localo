@@ -6,8 +6,8 @@
 
 
 include($_SERVER['APP_CLASS_LOADER']);
-include($_SERVER['APP_ROOT_DIR'] . '/htdocs/inc/session.inc');
-include($_SERVER['APP_ROOT_DIR'] . '/lib/error.inc');
+include($_SERVER['APP_WEB_DIR'] . '/inc/session.inc');
+include($_SERVER['APP_LIB_ROOT'] . '/webgloo/lib/com/indigloo/error.inc');
 
 use com\indigloo\core\Web  ;
 

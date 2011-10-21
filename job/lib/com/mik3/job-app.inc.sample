@@ -9,13 +9,13 @@
 // that can also be defined in terms of APP_ROOT_DIR
 //
   
-$_SERVER['APP_ROOT_DIR'] = '/var/www/vhosts/www.job.com';
-$_SERVER['APP_LIB_PATH'] = array('/var/www/vhosts/www.job.com/webgloo/lib' ,'/var/www/vhosts/www.job.com/job/lib') ;
+$_SERVER['APP_LIB_ROOT'] = '/home/rjha/code/localo';
+$_SERVER['APP_LIB_PATH'] = array('/home/rjha/code/localo/webgloo/lib' ,'/home/rjha/code/localo/job/lib') ;
 $_SERVER['APP_CONFIG_PATH'] = '/var/www/apps/job_config.ini' ;
-$_SERVER['APP_CLASS_LOADER'] = '/var/www/vhosts/www.job.com/lib/class_loader.inc' ;
-$_SERVER['APP_WEB_DIR'] = '/var/www/vhosts/www.job.com/htdocs' ;
-$_SERVER['WEB_TEMPLATE_DIR'] = '/var/www/vhosts/www.job.com/htdocs/templates' ;
-$_SERVER['WEB_TEMPLATE_COMPILE_DIR'] = '/var/www/vhosts/www.job.com/htdocs/templates_c' ;
+$_SERVER['APP_CLASS_LOADER'] = '/home/rjha/code/localo/webgloo/lib/com/indigloo/class_loader.inc' ;
+$_SERVER['APP_WEB_DIR'] = '/var/www/htdocs' ;
+$_SERVER['WEB_TEMPLATE_DIR'] = '/var/www/htdocs/templates' ;
+$_SERVER['WEB_TEMPLATE_COMPILE_DIR'] = '/var/www/htdocs/templates_c' ;
  
 
 ?>
