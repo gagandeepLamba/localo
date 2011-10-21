@@ -16,24 +16,26 @@
         <span>{location:h}</span>
     </div>
     
-     {if:hasSummary}
-        <div id="summary-{uuid}" class="description">
-            {summary:h}
-            <span class="link"> <a href="#" id="{uuid}" class="more-link">more&nbsp;&gt;</a> </span>
+    
+    <div id="summary-{uuid}" class="description">
+        {summary:h}
+        <span class="link"> <a href="#" id="{uuid}" class="more-link">more&nbsp;&gt;</a> </span>
+    </div>
+    
+    <div id="description-{uuid}" class="hide-me">
+        <div class="description">
+            {description:h}
         </div>
-    
-    {end:}
-
-    <div id="description-{uuid}" class="description hide-me">
-        {description:h}
-        {if:hasSummary}
-            <span class="link"> <a href="#" id="{uuid}" class="less-link">less&nbsp;&gt;</a> </span>
-        {end:}
+        <div class="skill">
+            {skill:h}
+            &nbsp;
+            <span class="link"> <a href="#" id="{uuid}" class="less-link">&lt;&nbsp;less</a> </span>
+        </div>
+        
+        
     </div>
     
-    <div class="skill">
-        {skill:h}
-    </div>
+   
     
      <div class="action-links">
         <span class="grey-button"> <a href="#" class="opening-action-link" id="{uuid}">Actions</a></span>

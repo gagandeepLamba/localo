@@ -158,10 +158,7 @@
             <div id="bd">
 
                 <div class="yui3-g">
-                    <div class="yui3-u-1-3">
-                        <?php include($_SERVER['APP_WEB_DIR'] . '/inc/left-panel.inc'); ?>
-                    </div> <!-- left unit -->
-
+                  
                     <div class="yui3-u-2-3">
                         <div id="content">
 							<div class="fb_top">
@@ -221,9 +218,15 @@
                             </div> <!-- form wrapper -->
 
 
-                        </div>
+                        </div> <!-- content -->
 
-                    </div> <!-- main unit -->
+                    </div>
+					
+					<div class="yui3-u-1-3">
+                        <?php include($_SERVER['APP_WEB_DIR'] . '/inc/sidebar.inc'); ?>
+                    </div> <!-- left unit -->
+
+
                 </div> <!-- GRID -->
 
 
@@ -232,8 +235,9 @@
 
 
         </div> <!-- body wrapper -->
-
-		<?php include($_SERVER['APP_WEB_DIR'] . '/inc/site-footer.inc'); ?>
-
+		
+		<div id="ft">
+            <?php include($_SERVER['APP_WEB_DIR'] . '/inc/site-footer.inc'); ?>
+        </div>
     </body>
 </html>

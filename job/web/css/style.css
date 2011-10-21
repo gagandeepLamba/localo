@@ -148,10 +148,11 @@ ul.reset li {
 .w200 {width:200px; }
 .f13 {font-size :13px;}
 .mt20 {margin-top :20px; }
-
+.ml20 {margin-left :20px; }
 .b {font-weight : bold ;}
 .gray {color : gray; }
 .pt10 {padding-top:10px;}
+.p20 {padding:20px;}
 .bbd5 {
 	border-bottom : 1px solid #D5D5D5 ;
 }
@@ -182,7 +183,7 @@ ul.reset li {
 }
 
 #content {
-	/* border:1px solid #bbbbbb; */
+	/* border-right:1px solid #D5D5D5; */
 	margin-top:7px;
 	padding:14px;
 	min-height : 600px;

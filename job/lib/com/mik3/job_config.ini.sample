@@ -14,8 +14,8 @@ system.page.records=10
 ; php.ini can also impose limits on posted file size - max limit
 ; we allow is 10 MB.
 ;
-max.file.size=10240000
-max.foto.size=10240000
+max.file.size=10485760
+max.foto.size=10485760
 
 
 [image]
@@ -66,19 +66,19 @@ farm.new.site.domain="3mik.com"
 ;@todo - change plain text password
 ;
 mysql.host=127.0.0.1
-mysql.database=webgloodb
-mysql.user=gloo
-mysql.password="osje8L"
+mysql.database=xxxx
+mysql.user=xxxx
+mysql.password=xxxx
 
 [Amazon web service]
-aws.bucket=test.indigloo
-aws.access.key=0Z4F45QMGC969088QQ02
-aws.secret.key=so5XhNwLBB5RrB1ivZA86Zgjg+HQWiibLzpsxbAH
+aws.bucket=xxxxx
+aws.access.key=xxxx
+aws.secret.key=xxxxx
 
 [SMTP]
-smtp.host = "ssl://smtpauth.rollernet.us";
+smtp.host = xxxx
 smtp.port="465";
-smtp.user="sales@indigloo.com"
-smtp.password="p2SfMKZwM2kioj=="
+smtp.user=xxxxx
+smtp.password=xxxx
 
 

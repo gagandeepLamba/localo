@@ -34,40 +34,44 @@
             </div>
             <div id="bd">
             	
-		    <!-- grid DIV -->
-		    <div class="yui3-g">
-                <div class="yui3-u-1-3">
-                    <?php include($_SERVER['APP_WEB_DIR'] . '/inc/left-panel.inc'); ?>
-        
-                </div> <!-- left unit -->
-        
-			    <div class="yui3-u-2-3">
-				<div id="content">
-				    <div class="opening">
-    
-                        <?php
-                            $openingDao = new com\mik3\dao\Opening();
-                            $rows = $openingDao->getAllRecords();
-                            foreach ($rows as $row) {
-                                $html = com\mik3\html\template\Opening::getPublicSummary($row);
-                                echo $html;
-                            }
-                        ?>
-					</div>
-				</div> <!-- content -->
-    
-                </div> 
-            </div> <!-- grid -->
+				<!-- grid DIV -->
+				<div class="yui3-g">
+				   
+			
+					<div class="yui3-u-2-3">
+						<div id="content">
+							<div class="opening">
+			
+								<?php
+									$openingDao = new com\mik3\dao\Opening();
+									$rows = $openingDao->getAllRecords();
+									foreach ($rows as $row) {
+										$html = com\mik3\html\template\Opening::getPublicSummary($row);
+										echo $html;
+									}
+								?>
+							</div>
+						</div> <!-- content -->
+			
+					</div> 
+					
+					<div class="yui3-u-1-3">
+					   <?php include($_SERVER['APP_WEB_DIR'] . '/inc/sidebar.inc'); ?>
+		   
+				   </div>
+					
+				</div> <!-- grid -->
 
 
-        </div> <!-- bd -->
+			</div> <!-- bd -->
 		
 
 
-    </div> <!-- body wrapper -->
+		</div> <!-- body wrapper -->
 
-<?php include($_SERVER['APP_WEB_DIR'] . '/inc/site-footer.inc'); ?>
-
+		<div id="ft">
+			<?php include($_SERVER['APP_WEB_DIR'] . '/inc/site-footer.inc'); ?>
+		</div>
 
 
 </body>

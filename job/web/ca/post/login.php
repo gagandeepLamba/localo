@@ -36,8 +36,7 @@ if (isset($_POST['login']) && ($_POST['login'] == 'Login')) {
             exit;
         } else {
             //logon success
-             $locationOnSuccess = Url::tryUrls(array($gWeb->find(Constants::PROTECTED_RESOURCE_URI,true),$gWeb->getPreviousUrl(), '/'));
-            //successful logon
+             $locationOnSuccess = '/opening/list.php';
             header("location: " . $locationOnSuccess);
         }
     }

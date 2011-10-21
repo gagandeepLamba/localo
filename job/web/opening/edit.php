@@ -57,11 +57,7 @@
 
         <link rel="stylesheet" type="text/css" href="/css/grids-min.css">
         <link rel="stylesheet" type="text/css" href="/css/style.css">
-
-        <script type="text/javascript" src="/js/jquery-1.6.2.min.js"></script>
-        <!-- jquery UI and css -->
-        <script type="text/javascript" src="/js/jquery-ui-1.8.14.custom.min.js"></script>
-        <script type="text/javascript" src="/js/main.js"></script>
+		<script type="text/javascript" src="/js/jquery-1.6.2.min.js"></script>
 		
 
     </head>
@@ -78,14 +74,10 @@
             <div id="bd">
                 <!-- grid DIV -->
                 <div class="yui3-g">
-                    <div class="yui3-u-5-24">
-                        <?php include($_SERVER['APP_WEB_DIR'] . '/inc/left-panel.inc'); ?>
+                    
 
-                    </div> <!-- left unit -->
-
-
-                    <div class="yui3-u-19-24">
-                        <div id="main-panel">
+                    <div class="yui3-u-2-3">
+                        <div id="content">
                             <h2> Edit &dash;&nbsp;<?php echo  $openingDBRow['title']; ?> </h2> 
                             <p> status &nbsp;&dash;&nbsp; <?php echo $displayStatus; ?> </p>
                             <?php include($_SERVER['APP_WEB_DIR'] . '/inc/form/message.inc'); ?>
@@ -100,7 +92,7 @@
                                         <tr>
                                             <td class="field"> Bounty<span class="red-label">*</span></td>
                                             <td>
-                                                <input type="text" name="bounty" maxlength="6" class="required width-1" title="&gt;&nbsp;Bounty is a required field" value="<?php echo $sticky->get('bounty', $openingDBRow['bounty']); ?>"/>
+                                                <input type="text" name="bounty" maxlength="6" class="required w280" title="&gt;&nbsp;Bounty is a required field" value="<?php echo $sticky->get('bounty', $openingDBRow['bounty']); ?>"/>
                                             </td>
                                         </tr>
 
@@ -108,22 +100,22 @@
                                         <tr>
                                             <td class="field"> Location<span class="red-label">*</span></td>
                                             <td>
-                                                <input type="text" name="location" maxlength="32" class="required width-1" title="&gt;&nbsp;Location is a required field" value="<?php echo $sticky->get('location', $openingDBRow['location']); ?>"/>
+                                                <input type="text" name="location" maxlength="32" class="required w280" title="&gt;&nbsp;Location is a required field" value="<?php echo $sticky->get('location', $openingDBRow['location']); ?>"/>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="field"> Title<span class="red-label">*</span></td>
                                             <td>
-                                                <input type="text" name="title" maxlength="100" class="required width-2" title="&gt;&nbsp;Title is a required field" value="<?php echo $sticky->get('title', $openingDBRow['title']); ?>"/>
+                                                <input type="text" name="title" maxlength="100" class="required" title="&gt;&nbsp;Title is a required field" value="<?php echo $sticky->get('title', $openingDBRow['title']); ?>"/>
                                             </td>
                                         </tr>
 
                                          <tr>
                                             <td class="field"> Experience</td>
                                             <td>
-                                                <input type="text" name="min_experience" class="width-number" maxlength="2" value="<?php echo $sticky->get('min_experience',$openingDBRow['min_experience']); ?>"/>
+                                                <input type="text" name="min_experience" class="w80" maxlength="2" value="<?php echo $sticky->get('min_experience',$openingDBRow['min_experience']); ?>"/>
                                                 &nbsp;to&nbsp;
-                                                <input type="text" name="max_experience" class="width-number" maxlength="2" value="<?php echo $sticky->get('max_experience',$openingDBRow['max_experience']); ?>"/>
+                                                <input type="text" name="max_experience" class="w80" maxlength="2" value="<?php echo $sticky->get('max_experience',$openingDBRow['max_experience']); ?>"/>
                                                 &nbsp;years&nbsp;
 
                                             </td>
@@ -131,14 +123,19 @@
                                         </tr>
 
                                         <tr>
-                                            <td> &nbsp; </td>
-                                            <td>  <span> Desired skills </span> <br> <textarea  name="skill" class="height-1 width-2" cols="50" rows="4" ><?php echo $sticky->get('skill', $openingDBRow['skill']); ?></textarea> </td>
+                                            <td colspan="2">
+												<span> Desired skills </span>
+												<br>
+												<textarea  name="skill" class="h130 w580" cols="50" rows="4" ><?php echo $sticky->get('skill', $openingDBRow['skill']); ?></textarea>
+											</td>
                                         </tr>
 
                                         <tr>
-                                            <td> &nbsp; </td>
-                                            <td><span> Details </span> <br>
-                                                <textarea  name="description" class="width-2" cols="50" rows="10" ><?php echo $sticky->get('description', $openingDBRow['description']); ?></textarea> </td>
+                                            <td colspan="2">
+												<span> Details </span>
+												<br>
+                                                <textarea  name="description" class="w580 h430" cols="50" rows="10" ><?php echo $sticky->get('description', $openingDBRow['description']); ?></textarea>
+											</td>
                                         </tr>
 
 
@@ -149,9 +146,9 @@
 
 
                                     <div class="button-container">
-                                        <button type="submit" name="save" value="Save" onclick="this.setAttribute('value','Save');" ><span>Save</span></button>
+                                        <button class="form-button" type="submit" name="save" value="Save" onclick="this.setAttribute('value','Save');" ><span>Save</span></button>
                                         <a href="<?php echo $previousUrl; ?>">
-                                            <button type="button" name="cancel"><span>Cancel</span></button>
+                                            <button class="form-button" type="button" name="cancel"><span>Cancel</span></button>
                                         </a>
                                     </div>
 
@@ -169,8 +166,15 @@
                             </div> <!-- form wrapper -->
 
 
-                        </div>
-                    </div> <!-- main unit -->
+                        </div> <!-- content -->
+						
+                    </div>
+					<div class="yui3-u-1-3">
+                        <?php include($_SERVER['APP_WEB_DIR'] . '/inc/sidebar.inc'); ?>
+
+                    </div> <!-- u-1-3 -->
+
+
                 </div> <!-- GRID -->
 
 

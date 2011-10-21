@@ -194,11 +194,7 @@
             <div id="bd">
                 
                 <div class="yui3-g">
-                    <div class="yui3-u-1-3">
-						<?php include($_SERVER['APP_WEB_DIR'] . '/inc/left-panel.inc'); ?>
-
-                    </div> <!-- left unit -->
-
+                   
 
                     <div class="yui3-u-2-3">
                         <div id="content">
@@ -238,6 +234,11 @@
 						</div> <!-- content -->
 					</div>
 					
+					 <div class="yui3-u-1-3">
+						<?php include($_SERVER['APP_WEB_DIR'] . '/inc/sidebar.inc'); ?>
+
+                    </div> <!-- u-1-3 -->
+
                 </div> <!-- GRID -->
 
 

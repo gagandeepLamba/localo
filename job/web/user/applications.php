@@ -60,46 +60,49 @@
             <div id="bd">
                 
                 <div class="yui3-g">
-                    <div class="yui3-u-1-3">
-                        <?php include($_SERVER['APP_WEB_DIR'] . '/inc/left-panel.inc'); ?>
-                    </div>
-                        <div class="yui3-u-2-3">
-                            <div id="content">
+                    
+                    <div class="yui3-u-2-3">
+                        <div id="content">
+                            
+                            <div class="fb_top">
+                                <div class="fb_name navy floatl">My Applications </div>
+                            
+                                <div class="clear"></div>
+                            </div> <!-- fb_top -->
                                 
-                                    <div class="fb_top">
-                                        <div class="fb_name navy floatl">My Applications </div>
+                            
+                            <div class="opening">
+                                <?php
+                                //applications
+                                $applicationDao = new com\mik3\dao\Application();
+                                $rows = $applicationDao->getRecordsOnUserId($userVO->uuid);
+                                
+                                foreach ($rows as $row) {
+                                    $html = com\mik3\html\template\Application::getUserSummary($row, array("itemCss" => "mt20 bbd5"));
+                                    echo $html;
                                     
-                                        <div class="clear"></div>
-                                    </div> <!-- fb_top -->
-                                    
-                                        
-                                    <div class="opening">
-                                        <?php
-                                        //applications
-                                        $applicationDao = new com\mik3\dao\Application();
-                                        $rows = $applicationDao->getRecordsOnUserId($userVO->uuid);
-                                        
-                                        foreach ($rows as $row) {
-                                            $html = com\mik3\html\template\Application::getUserSummary($row, array("itemCss" => "mt20 bbd5"));
-                                            echo $html;
-                                            
-                                        }
-                                    ?>
-                                    </div>
-                                    
-
+                                }
+                            ?>
                             </div>
+                                
 
-                        </div>
-                    </div> <!-- GRID -->
+                        </div> <!-- content -->
 
-                </div> <!-- bd -->
+                    </div>
+                        
+                    <div class="yui3-u-1-3">
+                        <?php include($_SERVER['APP_WEB_DIR'] . '/inc/sidebar.inc'); ?>
+                    </div>
+                        
+                </div> <!-- GRID -->
 
+            </div> <!-- bd -->
 
-
-            </div> <!-- body wrapper -->
-            
+        </div> <!-- body wrapper -->
+        
+        <div id="ft">
             <?php include($_SERVER['APP_WEB_DIR'] . '/inc/site-footer.inc'); ?>
+        </div>
             
             
     </body>
