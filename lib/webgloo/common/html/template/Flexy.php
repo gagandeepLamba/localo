@@ -22,8 +22,8 @@ namespace webgloo\common\html\template {
 
         static function getOptions() {
             $options = array(
-                'templateDir' => $_SERVER['TEMPLATE_FILE_DIR'],
-                'compileDir' => $_SERVER['TEMPLATE_COMPILE_DIR'],
+                'templateDir' => $_SERVER['WEB_TEMPLATE_DIR'],
+                'compileDir' => $_SERVER['WEB_TEMPLATE_COMPILE_DIR'],
                 'compiler' => 'Flexy',
                 'locale' => 'en',
                 'debug' => 0

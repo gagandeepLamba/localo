@@ -30,7 +30,7 @@ namespace webgloo\common {
 
         function __construct() {
             //each application will read from its own config file
-            $iniFile = $_SERVER['APP_CONFIG_FILE'];
+            $iniFile = $_SERVER['APP_CONFIG_PATH'];
             file_exists($iniFile) || die("unable to open app_config.ini file ");
             // create config object
             $this->ini_array = parse_ini_file($iniFile);

@@ -1,0 +1,14 @@
+===========================================
+rjha @mbp ~/code/localo $ git status 
+# On branch master
+# Your branch is ahead of 'origin/master' by 1 commit.
+#
+nothing to commit (working directory clean)
+
+==========================================
+
+To fix this issue - do $git fetch origin 
+(git fetch origin/master will not do the trick )
+Then do a $git rebase origin/master
+
+

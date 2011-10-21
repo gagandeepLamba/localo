@@ -1,7 +1,5 @@
 <?php
 
-
-
 function webgloo_error_handler($errorno,$errorstr,$file,$line) {
 
     if(error_reporting() == 0 ) {
@@ -12,9 +10,10 @@ function webgloo_error_handler($errorno,$errorstr,$file,$line) {
     switch($errorno) {
 
         case E_STRICT :
-        //do nothing
-        // PEAR packages use PHP-4 compatible code that throws
-        // errors in E_STRICT mode
+            //do nothing
+            // PEAR packages use PHP-4 compatible code that throws
+            // errors in E_STRICT mode
+            webgloo\common\Logger::getInstance()->error(" $file :: $line :: $errorstr");
             return true;
         case E_NOTICE :
         case E_USER_NOTICE :
@@ -52,7 +51,9 @@ function webgloo_ajax_error_handler($errorno,$errorstr,$file,$line) {
     if(error_reporting() == 0 ) { return true ; }
 
     switch($errorno) {
-        case E_STRICT : return true;
+        case E_STRICT :
+            webgloo\common\Logger::getInstance()->error(" $file :: $line :: $errorstr");
+            return true;
         case E_NOTICE :
         case E_USER_NOTICE :
             webgloo\common\Logger::getInstance()->error(" $file :: $line :: $errorstr");
