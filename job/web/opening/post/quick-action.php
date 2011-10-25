@@ -2,9 +2,8 @@
 
     include 'job-app.inc';
     include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
-    //@todo override default error handler
     include($_SERVER['APP_WEB_DIR'] . '/inc/admin/role.inc');
-
+    
     use com\indigloo\common\Util;
     use com\indigloo\auth\FormAuthentication;
     

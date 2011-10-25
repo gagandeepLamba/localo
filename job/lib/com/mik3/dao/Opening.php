@@ -1,6 +1,5 @@
 <?php
 
-//some comments
 
 namespace com\mik3\dao {
 
@@ -107,17 +106,16 @@ namespace com\mik3\dao {
             $openingVO->minExperience = $minExperience ;
             $openingVO->maxExperience = $maxExperience ;
 
-            //store into DB layer
             mysql\Opening::update($openingId, $openingVO);
         }
 
         function updateStatus($organizationId, $openingId,$status) {
-            //store into DB layer
+            
             mysql\Opening::updateStatus($organizationId, $openingId,$status);
         }
 
         function extendLife($organizationId, $openingId,$days) {
-            //store into DB layer
+        
             mysql\Opening::extendLife($organizationId, $openingId,$days);
         }
 

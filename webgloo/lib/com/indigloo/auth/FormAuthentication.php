@@ -99,7 +99,7 @@ namespace com\indigloo\auth {
 
         //region try query methods - do not raise exception for these methods
 
-        function tryUserRole() {
+        static function tryUserRole() {
             //check if we have a session going
             $flag = false;
             if (isset($_SESSION) && isset($_SESSION['LOGON_TOKEN'])) {
@@ -112,7 +112,7 @@ namespace com\indigloo\auth {
             return $flag;
         }
 
-        function tryAdminRole() {
+        static function tryAdminRole() {
             $flag = false;
             if (isset($_SESSION) && isset($_SESSION['LOGON_TOKEN'])) {
                 $role = $_SESSION['LOGON_ROLE'];

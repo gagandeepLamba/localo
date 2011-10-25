@@ -1,4 +1,4 @@
-<div id="application-{uuid}">
+<div id="application-{uuid}" class="mt20 bbd5">
 
     <div class="rating grey">
         Rating
@@ -20,23 +20,26 @@
         
     </div>
     
-   
-    {if:hasSummary}
-        <div id="application-summary-{uuid}" class="description">
-            {summary:h}
-            &nbsp; <a href="#" id="{uuid}" class="application-more-link">more&nbsp;&gt;</a>
-        </div>
-
-    {end:}
-    
-     <div id="application-detail-{uuid}" class="{descriptionClass} description">
-        {cvDescription:h}
-        {if:hasSummary}
-            &nbsp; <a href="#" id="{uuid}" class="application-less-link">less&nbsp;&gt;</a>
-        {end:}
+    <div id="application-summary-{uuid}" class="description">
+        {summary:h}
+        &nbsp; <a href="#" id="{uuid}" class="application-more-link">more&nbsp;&gt;</a>
     </div>
     
-    <div class="skill"> {cvSkill} </div>
+     <div id="application-detail-{uuid}" class="hide-me">
+        <div class="description">
+            {cvDescription:h}
+        </div>
+        
+        <div class="skill">
+            {cvSkill}
+             &nbsp; <a href="#" id="{uuid}" class="application-less-link">&lt;&nbsp;less</a>
+        </div>
+        
+       
+        
+    </div>
+    
+    
     
     <div class="action-links"> 
              <span class="grey-button"> <a href="#" id="{uuid}" class="application-approve-link"> Approve</a> </span>

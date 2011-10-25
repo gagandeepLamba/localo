@@ -1,20 +1,29 @@
-<div class="p20 mt20">
-    <h2> How it works </h2>
-    <iframe
-            width="280"
-            height="160"
-            src="http://www.youtube.com/embed/2m7ticc7jnE"
-            frameborder="0">
-        
-    </iframe>
-</div>
-
-
-<div class="ml20">
+<?php
     
- <div class="orange-button w200">
-    <a href="/ca/login.php"> Access for Companies</a>   
- </div>
- 
-</div>
+    use com\indigloo\auth\FormAuthentication ;
+    use com\indigloo\common\html\template\Flexy ;
 
+
+    if(FormAuthentication::tryUserRole()) {
+        //we have a user session runnning
+        $userVO = FormAuthentication::getLoggedInUser();
+        $flexy = Flexy::getInstance();
+        $flexy->compile('/sidebar/user.tmpl');
+        $html = $flexy->bufferedOutputObject($userVO);
+        echo $html;
+    }else if(FormAuthentication::tryAdminRole()) {
+        //we have a user session runnning
+        $adminVO = FormAuthentication::getLoggedInAdmin();
+        $flexy = Flexy::getInstance();
+        $flexy->compile('/sidebar/admin.tmpl');
+        $html = $flexy->bufferedOutputObject($adminVO);
+        echo $html;
+    } else {
+        $flexy = Flexy::getInstance();
+        $flexy->compile('/sidebar/default.tmpl');
+        $view = new stdClass ;
+        $html = $flexy->bufferedOutputObject($view);
+        echo $html;
+    }
+    
+?>

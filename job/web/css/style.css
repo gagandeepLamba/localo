@@ -567,20 +567,20 @@ div .orange-button a {
 }
 
 div .grey-button {
-    margin-bottom:10px;
-	margin-top:20px;
+    margin-bottom:5px;
 	background-color:#E9E9E9;
 	color:#FFFFFF;
-	padding:7px 20px;
+	padding:5px 10px;
 	border-radius:5px;
 	text-decoration:none;
-	 text-align:center;
+	text-align:center;
+	line-height:18px;
+	font-size:12px;
 
 }
 
 div .grey-button a {
      color:black;
-     font-size:13px;
      font-weight:bold;
 	 text-align:center;
 
@@ -829,3 +829,10 @@ a.progressCancel:hover {
 
 /* --- end - swfupload styles --- */
 
+#js-debug {
+	background : #FFFFFF ;
+	color:red ;
+	font-size: 11px;
+	padding:20px;
+	
+}

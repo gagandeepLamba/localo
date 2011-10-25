@@ -21,7 +21,9 @@
     } else {
         $flexy = Flexy::getInstance();
         $flexy->compile('/toolbar/default.tmpl');
-        $html = $flexy->bufferedOutputObject($adminVO);
+        
+        $view = new stdClass ;
+        $html = $flexy->bufferedOutputObject($view);
         echo $html;
     }
 

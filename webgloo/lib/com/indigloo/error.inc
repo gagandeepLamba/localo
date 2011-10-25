@@ -12,8 +12,8 @@ function webgloo_error_handler($errorno,$errorstr,$file,$line) {
         case E_STRICT :
             //do nothing
             // PEAR packages use PHP-4 compatible code that throws
-            // errors in E_STRICT mode
-            com\indigloo\common\Logger::getInstance()->error(" $file :: $line :: $errorstr");
+            // do not log E_STRICT errors - Better get rid of PEAR packages
+            // turn on logger when debugging issues
             return true;
         case E_NOTICE :
         case E_USER_NOTICE :
@@ -52,7 +52,8 @@ function webgloo_ajax_error_handler($errorno,$errorstr,$file,$line) {
 
     switch($errorno) {
         case E_STRICT :
-            com\indigloo\common\Logger::getInstance()->error(" $file :: $line :: $errorstr");
+            // do not log E_STRICT errors - Better get rid of PEAR packages
+            // turn on logger when debugging issues
             return true;
         case E_NOTICE :
         case E_USER_NOTICE :

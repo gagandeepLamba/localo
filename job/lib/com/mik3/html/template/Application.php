@@ -9,7 +9,7 @@ namespace com\mik3\html\template {
     class Application {
 
          //only application vanilla details
-         // compnay information is clear from context
+         // company information is clear from context
          // used in ajax page to fetch information
          static function getDetail($row) {
             $flexy = Flexy::getInstance();
@@ -77,7 +77,7 @@ namespace com\mik3\html\template {
 
         }
         
-        //shows resumes sent by a user on opening details page
+        //shows resumes sent by a user on pub opening details page
         //when a user is logged in
         static function getUserSummary2($row,$optional) {
             $flexy = Flexy::getInstance();
@@ -174,27 +174,23 @@ namespace com\mik3\html\template {
 
         }
         
-         static function getOrganizationSummary($row) {
+        //customer - opening - application details
+        static function getOrganizationSummary($row) {
             $flexy = Flexy::getInstance();
             $flexy->compile('/application/org/summary.tmpl');
             $application = new view\Application();
-            $view = $application->create($row);
-
-            if(empty($view->cvCompany)) {
-                 $view->cvCompany = 'N/A' ;
-            }
             
-            $view->descriptionClass = 'normal';
+            $view = $application->create($row);
+            $view->cvCompany = empty($view->cvCompany) ? 'N/A' : $view->cvCompany ;
             $view->cvLinkedInPage = $row['cv_linkedin_page'];
-            $view->hasSummary = false ;
+            
 
              if (strlen($view->cvDescription) > 340) {
                 //we need to print a summary
                 $view->summary = substr($view->cvDescription, 0, 340);
                 $view->summary .= '...' ;
-                $view->hasSummary = true ;
-                //hide long descriptions on page load
-                $view->descriptionClass = 'hide-me';
+            } else {
+                $view->summary = $view->cvDescription ;
             }
             
             $html = $flexy->bufferedOutputObject ($view);

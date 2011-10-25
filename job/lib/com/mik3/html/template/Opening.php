@@ -64,24 +64,21 @@ namespace com\mik3\html\template {
             return $html;
         }
 
-        //used on company opening list page
-        // and on company applications list page
+        //used on company - opening list page
+        // and on company - applications list page
         static function getOrganizationSummary($row) {
             $flexy = Flexy::getInstance();
             $flexy->compile('/opening/org/summary.tmpl');
             $opening = new view\Opening();
             $view = $opening->create($row);
 
-            $view->descriptionClass = 'normal';
-            $view->hasSummary = false;
-
             if (strlen($view->description) > 340) {
-                //we need to print a summary
                 $view->summary = substr($view->description, 0, 340);
                 $view->summary .= '...';
-                $view->hasSummary = true;
-                //hide long descriptions on page load
-                $view->descriptionClass = 'hide-me';
+              
+            } else {
+                //short description
+                $view->summary = $view->description ;
             }
 
             //number of days left to expire
@@ -103,6 +100,7 @@ namespace com\mik3\html\template {
             return $html;
         }
 
+        //customers - applications for an opening page
         static function getOrganizationSummary2($row) {
             $flexy = Flexy::getInstance();
             $flexy->compile('/opening/org/summary2.tmpl');

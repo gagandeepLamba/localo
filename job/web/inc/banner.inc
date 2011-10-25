@@ -1,6 +1,6 @@
 
 <div id="head">
-    <h3>join 3mik.com </h3>
+    <h3><a href="/user/register.php"> join 3mik.com </a> </h3>
 </div>
 
 <div id="main-menu">

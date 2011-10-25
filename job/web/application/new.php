@@ -59,18 +59,35 @@
 
         <link rel="stylesheet" type="text/css" href="/css/grids-min.css">
         <link rel="stylesheet" type="text/css" href="/css/style.css">
-       
-        <!-- include any javascript here -->
-        <!-- jquery UI and css -->
         <script type="text/javascript" src="/js/jquery-1.6.2.min.js"></script>
         <script type="text/javascript" src="/js/jquery.validate.min.js"></script>
-
+        <!-- facebox
+        <link href="/lib/facebox/facebox.css" media="screen" rel="stylesheet" type="text/css"/>
+        <script src="/lib/facebox/facebox.js" type="text/javascript"></script> -->
+        
+        <!-- fancybox -->
+        <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+        <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
+        
+        
+        
         <script type="text/javascript">
             
             $(document).ready(function(){
                 //form validator
                 $("#web-form1").validate({
                     errorLabelContainer: $("#web-form1 div.error")
+                });
+                
+               //attach fancybox
+               $(".fbox").fancybox({
+                    'title'             : 'press esc to close',
+                    'width'				: '75%',
+                    'height'			: '75%',
+                    'autoScale'     	: false,
+                    'transitionIn'		: 'none',
+                    'transitionOut'		: 'none',
+                    'type'				: 'iframe'
                 });
             });
                 
@@ -98,8 +115,7 @@
                                
                                    <div class="clear"></div>
                             </div> <!-- fb_top -->
-                               
-
+                             
                             <div class="opening">
                                 <!-- include opening details -->
                                 <?php echo $openingHtml; ?>

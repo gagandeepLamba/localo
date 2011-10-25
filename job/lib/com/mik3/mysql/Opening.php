@@ -177,7 +177,7 @@ namespace com\mik3\mysql {
             $mysqli = MySQL\Connection::getInstance()->getHandle();
 
             $sql = " update job_opening set expire_on = {expireOn} where id = ? and org_id = ? " ;
-            $sql = \str_replace("{expireOn}" , "(expire_on + INTERVAL ".$days. " DAY )", $sql);
+            $sql = \str_replace("{expireOn}" , "(now() + INTERVAL ".$days. " DAY )", $sql);
             $dbCode = MySQL\Connection::ACK_OK;
 
             $stmt = $mysqli->prepare($sql);
