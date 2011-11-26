@@ -2,7 +2,7 @@
 
 namespace com\indigloo\auth {
     
-    use \com\indigloo\common\Util as Util;
+    use \com\indigloo\Util as Util;
     use \com\mik3\dao as Dao;
 
     class FormAuthentication {

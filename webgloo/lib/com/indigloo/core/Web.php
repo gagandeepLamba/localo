@@ -17,9 +17,9 @@
 
 namespace com\indigloo\core {
 
-    use com\indigloo\common\Configuration as Config;
-    use com\indigloo\common\Logger as Logger;
-    use com\indigloo\common\Util as Util;
+    use com\indigloo\Configuration as Config;
+    use com\indigloo\Logger as Logger;
+    use com\indigloo\Util as Util;
 
     class Web {
 

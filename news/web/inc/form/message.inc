@@ -1,6 +1,6 @@
 <?php
 
-use com\indigloo\common\html\template\Flexy ;
+use com\indigloo\html\template\Flexy ;
 use com\indigloo\news\Constants as Constants;
 use com\indigloo\core\Web ;
 

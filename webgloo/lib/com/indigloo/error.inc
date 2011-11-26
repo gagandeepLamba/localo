@@ -17,7 +17,7 @@ function webgloo_error_handler($errorno,$errorstr,$file,$line) {
             return true;
         case E_NOTICE :
         case E_USER_NOTICE :
-            com\indigloo\common\Logger::getInstance()->error(" $file :: $line :: $errorstr");
+            com\indigloo\Logger::getInstance()->error(" $file :: $line :: $errorstr");
             break ;
 
         //E_USER_ERROR are not necessarily well defined errors
@@ -31,7 +31,7 @@ function webgloo_error_handler($errorno,$errorstr,$file,$line) {
             $trace = ob_get_contents();
             @ ob_end_clean();
             //debug_print_backtrace();
-            com\indigloo\common\Logger::getInstance()->trace($file,$line,$errorstr,$trace);
+            com\indigloo\Logger::getInstance()->trace($file,$line,$errorstr,$trace);
             //send generic json encoded message back to UI
             // 302 to error page
             $errorPageUrl = "/error.php?message=".base64_encode($errorstr) ;
@@ -57,7 +57,7 @@ function webgloo_ajax_error_handler($errorno,$errorstr,$file,$line) {
             return true;
         case E_NOTICE :
         case E_USER_NOTICE :
-            com\indigloo\common\Logger::getInstance()->error(" $file :: $line :: $errorstr");
+            com\indigloo\Logger::getInstance()->error(" $file :: $line :: $errorstr");
             break ;
 
         case E_USER_ERROR:
@@ -66,7 +66,7 @@ function webgloo_ajax_error_handler($errorno,$errorstr,$file,$line) {
             debug_print_backtrace();
             $trace = ob_get_contents();
             @ ob_end_clean();
-            com\indigloo\common\Logger::getInstance()->trace($file,$line,$errorstr,$trace);
+            com\indigloo\Logger::getInstance()->trace($file,$line,$errorstr,$trace);
             //send ajax error message back to UI
             $message =  'Internal server error happened. Please check log for details!';
             $error = array('code' => 500, 'message' => $message);
