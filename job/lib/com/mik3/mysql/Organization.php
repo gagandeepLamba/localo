@@ -3,7 +3,7 @@
 
 namespace com\mik3\mysql {
 
-    use com\indigloo\common\mysql as MySQL ;
+    use com\indigloo\mysql as MySQL ;
 
     class Organization {
         const MODULE_NAME = 'com\mik3\mysql\Organization';

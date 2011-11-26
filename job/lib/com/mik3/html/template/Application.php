@@ -2,9 +2,9 @@
 
 namespace com\mik3\html\template {
 
-    use com\indigloo\common\html\template\Flexy as Flexy ;
+    use com\indigloo\html\template\Flexy as Flexy ;
     use com\mik3\view as view ;
-    use com\indigloo\common\Util ;
+    use com\indigloo\Util ;
     
     class Application {
 

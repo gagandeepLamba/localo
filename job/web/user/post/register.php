@@ -4,9 +4,9 @@ include ('job-app.inc');
 include ($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
 
 use com\indigloo\auth\FormAuthentication;
-use com\indigloo\common\ui\form as Form;
+use com\indigloo\ui\form as Form;
 use com\mik3\Constants;
-use com\indigloo\common\Url ;
+use com\indigloo\Url ;
 
 if (isset($_POST['register']) && ($_POST['register'] == 'Register')) {
     
@@ -24,7 +24,7 @@ if (isset($_POST['register']) && ($_POST['register'] == 'Register')) {
     $userDao = new com\mik3\dao\User();
     $dbCode = $userDao->create($fvalues['name'], $fvalues['email'],$fvalues['password']);
     
-    if ($dbCode == com\indigloo\common\mysql\Connection::ACK_OK) {
+    if ($dbCode == com\indigloo\mysql\Connection::ACK_OK) {
         //user created
         //log in this user please!
         $logonCode = FormAuthentication::logonUser($fvalues['email'], $fvalues['password']);
@@ -35,7 +35,7 @@ if (isset($_POST['register']) && ($_POST['register'] == 'Register')) {
         //go back to main page
         header("location: ".$locationOnSuccess );
         
-    } else if ($dbCode == com\indigloo\common\mysql\Connection::DUPLICATE_KEY) {
+    } else if ($dbCode == com\indigloo\mysql\Connection::DUPLICATE_KEY) {
         //this user already exists
         $fhandler->addError("Duplicate key error: User with same email already exists!");
         $gWeb->store(Constants::FORM_ERRORS, $fhandler->getErrors());

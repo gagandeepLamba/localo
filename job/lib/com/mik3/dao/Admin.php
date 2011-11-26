@@ -4,7 +4,7 @@ namespace com\mik3\dao {
 
     use com\mik3\view as view;
     use com\mik3\mysql as mysql;
-    use com\indigloo\common\Util as Util ;
+    use com\indigloo\Util as Util ;
     
     class Admin {
 

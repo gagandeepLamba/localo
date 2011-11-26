@@ -5,7 +5,7 @@ namespace com\mik3\dao {
 
     use com\mik3\view as view;
     use com\mik3\mysql as mysql;
-    use com\indigloo\common\Util ;
+    use com\indigloo\Util ;
     
     class Opening {
         

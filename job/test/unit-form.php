@@ -1,6 +1,6 @@
 <?php
 include 'job-app.inc';
-use com\indigloo\common\ui\form as Form ;
+use com\indigloo\ui\form as Form ;
 
 echo intval('31.3');
 

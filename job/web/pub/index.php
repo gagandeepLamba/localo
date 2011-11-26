@@ -4,7 +4,7 @@
     include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
     //add current url to stack
     $gWeb->addCurrentUrlToStack();
-    $config = com\indigloo\common\Configuration::getInstance();
+    $config = com\indigloo\Configuration::getInstance();
     $siteName = $config->getFarmName();
 
 ?>

@@ -2,7 +2,7 @@
 
 namespace com\mik3\mysql {
 
-    use com\indigloo\common\mysql as MySQL;
+    use com\indigloo\mysql as MySQL;
 
     class Opening {
         const MODULE_NAME = 'com\mik3\mysql\Opening';

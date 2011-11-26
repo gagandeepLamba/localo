@@ -4,9 +4,9 @@ include ('job-app.inc');
 include ($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
 
 use com\indigloo\auth\FormAuthentication;
-use com\indigloo\common\ui\form as Form;
+use com\indigloo\ui\form as Form;
 use com\mik3\Constants;
-use com\indigloo\common\Url ;
+use com\indigloo\Url ;
 
 if (isset($_POST['login']) && ($_POST['login'] == 'Login')) {
 

@@ -5,7 +5,7 @@ include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
 //check if user has customer admin role or not
 include($_SERVER['APP_WEB_DIR'] . '/inc/admin/role.inc');
 
-use com\indigloo\common\ui\form as Form;
+use com\indigloo\ui\form as Form;
 use com\indigloo\core\Web as web ;
 use com\mik3\Constants;
 

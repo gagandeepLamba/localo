@@ -1,32 +1,33 @@
 <?php
 
 /**
- *
- * @author rajeevj
- * Usage: $uploader = new FileUploader();
- * $uploader->process("f");
- * if($uploader->hasError()) {
- *   //use $uploader->getErrorMessage();
- *
- * } else {
- *  //process further
- *
- * }
- *
- *
+ 
+@author rajeevj
+    Usage:
+    
+    $uploader = new FileUploader();
+    $uploader->process("f");
+    if($uploader->hasError()) {
+        //use $uploader->getErrorMessage();
+     
+    } else {
+        //process further
+     
+    }
+ 
+ 
  */
 
 namespace com\mik3 {
 
-    use com\indigloo\common\Configuration as Config;
-    use com\indigloo\common\Logger;
+    use com\indigloo\Configuration as Config;
+    use com\indigloo\Logger;
     
-    class FileUpload extends \com\indigloo\common\Upload {
+    class FileUpload extends \com\indigloo\Upload {
 
         private $storeName ;
 
         function __construct() {
-            //call parent constructor
             parent::__construct();
         }
 
@@ -42,18 +43,17 @@ namespace com\mik3 {
             
             $maxSize = Config::getInstance()->max_file_size();
             if (empty($maxSize) || is_null($maxSize)) {
-                //default to 10 MB or 10240000 KB
-                $maxSize = 10240000;
+                trigger_error('file maxsize is not set in config file',E_USER_ERROR);
             }
             
-            //set file size limit on uploader
             parent::setMaxSize($maxSize);
             parent::process($fieldName);
-            //error or empty field - no further processing required
+            
+            //error or empty field - return
             if (parent::hasError() || parent::isEmpty()) {
                 return;
             }
-            //processing required now
+            
             $fileData = parent::getFileData();
             if (is_null($fileData)) {
                 trigger_error('File processing returned Null Data', E_USER_ERROR);
@@ -69,7 +69,6 @@ namespace com\mik3 {
 
             $oTempFile = fopen($ftmp, "rb");
             $size = filesize($ftmp);
-            //file BLOB
             $sBlobData = fread($oTempFile, $size);
 
             $pos = strrpos($fname, '.');

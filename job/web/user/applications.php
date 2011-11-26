@@ -5,7 +5,7 @@
     include($_SERVER['APP_WEB_DIR'] . '/inc/user/role.inc');
 
     use com\indigloo\auth\FormAuthentication ;
-    use com\indigloo\common\Util ;
+    use com\indigloo\Util ;
 
     //This method will throw an error
     $userVO = FormAuthentication::getLoggedInUser();

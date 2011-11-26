@@ -4,7 +4,7 @@
     include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
     include($_SERVER['APP_WEB_DIR'] . '/inc/admin/role.inc');
     
-    use com\indigloo\common\Util;
+    use com\indigloo\Util;
     use com\indigloo\auth\FormAuthentication;
     
     //extract parameters

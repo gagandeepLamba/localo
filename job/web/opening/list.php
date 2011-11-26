@@ -6,7 +6,7 @@
 
     use com\indigloo\auth\FormAuthentication;
     use com\mik3\html\Link;
-    use com\indigloo\common\Url;
+    use com\indigloo\Url;
     use com\mik3\html\UIData ;
 
 

@@ -5,10 +5,10 @@
     use com\indigloo\auth\FormAuthentication;
 
     $openingId = $gWeb->getRequestParam('g_opening_id');
-    com\indigloo\common\Util::isEmpty('openingId', $openingId);
+    com\indigloo\Util::isEmpty('openingId', $openingId);
 
     $organizationId = $gWeb->getRequestParam('g_org_id');
-    com\indigloo\common\Util::isEmpty('$organizationId', $organizationId);
+    com\indigloo\Util::isEmpty('$organizationId', $organizationId);
 
 
     $openingDao = new com\mik3\dao\Opening();
