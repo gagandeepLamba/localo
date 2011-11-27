@@ -19,7 +19,7 @@
 drop table if exists news_post;
 create table news_post(
 	id int(11) NOT NULL auto_increment,
-	title varchar(256) not null ,
+	title varchar(256) not null UNIQUE,
 	summary TEXT not null ,
     description TEXT ,
     created_on timestamp default '0000-00-00 00:00:00',

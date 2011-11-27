@@ -41,7 +41,7 @@
         $mediaVO->width = $dimensions['width'];
         
         $message = 'file upload done!';
-        $data = array('code' => 0, 'media' => $mediaVO, 'message' => $message);
+        $data = array('code' => 0, 'mediaVO' => $mediaVO, 'message' => $message);
         echo json_encode($data);
     
     }

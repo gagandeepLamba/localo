@@ -12,31 +12,29 @@ String.prototype.supplant = function (o) {
 var webgloo = {} ;
 webgloo.media = {
     debug :false,
-    addImage : function(mediaId,bucket,imageName,diskName,width,height) {
-        if(webgloo.media.debug) {
-            webgloo.media.addDebug("Adding image :: " + imageName + " path :: " + diskName);
-        }
-        var row = {
-            id : mediaId,
-            bucket : bucket,
-            name: imageName ,
-            diskName: diskName,
-            width : width ,
-            height : height
-        };
+    column : 1 ,
+    addImage : function(mediaVO) {
         
-        buffer = this.imageDiv.supplant(row);
-        //Add this html to table in preview DIV
-        $("div#preview").append(buffer);
+        webgloo.media.addDebug("Adding image :: " + mediaVO.originalName + " path :: " + mediaVO.storeName);
+        buffer = this.imageDiv.supplant(mediaVO);
+        
+        var previewDivId = "div#preview" + this.column;
+        $(previewDivId).append(buffer);
+        
+        this.column = (this.column == 1 ) ? 2 : 1 ;
 
     },
-    imageDiv : '<div id="{id}"> <img src="/{bucket}/{diskName}" alt="{name}" width="{width}" height="{height}"/> <div> {name} </div> </div>'
+    imageDiv : '<div id="{id}"> <img src="/{bucket}/{storeName}" class="resize" alt="{originalName}" width="{width}" height="{height}"/> '
+    + '<div> <a href="#"> Delete </a> </div> <div> {originalName} </div> </div>'
 }
 
 
 webgloo.media.addDebug = function(message) {
-    $("#js-debug").append(message);
-    $("#js-debug").append("<br>");
+    if(webgloo.media.debug) {
+        $("#js-debug").append(message);
+        $("#js-debug").append("<br>");
+    }
+    
     
 };
 

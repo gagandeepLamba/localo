@@ -829,6 +829,7 @@ a.progressCancel:hover {
 
 /* --- end - swfupload styles --- */
 
+/* +news styles */
 #js-debug {
 	background : #FFFFFF ;
 	color:red ;
@@ -843,3 +844,9 @@ a.progressCancel:hover {
 	max-width: 160px;
 	max-height: 160px;
 }
+
+div#preview img{
+	padding:10px;
+}
+ 
+

@@ -59,6 +59,19 @@
 				webgloo.media.debug = true ;
 				webgloo.media.clearDebug();
 				
+				frm = document.forms["web-form1"];
+				var strMediaVOArray = frm.media_vo_array.value ;
+        
+				if(strMediaVOArray.length > 0 ) {
+					webgloo.media.addDebug( "media vo array json is ::  " + strMediaVOArray);
+					//objectify
+					var mediaVORows = JSON.parse(strMediaVOArray);
+					for(i = 0 ;i < mediaVORows.length ; i++) {
+						var mediaVO = mediaVORows[i];
+						webgloo.media.addImage(mediaVO);
+					}
+					
+				}
 
             });
 			
@@ -137,41 +150,17 @@
                     <div class="yui3-u-2-3">
                         <div id="content">
 							<div class="fb_top">
-								   <div class="fb_name navy floatl">Upload photos</div>
+								   <div class="fb_name navy floatl"> Add photos - <?php echo $postDBRow['title']; ?></div>
 							   
 								   <div class="clear"></div>
 							</div> <!-- fb_top -->
                            
-                            <p class="help-text">
-                                &nbsp;
-                            </p>
 							
                             <div class="opening">
-                                
-                                <?php echo $postDBRow['title']; ?>
-
-                            </div>
-                            
-
-                            <h4 class="mt20"> Photos  </h4>
-							
-                            <div id="preview">
-								<div class="yui3-g">
-									<div class="yui3-u-1-2">
-										column1 
-									</div>
-									<div class="yui3-u-1-2">
-										column 2 
-									</div>
-									
-								</div>
 								
-								<?php		
-									
-								?>
-
                             </div>
-                            <div id="form-wrapper">
+							
+                             <div id="form-wrapper">
                                 <form id="web-form1" class="web-form" name="web-form1" action="/post/edit-media.php" enctype="multipart/form-data"  method="POST">
 
                                     <div class="error">    </div>
@@ -198,15 +187,21 @@
 									 
                                 </form>
                             </div> <!-- form wrapper -->
+							
 
-
+                            <h4 class="mt20"> Photos  </h4>
+							<div id="preview">
+								<div class="floatl" id="preview1"> </div>
+								<div class="floatr" id="preview2"> </div>
+							</div>
+							
                         </div> <!-- content -->
 
                     </div>
 					
 					<div class="yui3-u-1-3">
                         <?php include($_SERVER['APP_WEB_DIR'] . '/inc/sidebar.inc'); ?>
-                    </div> <!-- left unit -->
+                    </div>
 
 
                 </div> <!-- GRID -->
