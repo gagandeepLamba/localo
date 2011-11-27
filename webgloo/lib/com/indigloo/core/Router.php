@@ -1,6 +1,6 @@
 <?php
-    namespace com\indigloo\core {
 
+namespace com\indigloo\core {
 
         class Router {
             
@@ -10,6 +10,10 @@
                 $this->rules = array();
             }
             
+            function __destruct() {
+                
+            }
+        
             function initTable() {
                 
             }
@@ -116,9 +120,10 @@
                 return '{'.$pattern.'}u' ;
             }
             
+            //make sure no trailing spaces after closing php tag
+            // otherwise you may get strange and hair pulling stupid parse
+            // errors from PHP parser.
+            
         }
     }
-    
-?>   
-    
-    
+?>

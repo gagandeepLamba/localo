@@ -2,12 +2,17 @@
 namespace com\indigloo\news{
 
     
-    class Router extends com\indigloo\core\Router {
+    class Router extends \com\indigloo\core\Router{
+        
         function __construct() {
             
         }
+
+        function __destruct() {
         
-        function initTable($router) {
+        }
+        
+        function initTable() {
             //match alphanumeric + dashes
             //a pcre word (\w) does not contain dashes
             $this->createRule('/', 'Gloo_Controller_Home');
