@@ -191,8 +191,8 @@
 
                             <h4 class="mt20"> Photos  </h4>
 							<div id="preview">
-								<div class="floatl" id="preview1"> </div>
-								<div class="floatr" id="preview2"> </div>
+								<div class="yui3-u" id="preview1"> </div>
+								<div class="yui3-u" id="preview2"> </div>
 							</div>
 							
                         </div> <!-- content -->

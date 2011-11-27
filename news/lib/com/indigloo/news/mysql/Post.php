@@ -19,6 +19,13 @@ namespace com\indigloo\news\mysql {
             return $row;
         }
         
+        static function getRecords() {
+            $mysqli = MySQL\Connection::getInstance()->getHandle();
+            
+            $sql = " select * from news_post " ;  
+            $rows = MySQL\Helper::fetchRows($mysqli, $sql);
+            return $rows;
+        }
         
         static function create($title,$summary,$description) {
 

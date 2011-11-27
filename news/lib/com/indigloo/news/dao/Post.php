@@ -14,8 +14,14 @@ namespace com\indigloo\news\dao {
         }
         
         function getRecordOnId($postId) {
-            $data = mysql\Post::getRecordOnId($postId);
-            return $data ;
+            $row = mysql\Post::getRecordOnId($postId);
+            return $row ;
+        }
+        
+        function getRecords() {
+            $rows = mysql\Post::getRecords();
+            return $rows ;
+
         }
     }
 

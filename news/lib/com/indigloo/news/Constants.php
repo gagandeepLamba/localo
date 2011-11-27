@@ -1,7 +1,7 @@
 <?php
 namespace com\indigloo\news{
 
-    //define all the constants for job application here
+    /* define all the constants for news application */
     class Constants {
         const FORM_ERRORS = "form.errors"   ;
         const FORM_MESSAGES = "form.messages" ;
