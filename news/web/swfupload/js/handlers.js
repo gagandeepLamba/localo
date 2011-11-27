@@ -119,11 +119,12 @@ function uploadSuccess(file, serverData) {
             if(dataObj.code == 0){
                 //no error object or error is not yes!
                 //process document object received from server
-                webgloo.media.addImage(
-									   dataObj.image.name,
-									   dataObj.image.storeName,
-									   dataObj.image.width,
-									   dataObj.image.height);
+                webgloo.media.addImage(dataObj.media.id,
+									   dataObj.media.bucket,
+									   dataObj.media.originalName,
+									   dataObj.media.storeName,
+									   dataObj.media.width,
+									   dataObj.media.height);
                 progress.setComplete();
                 progress.setStatus(dataObj.message);
                 progress.toggleCancel(false);

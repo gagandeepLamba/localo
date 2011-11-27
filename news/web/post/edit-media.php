@@ -13,6 +13,17 @@
 	$postDao = new com\indigloo\news\dao\Post();
 	$postDBRow = $postDao->getRecordOnId($postId);
 	
+	$mediaDao = new com\indigloo\news\dao\Media();
+	$mediaDBRows = $mediaDao->getMediaOnPostId($postId);
+	
+	$mediaVOArray = array();
+	foreach($mediaDBRows as $mediaDBRow) {
+		$mediaVO = com\indigloo\news\view\Media::create($mediaDBRow);
+		array_push($mediaVOArray,$mediaVO);
+	}
+									
+	$mediaVOArrayJson = json_encode($mediaVOArray);
+	
 	$sticky = new Sticky($gWeb->find(Constants::STICKY_MAP,true));
 	
 
@@ -44,8 +55,14 @@
         
         <script type="text/javascript">
 			
-            webgloo.media.debug = true ;
-			webgloo.media.clearDebug();
+            $(document).ready(function(){
+				webgloo.media.debug = true ;
+				webgloo.media.clearDebug();
+				
+
+            });
+			
+            
 			
             //swffileupload stuff
             var swfu;
@@ -139,7 +156,19 @@
                             <h4 class="mt20"> Photos  </h4>
 							
                             <div id="preview">
-                            
+								<div class="yui3-g">
+									<div class="yui3-u-1-2">
+										column1 
+									</div>
+									<div class="yui3-u-1-2">
+										column 2 
+									</div>
+									
+								</div>
+								
+								<?php		
+									
+								?>
 
                             </div>
                             <div id="form-wrapper">
@@ -165,7 +194,8 @@
                                     
                                     
                                     <div style="clear: both;"></div>
-
+									<input type="hidden" name="media_vo_array" value='<?php echo $mediaVOArrayJson; ?>' />
+									 
                                 </form>
                             </div> <!-- form wrapper -->
 

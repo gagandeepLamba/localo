@@ -12,13 +12,13 @@ String.prototype.supplant = function (o) {
 var webgloo = {} ;
 webgloo.media = {
     debug :false,
-    id : 1,
-    addImage : function(imageName,diskName,width,height) {
+    addImage : function(mediaId,bucket,imageName,diskName,width,height) {
         if(webgloo.media.debug) {
             webgloo.media.addDebug("Adding image :: " + imageName + " path :: " + diskName);
         }
         var row = {
-            id : this.id,
+            id : mediaId,
+            bucket : bucket,
             name: imageName ,
             diskName: diskName,
             width : width ,
@@ -28,11 +28,9 @@ webgloo.media = {
         buffer = this.imageDiv.supplant(row);
         //Add this html to table in preview DIV
         $("div#preview").append(buffer);
-        this.id = this.id + 1 ;
-        
 
     },
-    imageDiv : '<div id="{id}"> <img src="/media/{diskName}" alt="{name}" width="{width}" height="{height}"/> <div> {name} </div> </div>'
+    imageDiv : '<div id="{id}"> <img src="/{bucket}/{diskName}" alt="{name}" width="{width}" height="{height}"/> <div> {name} </div> </div>'
 }
 
 
@@ -46,8 +44,4 @@ webgloo.media.clearDebug = function(message) {
     $("#js-debug").html("");
 };
 
-webgloo.media.parse = function(serverData) {
-    
-    
-}
 

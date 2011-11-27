@@ -2,6 +2,7 @@
 
     include ('news-app.inc');
     include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
+    
     use com\indigloo\Util as Util;
     
     $uploader = new com\indigloo\media\ImageUpload();
@@ -17,18 +18,30 @@
     } else {
         
         $postId = $_POST['entity_id'];
-        $image = new stdClass ;
+        Util::isEmpty('post_id', $postId);
         
-        $image->name = $uploader->getName();
-        $image->storeName = $uploader->getStoreName();
         
-        $dimensions = Util::getScaledDimensions($uploader->getWidth(),$uploader->getHeight(),320);
+        $mediaVO = new com\indigloo\news\view\Media();
+        $mediaVO->mime =$uploader->getMime();
+        $mediaVO->storeName = $uploader->getStoreName();
+        $mediaVO->size = $uploader->getSize();
+        $mediaVO->originalName = $uploader->getName();
+        $mediaVO->height = $uploader->getHeight();
+        $mediaVO->width = $uploader->getWidth();
+        $mediaVO->bucket = 'media' ;
         
-        $image->height = $dimensions['height'];
-        $image->width = $dimensions['width'];
+        
+        $mediaDao = new com\indigloo\news\dao\Media();
+        $mediaId = $mediaDao->add($postId,$mediaVO);
+        $mediaVO->id  = $mediaId;
+        
+        
+        $dimensions = Util::getScaledDimensions($mediaVO->width,$mediaVO->height,320);
+        $mediaVO->height = $dimensions['height'];
+        $mediaVO->width = $dimensions['width'];
         
         $message = 'file upload done!';
-        $data = array('code' => 0, 'image' => $image, 'message' => $message);
+        $data = array('code' => 0, 'media' => $mediaVO, 'message' => $message);
         echo json_encode($data);
     
     }

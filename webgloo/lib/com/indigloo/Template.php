@@ -26,7 +26,7 @@ namespace com\indigloo {
         }
 
         static function render($tfile, $view) {
-            
+    
             if(empty($view)){
                 $message = "No view object defined for template rendering" ;
                 trigger_error($message,E_USER_ERROR);

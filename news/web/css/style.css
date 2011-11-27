@@ -836,3 +836,10 @@ a.progressCancel:hover {
 	padding:20px;
 	
 }
+
+.resize {
+	width: auto;
+	height: auto;
+	max-width: 160px;
+	max-height: 160px;
+}

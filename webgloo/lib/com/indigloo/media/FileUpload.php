@@ -74,14 +74,14 @@ namespace com\indigloo\media {
         }
 
         function store($sBlobData) {
-                
-            $token = $fname . date(DATE_RFC822);
+           
+            $token = $this->name . date(DATE_RFC822);
             $this->storeName = substr(md5($token), rand(1, 15), 16).rand(1, 4096);
-            $pos = strrpos($fname, '.');
+            $pos = strrpos($this->name, '.');
             
             if ($pos != false) {
                 //separate filename and extension
-                $extension = substr($fname, $pos + 1);
+                $extension = substr($this->name, $pos + 1);
                 $this->storeName =  $this->storeName. '.' . $extension;
             } 
             
@@ -90,7 +90,7 @@ namespace com\indigloo\media {
             $path = Config::getInstance()->get_value('system.upload.path').$this->storeName;
             
             if(Config::getInstance()->is_debug()){
-                Logger::getInstance()->debug(" file name = $fname, mime = $mime ");
+                Logger::getInstance()->debug(" file name = $this->name, mime = $mime ");
                 Logger::getInstance()->debug(" storage path is => $path ");
             }
             
