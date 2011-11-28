@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * class to do Django style URL routing
+ * 
+ */
+
 namespace com\indigloo\core {
 
         class Router {
