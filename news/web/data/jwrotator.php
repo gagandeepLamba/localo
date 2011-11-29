@@ -17,30 +17,7 @@
     header("content-type:text/xml;charset=utf-8");
     echo "<playlist version=\"1\" xmlns=\"http://xspf.org/ns/0/\">\n";
     echo "<trackList>\n";
-
-    /*
-    $images = array();
-    
-    $image1= array(
-        'location' => 'http://www.news.com/media/dd23dd6b3e9f0cc33467',
-        'name' => 'image1'
-    );
-    
-    $image2= array(
-        'location' => 'http://www.news.com/media/1abe26bd2d81ce76450',
-        'name' => 'image2'
-    );
-    
-    $image3= array(
-        'location' => 'http://www.news.com/media/a077f4f3c0bc36963028',
-        'name' => 'image3'
-    );
-    
-    array_push($images,$image1);
-    array_push($images,$image2);
-    array_push($images,$image3);
-    */
-    
+	    
     foreach($mediaDBRows as $mediaDBRow) {
         $image = array();
         $image['name'] = $mediaDBRow['original_name'];
