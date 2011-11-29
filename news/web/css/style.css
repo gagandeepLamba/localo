@@ -857,3 +857,134 @@ div#preview1  {
 div#preview2 {
 	width : 280px;
 }
+
+
+
+.widget {
+    margin-top:10px;
+    margin-bottom: 10px;
+    width: 100%;
+    clear: both;
+}
+
+.widget h2 {
+    font-weight:normal;
+    font-family: 'Georgia','Lucida Grande','Verdana','Arial','Sans-Serif';
+    color: #21759B;
+    font-size: 20px;
+    margin: 0px 0px 10px 0px;
+    line-height:1;
+    text-align: left;
+}
+.widget h2 a {
+    color: #005689;
+    text-decoration: none;
+}
+
+.widget h3{
+        font-weight: bold;
+        font-size:14px;
+}
+
+.widget h4{
+        font-weight: bold;
+        font-size:12px;
+}
+
+/* Photo Post */
+
+.widget .photo {
+    padding: 10px;
+    background-color: #fff;
+   
+}
+
+
+/* Any photo inside a widget can only go till 100%  */
+.widget img {
+    max-width : 100% ;
+}
+
+.widget .photo img {
+    max-width:100%;
+	border:6px solid #d5d5d5;
+    /* auto width means bigger images will flow out of containers */
+    /* width: auto; */
+}
+
+/* image and video alignment */
+
+img.alignright {float:right; margin:0 0 1em 1em}
+img.alignleft {float:left; margin:0 1em 1em 0}
+img.aligncenter {display: block; margin-left: auto; margin-right: auto}
+
+.video .alignright {float:right; margin:0 0 1em 1em}
+.video .alignleft {float:left; margin:0 1em 1em 0}
+.video .aligncenter {display: block; margin-left: auto; margin-right: auto}
+
+.widget .embedCode { margin:10px;}
+
+.widget .photo .caption {
+    font-size:        13px;
+    margin-top:       17px;
+}
+
+.widget .photo .caption a {
+    color: #222;
+}
+
+.widget .video{
+    width: 100%;
+    
+}
+
+.widget a{
+    text-decoration: none;
+}
+.widget a:hover{
+    text-decoration: underline;
+}
+
+/* Regular Post */
+.widget .regular {
+    font-size:        13px;
+    line-height:      18px;
+    text-align: justify;
+    color: #3A3A3A;
+}
+.edit-bar .widget .regular,
+.edit-bar div.grid{
+    border-left:1px solid #E7E7E7;
+    border-right:1px solid #E7E7E7;
+    padding: 9px 9px 0;
+    background: none;
+}
+.widget .regular p{
+    margin-bottom: 5px;
+}
+.widget .regular strong{
+    font-weight: bold;
+}
+.widget div.regular ul{
+    width:81%;
+}
+.widget div.regular ul  li{
+    list-style-image:  url('images/text_li_bg.gif');
+    margin-left:23px;
+    padding:0 0 10px 0px;
+}
+
+/* @todo div regular style for text ol li */
+
+.widget div.regular ol  li{
+    list-style:decimal; 
+    margin-left:27px;
+    padding:0 0 10px 0px;
+
+}
+
+.widget .regular blockquote {
+    font-style:       italic;
+}
+
+

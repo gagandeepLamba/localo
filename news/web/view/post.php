@@ -1,7 +1,14 @@
 <?php
-   
-    echo "post id = $postId <br> " ;
+    //find post on seo title
+    $postDao = new \com\indigloo\news\dao\Post();
+    $postDBRow = $postDao->getRecordOnSeoTitle($seoTitle);
+    $postId = $postDBRow['id'];
     
+    $jwRotatorSwfURI = \com\indigloo\news\Url::getJWRotatorSwfURI();
+    $jwRotatorTrackURI = \com\indigloo\news\Url::getJWRotatorTrackURI($postId);
+    
+    
+
 ?>
 
 
@@ -36,7 +43,33 @@
                     <div class="yui3-u-2-3">
 
                         <div id="main-panel">
-                            Post main panel
+                            
+                            <h1> <?php echo $postDBRow['title'] ; ?> </h1>
+                            
+                             
+                             <div class="widget rotator">
+     
+                        
+                                <embed src="<?php echo $jwRotatorSwfURI; ?>"
+                                    wmode=opaque
+                                    allowscriptaccess="always"
+                                    allowfullscreen="true"
+                                    allowresize="true"
+                                    width="600" height="400"
+                                    flashvars="file=<?php echo $jwRotatorTrackURI; ?>" />
+                                 
+                            </div>
+                            
+                            <div class="widget">
+                                <div class="regular">
+                                    <p>
+                                    <?php echo $postDBRow['description'] ; ?>
+                                    </p>
+                                    
+                                </div>
+                            </div>
+                            
+                            
                             
                         </div> <!-- content -->
 

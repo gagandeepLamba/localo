@@ -41,8 +41,8 @@
                             <?php
                             
                                 foreach($postDBRows as $postDBRow) {
-                                    
-                                    $html = \com\indigloo\news\html\Post::getMainPageSummary($postDBRow);
+                                    $postVO = \com\indigloo\news\view\Post::create($postDBRow);
+                                    $html = \com\indigloo\news\html\Post::getMainPageSummary($postVO);
                                     echo $html ;
                                 }
                             ?>

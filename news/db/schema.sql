@@ -22,6 +22,8 @@ create table news_post(
 	title varchar(256) not null UNIQUE,
 	summary TEXT not null ,
     description TEXT ,
+    media_json varchar(256),
+    seo_title varchar(256),
     created_on timestamp default '0000-00-00 00:00:00',
 	updated_on timestamp default '0000-00-00 00:00:00' ,
 	PRIMARY KEY (id)) ENGINE = MYISAM;
@@ -44,15 +46,6 @@ create table news_media(
 	PRIMARY KEY (id)) ENGINE = MYISAM;
     
 
-drop table if exists news_post_media;
-create table news_post_media(
-	id int(11) NOT NULL auto_increment,
-	media_id int  not null,
-    post_id int not null,
-    created_on timestamp default '0000-00-00 00:00:00',
-	updated_on timestamp default '0000-00-00 00:00:00' ,
-	PRIMARY KEY (id)) ENGINE = MYISAM;
-    
 
 
 

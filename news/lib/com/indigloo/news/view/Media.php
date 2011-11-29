@@ -13,10 +13,11 @@ namespace com\indigloo\news\view {
         public $height;
         public $width ;
         public $bucket ;
-        
+        //@todo - populate from DB
+        public $type ;
         
         static function create($row) {
-            //print_r($row);
+            
             $media = new Media();
             $media->id = $row['id'];
             $media->originalName = $row['original_name'];

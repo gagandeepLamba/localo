@@ -55,11 +55,12 @@ namespace com\indigloo\news\mysql {
             
             if($dbCode == MySQL\Connection::ACK_OK) {
                 $mediaId = MySQL\Connection::getInstance()->getLastInsertId();
-                $sql2 = " insert into news_post_media(post_id,media_id, created_on) " ;
-                $sql2 .= " values (?,?,now()) " ;
+                $sql2 = " update news_post set media_json =? where id = ? " ;
                 $stmt2 = $mysqli->prepare($sql2);
+                
                 if ($stmt2) {
-                    $stmt2->bind_param("ii",$postId,$mediaId);
+                    $mediaVOJson = json_encode($mediaVO);
+                    $stmt2->bind_param("si",$mediaVOJson,$postId);
                     $stmt2->execute();
 
                     if ($mysqli->affected_rows != 1) {

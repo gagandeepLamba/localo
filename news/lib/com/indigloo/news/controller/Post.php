@@ -6,9 +6,16 @@ namespace com\indigloo\news\controller{
         
         function process($params,$options) {
             $file = $_SERVER['APP_WEB_DIR']. '/view/post.php' ;
+            
+            if(is_null($params) || empty($params))
+                trigger_error("Required params is null or empty", E_USER_ERROR);
+                
+            if(!array_key_exists('token',$params))
+                trigger_error("Required token not found in request params", E_USER_ERROR);
+            
             //following variables will be visible in $file as well
-            //@todo - change SEO title into post_id
-            $postId = 1 ;
+            $seoTitle = $params['token'];
+            
             ob_start();
             include ($file);
             $buffer = ob_get_contents();
