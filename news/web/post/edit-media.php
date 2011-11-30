@@ -141,7 +141,7 @@
         <div id="body-wrapper">
 
             <div id="hd">
-            <!-- no banner -->
+				<?php include($_SERVER['APP_WEB_DIR'] . '/inc/banner.inc'); ?>
             </div>
             <div id="bd">
 
@@ -149,16 +149,12 @@
                   
                     <div class="yui3-u-2-3">
                         <div id="content">
-							<div class="fb_top">
-								   <div class="fb_name navy floatl"> Add photos - <?php echo $postDBRow['title']; ?></div>
-							   
-								   <div class="clear"></div>
-							</div> <!-- fb_top -->
-                           
+							 <h2> Edit Photos &nbsp;&raquo; <?php echo $postDBRow['title']; ?> </h2>
+							  <p class="help-text">
+								<a href="/post/edit.php?g_post_id=<?php echo $postId; ?>"> Edit post details </a> | Edit Post Photos
+                            </p>
+							  
 							
-                            <div class="opening">
-								
-                            </div>
 							
                              <div id="form-wrapper">
                                 <form id="web-form1" class="web-form" name="web-form1" action="/post/edit-media.php" enctype="multipart/form-data"  method="POST">

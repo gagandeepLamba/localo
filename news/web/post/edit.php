@@ -1,13 +1,20 @@
 <?php
-    //post/add.php
+    //post/edit.php
     include ('news-app.inc');
     include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
     
-    use com\indigloo\Util;
-    use com\indigloo\ui\form\Sticky;
+    use com\indigloo\Util as Util;
+    use com\indigloo\ui\form\Sticky as Sticky;
     use com\indigloo\news\Constants as Constants;
     
+    $postId = $_GET['g_post_id'];
+    Util::isEmpty('g_post_id',$postId);
+    
     $sticky = new Sticky($gWeb->find(Constants::STICKY_MAP,true));
+    $postDao = new \com\indigloo\news\dao\Post();
+    $postDBRow = $postDao->getRecordOnId($postId);
+    
+    
     
 ?>
 
@@ -16,7 +23,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 
-    <head><title> Post a news item</title>
+    <head><title> Edit post - <?php echo $postDBRow['title']; ?> </title>
 
         <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
 
@@ -56,17 +63,16 @@
                     <div class="yui3-u-2-3">
 
                         <div id="content">
-                            <h2> Add new post </h2>
+                            <h2> Edit &nbsp;&raquo; <?php echo $postDBRow['title']; ?> </h2>
 
 
                             <p class="help-text">
-                                Please fill in the details below and create your post.
-
+                                Edit  post details | <a href="/post/edit-media.php?g_post_id=<?php echo $postId; ?>"> Edit post photos </a>
                             </p>
-
+                            
 
                             <div id="form-wrapper">
-                                <form id="web-form1" class="web-form" name="web-form1" action="/post/form/add.php" enctype="multipart/form-data"  method="POST">
+                                <form id="web-form1" class="web-form" name="web-form1" action="/post/form/edit.php" enctype="multipart/form-data"  method="POST">
 
                                     <div class="error">    </div>
 
@@ -75,18 +81,18 @@
                                         <tr>
                                             <td class="field"> Title<span class="red-label">*</span></td>
                                             <td>
-                                                <input type="text" name="title" maxlength="100" class="required w580" title="&nbsp;Title is required" value="<?php echo $sticky->get('title'); ?>"/>
+                                                <input type="text" name="title" maxlength="100" class="required w580" title="&nbsp;Title is required" value="<?php echo $sticky->get('title',$postDBRow['title']); ?>"/>
                                             </td>
                                         </tr>
                                         
                                         <tr>
                                             <td> &nbsp; </td>
-                                            <td>  <span> Summary </span> <br> <textarea  name="summary" class="required h130 w580" title="&nbsp;Summary is required" cols="50" rows="4" ><?php echo $sticky->get('summary'); ?></textarea> </td>
+                                            <td>  <span> Summary </span> <br> <textarea  name="summary" class="required h130 w580" title="&nbsp;Summary is required" cols="50" rows="4" ><?php echo $sticky->get('summary',$postDBRow['summary']); ?></textarea> </td>
                                         </tr>
 
                                         <tr>
                                             <td> &nbsp; </td>
-                                            <td><span> Description</span> <br>  <textarea  name="description" class="w580" cols="50" rows="10" ><?php echo $sticky->get('description'); ?></textarea> </td>
+                                            <td><span> Description</span> <br>  <textarea  name="description" class="w580" cols="50" rows="10" ><?php echo $sticky->get('description',$postDBRow['description']); ?></textarea> </td>
                                         </tr>
 
                                     </table>
@@ -106,7 +112,7 @@
 
 
                                     <!-- hidden fields -->
-                                    <input type="hidden" name="organization_id" value="1234" />
+                                    <input type="hidden" name="post_id" value="<?php echo $postDBRow['id']; ?>" />
                                      
                                     <div style="clear: both;"></div>
 

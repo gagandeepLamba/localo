@@ -176,16 +176,23 @@ ul.reset li {
 	color:#FFF;
 }
 
+#header h3 {
+	color: #FFFFFF;
+	font-size:36px;
+}
+
+#header h3 a {
+	color: #FFFFFF ;
+	text-decoration : none;
+}
 
 #head {
-	background:url('images/head-bg2.jpg') no-repeat center 0;
-	height:207px;
+	
+	height:107px;
 }
 
 #content {
-	/* border-right:1px solid #D5D5D5; */
-	margin-top:7px;
-	padding:14px;
+	padding-top:10px;
 	min-height : 600px;
 }
 
@@ -202,9 +209,9 @@ ul.reset li {
 
 #head h3 {
 	color:#2288cc;
-	font-size: 36px;
+	font-size: 24px;
 	float:right;
-	margin-top: 88px;
+	margin-top: 28px;
 	font-family:"Myriad Pro",Arial,Helvetica,Tahoma,sans-serif;
 }
 
@@ -687,11 +694,13 @@ div .grey-button a {
 
 .doc-table {
 	font-weight : normal ;
-	font-size :12px;
+	font-size :13px;
 	
 }
 
-
+.doc-table td {
+	padding: 5px 20px 0 0;
+}
 
 /* style - swfupload */
 #form-wrapper #fsUploadProgress .legend {

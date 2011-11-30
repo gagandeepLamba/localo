@@ -2,7 +2,7 @@
 <div id="header">
 	<div class="h-content">
 		<div rel="home" id="logo">
-				<a href="/" title="{title}"> <img src="/css/images/logo.png" alt="{title}" /> </a>
+				<h3> <a href="/"> 27main.com </a> </h3>
 		</div>
 
 		<div id="search-top">
@@ -15,11 +15,10 @@
 
 		<div id="hcenter">
 				<div id="login">
-						
-						
 						<span class="register"><a href="/">Home</a></span> |
-						<span class="loginout"><a href="/user/login.php">Log in</a></span> |
-						<span class="register"><a href="/user/register.php">Register</a></span>
+						<span class="register"><a href="/post/list.php">All Posts</a></span> |
+                        <span class="register"><a href="/post/add.php">Send a post</a></span> |
+                        <span class="register"><a href="/link/add.php">Send a link</a></span>
 						
 				</div>
 				
