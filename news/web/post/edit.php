@@ -5,7 +5,8 @@
     
     use com\indigloo\Util as Util;
     use com\indigloo\ui\form\Sticky as Sticky;
-    use com\indigloo\news\Constants as Constants;
+    use com\indigloo\Constants as Constants;
+    use com\indigloo\ui\form\Message as FormMessage ;
     
     $postId = $_GET['g_post_id'];
     Util::isEmpty('g_post_id',$postId);
@@ -70,7 +71,8 @@
                                 Edit  post details | <a href="/post/edit-media.php?g_post_id=<?php echo $postId; ?>"> Edit post photos </a>
                             </p>
                             
-
+                            <?php FormMessage::render(); ?>
+                            
                             <div id="form-wrapper">
                                 <form id="web-form1" class="web-form" name="web-form1" action="/post/form/edit.php" enctype="multipart/form-data"  method="POST">
 
@@ -81,7 +83,7 @@
                                         <tr>
                                             <td class="field"> Title<span class="red-label">*</span></td>
                                             <td>
-                                                <input type="text" name="title" maxlength="100" class="required w580" title="&nbsp;Title is required" value="<?php echo $sticky->get('title',$postDBRow['title']); ?>"/>
+                                                <input type="text" name="title" maxlength="128" class="required w580" title="&nbsp;Title is required" value="<?php echo $sticky->get('title',$postDBRow['title']); ?>"/>
                                             </td>
                                         </tr>
                                         
@@ -112,7 +114,7 @@
 
 
                                     <!-- hidden fields -->
-                                    <input type="hidden" name="post_id" value="<?php echo $postDBRow['id']; ?>" />
+                                    <input type="hidden" name="post_id" value="<?php echo $postId; ?>" />
                                      
                                     <div style="clear: both;"></div>
 

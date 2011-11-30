@@ -5,7 +5,7 @@
 
 	use com\indigloo\Util ;
 	use com\indigloo\ui\form\Sticky ;
-	use com\indigloo\news\Constants as Constants ;
+	use com\indigloo\Constants as Constants ;
 	
 	$postId = $gWeb->getRequestParam('g_post_id');
 	Util::isEmpty('postId', $postId);
@@ -56,7 +56,7 @@
         <script type="text/javascript">
 			
             $(document).ready(function(){
-				webgloo.media.debug = true ;
+				webgloo.media.debug = false ;
 				webgloo.media.clearDebug();
 				
 				frm = document.forms["web-form1"];

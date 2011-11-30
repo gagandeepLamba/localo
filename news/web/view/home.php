@@ -2,7 +2,7 @@
    
     //pub/index.php
     $postDao = new \com\indigloo\news\dao\Post();
-    $postDBRows = $postDao->getRecords();
+    $postDBRows = $postDao->getRecordsWithMedia();
     
 ?>
 
@@ -41,8 +41,8 @@
                             <?php
                             
                                 foreach($postDBRows as $postDBRow) {
-                                    $postVO = \com\indigloo\news\view\Post::create($postDBRow);
-                                    $html = \com\indigloo\news\html\Post::getMainPageSummary($postVO);
+                                    /* $postVO = \com\indigloo\news\view\Post::create($postDBRow);*/
+                                    $html = \com\indigloo\news\html\Post::getMainPageSummary($postDBRow);
                                     echo $html ;
                                 }
                             ?>

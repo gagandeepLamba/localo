@@ -5,8 +5,9 @@
     
     use com\indigloo\Util;
     use com\indigloo\ui\form\Sticky;
-    use com\indigloo\news\Constants as Constants;
-    
+    use com\indigloo\Constants as Constants;
+    use com\indigloo\ui\form\Message as FormMessage;
+     
     $sticky = new Sticky($gWeb->find(Constants::STICKY_MAP,true));
     
 ?>
@@ -64,7 +65,8 @@
 
                             </p>
 
-
+                            <?php FormMessage::render(); ?>
+                            
                             <div id="form-wrapper">
                                 <form id="web-form1" class="web-form" name="web-form1" action="/post/form/add.php" enctype="multipart/form-data"  method="POST">
 
@@ -75,7 +77,7 @@
                                         <tr>
                                             <td class="field"> Title<span class="red-label">*</span></td>
                                             <td>
-                                                <input type="text" name="title" maxlength="100" class="required w580" title="&nbsp;Title is required" value="<?php echo $sticky->get('title'); ?>"/>
+                                                <input type="text" name="title" maxlength="128" class="required w580" title="&nbsp;Title is required" value="<?php echo $sticky->get('title'); ?>"/>
                                             </td>
                                         </tr>
                                         

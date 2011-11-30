@@ -45,6 +45,20 @@ namespace com\indigloo\news\mysql {
             return $rows;
         }
         
+        static function getRecordsWithMedia(){
+            $mysqli = MySQL\Connection::getInstance()->getHandle();
+             
+            $sql = " select post.id, post.s_media_id,post.seo_title,post.title,post.summary, media.bucket," ;
+            $sql .= " media.stored_name,media.original_name, media.original_height,media.original_width " ;
+            $sql .= " from news_post post LEFT  JOIN news_media media ON post.s_media_id = media.id ";
+            $sql .= " order by post.created_on " ;
+            
+            $rows = MySQL\Helper::fetchRows($mysqli, $sql);
+            return $rows;
+            
+        }
+        
+        
         static function create($title,$seoTitle,$summary,$description) {
 
             $mysqli = MySQL\Connection::getInstance()->getHandle();
@@ -82,6 +96,40 @@ namespace com\indigloo\news\mysql {
             
         }
 
+        static function update($postId,$title,$seoTitle,$summary,$description) {
+
+            $mysqli = MySQL\Connection::getInstance()->getHandle();
+            $sql = "  update news_post set title = ? , seo_title = ? , summary = ? , description =? ," ;
+            $sql .= " updated_on = now() where id = ? ";
+            
+
+            $dbCode = MySQL\Connection::ACK_OK;
+            $stmt = $mysqli->prepare($sql);
+            
+            if ($stmt) {
+                $stmt->bind_param("ssssi",
+                        $title,
+                        $seoTitle,
+                        $summary,
+                        $description,
+                        $postId);
+                        
+
+                $stmt->execute();
+
+                if ($mysqli->affected_rows != 1) {
+                    $dbCode = MySQL\Error::handle(self::MODULE_NAME, $stmt);
+                }
+                $stmt->close();
+            } else {
+                $dbCode = MySQL\Error::handle(self::MODULE_NAME, $mysqli);
+            }
+            
+            return array('code' => $dbCode) ;
+            
+            
+        }
+        
     }
 
 }

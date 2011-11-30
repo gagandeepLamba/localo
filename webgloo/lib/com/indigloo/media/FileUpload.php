@@ -61,7 +61,8 @@ namespace com\indigloo\media {
             $ftmp = $fileData['tmp_name'];
             $fname = $fileData['name'];
             $mime = $fileData['type'];
-
+            $this->name = $fname ;
+            
             $oTempFile = fopen($ftmp, "rb");
             $size = filesize($ftmp);
             

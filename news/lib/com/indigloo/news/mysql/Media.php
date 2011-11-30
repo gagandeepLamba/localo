@@ -8,7 +8,7 @@ namespace com\indigloo\news\mysql {
         
         const MODULE_NAME = 'com\indigloo\news\mysql\Media';
         
-         static function getMediaOnPostId($postId) {
+        static function getMediaOnPostId($postId) {
             $mysqli = MySQL\Connection::getInstance()->getHandle();
             $postId = $mysqli->real_escape_string($postId);
 
@@ -18,21 +18,44 @@ namespace com\indigloo\news\mysql {
             return $rows;
         }
         
+        static function deleteOnId($mediaId) {
+            $mysqli = MySQL\Connection::getInstance()->getHandle();
+            $mediaId = $mysqli->real_escape_string($mediaId);
+            
+            
+            $sql = " delete from news_media where id = ? ";
+            MySQL\Helper::executeSQL($mysqli,$sql);
+            
+            $stmt = $mysqli->prepare($sql);
+            if($stmt) {
+                $stmt->bind_param("i",$mediaId);
+                $stmt->execute();
+                if($mysqli->affected_rows != 1)  {
+                    MySQL\Error::handle(self::MODULE_NAME, $stmt);
+                }
+                
+                $stmt->close();
+            } else {
+                MySQL\Error::handle(self::MODULE_NAME, $mysqli);
+            }
+            
+        }
+        
         static function add($postId,$mediaVO) {
 
             $mysqli = MySQL\Connection::getInstance()->getHandle();
             $code = MySQL\Connection::ACK_OK;
             $mediaId = NULL ;
             
-            $sql1 = " insert into news_media(post_id,bucket,original_name, stored_name, " ;
-            $sql1 .= " size,mime, original_height, original_width,created_on) ";
-            $sql1 .= " values(?,?,?,?,?,?,?,?,now()) ";
+            $sql = " insert into news_media(post_id,bucket,original_name, stored_name, " ;
+            $sql .= " size,mime, original_height, original_width,created_on) ";
+            $sql .= " values(?,?,?,?,?,?,?,?,now()) ";
 
             $dbCode = MySQL\Connection::ACK_OK;
-            $stmt1 = $mysqli->prepare($sql1);
+            $stmt = $mysqli->prepare($sql);
             
-            if ($stmt1) {
-                $stmt1->bind_param("isssisii",
+            if ($stmt) {
+                $stmt->bind_param("isssisii",
                         $postId,
                         $mediaVO->bucket,
                         $mediaVO->originalName,
@@ -43,33 +66,19 @@ namespace com\indigloo\news\mysql {
                         $mediaVO->width);
                         
 
-                $stmt1->execute();
+                $stmt->execute();
 
                 if ($mysqli->affected_rows != 1) {
-                    $dbCode = MySQL\Error::handle(self::MODULE_NAME, $stmt1);
+                    $dbCode = MySQL\Error::handle(self::MODULE_NAME, $stmt);
                 }
-                $stmt1->close();
+                $stmt->close();
             } else {
                 $dbCode = MySQL\Error::handle(self::MODULE_NAME, $mysqli);
+                
             }
             
             if($dbCode == MySQL\Connection::ACK_OK) {
                 $mediaId = MySQL\Connection::getInstance()->getLastInsertId();
-                $sql2 = " update news_post set media_json =? where id = ? " ;
-                $stmt2 = $mysqli->prepare($sql2);
-                
-                if ($stmt2) {
-                    $mediaVOJson = json_encode($mediaVO);
-                    $stmt2->bind_param("si",$mediaVOJson,$postId);
-                    $stmt2->execute();
-
-                    if ($mysqli->affected_rows != 1) {
-                        $dbCode = MySQL\Error::handle(self::MODULE_NAME, $stmt2);
-                    }
-                    $stmt2->close();
-                } else {
-                    $dbCode = MySQL\Error::handle(self::MODULE_NAME, $mysqli);
-                }
             }
             
             return $mediaId;

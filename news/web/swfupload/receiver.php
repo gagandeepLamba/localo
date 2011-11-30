@@ -34,7 +34,7 @@
         $mediaDao = new com\indigloo\news\dao\Media();
         $mediaId = $mediaDao->add($postId,$mediaVO);
         $mediaVO->id  = $mediaId;
-        
+        $mediaVO->postId = $postId;
         
         $dimensions = Util::getScaledDimensions($mediaVO->width,$mediaVO->height,320);
         $mediaVO->height = $dimensions['height'];

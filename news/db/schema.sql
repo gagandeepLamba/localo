@@ -22,7 +22,7 @@ create table news_post(
 	title varchar(256) not null UNIQUE,
 	summary TEXT not null ,
     description TEXT ,
-    media_json varchar(256),
+    s_media_id int ,
     seo_title varchar(256),
     created_on timestamp default '0000-00-00 00:00:00',
 	updated_on timestamp default '0000-00-00 00:00:00' ,
@@ -45,6 +45,63 @@ create table news_media(
 	updated_on timestamp default '0000-00-00 00:00:00' ,
 	PRIMARY KEY (id)) ENGINE = MYISAM;
     
+
+
+
+
+
+DROP TRIGGER IF EXISTS trg_media_delete;
+
+delimiter //
+CREATE TRIGGER trg_media_delete AFTER DELETE ON news_media
+    FOR EACH ROW
+    BEGIN
+        DECLARE ps_media_id int ;
+        DECLARE ps_new_media_id int ;
+        
+        SELECT s_media_id into ps_media_id from news_post where id = OLD.post_id;
+        --
+        -- deleted media was cover of post
+        -- 
+        IF(ps_media_id IS NOT NULL AND (ps_media_id = OLD.id)) THEN
+                --
+                -- update post with another - if post has more media
+                -- 
+                SELECT max(id) into ps_new_media_id from news_media where post_id = OLD.post_id;
+                IF (ps_new_media_id IS NOT NULL ) THEN
+                    update news_post set s_media_id = ps_new_media_id where id = OLD.post_id ;
+                END IF;
+        
+        END IF;
+
+    END;//
+delimiter ;
+
+
+
+
+DROP TRIGGER IF EXISTS trg_media_insert;
+
+delimiter //
+CREATE TRIGGER trg_media_insert AFTER INSERT ON news_media
+    FOR EACH ROW
+    BEGIN
+        DECLARE ps_media_id int ;
+        
+        SELECT s_media_id into ps_media_id from news_post where id = NEW.post_id;
+        --
+        -- post has no cover
+        -- 
+        IF(ps_media_id IS NULL) THEN
+                --
+                -- make this media post cover
+                update news_post set s_media_id = NEW.id , updated_on = now() where id = NEW.post_id;  
+                
+        END IF;
+
+    END;//
+delimiter ;
+
 
 
 

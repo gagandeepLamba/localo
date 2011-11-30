@@ -14,6 +14,13 @@ namespace com\indigloo\news\dao {
             return $data ;
         }
         
+        function update($postId,$title,$summary,$description) {
+            Util::isEmpty('post_id',$postId);
+            $seoTitle = \com\indigloo\seo\StringUtil::convertNameToSeoKey($title);
+            $data = mysql\Post::update($postId,$title,$seoTitle,$summary,$description);
+            return $data ;
+        }
+        
         function getRecordOnId($postId) {
             $row = mysql\Post::getRecordOnId($postId);
             return $row ;
@@ -34,6 +41,13 @@ namespace com\indigloo\news\dao {
             return $rows ;
 
         }
+        
+        function getRecordsWithMedia() {
+            $rows = mysql\Post::getRecordsWithMedia();
+            return $rows ;
+
+        }
+        
     }
 
 }

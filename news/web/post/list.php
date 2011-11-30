@@ -51,7 +51,7 @@
 									<?php
 										$strRowItem = '<tr class="item"> <td> {count}. </td> <td> {title}</td> ' ;
 										$strRowItem .= '<td><a href="/post/edit.php?g_post_id={postId}"> Edit</a>  </td>';
-										$strRowItem .= '<td><a href="/post/delete.php?g_post_id={postId}"> Delete</a>  </td> </tr>';
+										$strRowItem .= '<td><a href="#"> Delete</a>  </td> </tr>';
 										
 										$count = 1;
 										foreach($postDBRows as $postDBRow) {

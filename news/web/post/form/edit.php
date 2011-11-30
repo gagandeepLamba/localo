@@ -1,5 +1,5 @@
 <?php
-    //post/form/add.php
+    //post/form/edit.php
     
     include 'news-app.inc';
     include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
@@ -7,6 +7,7 @@
     
     use com\indigloo\ui\form as Form;
     use com\indigloo\Constants as Constants ;
+    
     
     if (isset($_POST['save']) && ($_POST['save'] == 'Save')) {
         
@@ -16,19 +17,19 @@
         
         $fvalues = $fhandler->getValues();
         $ferrors = $fhandler->getErrors();
-    
+        
         
         if ($fhandler->hasErrors()) {
-            $locationOnError = '/post/add.php' ;
+            $locationOnError = '/post/edit.php?g_post_id='.$fvalues['post_id'] ;
             $gWeb->store(Constants::STICKY_MAP, $fvalues);
             $gWeb->store(Constants::FORM_ERRORS,$fhandler->getErrors());
-            
             header("location: " . $locationOnError);
             exit(1);
         } else {
             
             $postDao = new com\indigloo\news\dao\Post();
-            $data = $postDao->create($fvalues['title'],
+            $data = $postDao->update($fvalues['post_id'],
+                                $fvalues['title'],
                                 $fvalues['summary'],
                                 $fvalues['description']);
     
@@ -38,8 +39,8 @@
                 trigger_error("Error in Database operation");
             }
             
-            $locationOnSuccess = '/post/edit-media.php?g_post_id='.$data['lastInsertId'] ;
-            header("location: " . $locationOnSuccess);
+            
+            header("location: / ");
         }
     }
 ?>

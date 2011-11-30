@@ -10,7 +10,7 @@ namespace com\indigloo\news\view {
         public $seoTitle;
         public $summary ;
         public $description;
-        public $mediaJson;
+        
         
         static function create($row) {
              
@@ -19,7 +19,6 @@ namespace com\indigloo\news\view {
             $post->title = $row['title'];
             $post->summary = $row['summary'];
             $post->description = $row['description'];
-            $post->mediaJson = $row['media_json'];
             $post->createdOn = $row['created_on'];
             $post->seoTitle = $row['seo_title'];
             

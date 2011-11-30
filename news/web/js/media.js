@@ -25,7 +25,7 @@ webgloo.media = {
 
     },
     imageDiv : '<div id="{id}"> <img src="/{bucket}/{storeName}" class="resize" alt="{originalName}" width="{width}" height="{height}"/> '
-    + '<div> <a href="/media/delete.php?id={id}"> Delete </a> </div> <div> {originalName} </div> </div>'
+    + '<div> <a href="/post/delete-media.php?g_id={id}&g_post_id={postId}"> Delete </a> </div> <div> {originalName} </div> </div>'
 }
 
 
