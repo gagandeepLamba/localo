@@ -22,8 +22,8 @@ namespace com\indigloo\html\template {
 
         static function getOptions() {
             $options = array(
-                'templateDir' => $_SERVER['WEB_TEMPLATE_DIR'],
-                'compileDir' => $_SERVER['WEB_TEMPLATE_COMPILE_DIR'],
+                'templateDir' => $_SERVER['APP_WEB_DIR']. '/templates',
+                'compileDir' => $_SERVER['APP_WEB_DIR'].'/templates_c',
                 'compiler' => 'Flexy',
                 'locale' => 'en',
                 'debug' => 0

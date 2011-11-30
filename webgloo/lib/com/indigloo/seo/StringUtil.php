@@ -1,7 +1,6 @@
 <?php
 namespace com\indigloo\seo{
 
-    /* define all the constants for news application */
     class StringUtil {
         static function convertNameToSeoKey($name) {
             $seoKey = '' ;

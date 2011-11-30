@@ -14,7 +14,7 @@ namespace com\indigloo\news\html {
 			$mediaJson = $postVO->mediaJson ;
 			
 			if(!empty($mediaJson)) {
-				$template = $_SERVER['WEB_TEMPLATE_DIR'].'/widget/image.tmpl' ;
+				$template = $_SERVER['APP_WEB_DIR'].'/fragments/widget/image.tmpl' ;
 				$mediaVO = json_decode($mediaJson);
 				
 				$view = new \stdClass;
@@ -33,7 +33,7 @@ namespace com\indigloo\news\html {
 				$html = Template::render($template,$view);
 				
 			}else {
-				$template = $_SERVER['WEB_TEMPLATE_DIR'].'/widget/text.tmpl' ;
+				$template = $_SERVER['APP_WEB_DIR'].'/fragments/widget/text.tmpl' ;
 				$html = Template::render($template,$postVO);
 			}
 			

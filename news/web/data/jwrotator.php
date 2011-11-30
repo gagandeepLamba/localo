@@ -3,6 +3,19 @@
     include 'news-app.inc';
 	include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
     
+	/*
+	 + Embed jwrotator swf file using following code
+	 
+	<embed src="<?php echo $jwRotatorSwfURI; ?>"
+		wmode=opaque
+		allowscriptaccess="always"
+		allowfullscreen="true"
+		allowresize="true"
+		width="600" height="400"
+		flashvars="file=<?php echo $jwRotatorTrackURI; ?>" />
+                                 
+	*/
+	
     use com\indigloo\Util as Util ;
     use com\indigloo\news\Url as Url ;
     

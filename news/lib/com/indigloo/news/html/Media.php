@@ -9,7 +9,7 @@ namespace com\indigloo\news\html {
     class Media {
         
         static function getPostImageActions($mediaDBRow) {
-            $template = $_SERVER['WEB_TEMPLATE_DIR'].'/image.tmpl' ;
+            $template = $_SERVER['APP_WEB_DIR'].'/fragments/image.tmpl' ;
             $mediaVO = MediaView::create($mediaDBRow);
             //@todo adjust height/width
 			$html = Template::render($template,$mediaVO);
