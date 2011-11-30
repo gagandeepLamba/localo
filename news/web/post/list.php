@@ -50,13 +50,15 @@
 								<table class="doc-table pt10">
 									<?php
 										$strRowItem = '<tr class="item"> <td> {count}. </td> <td> {title}</td> ' ;
-										$strRowItem .= '<td><a href="/post/edit.php?g_post_id={postId}"> Edit</a>  </td>';
+										$strRowItem .= '<td><a href="{editLink}?g_post_id={postId}"> Edit</a>  </td>';
 										$strRowItem .= '<td><a href="#"> Delete</a>  </td> </tr>';
 										
 										$count = 1;
 										foreach($postDBRows as $postDBRow) {
-											$rowItem = str_replace(array( 0 => "{count}", 1=> "{title}", 2=>"{postId}"),
-																   array(0 => $count, 1 => $postDBRow['title'], 2=> $postDBRow['id']),
+											$editLink = ($postDBRow['is_link'] == 1 ) ? '/link/edit.php' : '/post/edit.php' ;
+											
+											$rowItem = str_replace(array( 0 => "{count}", 1=> "{title}", 2=>"{postId}", 3 => "{editLink}"),
+																   array(0 => $count, 1 => $postDBRow['title'], 2=> $postDBRow['id'], 3=> $editLink),
 																   $strRowItem);
 											
 											echo $rowItem;	

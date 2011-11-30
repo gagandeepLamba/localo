@@ -24,6 +24,8 @@ create table news_post(
     description TEXT ,
     s_media_id int ,
     seo_title varchar(256),
+    link varchar(256),
+    is_link int default 0,
     created_on timestamp default '0000-00-00 00:00:00',
 	updated_on timestamp default '0000-00-00 00:00:00' ,
 	PRIMARY KEY (id)) ENGINE = MYISAM;

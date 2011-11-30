@@ -1003,6 +1003,18 @@ img.aligncenter {display: block; margin-left: auto; margin-right: auto}
     font-style:       italic;
 }
 
+.widget .orange-link {
+	width:70px;
+	height:20px;
+	background-color:#FF7906;
+	color:#FFFFFF;
+	margin-bottom:10px;
+	border-radius:5px;
+	text-decoration:none;
+	text-align:center;
+	
+}
+
 /* + styles for jquery tiny carousel */
 
 #slider-code { height:345px; overflow:hidden; }

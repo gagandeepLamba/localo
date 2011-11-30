@@ -12,6 +12,7 @@ namespace com\indigloo\news\html {
            
 		    $html = NULL ;
 			$coverMediaId = $postDBRow['s_media_id'];
+			$isLink = ($postDBRow['is_link'] ==  1) ? true : false ;
 			
 			if(!empty($coverMediaId)) {
 
@@ -37,7 +38,18 @@ namespace com\indigloo\news\html {
 				//print_r($view); exit ;
 				$html = Template::render($template,$view);
 				
-			}else {
+			} else if($isLink) {
+				$template = $_SERVER['APP_WEB_DIR'].'/fragments/widget/link.tmpl' ;
+				
+				$view = new \stdClass;
+				$view->title = $postDBRow['title'];
+				$view->summary = $postDBRow['summary'];
+				$view->seoTitle = $postDBRow['seo_title'];
+				$view->link = $postDBRow['link'];
+				
+				$html = Template::render($template,$view);
+			} else {
+				
 				$template = $_SERVER['APP_WEB_DIR'].'/fragments/widget/text.tmpl' ;
 				
 				$view = new \stdClass;

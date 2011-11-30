@@ -14,10 +14,24 @@ namespace com\indigloo\news\dao {
             return $data ;
         }
         
+        function createLink($title,$summary,$link) {
+            $seoTitle = \com\indigloo\seo\StringUtil::convertNameToSeoKey($title);
+            $data = mysql\Post::createLink($title,$seoTitle,$summary,$link);
+            return $data ;
+        }
+        
         function update($postId,$title,$summary,$description) {
             Util::isEmpty('post_id',$postId);
             $seoTitle = \com\indigloo\seo\StringUtil::convertNameToSeoKey($title);
             $data = mysql\Post::update($postId,$title,$seoTitle,$summary,$description);
+            return $data ;
+        }
+        
+        function updateLink($postId,$title,$summary,$link) {
+            Util::isEmpty('post_id',$postId);
+            
+            $seoTitle = \com\indigloo\seo\StringUtil::convertNameToSeoKey($title);
+            $data = mysql\Post::updateLink($postId,$title,$seoTitle,$summary,$link);
             return $data ;
         }
         
