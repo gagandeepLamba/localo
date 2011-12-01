@@ -39,9 +39,11 @@
                 $locationOnSuccess = '/post/edit-media.php?g_post_id='.$data['lastInsertId'] ;
                 header("location: " . $locationOnSuccess);
                 
-            } else {
+            }
+            
+            if($code == com\indigloo\mysql\Connection::DUPLICATE_KEY ) {
                 $gWeb->store(Constants::STICKY_MAP, $fvalues);
-                $gWeb->store(Constants::FORM_ERRORS,array("Error in Database operation"));
+                $gWeb->store(Constants::FORM_ERRORS,array("Duplicate error : Did you try an existing title? "));
                 $locationOnError = '/post/add.php' ;
                 header("location: " . $locationOnError);
                 exit(1);

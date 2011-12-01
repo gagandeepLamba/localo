@@ -27,15 +27,15 @@ namespace com\indigloo\mysql {
             );
 
             $message = $module . ':: DB error no:: ' . $errorNo . ' :: message:: ' . $dbHandle->error;
-            //This error should be handled separately
+            
+            // errors that we are willing to handle
             if (array_key_exists($errorNo, $map)) {
                 Logger::getInstance()->error($message);
                 //get Gloo DB code for this error
                 $code = $map[$errorNo];
                 return $code;
             } else {
-                //do not want to handle this error
-                //raise error
+                //crash and burn errors
                 trigger_error($message, E_USER_ERROR);
                 exit(1);
             }

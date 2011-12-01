@@ -38,12 +38,12 @@
             $code = $data['code'];
             
             if ($code == com\indigloo\mysql\Connection::ACK_OK ) {
-               //success
                 header("location: /");
-                
-            } else {
+            }
+            
+            if($code == com\indigloo\mysql\Connection::DUPLICATE_KEY ) {
                 $gWeb->store(Constants::STICKY_MAP, $fvalues);
-                $gWeb->store(Constants::FORM_ERRORS,array("Error in Database operation"));
+                $gWeb->store(Constants::FORM_ERRORS,array("Duplicate error : Did you try an existing title?"));
                 $locationOnError = '/link/edit.php?g_post_id='.$fvalues['post_id']; 
                 header("location: " . $locationOnError);
                 exit(1);

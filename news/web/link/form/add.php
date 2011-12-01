@@ -36,12 +36,12 @@
             $code = $data['code'];
             
             if ($code == com\indigloo\mysql\Connection::ACK_OK ) {
-               //success
                 header("location: /");
-                
-            } else {
-                 $gWeb->store(Constants::STICKY_MAP, $fvalues);
-                $gWeb->store(Constants::FORM_ERRORS,array("Error in Database operation"));
+            }
+            
+            if($code == com\indigloo\mysql\Connection::DUPLICATE_KEY ) {
+                $gWeb->store(Constants::STICKY_MAP, $fvalues);
+                $gWeb->store(Constants::FORM_ERRORS,array("Duplicate error : Did you try an existing title?"));
                 $locationOnError = '/link/add.php' ;
                 header("location: " . $locationOnError);
                 exit(1);

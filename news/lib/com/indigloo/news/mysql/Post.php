@@ -51,7 +51,7 @@ namespace com\indigloo\news\mysql {
             $sql = " select post.*, media.bucket, media.id as media_id," ;
             $sql .= " media.stored_name,media.original_name, media.original_height,media.original_width " ;
             $sql .= " from news_post post LEFT  JOIN news_media media ON post.s_media_id = media.id ";
-            $sql .= " order by post.created_on " ;
+            $sql .= " order by post.created_on DESC " ;
             
             $rows = MySQL\Helper::fetchRows($mysqli, $sql);
             return $rows;
@@ -67,6 +67,7 @@ namespace com\indigloo\news\mysql {
 
             $dbCode = MySQL\Connection::ACK_OK;
             $stmt = $mysqli->prepare($sql);
+            $lastInsertId = NULL ;
             
             if ($stmt) {
                 $stmt->bind_param("ssss",
@@ -86,8 +87,7 @@ namespace com\indigloo\news\mysql {
                 $dbCode = MySQL\Error::handle(self::MODULE_NAME, $mysqli);
             }
             
-            if($dbCode == MySQL\Connection::ACK_OK) {
-                
+            if($dbCode == MySQL\Connection::ACK_OK) {     
                 $lastInsertId = MySQL\Connection::getInstance()->getLastInsertId();
             }
             
