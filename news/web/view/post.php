@@ -69,7 +69,7 @@
                             </div>
                             
                             
-                            
+                             <?php include($_SERVER['APP_WEB_DIR'] . '/inc/disqus.inc'); ?>
                         </div> <!-- content -->
 
                     </div>
