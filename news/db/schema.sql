@@ -48,7 +48,29 @@ create table news_media(
 	PRIMARY KEY (id)) ENGINE = MYISAM;
     
 
+--
+-- password column should be > 40 chars
+-- SHA1 digest is a 40-character hexadecimal number
+-- 
+drop table if exists news_login;
+CREATE TABLE news_login (
+    id int(11) NOT NULL auto_increment,
+	user_name varchar(32) not null,
+	password varchar(64) not null,
+    first_name varchar(32) not null,
+    last_name varchar(32) not null,
+    email varchar(64) not null,
+    is_staff int default 0 ,
+    is_admin int default 0,
+    is_active int not null default 1,
+	salt varchar(16) not null,
+    login_on TIMESTAMP  default '0000-00-00 00:00:00',
+	created_on TIMESTAMP  default '0000-00-00 00:00:00',
+	updated_on TIMESTAMP   default '0000-00-00 00:00:00',
+	PRIMARY KEY (id)) ENGINE =MYISAM ;
 
+alter table  news_login add constraint UNIQUE uniq_login (user_name);
+alter table  news_login add constraint UNIQUE uniq_email (email);
 
 
 

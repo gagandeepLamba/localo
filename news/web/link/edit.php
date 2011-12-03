@@ -1,8 +1,9 @@
 <?php
-    //post/edit.php
+    //link/edit.php
     include ('news-app.inc');
     include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
-    
+    include($_SERVER['APP_WEB_DIR'] . '/inc/staff-role.inc');
+     
     use com\indigloo\Util as Util;
     use com\indigloo\ui\form\Sticky as Sticky;
     use com\indigloo\Constants as Constants;

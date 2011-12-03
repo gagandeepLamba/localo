@@ -1,7 +1,7 @@
 <?php
 	include 'news-app.inc';
 	include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
-	
+	include($_SERVER['APP_WEB_DIR'] . '/inc/staff-role.inc');
 
 	use com\indigloo\Util ;
 	use com\indigloo\ui\form\Sticky ;

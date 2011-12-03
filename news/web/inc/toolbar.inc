@@ -16,13 +16,23 @@
 		<div id="hcenter">
 				<div id="login">
 						<span class="register"><a href="/">Home</a></span> |
+                        <span class="register"><a href="/user/register.php">Register</a></span> |
 						<span class="register"><a href="/post/list.php">All Posts</a></span> |
-                        <span class="register"><a href="/post/add.php">Send a post</a></span> |
-                        <span class="register"><a href="/link/add.php">Send a link</a></span>
-						
+                        <span class="register"><a href="/post/add.php">Add Post</a></span> |
+                        <span class="register"><a href="/link/add.php">Add Link</a></span>
+                        
+                        <?php
+                            use com\indigloo\auth\User as Auth ;
+                            if(Auth::isStaff()){
+                               echo '<span class="register"><a href="/user/logout.php">logout</a></span>' ;
+                            }
+                        ?>
+
+                        
 				</div>
 				
 		</div>
 
 	</div>
 </div>
+
