@@ -149,8 +149,8 @@ namespace com\indigloo\auth {
             $message = $password.$salt;
             $digest = sha1($message);
             
-            $sql = " insert into {table} (first_name, last_name, user_name,email,password,salt,created_on,is_staff,plain_password) ";
-            $sql .= " values(?,?,?,?,?,?,now(),1,?) ";
+            $sql = " insert into {table} (first_name, last_name, user_name,email,password,salt,created_on,is_staff) ";
+            $sql .= " values(?,?,?,?,?,?,now(),1) ";
             $sql = str_replace("{table}", $tableName,$sql);
             
 
@@ -159,14 +159,13 @@ namespace com\indigloo\auth {
             //store computed password and random salt
             $stmt = $mysqli->prepare($sql);
             if ($stmt) {
-                $stmt->bind_param("sssssss",
+                $stmt->bind_param("ssssss",
                         $firstName,
                         $lastName,
                         $userName,
                         $email,
                         $digest,
-                        $salt,
-                        $password);
+                        $salt);
 
                 $stmt->execute();
 
