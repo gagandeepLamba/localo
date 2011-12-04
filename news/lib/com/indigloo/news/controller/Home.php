@@ -5,6 +5,11 @@ namespace com\indigloo\news\controller{
     class Home implements INewsController{
         
         function process($params,$options) {
+            $pageNo = 1 ;
+            if(array_key_exists('page',$params)) {
+                $pageNo = $params['page'];
+            }
+            
             $file = $_SERVER['APP_WEB_DIR']. '/view/home.php' ;
             ob_start();
             include ($file);

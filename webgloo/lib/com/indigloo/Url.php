@@ -6,6 +6,11 @@ namespace com\indigloo {
 
     class Url {
 
+        static function base () {
+            return 'http://'.$_SERVER["HTTP_HOST"] ;
+                
+        }
+            
         //accept an array of param and values and add to
         // this base URI
         static function addQueryParameters($url, $params) {

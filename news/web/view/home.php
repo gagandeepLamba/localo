@@ -1,8 +1,16 @@
 <?php
    
-    //pub/index.php
+    //view/home.php
+    
+    use \com\indigloo\ui\Pagination as Pagination;
+    use \com\indigloo\Url as Url;
+    
     $postDao = new \com\indigloo\news\dao\Post();
-    $postDBRows = $postDao->getRecordsWithMedia();
+    $pageSize = 10 ;
+    $postDBRows = $postDao->getRecordsWithMedia($pageNo,$pageSize);
+    $postDBRowsCount = $postDao->getRecordsWithMediaCount();
+    $paginator = new Pagination($pageNo,$postDBRowsCount,$pageSize);
+    
     
 ?>
 
@@ -47,8 +55,10 @@
                                 }
                             ?>
                             
+                            <?php $paginator->renderSeo(Url::base()); ?>
+                            
                         </div> <!-- content -->
-
+                
                     </div>
                     
                     <div class="yui3-u-1-3">

@@ -275,86 +275,6 @@ ul.reset li {
 }
 
 
-/* --------------- Content --------------- */
-
-.opening {
-	padding:0 20px;
-	font-size: 14px;
-	font-family:"Myriad Pro",Arial,Helvetica,Tahoma,sans-serif;
-}
-.opening .item {
-	padding-bottom:30px;
-	margin-bottom:15px;
-	/* border-bottom:1px solid #ebebeb; */
-}
-
-.opening .price {
-	float:right;
-	font-size:18px;
-	color:#88cc44;
-	margin-top: 7px;
-	margin-left: 30px;
-	line-height: 28px;
-}
-.opening .photos {
-	float:right;
-	margin-top: 7px;
-}
-.opening .photos img {
-	margin-right: 5px;
-}
-
-.pagenavi {
-	text-align:center;
-	margin-top:40px;
-	margin-bottom:50px;
-}
-.pagenavi .page {
-	border:1px solid #9c9997;
-	padding:3px 6px;
-	font-size:11px;
-}
-.pagenavi .current {
-	text-decoration:underline;
-}
-
-/* --------------- Sidebar --------------- */
-
-.widget {
-	margin-bottom:26px;
-	
-}
-.access-btn {
-	display:block;
-	border:none;
-	width:195px;
-	height:46px;
-	background:url('images/access-btn.png') no-repeat 0 0;
-	margin:0 auto;
-}
-
-#news-widget .item {
-	background:url('images/news-bg.png') no-repeat center bottom;
-	padding-bottom:10px;
-	margin:15px 0;
-}
-#news-widget .thumb {
-	float:left;
-	margin-right:10px;
-}
-#news-widget .date {
-	background:url('images/date-bg.png') no-repeat right 0;
-	color: #066193;
-    font-size: 10px;
-    height: 11px;
-    line-height: 10px;
-    padding-right: 4px;
-    text-align: right;
-    clear:both;
-    margin-top: 5px;
-}
-
-
 /* --------------- Footer --------------- */
 
 .f-content {
@@ -1015,7 +935,7 @@ img.aligncenter {display: block; margin-left: auto; margin-right: auto}
 	
 }
 
-/* + styles for jquery tiny carousel */
+/* + jquery tiny carousel */
 
 #slider-code { height:345px; overflow:hidden; }
 #slider-code .viewport {
@@ -1051,7 +971,31 @@ img.aligncenter {display: block; margin-left: auto; margin-right: auto}
 	max-height: 300px;
 }
 
-/*  tiny carousel styles */
+
+
+/* + pagination  */
+.pagination {
+    padding: 1em;
+    margin: 1em 0;
+    clear: left;
+    font-size: 12px;
+    color: #AAA;
+
+}
+
+.pagination a {
+    border: 1px solid #9AAFE5;
+    padding: 2px 6px;
+    text-decoration: none;
+}
+
+.pagination a:hover {
+    border-color: #2E6AB1;
+}
+
+.pagination a.nextprev {
+    font-weight: bold;
+}
 
 
 

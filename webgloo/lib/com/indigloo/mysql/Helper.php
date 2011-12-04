@@ -72,26 +72,13 @@ namespace com\indigloo\mysql {
                 trigger_error($mysqli->error, E_USER_ERROR);
             }
         }
-
-        //@todo -fix this paginator
-        static function paginate($sql, $paginator, $orderByClause=NULL) {
-            if (empty($paginator)) {
-                trigger_error('No pagination object', E_USER_ERROR);
-            }
-            if (empty($orderByClause)) {
-                trigger_error('No order by clause for paginator', E_USER_ERROR);
-            }
-
-            $size = $paginator->getPageSize();
-            if (empty($size)) {
-                trigger_error('paginator is without page size ', E_USER_ERROR);
-            }
-            $offset = 0 + ($paginator->getPage() - 1 ) * $size;
-            $sql = $sql . $orderByClause . " LIMIT  " . $offset . "," . $size;
-
-            return $sql;
+        
+        static function addLimitSQL($sql, $pageNo,$pageSize) {
+            $offset = 0 + ($pageNo - 1 ) * $pageSize;
+            $sql = $sql." LIMIT  " .$offset. "," .$pageSize;
+            return $sql ;
         }
-
+        
     }
 
 }

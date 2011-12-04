@@ -17,10 +17,10 @@ namespace com\indigloo\news{
             //a pcre word (\w) does not contain dashes
             $this->createRule('/', 'com\indigloo\news\controller\Home');
             $this->createRule( '^(?P<token>[-\w]+)$','com\indigloo\news\controller\Post');
-            $this->createRule('^page/(?P<pagenum>\d+)$','com\indigloo\news\controller\Home');
-            $this->createRule('^(?P<token>\w+)/page/(?P<pagenum>\d+)$','Gloo_Controller_Post');
-            $this->createRule('^category/(?P<name>\w+)$','Gloo_Controller_Category');
-            $this->createRule('^category/(?P<name>\w+)/page/(?P<pagenum>\d+)$','Gloo_Controller_Category');
+            $this->createRule('^page/(?P<page>\d+)$','com\indigloo\news\controller\Home');
+            $this->createRule('^(?P<token>\w+)/page/(?P<page>\d+)$','com\indigloo\news\controller\Post');
+            $this->createRule('^category/(?P<name>\w+)$','com\indigloo\news\controller\Category');
+            $this->createRule('^category/(?P<name>\w+)/page/(?P<page>\d+)$','com\indigloo\news\controller\Category');
 
         }
     }

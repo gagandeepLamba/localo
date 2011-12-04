@@ -45,7 +45,7 @@ namespace com\indigloo\news\mysql {
             return $rows;
         }
         
-        static function getRecordsWithMedia(){
+        static function getRecordsWithMedia($pageNo,$pageSize){
             $mysqli = MySQL\Connection::getInstance()->getHandle();
              
             $sql = " select post.*, media.bucket, media.id as media_id," ;
@@ -53,11 +53,22 @@ namespace com\indigloo\news\mysql {
             $sql .= " from news_post post LEFT  JOIN news_media media ON post.s_media_id = media.id ";
             $sql .= " order by post.created_on DESC " ;
             
+            $offset = 0 + ($pageNo - 1 ) * $pageSize;
+            $sql = $sql." LIMIT  " .$offset. "," .$pageSize;
+
             $rows = MySQL\Helper::fetchRows($mysqli, $sql);
             return $rows;
             
         }
         
+        static function getRecordsWithMediaCount() {
+            
+            $mysqli = MySQL\Connection::getInstance()->getHandle();
+            
+            $sql = " select count(id) as count from news_post " ;  
+            $row = MySQL\Helper::fetchRow($mysqli, $sql);
+            return $row;
+        }
         
         static function create($title,$seoTitle,$summary,$description) {
 

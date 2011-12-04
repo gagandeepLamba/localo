@@ -56,11 +56,17 @@ namespace com\indigloo\news\dao {
 
         }
         
-        function getRecordsWithMedia() {
-            $rows = mysql\Post::getRecordsWithMedia();
+        function getRecordsWithMedia($pageNo,$pageSize) {
+            $rows = mysql\Post::getRecordsWithMedia($pageNo,$pageSize);
             return $rows ;
 
         }
+        
+        function getRecordsWithMediaCount() {
+            $row = mysql\Post::getRecordsWithMediaCount();
+            return $row['count'] ;
+        }
+        
         
     }
 
