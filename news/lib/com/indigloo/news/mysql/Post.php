@@ -70,24 +70,24 @@ namespace com\indigloo\news\mysql {
             return $row;
         }
         
-        static function create($title,$seoTitle,$summary,$description) {
+        static function create($title,$seoTitle,$summary,$markdown,$html) {
 
             $mysqli = MySQL\Connection::getInstance()->getHandle();
-            $sql = " insert into news_post(title,seo_title,summary,description,created_on) ";
-            $sql .= " values(?,?,?,?,now()) ";
+            $sql = " insert into news_post(title,seo_title,summary,markdown,description,created_on) ";
+            $sql .= " values(?,?,?,?,?,now()) ";
 
             $dbCode = MySQL\Connection::ACK_OK;
             $stmt = $mysqli->prepare($sql);
             $lastInsertId = NULL ;
             
             if ($stmt) {
-                $stmt->bind_param("ssss",
+                $stmt->bind_param("sssss",
                         $title,
                         $seoTitle,
                         $summary,
-                        $description);
-                        
-
+                        $markdown,
+                        $html);
+                      
                 $stmt->execute();
 
                 if ($mysqli->affected_rows != 1) {
@@ -137,10 +137,10 @@ namespace com\indigloo\news\mysql {
             return array('code' => $dbCode) ;
         }
         
-        static function update($postId,$title,$seoTitle,$summary,$description) {
+        static function update($postId,$title,$seoTitle,$summary,$markdown,$html) {
 
             $mysqli = MySQL\Connection::getInstance()->getHandle();
-            $sql = "  update news_post set title = ? , seo_title = ? , summary = ? , description =? ," ;
+            $sql = "  update news_post set title = ? , seo_title = ? , summary = ? , markdown = ? ,description =? ," ;
             $sql .= " updated_on = now() where id = ? ";
             
 
@@ -148,11 +148,12 @@ namespace com\indigloo\news\mysql {
             $stmt = $mysqli->prepare($sql);
             
             if ($stmt) {
-                $stmt->bind_param("ssssi",
+                $stmt->bind_param("sssssi",
                         $title,
                         $seoTitle,
                         $summary,
-                        $description,
+                        $markdown,
+                        $html,
                         $postId);
                         
 

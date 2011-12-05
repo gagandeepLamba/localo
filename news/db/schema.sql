@@ -22,6 +22,7 @@ create table news_post(
 	title varchar(256) not null UNIQUE,
 	summary TEXT not null ,
     description TEXT ,
+    markdown TEXT,
     s_media_id int ,
     seo_title varchar(256),
     link varchar(256),
@@ -127,6 +128,13 @@ CREATE TRIGGER trg_media_insert AFTER INSERT ON news_media
 delimiter ;
 
 
+
+--
+-- patch
+-- 05 Dec 2011
+-- 
+--
+alter table news_post add column markdown TEXT ;
 
 
 

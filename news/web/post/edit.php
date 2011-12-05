@@ -35,6 +35,10 @@
         <script type="text/javascript" src="/lib/jquery/jquery-1.6.4.min.js"></script>
         <script type="text/javascript" src="/lib/jquery/jquery.validate.1.9.0.min.js"></script>
 
+        <link rel="stylesheet" type="text/css" href="/lib/wmd/wmd-news.css" />
+        <script type="text/javascript" src="/lib/wmd/showdown.js"></script>
+      
+      
         <script type="text/javascript">
             $(document).ready(function(){
                 //form validator
@@ -84,7 +88,7 @@
                                         <tr>
                                             <td class="field"> Title<span class="red-label">*</span></td>
                                             <td>
-                                                <input type="text" name="title" maxlength="128" class="required w580" title="&nbsp;Title is required" value="<?php echo $sticky->get('title',$postDBRow['title']); ?>"/>
+                                                <input type="text" name="title" maxlength="128" class="required w580 " title="&nbsp;Title is required" value="<?php echo $sticky->get('title',$postDBRow['title']); ?>"/>
                                             </td>
                                         </tr>
                                         
@@ -95,9 +99,22 @@
 
                                         <tr>
                                             <td> &nbsp; </td>
-                                            <td><span> Description</span> <br>  <textarea  name="description" class="w580" cols="50" rows="10" ><?php echo $sticky->get('description',$postDBRow['description']); ?></textarea> </td>
+                                            <td>
+                                                
+                                                <span> Description (use <a href="http://daringfireball.net/projects/markdown/" target="_blank">markdown</a> for formatting) </span>
+                                                <div id="wmd-button-bar" class="wmd-panel wmd-button-bar"></div>
+                                                <br/>
+                                                <textarea  id="wmd-input" name="description" class="w580 wmd-panel wmd-input" cols="50" rows="10" ><?php echo $sticky->get('description',$postDBRow['markdown']); ?></textarea> </td>
                                         </tr>
-
+                                        
+                                         <tr>
+                                            <td> &nbsp; </td>
+                                            <td>
+                                                <h2> Preview </h2>
+                                                <div id="wmd-preview" class="wmd-panel wmd-preview"></div>
+                                            </td>
+                                        </tr>
+                                         
                                     </table>
 
                                     <div class="tc">
@@ -144,6 +161,7 @@
         <div id="ft">
             <?php include($_SERVER['APP_WEB_DIR'] . '/inc/site-footer.inc'); ?>
         </div>
-
+        
+        <script type="text/javascript" src="/lib/wmd/wmd.js"></script>
     </body>
 </html>

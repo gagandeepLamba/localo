@@ -10,7 +10,10 @@ namespace com\indigloo\news\dao {
 
         function create($title,$summary,$description) {
             $seoTitle = \com\indigloo\seo\StringUtil::convertNameToSeoKey($title);
-            $data = mysql\Post::create($title,$seoTitle,$summary,$description);
+            //change description (markdown) to html
+            $parser = new \ext\MarkdownParser();
+            $html = $parser->transform($description);
+            $data = mysql\Post::create($title,$seoTitle,$summary,$description,$html);
             return $data ;
         }
         
@@ -23,7 +26,11 @@ namespace com\indigloo\news\dao {
         function update($postId,$title,$summary,$description) {
             Util::isEmpty('post_id',$postId);
             $seoTitle = \com\indigloo\seo\StringUtil::convertNameToSeoKey($title);
-            $data = mysql\Post::update($postId,$title,$seoTitle,$summary,$description);
+            //change description (markdown) to html
+            $parser = new \ext\MarkdownParser();
+            $html = $parser->transform($description);
+            
+            $data = mysql\Post::update($postId,$title,$seoTitle,$summary,$description,$html);
             return $data ;
         }
         
