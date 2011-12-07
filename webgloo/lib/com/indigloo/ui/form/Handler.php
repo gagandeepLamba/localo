@@ -13,8 +13,9 @@ namespace com\indigloo\ui\form {
         private $ferrors;
         private $fvalues;
         private $processed;
-
-        function __construct($fname, $post) {
+        private $translate ;
+        
+        function __construct($fname, $post,$translate=true) {
             $this->fname = $fname;
             $this->post = $post;
             //collection of processed key-value pairs
@@ -24,6 +25,7 @@ namespace com\indigloo\ui\form {
             //errors array
             $this->ferrors = array();
             $this->processed = array();
+            $this->translate = $translate;
         }
 
         function addRule($name, $displayName, $rules) {
@@ -64,7 +66,7 @@ namespace com\indigloo\ui\form {
                 // we run the rules on raw version
                 // but we should add the sanitized version for our consumption
 
-                $this->fvalues[$name] = self::getSecureHtml($value);
+                $this->fvalues[$name] = $this->getSecureHtml($value);
             } else {
                 if (Config::getInstance()->is_debug()) {
                     Logger::getInstance()->debug("Form processed $name and rules :: ");
@@ -132,7 +134,7 @@ namespace com\indigloo\ui\form {
                     // because we ran some rules there
                 } else {
                     //add sanitized output
-                    $this->fvalues[$key] = self::getSecureHtml($value);
+                    $this->fvalues[$key] = $this->getSecureHtml($value);
                 }
             }
             return $this->fvalues;
@@ -156,17 +158,11 @@ namespace com\indigloo\ui\form {
             $this->fvalues[$name] = $value;
         }
 
-        static function sanitize($vars, $name) {
-            // by default keep null string as return value
-            $value = '';
-            if (isset($vars[$name])) {
-                $value = self::getSecureHtml($vars[$name]);
-            }
-            return $value;
-        }
-
-        static function getSecureHtml($x) {
-            return trim(htmlspecialchars($x, ENT_QUOTES));
+        function getSecureHtml($x) {
+            if($this->translate)
+                return trim(htmlspecialchars($x, ENT_QUOTES));
+            else
+                return trim($x);
         }
 
     }

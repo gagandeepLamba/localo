@@ -11,7 +11,7 @@
     
     if (isset($_POST['save']) && ($_POST['save'] == 'Save')) {
         
-        $fhandler = new Form\Handler('web-form-1', $_POST);
+        $fhandler = new Form\Handler('web-form-1', $_POST,false);
         $fhandler->addRule('title', 'Title', array('required' => 1));
         $fhandler->addRule('summary', 'Summary', array('required' => 1));
         

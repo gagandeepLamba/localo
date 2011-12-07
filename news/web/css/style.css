@@ -885,7 +885,7 @@ img.aligncenter {display: block; margin-left: auto; margin-right: auto}
 .widget .regular {
     font-size:        13px;
     line-height:      18px;
-    text-align: justify;
+    text-align: left;
     color: #3A3A3A;
 }
 .edit-bar .widget .regular,
@@ -923,13 +923,13 @@ img.aligncenter {display: block; margin-left: auto; margin-right: auto}
     font-style:       italic;
 }
 
-.widget .orange-link {
-	width:70px;
-	height:20px;
+.widget .external-link {
+	
 	background-color:#FF7906;
 	color:#FFFFFF;
-	margin-bottom:10px;
-	border-radius:5px;
+	padding:3px;
+	font-size:12px;
+	font-weight :bold;
 	text-decoration:none;
 	text-align:center;
 	
