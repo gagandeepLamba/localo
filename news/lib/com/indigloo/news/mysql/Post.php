@@ -107,20 +107,21 @@ namespace com\indigloo\news\mysql {
             
         }
 
-         static function createLink($title,$seoTitle,$summary,$link) {
+         static function createLink($title,$seoTitle,$markdown,$html,$link) {
 
             $mysqli = MySQL\Connection::getInstance()->getHandle();
-            $sql = " insert into news_post(title,seo_title,summary,link,created_on,is_link) ";
-            $sql .= " values(?,?,?,?,now(),1) ";
+            $sql = " insert into news_post(title,seo_title,markdown,summary,link,created_on,is_link) ";
+            $sql .= " values(?,?,?,?,?,now(),1) ";
 
             $dbCode = MySQL\Connection::ACK_OK;
             $stmt = $mysqli->prepare($sql);
             
             if ($stmt) {
-                $stmt->bind_param("ssss",
+                $stmt->bind_param("sssss",
                         $title,
                         $seoTitle,
-                        $summary,
+                        $markdown,
+                        $html,
                         $link);
                         
 
@@ -170,10 +171,10 @@ namespace com\indigloo\news\mysql {
             return array('code' => $dbCode) ;
         }
         
-        static function updateLink($postId,$title,$seoTitle,$summary,$link) {
+        static function updateLink($postId,$title,$seoTitle,$markdown,$html,$link) {
 
             $mysqli = MySQL\Connection::getInstance()->getHandle();
-            $sql = "  update news_post set title = ? , seo_title = ? , summary = ? , link = ? ," ;
+            $sql = "  update news_post set title = ? , seo_title = ? , markdown = ?, summary = ?, link = ? ," ;
             $sql .= " updated_on = now() where id = ? ";
             
 
@@ -181,10 +182,11 @@ namespace com\indigloo\news\mysql {
             $stmt = $mysqli->prepare($sql);
             
             if ($stmt) {
-                $stmt->bind_param("ssssi",
+                $stmt->bind_param("sssssi",
                         $title,
                         $seoTitle,
-                        $summary,
+                        $markdown,
+                        $html,
                         $link,
                         $postId);
                         

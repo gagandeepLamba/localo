@@ -34,7 +34,8 @@
         
         <script type="text/javascript" src="/lib/jquery/jquery-1.6.4.min.js"></script>
         <script type="text/javascript" src="/lib/jquery/jquery.validate.1.9.0.min.js"></script>
-
+      
+      
         <script type="text/javascript">
             $(document).ready(function(){
                 //form validator
@@ -90,7 +91,11 @@
                                         
                                         <tr>
                                             <td> &nbsp; </td>
-                                            <td>  <span> Summary </span> <br> <textarea  name="summary" class="required h130 w580" title="&nbsp;Summary is required" cols="50" rows="4" ><?php echo $sticky->get('summary',$postDBRow['summary']); ?></textarea> </td>
+                                            <td>
+                                            <br>
+                                            <span> Summary (use <a href="http://daringfireball.net/projects/markdown/" target="_blank">markdown</a> for formatting) </span></span>
+                                            
+                                            <textarea name="summary" class="required h130 w580" title="&nbsp;Summary is required" cols="50" rows="4" ><?php echo $sticky->get('summary',$postDBRow['markdown']); ?></textarea> </td>
                                         </tr>
 
                                          <tr>
@@ -99,7 +104,7 @@
                                                 <input type="text" name="link" maxlength="128" class="required w580" title="&nbsp;Link is required" value="<?php echo $sticky->get('link',$postDBRow['link']); ?>"/>
                                             </td>
                                         </tr>
-
+                                      
                                     </table>
 
                                     <div class="tc">
@@ -146,6 +151,6 @@
         <div id="ft">
             <?php include($_SERVER['APP_WEB_DIR'] . '/inc/site-footer.inc'); ?>
         </div>
-
+       
     </body>
 </html>

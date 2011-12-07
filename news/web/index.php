@@ -19,8 +19,8 @@
 		$message = sprintf("No route for path %s",$_SERVER['REQUEST_URI']);
 		Logger::getInstance()->error($message);
 		
-		$controller = new Gloo_Controller_Null();
-		$controller->process();
+		$controller = new com\indigloo\news\Controller\Null();
+		$controller->process($route["params"], $route["options"]);
 		exit;
 
     } else {
