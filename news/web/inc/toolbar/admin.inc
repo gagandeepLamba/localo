@@ -16,7 +16,6 @@
 		<div id="hcenter">
 				<div id="login">
 					<span class="register"><a href="/">Home</a></span> |
-					<span class="register"><a href="/post/list.php">Dashboard</a></span> |
 					<span class="register"><a href="/post/add.php">Submit story</a></span> |
 					<span class="register"><a href="/post/list.php">Posts</a></span> |
 					<span class="register"><a href="#">Links</a></span> |

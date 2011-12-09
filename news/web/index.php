@@ -11,7 +11,16 @@
     $router = new com\indigloo\news\Router();
     //initialize news app routing table
     $router->initTable();
-    $route = $router->getRoute($_SERVER['REQUEST_URI']);
+	$requestURI = $_SERVER['REQUEST_URI'];
+	$pos = strpos($requestURI, '?');
+	$qpart = NULL ;
+ 
+	if($pos !== false) {
+		$requestURI = substr($_SERVER['REQUEST_URI'],0,$pos);
+		$qpart = substr($_SERVER['REQUEST_URI'], $pos+1);
+	}
+	
+    $route = $router->getRoute($requestURI);
     
 	
 	if(is_null($route)) {
@@ -19,12 +28,16 @@
 		$message = sprintf("No route for path %s",$_SERVER['REQUEST_URI']);
 		Logger::getInstance()->error($message);
 		
-		$controller = new com\indigloo\news\Controller\Null();
+		$controller = new \com\indigloo\news\controller\Null();
 		$controller->process($route["params"], $route["options"]);
 		exit;
 
     } else {
 		$controllerName = $route["action"];
+		//add query part
+		if(!is_null($qpart)){
+			$route["params"]["q"] = $qpart ;
+		}
 		
 		if(Config::getInstance()->is_debug()) {
 			$strParams = Util::stringify($route["params"]);

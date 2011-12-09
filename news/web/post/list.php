@@ -67,7 +67,7 @@
 																   $strRowItem);
 											
 											if($isAdmin) {
-												$strRowItem .= '<td><a href="#"> Delete</a>  </td> </tr>';
+												$rowItem .= '<td><a href="#"> Delete</a>  </td> </tr>';
 											}
 											
 											echo $rowItem;	
