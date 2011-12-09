@@ -2,8 +2,7 @@
     //link/add.php
     include ('news-app.inc');
     include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
-    include($_SERVER['APP_WEB_DIR'] . '/inc/staff-role.inc');
-     
+      
     use com\indigloo\Util;
     use com\indigloo\ui\form\Sticky;
     use com\indigloo\Constants as Constants;
@@ -59,11 +58,11 @@
                     <div class="yui3-u-2-3">
 
                         <div id="content">
-                            <h2> Add new post </h2>
+                            <h2> Submit a link </h2>
 
 
                             <p class="help-text">
-                                Please fill in the details below and create your post.
+                                Read something interesting? Please send us a link.
 
                             </p>
 
@@ -87,8 +86,15 @@
                                             <td> &nbsp; </td>
                                             <td>
                                             <br>    
-                                            <span> Summary (use <a href="http://daringfireball.net/projects/markdown/" target="_blank">markdown</a> for formatting) </span></span>
-                                            
+                                            <span>
+                                                    
+                                                Summary (You can use
+                                                <a href="http://daringfireball.net/projects/markdown/" target="_blank">markdown</a>
+                                                or <a href="http://www.w3.org/TR/xhtml1/" target="_blank">xhtml</a>
+                                                for formatting)
+                                                
+                                            </span>
+                                            <br>
                                             <textarea name="summary" class="required h130 w580" title="&nbsp;Summary is required" cols="50" rows="4" ><?php echo $sticky->get('summary'); ?></textarea> </td>
                                         </tr>
                                         

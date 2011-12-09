@@ -3,30 +3,26 @@ body
 	background-color: White
 }
 
-.wmd-panel { }
+.wmd-panel
+{
+	width:580px;
+}
+
 
 #wmd-editor
 {
 	background-color: white;
 }
 
-#wmd-button-bar 
-{
-	width: 100%;
-	/* background-color: Silver; */
-}
+#wmd-button-bar { }
 
 #wmd-input 
 { 
-	/* height: 500px; */
-	width: 100%;
-	/* background-color: Gainsboro; */
 	border: 1px solid DarkGray;
 }
 
 #wmd-preview 
 { 
-	/* background-color: LightSkyBlue; */
 	border: 1px dotted blue ;
 }
 

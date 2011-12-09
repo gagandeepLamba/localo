@@ -1,7 +1,7 @@
 <?php
- use com\indigloo\auth\User as Auth ;
+ use \com\indigloo\auth\User as User ;
  
- if(!Auth::isStaff()){
+ if(!User::isAdmin()){
         $fwd = '/user/login.php?q='.$_SERVER['REQUEST_URI'];
         header('location: '.$fwd);
         exit ;

@@ -2,7 +2,7 @@
     //post/edit.php
     include ('news-app.inc');
     include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
-    include($_SERVER['APP_WEB_DIR'] . '/inc/staff-role.inc');
+    include($_SERVER['APP_WEB_DIR'] . '/inc/role/staff.inc');
      
     use com\indigloo\Util as Util;
     use com\indigloo\ui\form\Sticky as Sticky;
@@ -15,8 +15,6 @@
     $sticky = new Sticky($gWeb->find(Constants::STICKY_MAP,true));
     $postDao = new \com\indigloo\news\dao\Post();
     $postDBRow = $postDao->getRecordOnId($postId);
-    
-    
     
 ?>
 
@@ -69,11 +67,13 @@
                     <div class="yui3-u-2-3">
 
                         <div id="content">
-                            <h2> Edit &nbsp;&raquo; <?php echo $postDBRow['title']; ?> </h2>
-
-
+                       
                             <p class="help-text">
-                                Edit  post details | <a href="/post/edit-media.php?g_post_id=<?php echo $postId; ?>"> Edit post photos </a>
+                                Edit details | <a href="/post/edit-media.php?g_post_id=<?php echo $postId; ?>"> Edit photos </a>
+                                <br>
+                                <br>
+                            <h2> Edit &nbsp;&raquo; <?php echo $postDBRow['title']; ?> </h2>
+                            <p>
                             </p>
                             
                             <?php FormMessage::render(); ?>
@@ -101,7 +101,15 @@
                                             <td> &nbsp; </td>
                                             <td>
                                                 
-                                                <span> Description (use <a href="http://daringfireball.net/projects/markdown/" target="_blank">markdown</a> for formatting) </span>
+                                                <span>
+                                                    Description (You can use
+                                                     
+                                                    <a href="http://daringfireball.net/projects/markdown/" target="_blank">markdown</a>
+                                                    or <a href="http://www.w3.org/TR/xhtml1/" target="_blank">xhtml</a>
+                                                    for formatting)
+                                                </span>
+                                                <br>
+                                                    
                                                 <div id="wmd-button-bar" class="wmd-panel wmd-button-bar"></div>
                                                 <br/>
                                                 <textarea  id="wmd-input" name="description" class="w580 wmd-panel wmd-input" cols="50" rows="10" ><?php echo $sticky->get('description',$postDBRow['markdown']); ?></textarea> </td>
@@ -110,7 +118,7 @@
                                          <tr>
                                             <td> &nbsp; </td>
                                             <td>
-                                                <h2> Preview </h2>
+                                                <b> Preview </b>
                                                 <div id="wmd-preview" class="wmd-panel wmd-preview"></div>
                                             </td>
                                         </tr>

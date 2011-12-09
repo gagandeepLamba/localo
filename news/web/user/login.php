@@ -74,14 +74,14 @@
                                                 <tr>
                                                     <td class="field"> Email<span class="red-label">*</span></td>
                                                     <td>
-                                                        <input type="text" name="email" maxlength="100" class="required" title="&gt;&nbsp;Email is a required field" value="<?php echo $sticky->get('email'); ?>"/>
+                                                        <input type="text" name="email" maxlength="64" class="required" title="&gt;&nbsp;Email is a required field" value="<?php echo $sticky->get('email'); ?>"/>
                                                     </td>
                                                 </tr>
 
                                                  <tr>
                                                     <td class="field"> Password<span class="red-label">*</span></td>
                                                     <td>
-                                                        <input type="password" name="password" maxlength="100" class="required" title="&gt;&nbsp;Password is a required field" value=""/>
+                                                        <input type="password" name="password" maxlength="32" class="required" title="&gt;&nbsp;Password is a required field" value=""/>
                                                     </td>
                                                 </tr>
                                              

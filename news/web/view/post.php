@@ -4,11 +4,9 @@
     $postDBRow = $postDao->getRecordOnSeoTitle($seoTitle);
     $postId = $postDBRow['id'];
     
-    $jwRotatorSwfURI = \com\indigloo\news\Url::getJWRotatorSwfURI();
-    $jwRotatorTrackURI = \com\indigloo\news\Url::getJWRotatorTrackURI($postId);
-    
     $mediaDBRows = $postDao->getMediaOnId($postId);
-    
+    $description = empty($postDBRow['description']) ? $postDBRow['summary'] : $postDBRow['description'] ;
+    $pageURI = \com\indigloo\Url::base().'/'.$seoTitle ;
 
 ?>
 
@@ -39,7 +37,8 @@
 
 
     <body>
-
+        
+        <?php include($_SERVER['APP_WEB_DIR'] . '/inc/fb-comment.inc'); ?>
         <?php include($_SERVER['APP_WEB_DIR'] . '/inc/toolbar.inc'); ?>
 
         <div id="body-wrapper">
@@ -54,22 +53,27 @@
                     <div class="yui3-u-2-3">
 
                         <div id="main-panel">
-                            
-                            <h1> <?php echo $postDBRow['title'] ; ?> </h1>
+                            <div class="mt20">
+                                <h1> <?php echo $postDBRow['title'] ; ?> </h1>
+                            </div>
                             
                             <?php if(sizeof($mediaDBRows) > 0 ) { include('inc/slider.inc') ; } ?>
                             
+                          
                             <div class="widget">
-                                <div class="regular">
-                                    <p>
-                                    <?php echo $postDBRow['description'] ; ?>
-                                    </p>
-                                    
+                                <div class="regular bbd5">
+                                    <?php echo $description ; ?>
                                 </div>
                             </div>
                             
+                            <!-- FB like - do not show faces -->
+                            <div class="p20" > 
+                               <div class="fb-like" data-href="<?php echo $pageURI; ?>" data-send="true" data-width="450" data-show-faces="false"></div>
+                            </div>
                             
-                             <?php include($_SERVER['APP_WEB_DIR'] . '/inc/disqus.inc'); ?>
+                            <!-- FB comments -->
+                            <div class="fb-comments" data-href="<?php echo $pageURI; ?>" data-num-posts="10" data-width="500"></div>
+                            
                         </div> <!-- content -->
 
                     </div>

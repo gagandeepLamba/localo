@@ -11,9 +11,9 @@
     if (isset($_POST['register']) && ($_POST['register'] == 'Register')) {
         
         $fhandler = new Form\Handler('web-form-1', $_POST);
-        $fhandler->addRule('name', 'Name', array('required' => 1));
-        $fhandler->addRule('email', 'Email', array('required' => 1));
-        $fhandler->addRule('password', 'Password', array('required' => 1));
+        $fhandler->addRule('name', 'Name', array('required' => 1, 'maxlength' => 32));
+        $fhandler->addRule('email', 'Email', array('required' => 1, 'maxlength' => 64));
+        $fhandler->addRule('password', 'Password', array('required' => 1 , 'maxlength' => 32));
         
         $fvalues = $fhandler->getValues();
         $ferrors = $fhandler->getErrors();

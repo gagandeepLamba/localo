@@ -25,11 +25,22 @@ create table news_post(
     markdown TEXT,
     s_media_id int ,
     seo_title varchar(256),
-    link varchar(256),
-    is_link int default 0,
+    owner_name varchar(64),
     created_on timestamp default '0000-00-00 00:00:00',
 	updated_on timestamp default '0000-00-00 00:00:00' ,
 	PRIMARY KEY (id)) ENGINE = MYISAM;
+    
+drop table if exists news_link;
+create table news_link(
+	id int(11) NOT NULL auto_increment,
+	title varchar(256) not null UNIQUE,
+	summary TEXT not null ,
+    link varchar(256),
+    owner_name varchar(64),
+    created_on timestamp default '0000-00-00 00:00:00',
+	updated_on timestamp default '0000-00-00 00:00:00' ,
+	PRIMARY KEY (id)) ENGINE = MYISAM;
+    
     
     
     
@@ -56,7 +67,7 @@ create table news_media(
 drop table if exists news_login;
 CREATE TABLE news_login (
     id int(11) NOT NULL auto_increment,
-	user_name varchar(32) not null,
+	user_name varchar(64) not null,
 	password varchar(64) not null,
     first_name varchar(32) not null,
     last_name varchar(32) not null,
@@ -136,6 +147,28 @@ delimiter ;
 --
 alter table news_post add column markdown TEXT ;
 
+--
+-- 9 Dec 2011
+--
+
+alter table news_post drop column is_link ;
+alter table news_post drop column link;
+alter table news_login modify column user_name varchar(64);
+alter table news_login modify column email varchar(64);
+alter table news_post add column owner_name varchar(64) ;
+
+drop table if exists news_link;
+create table news_link(
+	id int(11) NOT NULL auto_increment,
+	title varchar(256) not null UNIQUE,
+	summary TEXT not null ,
+    link varchar(256),
+    owner_name varchar(64),
+    created_on timestamp default '0000-00-00 00:00:00',
+	updated_on timestamp default '0000-00-00 00:00:00' ,
+	PRIMARY KEY (id)) ENGINE = MYISAM;
+    
+    
 
 
 

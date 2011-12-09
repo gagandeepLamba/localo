@@ -107,21 +107,19 @@ namespace com\indigloo\news\mysql {
             
         }
 
-         static function createLink($title,$seoTitle,$markdown,$html,$link) {
+         static function createLink($title,$summary,$link) {
 
             $mysqli = MySQL\Connection::getInstance()->getHandle();
-            $sql = " insert into news_post(title,seo_title,markdown,summary,link,created_on,is_link) ";
-            $sql .= " values(?,?,?,?,?,now(),1) ";
+            $sql = " insert into news_link(title,summary,link,created_on) ";
+            $sql .= " values(?,?,?,now()) ";
 
             $dbCode = MySQL\Connection::ACK_OK;
             $stmt = $mysqli->prepare($sql);
             
             if ($stmt) {
-                $stmt->bind_param("sssss",
+                $stmt->bind_param("sss",
                         $title,
-                        $seoTitle,
-                        $markdown,
-                        $html,
+                        $summary,
                         $link);
                         
 
@@ -155,39 +153,6 @@ namespace com\indigloo\news\mysql {
                         $summary,
                         $markdown,
                         $html,
-                        $postId);
-                        
-
-                $stmt->execute();
-
-                if ($mysqli->affected_rows != 1) {
-                    $dbCode = MySQL\Error::handle(self::MODULE_NAME, $stmt);
-                }
-                $stmt->close();
-            } else {
-                $dbCode = MySQL\Error::handle(self::MODULE_NAME, $mysqli);
-            }
-            
-            return array('code' => $dbCode) ;
-        }
-        
-        static function updateLink($postId,$title,$seoTitle,$markdown,$html,$link) {
-
-            $mysqli = MySQL\Connection::getInstance()->getHandle();
-            $sql = "  update news_post set title = ? , seo_title = ? , markdown = ?, summary = ?, link = ? ," ;
-            $sql .= " updated_on = now() where id = ? ";
-            
-
-            $dbCode = MySQL\Connection::ACK_OK;
-            $stmt = $mysqli->prepare($sql);
-            
-            if ($stmt) {
-                $stmt->bind_param("sssssi",
-                        $title,
-                        $seoTitle,
-                        $markdown,
-                        $html,
-                        $link,
                         $postId);
                         
 

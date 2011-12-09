@@ -2,11 +2,15 @@
     //post/list.php
     include ('news-app.inc');
     include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
-    include($_SERVER['APP_WEB_DIR'] . '/inc/staff-role.inc');
+    include($_SERVER['APP_WEB_DIR'] . '/inc/role/staff.inc');
 	
 	$postDao = new \com\indigloo\news\dao\Post();
     $postDBRows = $postDao->getRecords();
 
+	use \com\indigloo\auth\User as User ;
+	$isAdmin = (User::isAdmin()) ? true : false ;
+	
+	
 ?>
 
 
@@ -51,16 +55,20 @@
 								<table class="doc-table pt10">
 									<?php
 										$strRowItem = '<tr class="item"> <td> {count}. </td> <td> {title}</td> ' ;
-										$strRowItem .= '<td><a href="{editLink}?g_post_id={postId}"> Edit</a>  </td>';
-										$strRowItem .= '<td><a href="#"> Delete</a>  </td> </tr>';
+										$strRowItem .= '<td><a href="/post/edit.php?g_post_id={postId}"> Edit</a>  </td>';
+										
 										
 										$count = 1;
 										foreach($postDBRows as $postDBRow) {
 											$editLink = ($postDBRow['is_link'] == 1 ) ? '/link/edit.php' : '/post/edit.php' ;
 											
-											$rowItem = str_replace(array( 0 => "{count}", 1=> "{title}", 2=>"{postId}", 3 => "{editLink}"),
-																   array(0 => $count, 1 => $postDBRow['title'], 2=> $postDBRow['id'], 3=> $editLink),
+											$rowItem = str_replace(array( 0 => "{count}", 1=> "{title}", 2=>"{postId}"),
+																   array(0 => $count, 1 => $postDBRow['title'], 2=> $postDBRow['id']),
 																   $strRowItem);
+											
+											if($isAdmin) {
+												$strRowItem .= '<td><a href="#"> Delete</a>  </td> </tr>';
+											}
 											
 											echo $rowItem;	
 											$count++ ;

@@ -116,6 +116,16 @@ namespace com\indigloo\auth {
             return $flag;
         }
         
+        function isAuthenticated() {
+            $flag = false ;
+            if (isset($_SESSION) && isset($_SESSION['LOGON_TOKEN'])) {
+                $flag = true ;
+            }
+            
+            return $flag ;
+        
+        }
+        
         static function getLoggedInUser() {
             $user = NULL ;
             if (isset($_SESSION) && isset($_SESSION['LOGON_TOKEN'])) {
@@ -150,7 +160,7 @@ namespace com\indigloo\auth {
             $digest = sha1($message);
             
             $sql = " insert into {table} (first_name, last_name, user_name,email,password,salt,created_on,is_staff) ";
-            $sql .= " values(?,?,?,?,?,?,now(),1) ";
+            $sql .= " values(?,?,?,?,?,?,now(),0) ";
             $sql = str_replace("{table}", $tableName,$sql);
             
 

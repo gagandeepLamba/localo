@@ -1,7 +1,7 @@
 <?php
 	include 'news-app.inc';
 	include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
-	include($_SERVER['APP_WEB_DIR'] . '/inc/staff-role.inc');
+	include($_SERVER['APP_WEB_DIR'] . '/inc/role/staff.inc');
 
 	use com\indigloo\Util ;
 	use com\indigloo\ui\form\Sticky ;
@@ -149,12 +149,15 @@
                   
                     <div class="yui3-u-2-3">
                         <div id="content">
+							<p class="help-text">
+								Edit Photos | 
+								<a href="/post/edit.php?g_post_id=<?php echo $postId; ?>"> Edit details </a> 
+								
+								<br>
+                                <br>
+							</p>
 							 <h2> Edit Photos &nbsp;&raquo; <?php echo $postDBRow['title']; ?> </h2>
-							  <p class="help-text">
-								<a href="/post/edit.php?g_post_id=<?php echo $postId; ?>"> Edit post details </a> | Edit Post Photos
-                            </p>
-							  
-							
+							 
 							
                              <div id="form-wrapper">
                                 <form id="web-form1" class="web-form" name="web-form1" action="/post/edit-media.php" enctype="multipart/form-data"  method="POST">

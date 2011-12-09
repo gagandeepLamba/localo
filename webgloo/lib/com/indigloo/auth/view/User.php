@@ -9,6 +9,14 @@ namespace com\indigloo\auth\view {
         public $userName ;
         public $email ;
         
+        static function create($row) {
+            $user = new User();
+            $user->firstName = $row['first_name'] ;
+            $user->lastName = '' ;
+            $user->userName = $row['user_name'];
+            $user->email = $row['email'];
+            
+        }
     }
 }
     

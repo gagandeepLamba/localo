@@ -18,12 +18,7 @@ namespace com\indigloo\news\dao {
         }
         
         function createLink($title,$summary,$link) {
-            $seoTitle = \com\indigloo\seo\StringUtil::convertNameToSeoKey($title);
-            //change summary (markdown) to html
-            $parser = new \ext\MarkdownParser();
-            $html = $parser->transform($summary);
-            
-            $data = mysql\Post::createLink($title,$seoTitle,$summary,$html,$link);
+            $data = mysql\Post::createLink($title,$summary,$link);
             return $data ;
         }
         
@@ -35,18 +30,6 @@ namespace com\indigloo\news\dao {
             $html = $parser->transform($description);
             
             $data = mysql\Post::update($postId,$title,$seoTitle,$summary,$description,$html);
-            return $data ;
-        }
-        
-        function updateLink($postId,$title,$summary,$link) {
-            Util::isEmpty('post_id',$postId);
-            
-            $seoTitle = \com\indigloo\seo\StringUtil::convertNameToSeoKey($title);
-             //change summary (markdown) to html
-            $parser = new \ext\MarkdownParser();
-            $html = $parser->transform($summary);
-            
-            $data = mysql\Post::updateLink($postId,$title,$seoTitle,$summary,$html,$link);
             return $data ;
         }
         

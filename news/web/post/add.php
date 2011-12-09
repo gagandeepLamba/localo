@@ -2,7 +2,7 @@
     //post/add.php
     include ('news-app.inc');
     include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
-    include($_SERVER['APP_WEB_DIR'] . '/inc/staff-role.inc');
+    include($_SERVER['APP_WEB_DIR'] . '/inc/role/staff.inc');
     
     use com\indigloo\Util;
     use com\indigloo\ui\form\Sticky;
@@ -97,7 +97,14 @@
                                             <td>
                                                 
                                                 
-                                                <span> Description (use <a href="http://daringfireball.net/projects/markdown/" target="_blank">markdown</a> for formatting) </span>
+                                                <span>
+                                                    Description (You can use
+                                                     
+                                                    <a href="http://daringfireball.net/projects/markdown/" target="_blank">markdown</a>
+                                                    or <a href="http://www.w3.org/TR/xhtml1/" target="_blank">xhtml</a>
+                                                    for formatting)
+                                                </span>
+                                                <br>
                                                 <div id="wmd-button-bar" class="wmd-panel wmd-button-bar"></div>
                                                 <br/>
                                                 

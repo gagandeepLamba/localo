@@ -11,15 +11,20 @@
     if (isset($_POST['login']) && ($_POST['login'] == 'Login')) {
         
         $fhandler = new Form\Handler('web-form-1', $_POST);
-        $fhandler->addRule('email', 'Email', array('required' => 1));
-        $fhandler->addRule('password', 'Password', array('required' => 1));
+        $fhandler->addRule('email', 'Email', array('required' => 1, 'maxlength' => 64));
+        $fhandler->addRule('password', 'Password', array('required' => 1, 'maxlength' => 32));
         
         $fvalues = $fhandler->getValues();
         $ferrors = $fhandler->getErrors();
-    
+        
+        $forwardURI = '/' ;
+        if(array_key_exists('fwd_uri',$_POST) && (!empty($_POST['fwd_uri']))) {
+            $forwardURI = $_POST['fwd_uri'] ;
+        }
+        
         
         if ($fhandler->hasErrors()) {
-            $locationOnError = '/user/login.php?q='.$_POST['fwd_uri'] ;
+            $locationOnError = '/user/login.php?q='.$forwardURI ;
             $gWeb->store(Constants::STICKY_MAP, $fvalues);
             $gWeb->store(Constants::FORM_ERRORS,$fhandler->getErrors());
             
@@ -35,13 +40,14 @@
             $code = $data['code'];
             
             if ($code > 0 ) {
-                header("location: ".$_POST['fwd_uri']);
+                
+                header("location: ".$forwardURI);
                 
             } else{
                 
                 $gWeb->store(Constants::STICKY_MAP, $fvalues);
                 $gWeb->store(Constants::FORM_ERRORS,array("Error: wrong login or password"));
-                $locationOnError = '/user/login.php?q='.$_POST['fwd_uri'] ;
+                $locationOnError = '/user/login.php?q='.$forwardURI ;
                 header("location: ".$locationOnError);
                 exit(1);
             }

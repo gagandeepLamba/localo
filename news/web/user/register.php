@@ -90,7 +90,7 @@
                                                  <tr>
                                                     <td class="field"> Name<span class="red-label">*</span></td>
                                                     <td>
-                                                        <input type="text" name="name" maxlength="64" class="required" title="&nbsp;Name is required" value="<?php echo $sticky->get('name'); ?>"/>
+                                                        <input type="text" name="name" maxlength="32" class="required" title="&nbsp;Name is required" value="<?php echo $sticky->get('name'); ?>"/>
                                                     </td>
                                                  </tr>
 
