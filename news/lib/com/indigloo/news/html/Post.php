@@ -20,6 +20,7 @@ namespace com\indigloo\news\html {
 				$view = new \stdClass;
 				$view->title = $postDBRow['title'];
 				$view->summary = $postDBRow['summary'];
+				$view->shortId = $postDBRow['short_id'];
 				$view->seoTitle = $postDBRow['seo_title'];
 				
 				$view->originalName = $postDBRow['original_name'];
@@ -43,6 +44,7 @@ namespace com\indigloo\news\html {
 				$view = new \stdClass;
 				$view->title = $postDBRow['title'];
 				$view->summary = $postDBRow['summary'];
+				$view->shortId = $postDBRow['short_id'];
 				$view->seoTitle = $postDBRow['seo_title'];
 				
 				$html = Template::render($template,$view);

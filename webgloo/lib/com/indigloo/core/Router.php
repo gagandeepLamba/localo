@@ -47,11 +47,12 @@ namespace com\indigloo\core {
                 }
                     
                 $route = NULL ;
-        
-                if($path == '/') 
+                
+                if($path == '/') {
                     $route = $this->matchHome($this->rules);      
-                else 
+                } else {
                     $route = $this->match($this->rules,$path);
+                }
         
                 return $route ;
 
@@ -61,7 +62,7 @@ namespace com\indigloo\core {
                 $route = NULL ;
         
                 foreach($rules as $rule) {
-                    if($rule["pattern"] == '/') {
+                    if($rule["pattern"] == '^/$') {
                         $route = $this->createRoute($rule,array());
                     }
                 }

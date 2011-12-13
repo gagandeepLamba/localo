@@ -3,13 +3,14 @@
 namespace com\indigloo\news\dao {
 
     
-    use com\indigloo\Util as Util ;
-    use com\indigloo\news\mysql as mysql;
+    use \com\indigloo\Util as Util ;
+    use \com\indigloo\news\mysql as mysql;
+    use \com\indigloo\seo\StringUtil as SeoStringUtil ;
     
     class Post {
 
         function create($title,$summary,$description) {
-            $seoTitle = \com\indigloo\seo\StringUtil::convertNameToSeoKey($title);
+            $seoTitle = SeoStringUtil::convertNameToSeoKey($title);
             //change description (markdown) to html
             $parser = new \ext\MarkdownParser();
             $html = $parser->transform($description);
@@ -24,7 +25,7 @@ namespace com\indigloo\news\dao {
         
         function update($postId,$title,$summary,$description) {
             Util::isEmpty('post_id',$postId);
-            $seoTitle = \com\indigloo\seo\StringUtil::convertNameToSeoKey($title);
+            $seoTitle = SeoStringUtil::convertNameToSeoKey($title);
             //change description (markdown) to html
             $parser = new \ext\MarkdownParser();
             $html = $parser->transform($description);
@@ -45,6 +46,11 @@ namespace com\indigloo\news\dao {
         
         function getRecordOnSeoTitle($seoTitle) {
             $row = mysql\Post::getRecordOnSeoTitle($seoTitle);
+            return $row ;
+        }
+        
+        function getRecordOnShortId($shortId) {
+            $row = mysql\Post::getRecordOnShortId($shortId);
             return $row ;
         }
         

@@ -5,17 +5,22 @@
     include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
     include($_SERVER['APP_WEB_DIR'] . '/inc/role/staff.inc');
     
-    use com\indigloo\ui\form as Form;
-    use com\indigloo\Constants as Constants ;
-    
+    use \com\indigloo\ui\form as Form;
+    use \com\indigloo\Constants as Constants ;
+    use \com\indigloo\Util as Util ;
     
     if (isset($_POST['save']) && ($_POST['save'] == 'Save')) {
         
         $fhandler = new Form\Handler('web-form-1', $_POST,false);
-        $fhandler->addRule('title', 'Title', array('required' => 1));
+        $fhandler->addRule('title', 'Title', array('required' => 1, 'maxlength' => 128));
         $fhandler->addRule('summary', 'Summary', array('required' => 1));
         
         $fvalues = $fhandler->getValues();
+        
+        if(!Util::isAlphaNumeric($fvalues['title'])){
+            $fhandler->addError('Post title can contain letters and numbers only!');
+        }
+        
         $ferrors = $fhandler->getErrors();
         
         

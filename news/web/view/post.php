@@ -1,12 +1,12 @@
 <?php
     //find post on seo title
     $postDao = new \com\indigloo\news\dao\Post();
-    $postDBRow = $postDao->getRecordOnSeoTitle($seoTitle);
+    $postDBRow = $postDao->getRecordOnShortId($shortId);
     $postId = $postDBRow['id'];
     
     $mediaDBRows = $postDao->getMediaOnId($postId);
     $description = empty($postDBRow['description']) ? $postDBRow['summary'] : $postDBRow['description'] ;
-    $pageURI = \com\indigloo\Url::base().'/'.$seoTitle ;
+    $pageURI = \com\indigloo\Url::base().'/'.$shortId.'/'.$seoTitle ;
 
 ?>
 

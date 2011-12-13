@@ -27,6 +27,17 @@ namespace com\indigloo {
             $token = md5(uniqid(mt_rand(), true));
             return $token;
         }
+        
+        function getRandomString($length = 8) {
+            $characters = '123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $string = '';
+
+            for ($i = 0; $i < $length; $i++) {
+                $string .= $characters[mt_rand(0, strlen($characters) - 1)];
+            }
+
+            return $string;
+        }
 
         static function array2nl($arr) {
             //lambda style function
@@ -37,7 +48,7 @@ namespace com\indigloo {
 
         static function stringify($var) {
             $buffer = '';
-            //var_dump($var);
+            
             if (is_object($var)) {
                 $buffer = '{object=' . $var->__toString() . '}';
                 return $buffer;

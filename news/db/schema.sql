@@ -19,17 +19,21 @@
 drop table if exists news_post;
 create table news_post(
 	id int(11) NOT NULL auto_increment,
-	title varchar(256) not null UNIQUE,
+    short_id varchar(8) not null,
+	title varchar(128) not null,
 	summary TEXT not null ,
     description TEXT ,
     markdown TEXT,
     s_media_id int ,
-    seo_title varchar(256),
+    seo_title varchar(144),
     owner_name varchar(64),
     created_on timestamp default '0000-00-00 00:00:00',
 	updated_on timestamp default '0000-00-00 00:00:00' ,
 	PRIMARY KEY (id)) ENGINE = MYISAM;
     
+alter table  news_post add constraint UNIQUE uniq_skey (short_id);
+
+
 drop table if exists news_link;
 create table news_link(
 	id int(11) NOT NULL auto_increment,
@@ -169,7 +173,20 @@ create table news_link(
 	PRIMARY KEY (id)) ENGINE = MYISAM;
     
     
+--
+-- 13 dec 2011
+--
 
+alter table news_post modify column title varchar(128);
+alter table news_post drop index title;
+alter table news_post modify column seo_title varchar(144);
+alter table news_post add column short_id varchar(8) not null ;
+--
+-- run the db/scripts/post-shortid.php script now
+--
+-- Add UNIQUE constraint
+
+alter table  news_post add constraint UNIQUE uniq_skey (short_id);
 
 
     

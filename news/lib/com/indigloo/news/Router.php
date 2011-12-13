@@ -13,15 +13,18 @@ namespace com\indigloo\news{
         }
         
         function initTable() {
-            //match alphanumeric + dashes
-            //a pcre word (\w) does not contain dashes
-            $this->createRule('/', 'com\indigloo\news\controller\Home');
-            $this->createRule( '^(?P<token>[-\w]+)$','com\indigloo\news\controller\Post');
+             /* match alphanumeric + dashes
+              * a pcre word (\w) does not contain dashes
+              * our SEO title contains dashes, hence the matching pattern has to
+              * include a dash [-\w]
+              * 
+              */
+            $this->createRule('^/$', 'com\indigloo\news\controller\Home');
             $this->createRule('^page/(?P<page>\d+)$','com\indigloo\news\controller\Home');
-            $this->createRule('^(?P<token>\w+)/page/(?P<page>\d+)$','com\indigloo\news\controller\Post');
-            $this->createRule('^category/(?P<name>\w+)$','com\indigloo\news\controller\Category');
-            $this->createRule('^category/(?P<name>\w+)/page/(?P<page>\d+)$','com\indigloo\news\controller\Category');
-
+            //short identifier match
+            $this->createRule( '^(?P<shortid>[\w]{8})/(?P<token>[-\w]+)$','com\indigloo\news\controller\Post');
+            $this->createRule( '^(?P<token>[\w]{8})$','com\indigloo\news\controller\TinyUrl');
+            
         }
     }
 }

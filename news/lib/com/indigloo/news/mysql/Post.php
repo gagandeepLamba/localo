@@ -2,8 +2,9 @@
 
 namespace com\indigloo\news\mysql {
 
-    use com\indigloo\mysql as MySQL;
-
+    use \com\indigloo\mysql as MySQL;
+    use \com\indigloo\Util as Util ;
+    
     class Post {
         
         const MODULE_NAME = 'com\indigloo\news\mysql\Post';
@@ -27,12 +28,20 @@ namespace com\indigloo\news\mysql {
             
         }
         
-        
         static function getRecordOnSeoTitle($seoTitle) {
             $mysqli = MySQL\Connection::getInstance()->getHandle();
             $seoTitle = $mysqli->real_escape_string($seoTitle);
 
             $sql = " select * from news_post where seo_title = '".$seoTitle. "' " ;
+            $row = MySQL\Helper::fetchRow($mysqli, $sql);
+            return $row;
+        }
+        
+        static function getRecordOnShortId($shortId) {
+            $mysqli = MySQL\Connection::getInstance()->getHandle();
+            $shortId = $mysqli->real_escape_string($shortId);
+
+            $sql = " select * from news_post where short_id = '".$shortId. "' " ;
             $row = MySQL\Helper::fetchRow($mysqli, $sql);
             return $row;
         }
@@ -73,15 +82,18 @@ namespace com\indigloo\news\mysql {
         static function create($title,$seoTitle,$summary,$markdown,$html) {
 
             $mysqli = MySQL\Connection::getInstance()->getHandle();
-            $sql = " insert into news_post(title,seo_title,summary,markdown,description,created_on) ";
-            $sql .= " values(?,?,?,?,?,now()) ";
+            $sql = " insert into news_post(short_id,title,seo_title,summary,markdown,description,created_on) ";
+            $sql .= " values(?,?,?,?,?,?,now()) ";
 
             $dbCode = MySQL\Connection::ACK_OK;
             $stmt = $mysqli->prepare($sql);
             $lastInsertId = NULL ;
+            $shortId = Util::getRandomString(8);
+            
             
             if ($stmt) {
-                $stmt->bind_param("sssss",
+                $stmt->bind_param("ssssss",
+                        $shortId,
                         $title,
                         $seoTitle,
                         $summary,

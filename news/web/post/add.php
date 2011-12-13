@@ -81,7 +81,7 @@
                                     <table class="form-table">
 
                                         <tr>
-                                            <td class="field"> Title<span class="red-label">*</span></td>
+                                            <td class="field"> Title<span class="red-label">*</span> (Alphanumeric only)</td>
                                             <td>
                                                 <input type="text" name="title" maxlength="128" class="required w580" title="&nbsp;Title is required" value="<?php echo $sticky->get('title'); ?>"/>
                                             </td>
