@@ -1,19 +1,3 @@
-<?php
-   
-    //view/home.php
-    
-    use \com\indigloo\ui\Pagination as Pagination;
-    use \com\indigloo\Url as Url;
-    
-    $postDao = new \com\indigloo\news\dao\Post();
-    $pageSize = 10 ;
-    $postDBRows = $postDao->getRecordsWithMedia($pageNo,$pageSize);
-    $postDBRowsCount = $postDao->getRecordsWithMediaCount();
-    $paginator = new Pagination($pageNo,$postDBRowsCount,$pageSize);
-    
-    
-?>
-
 
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -48,14 +32,25 @@
                         <div id="main-panel">
                             <?php
                             
+                                $start = NULL ;
+                                $end = NULL ;
+                                
+                                if(sizeof($postDBRows) > 0 ) { 
+                                    $start = $postDBRows[0]['id'] ;
+                                    $end =   $postDBRows[sizeof($postDBRows)-1]['id'] ;
+                                }
+                                
                                 foreach($postDBRows as $postDBRow) {
-                                    /* $postVO = \com\indigloo\news\view\Post::create($postDBRow);*/
+                                    
                                     $html = \com\indigloo\news\html\Post::getMainPageSummary($postDBRow);
                                     echo $html ;
                                 }
+                                
                             ?>
                             
-                            <?php $paginator->renderSeo(Url::base()); ?>
+                            <?php
+                                $paginator->render('/index2.php',$start,$end);
+                            ?>
                             
                         </div> <!-- content -->
                 

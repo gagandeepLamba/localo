@@ -28,15 +28,6 @@ namespace com\indigloo\news\mysql {
             
         }
         
-        static function getRecordOnSeoTitle($seoTitle) {
-            $mysqli = MySQL\Connection::getInstance()->getHandle();
-            $seoTitle = $mysqli->real_escape_string($seoTitle);
-
-            $sql = " select * from news_post where seo_title = '".$seoTitle. "' " ;
-            $row = MySQL\Helper::fetchRow($mysqli, $sql);
-            return $row;
-        }
-        
         static function getRecordOnShortId($shortId) {
             $mysqli = MySQL\Connection::getInstance()->getHandle();
             $shortId = $mysqli->real_escape_string($shortId);
@@ -46,37 +37,54 @@ namespace com\indigloo\news\mysql {
             return $row;
         }
         
-        static function getRecords() {
+        static function getLatestPostWithMedia($pageSize){
             $mysqli = MySQL\Connection::getInstance()->getHandle();
             
-            $sql = " select * from news_post " ;  
-            $rows = MySQL\Helper::fetchRows($mysqli, $sql);
-            return $rows;
-        }
-        
-        static function getRecordsWithMedia($pageNo,$pageSize){
-            $mysqli = MySQL\Connection::getInstance()->getHandle();
-             
             $sql = " select post.*, media.bucket, media.id as media_id," ;
             $sql .= " media.stored_name,media.original_name, media.original_height,media.original_width " ;
             $sql .= " from news_post post LEFT  JOIN news_media media ON post.s_media_id = media.id ";
-            $sql .= " order by post.created_on DESC " ;
-            
-            $offset = 0 + ($pageNo - 1 ) * $pageSize;
-            $sql = $sql." LIMIT  " .$offset. "," .$pageSize;
+            $sql .= " order by post.id DESC LIMIT " .$pageSize;
 
             $rows = MySQL\Helper::fetchRows($mysqli, $sql);
             return $rows;
-            
+        
         }
         
-        static function getRecordsWithMediaCount() {
             
+        static function getPostWithMedia($start,$direction,$pageSize){
             $mysqli = MySQL\Connection::getInstance()->getHandle();
             
-            $sql = " select count(id) as count from news_post " ;  
-            $row = MySQL\Helper::fetchRow($mysqli, $sql);
-            return $row;
+            // primary key id is an excellent proxy for created_on column
+            // latest posts has max(id) and appears on top
+            // so AFTER (NEXT) means id < latest post id
+            
+            $predicate = '' ;
+            
+            if($direction == 'after') {
+                $predicate = " where post.id < ".$start ;
+                $predicate .= " order by post.id DESC LIMIT " .$pageSize;
+            } else if($direction == 'before'){
+                $predicate = " where post.id > ".$start ;
+                $predicate .= " order by post.id ASC LIMIT " .$pageSize;
+            } else {
+                trigger_error("Unknow sort direction in query", E_USER_ERROR);
+            }
+            
+            $sql = " select post.*, media.bucket, media.id as media_id," ;
+            $sql .= " media.stored_name,media.original_name, media.original_height,media.original_width " ;
+            $sql .= " from news_post post LEFT  JOIN news_media media ON post.s_media_id = media.id ";
+            $sql .= $predicate ;
+            
+            $rows = MySQL\Helper::fetchRows($mysqli, $sql);
+            
+            //reverse rows for 'before' direction
+            if($direction == 'before') {
+                $results = array_reverse($rows) ;
+                return $results ;
+            }
+            
+            return $rows;
+            
         }
         
         static function create($title,$seoTitle,$summary,$markdown,$html) {
@@ -115,7 +123,6 @@ namespace com\indigloo\news\mysql {
             }
             
             return array('code' => $dbCode , 'lastInsertId' => $lastInsertId ) ;
-            
             
         }
 

@@ -43,11 +43,9 @@
              
             if ($code == com\indigloo\mysql\Connection::ACK_OK ) {
                 header("location: / ");
-            }
-            
-            if($code == com\indigloo\mysql\Connection::DUPLICATE_KEY ) {
+            } else {
                 $gWeb->store(Constants::STICKY_MAP, $fvalues);
-                $gWeb->store(Constants::FORM_ERRORS,array("Duplicate error : Did you try an existing title?"));
+                $gWeb->store(Constants::FORM_ERRORS,array("Unknown DB Error : This looks bad!"));
                 $locationOnError = '/post/edit.php?g_post_id='.$fvalues['post_id'] ;
                 header("location: " . $locationOnError);
                 exit(1);

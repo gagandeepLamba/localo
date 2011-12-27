@@ -46,11 +46,15 @@
                 $locationOnSuccess = '/post/edit-media.php?g_post_id='.$data['lastInsertId'] ;
                 header("location: " . $locationOnSuccess);
                 
-            }
-            
-            if($code == com\indigloo\mysql\Connection::DUPLICATE_KEY ) {
+            } else if($code == com\indigloo\mysql\Connection::DUPLICATE_KEY ) {
                 $gWeb->store(Constants::STICKY_MAP, $fvalues);
-                $gWeb->store(Constants::FORM_ERRORS,array("Duplicate error : Did you try an existing title? "));
+                $gWeb->store(Constants::FORM_ERRORS,array("Duplicate short key: Please submit again!"));
+                $locationOnError = '/post/add.php' ;
+                header("location: " . $locationOnError);
+                exit(1);
+            } else {
+                $gWeb->store(Constants::STICKY_MAP, $fvalues);
+                $gWeb->store(Constants::FORM_ERRORS,array("Unknown DB Error : This looks bad!"));
                 $locationOnError = '/post/add.php' ;
                 header("location: " . $locationOnError);
                 exit(1);

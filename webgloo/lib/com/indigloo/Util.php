@@ -110,14 +110,22 @@ namespace com\indigloo {
             return ctype_alnum($input);
         }
 
-        //@todo - even a valid value zero triggers this error
+        //@todo - fix - a valid value of zero will triggers this error
         static function isEmpty($name, $value) {
             if (empty($value)) {
                 $message = 'Bad input:: ' . $name . ' is empty or null!';
                 trigger_error($message, E_USER_ERROR);
             }
         }
-
+        
+        static function isEmptyMessage($name, $value) {
+            if (empty($value)) {
+                $message = "Bad input :: $name is empty or null \n";
+                echo nl2br($message);
+                exit ;
+            }
+        }
+        
         static function startsWith($Haystack, $Needle) {
             // Recommended version, using strpos
             return strpos($Haystack, $Needle) === 0;

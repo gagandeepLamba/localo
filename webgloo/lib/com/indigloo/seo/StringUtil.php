@@ -3,8 +3,9 @@ namespace com\indigloo\seo{
 
     class StringUtil {
         static function convertNameToSeoKey($name) {
+            
             $seoKey = '' ;
-           
+            $name = trim($name);
             $name = str_replace('-', ' ', $name);
             
             //squeeze extra white spaces

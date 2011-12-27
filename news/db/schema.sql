@@ -179,8 +179,10 @@ create table news_link(
 
 alter table news_post modify column title varchar(128);
 alter table news_post drop index title;
+
 alter table news_post modify column seo_title varchar(144);
 alter table news_post add column short_id varchar(8) not null ;
+
 --
 -- run the db/scripts/post-shortid.php script now
 --

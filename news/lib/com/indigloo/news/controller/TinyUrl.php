@@ -2,10 +2,10 @@
 namespace com\indigloo\news\controller{
 
     
-    class Category implements INewsController{
+    class TinyUrl implements INewsController{
         
         function process($params,$options) {
-            echo("Category Controller Not implemented!");
+            echo("TinyUrl Controller Not implemented!");
         }
     }
 }

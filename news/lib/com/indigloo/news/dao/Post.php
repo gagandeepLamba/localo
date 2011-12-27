@@ -44,33 +44,24 @@ namespace com\indigloo\news\dao {
             return $rows ;
         }
         
-        function getRecordOnSeoTitle($seoTitle) {
-            $row = mysql\Post::getRecordOnSeoTitle($seoTitle);
-            return $row ;
-        }
-        
         function getRecordOnShortId($shortId) {
             $row = mysql\Post::getRecordOnShortId($shortId);
             return $row ;
         }
         
-        function getRecords() {
-            $rows = mysql\Post::getRecords();
+        function getLatestPostWithMedia() {
+            //@todo read pagesize from config file
+            $rows = mysql\Post::getLatestPostWithMedia(10);
             return $rows ;
 
         }
         
-        function getRecordsWithMedia($pageNo,$pageSize) {
-            $rows = mysql\Post::getRecordsWithMedia($pageNo,$pageSize);
+        function getPostWithMedia($start,$direction) {
+            //@todo read pagesize from config file
+            $rows = mysql\Post::getPostWithMedia($start,$direction,10);
             return $rows ;
 
         }
-        
-        function getRecordsWithMediaCount() {
-            $row = mysql\Post::getRecordsWithMediaCount();
-            return $row['count'] ;
-        }
-        
         
     }
 
