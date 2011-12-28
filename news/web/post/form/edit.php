@@ -42,10 +42,13 @@
             
              
             if ($code == com\indigloo\mysql\Connection::ACK_OK ) {
+                //@todo - take to post
                 header("location: / ");
             } else {
+                
+                $message = sprintf("DB Error: (code is %d) please try again!",$code);
                 $gWeb->store(Constants::STICKY_MAP, $fvalues);
-                $gWeb->store(Constants::FORM_ERRORS,array("Unknown DB Error : This looks bad!"));
+                $gWeb->store(Constants::FORM_ERRORS,array($message));
                 $locationOnError = '/post/edit.php?g_post_id='.$fvalues['post_id'] ;
                 header("location: " . $locationOnError);
                 exit(1);

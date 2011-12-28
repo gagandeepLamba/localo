@@ -42,19 +42,14 @@
             $code = $data['code'];
             
             if ($code == com\indigloo\mysql\Connection::ACK_OK ) {
-                //success
+                //@todo - take to post
                 $locationOnSuccess = '/post/edit-media.php?g_post_id='.$data['lastInsertId'] ;
                 header("location: " . $locationOnSuccess);
                 
-            } else if($code == com\indigloo\mysql\Connection::DUPLICATE_KEY ) {
-                $gWeb->store(Constants::STICKY_MAP, $fvalues);
-                $gWeb->store(Constants::FORM_ERRORS,array("Duplicate short key: Please submit again!"));
-                $locationOnError = '/post/add.php' ;
-                header("location: " . $locationOnError);
-                exit(1);
             } else {
+                $message = sprintf("DB Error: (code is %d) please try again!",$code);
                 $gWeb->store(Constants::STICKY_MAP, $fvalues);
-                $gWeb->store(Constants::FORM_ERRORS,array("Unknown DB Error : This looks bad!"));
+                $gWeb->store(Constants::FORM_ERRORS,array($message));
                 $locationOnError = '/post/add.php' ;
                 header("location: " . $locationOnError);
                 exit(1);

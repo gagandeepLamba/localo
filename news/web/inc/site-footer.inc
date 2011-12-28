@@ -14,6 +14,6 @@
 				<a class="yt" href="#YouTube"></a>
 			</div>
 			<div class="clear"></div>
-		<div id="copyright"> Copyright © 2011 Your Logo </div>
+		<div id="copyright"> Copyright © 27main.com </div>
 	</div>
 </div>

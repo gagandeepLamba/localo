@@ -52,19 +52,22 @@ namespace com\indigloo\ui {
                 return '' ;
             }
             
+            //convert to base36
+            $start = base_convert($start,10,36) ;
+            $end = base_convert($end,10,36) ;
+             
             printf("<div class=\"pagination\">");
             printf("<span class=\"nextprev\"> <a href=\"/\">Home</a> &nbsp;&nbsp;</span>");
             
             if($this->hasPrevious()){
-                //convert to base36
-                $start = base_convert($start,10,36) ;
+               
                 $bparams = array('before' => $start, 'pageNo' => $this->previousPage());
                 $previousURI = Url::addQueryParameters($pageURI,$bparams);
                 printf("<span class=\"nextprev\"> <a href=\"%s\">&lt;&nbsp;Previous</a> </span>",$previousURI);
             }
             
             if($this->hasNext()){
-                $end = base_convert($end,10,36) ;
+               
                 $nparams = array('after' => $end, 'pageNo' => $this->nextPage()) ;
                 $nextURI = Url::addQueryParameters($pageURI,$nparams);
                 printf("<span class=\"nextprev\"> <a href=\"%s\">&nbsp;Next&nbsp;&gt;</a> </span>",$nextURI);

@@ -51,14 +51,14 @@ namespace com\indigloo\news\dao {
         
         function getLatestPostWithMedia() {
             //@todo read pagesize from config file
-            $rows = mysql\Post::getLatestPostWithMedia(10);
+            $rows = mysql\Post::getLatestPostWithMedia(20);
             return $rows ;
 
         }
         
         function getPostWithMedia($start,$direction) {
             //@todo read pagesize from config file
-            $rows = mysql\Post::getPostWithMedia($start,$direction,10);
+            $rows = mysql\Post::getPostWithMedia($start,$direction,20);
             return $rows ;
 
         }

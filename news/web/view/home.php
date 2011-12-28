@@ -1,12 +1,26 @@
+<?php
+
+    use \com\indigloo\ui\Pagination as Pagination;
+    use \com\indigloo\Url as Url;
+    
+    $postDao = new \com\indigloo\news\dao\Post();
+    $postDBRows = $postDao->getLatestPostWithMedia();
+    $paginator = new Pagination($pageNo);
+    
+    $pageURI = 'http://www.27main.com' ;
+
+?>
 
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 
-    <head><title> News site</title>
+    <head><title> 27main - source of news and content from India - created by you</title>
 
-        <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
-
+        <meta http-equiv="content-type" content="text/html; charset="utf-8" />
+        <meta name="keywords" content="27main, pictures,india news, entertainment, indian politics, headline news, offbeat, created by users, bookmarking site">
+        <meta name="description" content="27 main is a source of news and content from India - All created by its users">
+                                    
         <link rel="stylesheet" type="text/css" href="/lib/yui3/grids-min.css">
         <link rel="stylesheet" type="text/css" href="/css/style.css">
         
@@ -15,7 +29,7 @@
 
 
     <body>
-
+        <?php include($_SERVER['APP_WEB_DIR'] . '/inc/fb-sdk.inc'); ?>
         <?php include($_SERVER['APP_WEB_DIR'] . '/inc/toolbar.inc'); ?>
 
         <div id="body-wrapper">

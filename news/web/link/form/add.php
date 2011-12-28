@@ -36,11 +36,12 @@
             
             if ($code == com\indigloo\mysql\Connection::ACK_OK ) {
                 header("location: /link/thanks.php");
-            }
-            
-            if($code == com\indigloo\mysql\Connection::DUPLICATE_KEY ) {
+                
+            }else {
+                
+                $message = sprintf("DB Error: (code is %d) please try again!",$code);
                 $gWeb->store(Constants::STICKY_MAP, $fvalues);
-                $gWeb->store(Constants::FORM_ERRORS,array("Duplicate error : Did you try an existing title?"));
+                $gWeb->store(Constants::FORM_ERRORS,array($message));
                 $locationOnError = '/link/add.php' ;
                 header("location: " . $locationOnError);
                 exit(1);

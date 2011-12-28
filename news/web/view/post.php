@@ -15,10 +15,12 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 
-    <head><title> News site</title>
+    <head><title> <?php echo $postDBRow['title']; ?> </title>
 
-        <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
-
+        <meta http-equiv="content-type" content="text/html; charset="utf-8" />
+        <meta name="keywords" content="27main">
+        <meta name="description" content="<?php echo $postDBRow['summary']; ?>">
+        
         <link rel="stylesheet" type="text/css" href="/lib/yui3/grids-min.css">
         <link rel="stylesheet" type="text/css" href="/css/style.css">
             
@@ -38,7 +40,7 @@
 
     <body>
         
-        <?php include($_SERVER['APP_WEB_DIR'] . '/inc/fb-comment.inc'); ?>
+        <?php include($_SERVER['APP_WEB_DIR'] . '/inc/fb-sdk.inc'); ?>
         <?php include($_SERVER['APP_WEB_DIR'] . '/inc/toolbar.inc'); ?>
 
         <div id="body-wrapper">
@@ -66,13 +68,6 @@
                                 </div>
                             </div>
                             
-                            <!-- FB like - do not show faces -->
-                            <div class="p20" > 
-                               <div class="fb-like" data-href="<?php echo $pageURI; ?>" data-send="true" data-width="450" data-show-faces="false"></div>
-                            </div>
-                            
-                            <!-- FB comments -->
-                            <div class="fb-comments" data-href="<?php echo $pageURI; ?>" data-num-posts="10" data-width="500"></div>
                             
                         </div> <!-- content -->
 
@@ -80,6 +75,11 @@
                     
                     <div class="yui3-u-1-3">
                         <?php include($_SERVER['APP_WEB_DIR'] . '/inc/sidebar.inc'); ?>
+                        <div class="p20">
+                        <hr>
+                        short url for mobiles &raquo;<b> 27ma.in/<?php echo $shortId; ?> </b>
+                        </div>
+                        
                     </div>
                     
                     
