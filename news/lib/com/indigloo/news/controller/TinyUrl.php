@@ -7,7 +7,11 @@ namespace com\indigloo\news\controller{
         function process($params,$options) {
             
             $host = $_SERVER['HTTP_HOST'];
-            if(strcasecmp($host,'27ma.in') != 0) {
+            $host = strtolower($host);
+             
+            $allowed = array('27ma.in', 'news.in');
+            
+            if(!in_array($host,$allowed)) {
                 //for hosts other than 27ma.in
                 // we do not know this url
                 $controller = new \com\indigloo\news\controller\Null();
