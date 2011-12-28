@@ -31,7 +31,8 @@
 	
     $postDao = new \com\indigloo\news\dao\Post();
 	$postDBRows = $postDao->getPostWithMedia($start,$direction);
-	$paginator = new \com\indigloo\ui\Pagination($pageNo);
+	$totalPages = $postDao->getTotalPages();
+	$paginator = new \com\indigloo\ui\Pagination($pageNo,$totalPages);
 	
 	$file = $_SERVER['APP_WEB_DIR']. '/view/home.php' ;
 	ob_start();

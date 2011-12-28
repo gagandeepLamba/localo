@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /post/
+Disallow: /link/
+Disallow: /user/
+Disallow: /media/

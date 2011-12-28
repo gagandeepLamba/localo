@@ -5,7 +5,9 @@
     
     $postDao = new \com\indigloo\news\dao\Post();
     $postDBRows = $postDao->getLatestPostWithMedia();
-    $paginator = new Pagination($pageNo);
+    //find total number of pages
+    $totalPages = $postDao->getTotalPages();
+    $paginator = new Pagination($pageNo,$totalPages);
     
     $pageURI = 'http://www.27main.com' ;
 

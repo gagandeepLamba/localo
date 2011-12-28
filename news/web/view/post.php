@@ -8,9 +8,8 @@
     $description = empty($postDBRow['description']) ? $postDBRow['summary'] : $postDBRow['description'] ;
     $pageURI = \com\indigloo\Url::base().'/'.$shortId.'/'.$seoTitle ;
 
-	//@todo - strip_tags, abbreviate
 	$metaDescription = strip_tags($postDBRow['summary']);
-	$metaDescription = trim($metaDescription);
+	$metaDescription = \com\indigloo\Util::abbreviate($metaDescription,180);
 
 ?>
 

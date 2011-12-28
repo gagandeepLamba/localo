@@ -63,6 +63,18 @@ namespace com\indigloo\news\dao {
 
         }
         
+        function getTotalPages() {
+            $count = $this->getPostWithMediaCount();
+            //@todo - replace 20 with value from config
+            $totalPages = ceil($count / 20);
+            return $totalPages ;
+        }
+        
+        function getPostWithMediaCount() {
+            $row = mysql\Post::getPostWithMediaCount();
+            return $row['count'] ;
+        }
+        
     }
 
 }

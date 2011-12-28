@@ -7,22 +7,22 @@ namespace com\indigloo\ui {
     class Pagination {
         
         private $pageNo ;
+        private $totalPages ;
         
-        function __construct($pageNo) {
+        function __construct($pageNo,$totalPages) {
             
-            $this->pageNo = $pageNo ;
-            
-            if(empty($this->pageNo)) {
+            if(empty($pageNo) || ($pageNo <= 0) || ($pageNo > $totalPages)) {
                 $this->pageNo = 1 ;
+            } else {
+                $this->pageNo = $pageNo ;
             }
             
-            if($pageNo <= 0) {
-                $this->pageNo = 1 ;
-            }
+            $this->totalPages = $totalPages;
+            
         }
         
         function hasNext() {
-            if($this->pageNo <= 20 ) {
+            if(($this->pageNo < $this->totalPages) && ($this->pageNo <= 20)) {
                 return true ;
             } else {
                 return false ;

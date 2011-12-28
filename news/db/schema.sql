@@ -37,7 +37,7 @@ alter table  news_post add constraint UNIQUE uniq_skey (short_id);
 drop table if exists news_link;
 create table news_link(
 	id int(11) NOT NULL auto_increment,
-	title varchar(256) not null UNIQUE,
+	title varchar(128) not null,
 	summary TEXT not null ,
     link varchar(256),
     owner_name varchar(64),

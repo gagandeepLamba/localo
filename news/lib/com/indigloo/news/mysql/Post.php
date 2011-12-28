@@ -188,6 +188,15 @@ namespace com\indigloo\news\mysql {
             return array('code' => $dbCode) ;
         }
         
+        static function getPostWithMediaCount() {
+            
+            $mysqli = MySQL\Connection::getInstance()->getHandle();
+            
+            $sql = " select count(id) as count from news_post " ;  
+            $row = MySQL\Helper::fetchRow($mysqli, $sql);
+            return $row;
+        }
+        
     }
 
 }

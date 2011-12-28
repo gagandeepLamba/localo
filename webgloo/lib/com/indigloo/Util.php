@@ -104,6 +104,35 @@ namespace com\indigloo {
             return $input;
         }
 
+        static function abbreviate($input,$width) {
+            if(empty($input)) return $input ;
+            
+            if (strlen($input) <= $width) {
+                return $input;
+            }
+            
+            $output = substr($input,0,$width);
+            
+            //normals words are seldom more than 30 chars
+            $pos = 0 ;
+            $found = false ;
+            
+            for($i = $width ; $i >= 0 ; $i--) {
+                 if(ctype_space($output[$i])) {
+                    $found = true ;
+                    break ;
+                 }
+                 $pos++ ;
+            }
+            
+            if($found && ($pos > 0)) {
+                $output = substr($output,0,($width-$pos));
+                $output = rtrim($output) ;
+            }
+            
+            return $output;
+        }
+        
         static function isAlphaNumeric($input) {
             //Allow spaces
             $input = preg_replace('/\s+/', '', $input);
@@ -126,9 +155,9 @@ namespace com\indigloo {
             }
         }
         
-        static function startsWith($Haystack, $Needle) {
+        static function startsWith($haystack, $needle) {
             // Recommended version, using strpos
-            return strpos($Haystack, $Needle) === 0;
+            return strpos($haystack, $needle) === 0;
         }
 
         static function convertBytesIntoKB($bytes) {
