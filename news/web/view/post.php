@@ -8,6 +8,10 @@
     $description = empty($postDBRow['description']) ? $postDBRow['summary'] : $postDBRow['description'] ;
     $pageURI = \com\indigloo\Url::base().'/'.$shortId.'/'.$seoTitle ;
 
+	//@todo - strip_tags, abbreviate
+	$metaDescription = strip_tags($postDBRow['summary']);
+	$metaDescription = trim($metaDescription);
+
 ?>
 
 
@@ -19,7 +23,7 @@
 
         <meta http-equiv="content-type" content="text/html; charset="utf-8" />
         <meta name="keywords" content="27main">
-        <meta name="description" content="<?php echo $postDBRow['summary']; ?>">
+        <meta name="description" content="<?php echo $metaDescription;  ?>">
         
         <link rel="stylesheet" type="text/css" href="/lib/yui3/grids-min.css">
         <link rel="stylesheet" type="text/css" href="/css/style.css">

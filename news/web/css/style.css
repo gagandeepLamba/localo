@@ -19,7 +19,6 @@ body {
 	position: relative;
 	background: #f0f0f0 url('images/bg.png') repeat-x 0 85px;;
 	color: #494949;
-	min-height:100%;
 	
 	
 }
@@ -836,13 +835,13 @@ div#preview2 {
 }
 
 
-/* Any photo inside a widget can only go till 100%  */
+/* Any photo inside a widget can only go till 90%  */
 .widget img {
-    max-width : 100% ;
+    max-width : 90% ;
 }
 
 .widget .photo img {
-    max-width:100%;
+    max-width:90%;
 	border:6px solid #d5d5d5;
     /* auto width means bigger images will flow out of containers */
     /* width: auto; */
