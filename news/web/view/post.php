@@ -6,8 +6,7 @@
     
     $mediaDBRows = $postDao->getMediaOnId($postId);
     $description = empty($postDBRow['description']) ? $postDBRow['summary'] : $postDBRow['description'] ;
-    $pageURI = \com\indigloo\Url::base().'/'.$shortId.'/'.$seoTitle ;
-
+    
 	$metaDescription = strip_tags($postDBRow['summary']);
 	$metaDescription = \com\indigloo\Util::abbreviate($metaDescription,180);
 

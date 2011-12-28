@@ -20,6 +20,7 @@ namespace com\indigloo\news\controller{
             //following variables will be visible in $file as well
             $seoTitle = $params['token'];
             $shortId = $params['shortid'];
+            $pageURI = \com\indigloo\Url::base().'/'.$shortId.'/'.$seoTitle ;
             
             ob_start();
             include ($file);

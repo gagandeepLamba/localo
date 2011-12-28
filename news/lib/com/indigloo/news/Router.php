@@ -22,7 +22,7 @@ namespace com\indigloo\news{
             $this->createRule('^/$', 'com\indigloo\news\controller\Home');
             //short identifier match
             $this->createRule( '^(?P<shortid>[\w]{8})/(?P<token>[-\w]+)$','com\indigloo\news\controller\Post');
-            $this->createRule( '^(?P<token>[\w]{8})$','com\indigloo\news\controller\TinyUrl');
+            $this->createRule( '^(?P<shortid>[\w]{8})$','com\indigloo\news\controller\TinyUrl');
             
         }
     }
