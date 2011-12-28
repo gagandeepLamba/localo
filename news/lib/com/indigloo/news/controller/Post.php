@@ -9,7 +9,7 @@ namespace com\indigloo\news\controller{
             $host = strtolower($host);
             
             //last one is for testing..
-            $allowed = array('www.27main.com', '27main.com', 'www.news.com');
+            $allowed = array('www.27main.com', 'www.news.com');
             
             if(!in_array($host,$allowed)) {
                 $controller = new \com\indigloo\news\controller\Null();

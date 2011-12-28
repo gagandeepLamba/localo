@@ -9,7 +9,7 @@ namespace com\indigloo\news\controller{
             $host = $_SERVER['HTTP_HOST'];
             $host = strtolower($host);
              
-            $allowed = array('27ma.in', 'news.in');
+            $allowed = array('www.27main.com', 'www.news.com');
             
             if(!in_array($host,$allowed)) {
                 //for hosts other than 27ma.in
