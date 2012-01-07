@@ -20,7 +20,7 @@
     <head><title> <?php echo $postDBRow['title']; ?> </title>
 
         <meta http-equiv="content-type" content="text/html; charset="utf-8" />
-        <meta name="keywords" content="27main">
+        <meta name="keywords" content="27main, pictures,india news, entertainment, indian politics, headline news, offbeat, created by users, bookmarking site">
         <meta name="description" content="<?php echo $metaDescription;  ?>">
         
         <link rel="stylesheet" type="text/css" href="/lib/yui3/grids-min.css">
