@@ -117,7 +117,7 @@ namespace com\indigloo {
             $pos = 0 ;
             $found = false ;
             
-            for($i = $width ; $i >= 0 ; $i--) {
+            for($i = $width-1 ; $i >= 0 ; $i--) {
                  if(ctype_space($output[$i])) {
                     $found = true ;
                     break ;
