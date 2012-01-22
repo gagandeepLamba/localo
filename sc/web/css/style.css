@@ -379,7 +379,7 @@ div #form-wrapper {
 }
 
 
-
+.form-table .w200{width: 200px; }
 .form-table .w280{width: 280px; }
 .form-table .w580{ width: 580px;}
 .form-table .w780{ width: 780px;}
@@ -997,5 +997,14 @@ img.aligncenter {display: block; margin-left: auto; margin-right: auto}
 
 .pagination a:hover {
     border-color: #2E6AB1;
+}
+
+/* +fancybox stuff */
+.fancybox-container {
+	display: none ;
+}
+
+.fancybox-container input {
+	width:400px;
 }
 
