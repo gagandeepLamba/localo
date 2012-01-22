@@ -106,13 +106,22 @@ function uploadSuccess(file, serverData) {
     // error case.
     try {
         var progress = new FileProgress(file, this.customSettings.progressTarget);
-       
+        var dataObj ;
         
         try{
-			alert("Photo uploaded");
-			progress.setComplete();
-			progress.setStatus(dataObj.message);
-			progress.toggleCancel(false);
+			dataObj = JSON.parse(serverData);
+            //alert(dataObj.code);
+            if(dataObj.code == 0){
+                //no error object or error is not yes!
+                //process document object received from server
+                questionJsObject.addImage(dataObj.mediaVO);
+                progress.setComplete();
+                progress.setStatus(dataObj.message);
+                progress.toggleCancel(false);
+            }else {
+                //known error
+                progress.setStatus("Error :: " + dataObj.message);
+            }
             
             
         } catch(ex) {

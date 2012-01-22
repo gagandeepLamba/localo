@@ -27,6 +27,7 @@
         
         <script type="text/javascript" src="/lib/jquery/jquery-1.6.4.min.js"></script>
         <script type="text/javascript" src="/lib/jquery/jquery.validate.1.9.0.min.js"></script>
+       <script type="text/javascript" src="/js/sc.js"></script>
         <!-- fancybox -->
         <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
         <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
@@ -39,43 +40,6 @@
         
         <script type="text/javascript">
               
-            var pageJsObject = {} ;
-            pageJsObject.attachEvents = function() {
-              
-              $("a#open-link").live("click", function(event){
-                  event.preventDefault();
-                  $("#link-container").slideDown("slow");
-              }) ;
-              
-              $("#add-link").live("click", function(event){
-                  event.preventDefault();
-                  pageJsObject.addLink();
-              }) ;
-              
-               $("a#open-image").live("click", function(event){
-                  event.preventDefault();
-                  $("#image-container").slideDown("slow");
-              }) ;
-              
-              $("#add-image").live("click", function(event){
-                  event.preventDefault();
-                  pageJsObject.addImage();
-              }) ;
-              
-            };
-            
-            pageJsObject.addLink= function() {
-              var linkData = $("#link-box").val();
-              $("#link-data").append(linkData);
-              $("#link-container").slideUp("slow");
-
-            } ;
-            
-            pageJsObject.addImage= function() {
-             
-              $("#image-container").slideUp("slow");
-
-            } ;
             
             
             
@@ -86,7 +50,7 @@
                     
                 });
                 
-                pageJsObject.attachEvents();
+                questionJsObject.attachEvents();
                 
                 //attach fancybox
                $(".fancybox").fancybox({
@@ -196,6 +160,19 @@
 
               #form-wrapper #divstatus{
                      padding:5px;
+              }
+              
+              #media-data {
+                     width: 580px;
+              }
+              .previewImage{
+                     position :relative ;
+                     float : left;
+                     padding:11px;
+                     height:180px;
+                     width:180px;
+                     border:2px solid #DDD ;
+                     margin :5px;
               }
               
        </style>
@@ -321,10 +298,6 @@
                                         </form>
                                     </div> <!-- form wrapper -->
                                    
-                                  
-                                   
-                                  
-                                   
                                    
                             </div> <!-- content -->
 
@@ -341,7 +314,9 @@
                 </div> <!-- bd -->
 
 
-
+              <div id="js-debug">
+              </div>
+              
         </div> <!-- body wrapper -->
         <div id="ft">
             <?php include($_SERVER['APP_WEB_DIR'] . '/inc/site-footer.inc'); ?>

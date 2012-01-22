@@ -17,8 +17,17 @@
     
     } else {
         
+        $mediaVO = new com\indigloo\sc\view\Media();
+        $mediaVO->mime =$uploader->getMime();
+        $mediaVO->storeName = $uploader->getStoreName();
+        $mediaVO->size = $uploader->getSize();
+        $mediaVO->originalName = $uploader->getName();
+        $mediaVO->height = $uploader->getHeight();
+        $mediaVO->width = $uploader->getWidth();
+        $mediaVO->bucket = 'media' ;
+        
         $message = 'file upload done!';
-        $data = array('code' => 0, 'message' => $message);
+        $data = array('code' => 0, 'message' => $message, 'mediaVO' => $mediaVO);
         echo json_encode($data);
     
     }
