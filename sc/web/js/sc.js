@@ -14,7 +14,10 @@ questionJsObject.attachEvents = function() {
   
     $("a#open-link").live("click", function(event){
         event.preventDefault();
+        //make the container visible before scrolling to it
+        $("#image-container").slideUp("slow");
         $("#link-container").slideDown("slow");
+        $(window).scrollTop($("#link-container").position().top) ;
     }) ;
     
     $("#add-link").live("click", function(event){
@@ -24,7 +27,10 @@ questionJsObject.attachEvents = function() {
     
      $("a#open-image").live("click", function(event){
         event.preventDefault();
+        
+        $("#link-container").slideUp("slow");
         $("#image-container").slideDown("slow");
+        $(window).scrollTop($("#image-container").position().top) ;
     }) ;
     
     $("#add-image").live("click", function(event){
@@ -36,6 +42,7 @@ questionJsObject.attachEvents = function() {
 
 
 questionJsObject.addLink= function() {
+  
   var linkData = $("#link-box").val();
   $("#link-data").append(linkData);
   $("#link-container").slideUp("slow");

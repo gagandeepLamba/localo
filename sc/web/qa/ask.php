@@ -254,7 +254,7 @@
                                             </table>
                                             <hr>
                                            
-                                           
+                                       
                                           <div id="link-container" class="hide-me">
                                             <p> Use a url shortening service like goo.gl to shorten long url</p>
                                             Link*&nbsp;<input  id="link-box"  type="text" name="link" maxlength="64" value="" />
