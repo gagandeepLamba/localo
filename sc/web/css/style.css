@@ -209,7 +209,7 @@ ul.reset li {
 #head h3 {
 	color:#2288cc;
 	font-size: 24px;
-	float:right;
+	/* float:right; */
 	margin-top: 28px;
 	font-family:"Myriad Pro",Arial,Helvetica,Tahoma,sans-serif;
 }
@@ -226,6 +226,7 @@ ul.reset li {
     width: 320px;
     font-family:Arial,Helvetica,Tahoma,sans-serif;
     padding-top: 28px;
+	float : right ;
 }
 
 #searchform {

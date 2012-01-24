@@ -27,7 +27,8 @@
         
         <script type="text/javascript" src="/lib/jquery/jquery-1.6.4.min.js"></script>
         <script type="text/javascript" src="/lib/jquery/jquery.validate.1.9.0.min.js"></script>
-       <script type="text/javascript" src="/js/sc.js"></script>
+        <script type="text/javascript" src="/js/sc.js"></script>
+        
         <!-- fancybox -->
         <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
         <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
@@ -36,13 +37,10 @@
         <script type="text/javascript" src="/swfupload/swfupload.js"></script>
         <script type="text/javascript" src="/swfupload/js/swfupload.queue.js"></script>
         <script type="text/javascript" src="/swfupload/js/fileprogress.js"></script>
-        <script type="text/javascript" src="/test/handlers.js"></script>
+        <script type="text/javascript" src="/swfupload/js/handlers.js"></script>
         
         <script type="text/javascript">
-              
-            
-            
-            
+       
             $(document).ready(function(){
                 
                 $("#web-form1").validate({
@@ -50,7 +48,7 @@
                     
                 });
                 
-                questionJsObject.attachEvents();
+                webgloo.sc.question.attachEvents();
                 
                 //attach fancybox
                $(".fancybox").fancybox({
@@ -93,16 +91,16 @@
                     button_placeholder_id: "spanButtonPlaceHolder",
 					button_cursor:SWFUpload.CURSOR.HAND,
                     
-                    // The event handler functions are defined in handlers.js
+                    // handlers.js event handlers
                     file_queued_handler : fileQueued,
                     file_queue_error_handler : fileQueueError,
                     file_dialog_complete_handler : fileDialogComplete,
                     upload_start_handler : uploadStart,
                     upload_progress_handler : uploadProgress,
                     upload_error_handler : uploadError,
-                    upload_success_handler : uploadSuccess,
+                    upload_success_handler : webgloo.sc.question.uploadSuccess,
                     upload_complete_handler : uploadComplete,
-                    queue_complete_handler : queueComplete	// Queue plugin event
+                    queue_complete_handler : queueComplete
                 };
 
                 swfu = new SWFUpload(settings);
@@ -162,10 +160,15 @@
                      padding:5px;
               }
               
+              #link-data {
+                     margin-top:20px;
+              }
+              
               #media-data {
                      width: 580px;
               }
-              .previewImage{
+              
+              div .previewImage{
                      position :relative ;
                      float : left;
                      padding:11px;
@@ -174,6 +177,11 @@
                      border:2px solid #DDD ;
                      margin :5px;
               }
+              
+              div .previewLink{
+                     padding-top:5px;
+              }
+              
               
        </style>
     </head>
@@ -211,14 +219,14 @@
                                             <table class="form-table">
 
                                                  <tr>
-                                                    <td class="field"> Question <span class="red-label">*</span></td>
+                                                    <td class="field">Question<span class="red-label">*</span></td>
                                                     <td>
                                                         <input type="text" name="question" maxlength="128" class="required" title="&gt; Queston is required"! value="<?php echo $sticky->get('question'); ?>"/>
                                                     </td>
                                                  </tr>
                                                  
                                                  <tr>
-                                                        <td class="field"> Details</td>
+                                                        <td class="field">Details</td>
                                                         <td>
                                                             <textarea  name="description" class="h130" cols="50" rows="4" ><?php echo $sticky->get('description'); ?></textarea>
                                                         </td>
@@ -229,7 +237,7 @@
                                                 </tr>
 
                                                 <tr>
-                                                    <td class="field">Tags <span class="red-label">*</span> &nbsp;</td>
+                                                    <td class="field">Tags<span class="red-label">*</span> &nbsp;</td>
                                                     <td> <input  type="text" name="tags" maxlength="64" class="required"  title="&gt; Tags are required!" value="" /></td>
                                                 </tr>
                                                  
