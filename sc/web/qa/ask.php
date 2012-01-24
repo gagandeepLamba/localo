@@ -180,6 +180,7 @@
               
               div .previewLink{
                      padding-top:5px;
+                     font-size:11px;
               }
               
               
@@ -264,8 +265,9 @@
                                            
                                        
                                           <div id="link-container" class="hide-me">
-                                            <p> Use a url shortening service like goo.gl to shorten long url</p>
-                                            Link*&nbsp;<input  id="link-box"  type="text" name="link" maxlength="64" value="" />
+                                            <div id="error"> </div>
+                                            <p> Use a url shortening service like goo.gl to shorten long urls</p>
+                                            Link*&nbsp;<input  id="link-box"  type="text" name="link"  value="" />
                                             &nbsp; <button  id="add-link">Add</button>
                                             
                                           </div>
@@ -290,9 +292,7 @@
                                                  </div>
                                                  
                                           </div>
-                                                    
-                                                       
-                                               
+                                             
                                             <div class="button-container">
                                                 <button class="form-button" type="submit" name="save" value="Save" onclick="this.setAttribute('value','Save');" ><span>Save</span></button>
                                                  <a href="/">
@@ -302,6 +302,8 @@
                                             </div>
                                             
                                             <div style="clear: both;"></div>
+                                            <input type="hidden" name="links_json" value="" />
+                                            <input type="hidden" name="images_json" value="" />
                                             
                                         </form>
                                     </div> <!-- form wrapper -->

@@ -26,6 +26,8 @@
         $mediaVO->width = $uploader->getWidth();
         $mediaVO->bucket = 'media' ;
         
+        //some random id
+        $mediaVO->id = rand(1,100);
         $message = 'file upload done!';
         $data = array('code' => 0, 'message' => $message, 'mediaVO' => $mediaVO);
         echo json_encode($data);
