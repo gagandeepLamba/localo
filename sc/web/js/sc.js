@@ -65,8 +65,8 @@ webgloo.sc.question = {
         
         
     },
-    imagePreviewDIV : '<div id="{id}" class="previewImage"> <img src="/{bucket}/{storeName}" class="resize" alt="{originalName}" width="{width}" height="{height}"/> '
-        + ' <div> {originalName} </div> <div> <a id="{id}" class="remove-image" href=""> Remove </a> </div> </div>',
+    imagePreviewDIV : '<div class="previewImage"> <img src="/{bucket}/{storeName}" class="resize" alt="{originalName}" width="{width}" height="{height}"/> '
+        + ' <div> {originalName} </div> <div> <a id="{storeName}" class="remove-image" href="" rel="{bucket}"> Remove </a> </div> </div>',
     
     linkPreviewDIV : '<div class="previewLink"> {link} &nbsp; <a class="remove-link" href="{link}"> Remove</a> </div> ' ,
     
@@ -80,7 +80,10 @@ webgloo.sc.question = {
         });
         
         $("div#media-data").find('a').each(function(index) {
-             images.push($(this).attr("id"));
+             var data = {};
+             data.bucket= $(this).attr("rel");
+             data.storeName = $(this).attr("id") ;
+             images.push(data);
         });
         
         frm = document.forms["web-form1"];
@@ -101,8 +104,7 @@ webgloo.sc.question = {
     },
 
     removeImage : function(linkObj) {
-        var divId = $(linkObj).attr("id");
-        $("div#media-data #"+divId).remove();
+       $(linkObj).parent().remove();
     },
     addImage : function(mediaVO) {
         webgloo.addDebug("Adding image :: " + mediaVO.originalName + " path :: " + mediaVO.storeName);

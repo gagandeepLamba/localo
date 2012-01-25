@@ -1,6 +1,6 @@
 <?php
 
-    //user/register.php
+    //qa/ask.php
     include ('sc-app.inc');
     include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
     
@@ -22,22 +22,19 @@
 
         <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
 
-        <link rel="stylesheet" type="text/css" href="/lib/yui3/grids-min.css">
+        <link rel="stylesheet" type="text/css" href="/common/yui3/grids-min.css">
         <link rel="stylesheet" type="text/css" href="/css/style.css">
         
-        <script type="text/javascript" src="/lib/jquery/jquery-1.6.4.min.js"></script>
-        <script type="text/javascript" src="/lib/jquery/jquery.validate.1.9.0.min.js"></script>
+        <script type="text/javascript" src="/common/jquery/jquery-1.6.4.min.js"></script>
+        <script type="text/javascript" src="/common/jquery/jquery.validate.1.9.0.min.js"></script>
         <script type="text/javascript" src="/js/sc.js"></script>
         
-        <!-- fancybox -->
-        <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
-        <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
-        
+       
        <!-- swfupload related stuff -->
-        <script type="text/javascript" src="/swfupload/swfupload.js"></script>
-        <script type="text/javascript" src="/swfupload/js/swfupload.queue.js"></script>
-        <script type="text/javascript" src="/swfupload/js/fileprogress.js"></script>
-        <script type="text/javascript" src="/swfupload/js/handlers.js"></script>
+        <script type="text/javascript" src="/common/swfupload/swfupload.js"></script>
+        <script type="text/javascript" src="/common/swfupload/js/swfupload.queue.js"></script>
+        <script type="text/javascript" src="/common/swfupload/js/fileprogress.js"></script>
+        <script type="text/javascript" src="/common/swfupload/js/handlers.js"></script>
         
         <script type="text/javascript">
        
@@ -49,16 +46,6 @@
                 });
                 
                 webgloo.sc.question.attachEvents();
-                
-                //attach fancybox
-               $(".fancybox").fancybox({
-                    'width'				: '75%',
-                    'height'			: '75%',
-                    'autoScale'     	: false,
-                    'transitionIn'		: 'none',
-                    'transitionOut'		: 'none',
-                    'type'				: 'inline'
-                });
             });
        
               
@@ -67,7 +54,7 @@
             
             window.onload = function() {
                 var settings = {
-                    flash_url : "/swfupload/swfupload.swf",
+                    flash_url : "/common/swfupload/swfupload.swf",
                     upload_url: "/test/receiver.php",
                     post_params: {
                         "PHPSESSID" : "<?php echo session_id(); ?>"
@@ -85,7 +72,7 @@
 
                     // Button settings
                     
-					button_image_url: "/swfupload/images/XPButtonUploadText_61x22.png",
+					button_image_url: "/common/swfupload/images/XPButtonUploadText_61x22.png",
                     button_width: "61",
                     button_height: "22",
                     button_placeholder_id: "spanButtonPlaceHolder",
@@ -183,6 +170,15 @@
                      font-size:11px;
               }
               
+              select {
+                     max-width: 220px;
+                     width: 220px;
+                     margin: 0 0 5px;
+                     border: 1px solid #BDC7D8 ;
+                     padding:2px;
+                     
+              }
+              
               
        </style>
     </head>
@@ -213,7 +209,7 @@
                                     <?php FormMessage::render(); ?>
                             
                                     <div id="form-wrapper">
-                                        <form id="web-form1"  name="web-form1" action="/user/form/register.php" enctype="multipart/form-data"  method="POST">
+                                        <form id="web-form1"  name="web-form1" action="/qa/form/ask.php" enctype="multipart/form-data"  method="POST">
 
                                             <div class="error">    </div>
 
@@ -236,7 +232,20 @@
                                                     <td class="field">Location<span class="red-label">*</span> &nbsp; </td>
                                                     <td> <input type="text" name="location" maxlength="32" class="w200 required" minlength="3" title="&gt; Location is required!" value="" /></td>
                                                 </tr>
-
+                                                 
+                                                 <tr>
+                                                    <td class="field">Category<span class="red-label">*</span> &nbsp;</td>
+                                                    <td>
+                                                        <select name="category">
+                                                               <option value="1">Baby/Kids </option>
+                                                               <option value="2">Bags/Luggage </option>
+                                                               <option value="3">Camera</option>
+                                                               <option value="4">Clothes</option>
+                                                               <option value="5">Computers/Tablets</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                 
                                                 <tr>
                                                     <td class="field">Tags<span class="red-label">*</span> &nbsp;</td>
                                                     <td> <input  type="text" name="tags" maxlength="64" class="required"  title="&gt; Tags are required!" value="" /></td>
