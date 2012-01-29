@@ -9,12 +9,9 @@ namespace com\indigloo\news\dao {
     
     class Post {
 
-        function create($title,$summary,$description) {
+        function create($title,$summary,$description,$linksJson,$imagesJson) {
             $seoTitle = SeoStringUtil::convertNameToSeoKey($title);
-            //change description (markdown) to html
-            $parser = new \ext\MarkdownParser();
-            $html = $parser->transform($description);
-            $data = mysql\Post::create($title,$seoTitle,$summary,$description,$html);
+            $data = mysql\Post::create($title,$seoTitle,$summary,$description,$linksJson,$imagesJson);
             return $data ;
         }
         
@@ -23,13 +20,10 @@ namespace com\indigloo\news\dao {
             return $data ;
         }
         
-        function update($postId,$title,$summary,$description) {
+        function update($postId,$title,$summary,$description,$linksJson,$imagesJson) {
             Util::isEmpty('post_id',$postId);
             $seoTitle = SeoStringUtil::convertNameToSeoKey($title);
-            //change description (markdown) to html
-            $parser = new \ext\MarkdownParser();
-            $html = $parser->transform($description);
-            
+            //@todo - remove unwanted media files
             $data = mysql\Post::update($postId,$title,$seoTitle,$summary,$description,$html);
             return $data ;
         }
@@ -37,11 +31,6 @@ namespace com\indigloo\news\dao {
         function getRecordOnId($postId) {
             $row = mysql\Post::getRecordOnId($postId);
             return $row ;
-        }
-        
-        function getMediaOnId($postId) {
-            $rows = mysql\Post::getMediaOnId($postId);
-            return $rows ;
         }
         
         function getRecordOnShortId($shortId) {

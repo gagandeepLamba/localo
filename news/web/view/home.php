@@ -23,8 +23,8 @@
         <meta name="keywords" content="27main, pictures,india news, entertainment, indian politics, headline news, offbeat, created by users, bookmarking site">
         <meta name="description" content="27 main is a source of news and content from India - All created by its users">
                                     
-        <link rel="stylesheet" type="text/css" href="/lib/yui3/grids-min.css">
-        <link rel="stylesheet" type="text/css" href="/css/style.css">
+        <link rel="stylesheet" type="text/css" href="/3p/yui3/grids-min.css">
+        <link rel="stylesheet" type="text/css" href="/css/news.css">
         
         
     </head>
@@ -85,7 +85,13 @@
 
 
         </div> <!-- body wrapper -->
-
+        <div id="feedback" class="vertical">
+            S e n d
+            <br />
+            <br />
+            F e e d b a c k
+        </div>
+        
         <div id="ft">
             <?php include($_SERVER['APP_WEB_DIR'] . '/inc/site-footer.inc'); ?>
         </div>

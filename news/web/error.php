@@ -23,6 +23,8 @@
                 left: 50%;
                 margin-top: -175px;
                 margin-left: -230px;
+                font-family:Arial,sans-serif;
+                font-size:13px;
             }
 
             #mini_inner {
@@ -55,11 +57,11 @@
     <body>
         <div id="mini_inner" class="centered">
             <img src="/css/images/alert.png" alt="alert" class="alert">
-            <h1> Error happened on page</h1>
-            <p>This page has encountered an error.
+            <h1> Urggh. We encountered an error on page.</h1>
+            <p> Apologies.
                 <span class="error"> <?php echo $error ; ?></span>
                 To know more you can examine the logs or contact your administrator.
-                Please click here to go back to  <a href="/"> home page</a>.</p>
+                Go back to  <a href="/"> Home page</a>.</p>
         </div>
 
 

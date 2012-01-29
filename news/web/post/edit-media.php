@@ -23,7 +23,6 @@
 	}
 									
 	$mediaVOArrayJson = json_encode($mediaVOArray);
-	
 	$sticky = new Sticky($gWeb->find(Constants::STICKY_MAP,true));
 	
 
@@ -41,10 +40,10 @@
 		<!-- swfupload style interferes with our grids -->
         <!-- <link rel="stylesheet" type="text/css" href="/swfupload/default.css"> -->
 		
-        <link rel="stylesheet" type="text/css" href="/css/style.css">
+        <link rel="stylesheet" type="text/css" href="/css/news.css">
         <script type="text/javascript" src="/lib/jquery/jquery-1.6.4.min.js"></script>
 		<script type="text/javascript" src="/lib/json2.js"></script>
-		<script type="text/javascript" src="/js/media.js"></script>
+		<script type="text/javascript" src="/js/news.js"></script>
 		
         <!-- swfupload related stuff -->
         <script type="text/javascript" src="/swfupload/swfupload.js"></script>

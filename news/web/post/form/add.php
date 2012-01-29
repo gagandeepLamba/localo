@@ -32,18 +32,20 @@
             
             header("location: " . $locationOnError);
             exit(1);
+            
         } else {
             
             $postDao = new com\indigloo\news\dao\Post();
             $data = $postDao->create($fvalues['title'],
                                 $fvalues['summary'],
-                                $fvalues['description']);
+                                $fvalues['description'],
+                                $fvalues['links_json'],
+                                $fvalues['images_json']);
     
             $code = $data['code'];
             
             if ($code == com\indigloo\mysql\Connection::ACK_OK ) {
-                //@todo - take to post
-                $locationOnSuccess = '/post/edit-media.php?g_post_id='.$data['lastInsertId'] ;
+                $locationOnSuccess = '/'.$data['shortId'].'/'.$data['seoTitle'];
                 header("location: " . $locationOnSuccess);
                 
             } else {

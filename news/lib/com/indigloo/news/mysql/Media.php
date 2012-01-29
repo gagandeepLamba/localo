@@ -41,22 +41,21 @@ namespace com\indigloo\news\mysql {
             
         }
         
-        static function add($postId,$mediaVO) {
+        static function add($mediaVO) {
 
             $mysqli = MySQL\Connection::getInstance()->getHandle();
             $code = MySQL\Connection::ACK_OK;
             $mediaId = NULL ;
             
-            $sql = " insert into news_media(post_id,bucket,original_name, stored_name, " ;
+            $sql = " insert into news_media(bucket,original_name, stored_name, " ;
             $sql .= " size,mime, original_height, original_width,created_on) ";
-            $sql .= " values(?,?,?,?,?,?,?,?,now()) ";
+            $sql .= " values(?,?,?,?,?,?,?,now()) ";
 
             $dbCode = MySQL\Connection::ACK_OK;
             $stmt = $mysqli->prepare($sql);
             
             if ($stmt) {
-                $stmt->bind_param("isssisii",
-                        $postId,
+                $stmt->bind_param("sssisii",
                         $mediaVO->bucket,
                         $mediaVO->originalName,
                         $mediaVO->storeName,

@@ -8,8 +8,8 @@ namespace com\indigloo\news\dao {
     
     class Media {
 
-        function add($postId,$mediaVO) {
-            $mediaId = mysql\Media::add($postId,$mediaVO);
+        function add($mediaVO) {
+            $mediaId = mysql\Media::add($mediaVO);
             if(empty($mediaId)) {
                 trigger_error("No Media ID in DAO :: Error adding media", E_USER_ERROR);
             }

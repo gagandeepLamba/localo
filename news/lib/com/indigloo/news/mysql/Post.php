@@ -18,16 +18,6 @@ namespace com\indigloo\news\mysql {
             return $row;
         }
         
-        static function getMediaOnId($postId) {
-            $mysqli = MySQL\Connection::getInstance()->getHandle();
-            $postId = $mysqli->real_escape_string($postId);
-
-            $sql = " select bucket,stored_name,original_name from news_media where post_id = ".$postId ;
-            $rows = MySQL\Helper::fetchRows($mysqli, $sql);
-            return $rows;
-            
-        }
-        
         static function getRecordOnShortId($shortId) {
             $mysqli = MySQL\Connection::getInstance()->getHandle();
             $shortId = $mysqli->real_escape_string($shortId);
@@ -40,9 +30,7 @@ namespace com\indigloo\news\mysql {
         static function getLatestPostWithMedia($pageSize){
             $mysqli = MySQL\Connection::getInstance()->getHandle();
             
-            $sql = " select post.*, media.bucket, media.id as media_id," ;
-            $sql .= " media.stored_name,media.original_name, media.original_height,media.original_width " ;
-            $sql .= " from news_post post LEFT  JOIN news_media media ON post.s_media_id = media.id ";
+            $sql = " select post.* from news_post post" ;
             $sql .= " order by post.id DESC LIMIT " .$pageSize;
 
             $rows = MySQL\Helper::fetchRows($mysqli, $sql);
@@ -70,9 +58,7 @@ namespace com\indigloo\news\mysql {
                 trigger_error("Unknow sort direction in query", E_USER_ERROR);
             }
             
-            $sql = " select post.*, media.bucket, media.id as media_id," ;
-            $sql .= " media.stored_name,media.original_name, media.original_height,media.original_width " ;
-            $sql .= " from news_post post LEFT  JOIN news_media media ON post.s_media_id = media.id ";
+            $sql = " select post.* from news_post post " ;
             $sql .= $predicate ;
             
             $rows = MySQL\Helper::fetchRows($mysqli, $sql);
@@ -87,11 +73,11 @@ namespace com\indigloo\news\mysql {
             
         }
         
-        static function create($title,$seoTitle,$summary,$markdown,$html) {
+        static function create($title,$seoTitle,$summary,$description,$linksJson,$imagesJson) {
 
             $mysqli = MySQL\Connection::getInstance()->getHandle();
-            $sql = " insert into news_post(short_id,title,seo_title,summary,markdown,description,created_on) ";
-            $sql .= " values(?,?,?,?,?,?,now()) ";
+            $sql = " insert into news_post(short_id,title,seo_title,summary,description,links_json,images_json,created_on) ";
+            $sql .= " values(?,?,?,?,?,?,?,now()) ";
 
             $dbCode = MySQL\Connection::ACK_OK;
             $stmt = $mysqli->prepare($sql);
@@ -100,13 +86,14 @@ namespace com\indigloo\news\mysql {
             
             
             if ($stmt) {
-                $stmt->bind_param("ssssss",
+                $stmt->bind_param("sssssss",
                         $shortId,
                         $title,
                         $seoTitle,
                         $summary,
-                        $markdown,
-                        $html);
+                        $description,
+                        $linksJson,
+                        $imagesJson);
                       
                 $stmt->execute();
 
@@ -122,7 +109,10 @@ namespace com\indigloo\news\mysql {
                 $lastInsertId = MySQL\Connection::getInstance()->getLastInsertId();
             }
             
-            return array('code' => $dbCode , 'lastInsertId' => $lastInsertId ) ;
+            return array('code' => $dbCode ,
+                         'lastInsertId' => $lastInsertId,
+                         'seoTitle' => $seoTitle,
+                          'shortId' => $shortId) ;
             
         }
 
@@ -155,23 +145,24 @@ namespace com\indigloo\news\mysql {
             return array('code' => $dbCode) ;
         }
         
-        static function update($postId,$title,$seoTitle,$summary,$markdown,$html) {
-
+        static function update($postId,$title,$seoTitle,$summary,$description,$linksJson,$imagesJson) {
+            
             $mysqli = MySQL\Connection::getInstance()->getHandle();
-            $sql = "  update news_post set title = ? , seo_title = ? , summary = ? , markdown = ? ,description =? ," ;
-            $sql .= " updated_on = now() where id = ? ";
+            $sql = "  update news_post set title = ? , seo_title = ? , summary = ? ,description =? ," ;
+            $sql .= "  links_json = ? , images_json = ? , updated_on = now() where id = ? ";
             
 
             $dbCode = MySQL\Connection::ACK_OK;
             $stmt = $mysqli->prepare($sql);
             
             if ($stmt) {
-                $stmt->bind_param("sssssi",
+                $stmt->bind_param("ssssssi",
                         $title,
                         $seoTitle,
                         $summary,
-                        $markdown,
-                        $html,
+                        $description,
+                        $linksJson,
+                        $imagesJson,
                         $postId);
                         
 

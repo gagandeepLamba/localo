@@ -333,8 +333,8 @@
                 </div> <!-- bd -->
 
 
-              <div id="js-debug">
-              </div>
+              <div id="js-debug"> </div>
+              
               
         </div> <!-- body wrapper -->
         <div id="ft">

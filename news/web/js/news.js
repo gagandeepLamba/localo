@@ -1,7 +1,6 @@
 
-/* + useful methods */
 
-/* @see http://javascript.crockford.com/remedial.html for supplant */
+/* supplant source - http://javascript.crockford.com/remedial.html */
 
 String.prototype.supplant = function (o) {
     return this.replace(/{([^{}]*)}/g,
@@ -11,14 +10,31 @@ String.prototype.supplant = function (o) {
         });
 };
 
-/* + namepsaces */
+
+/* +namepsaces */
 webgloo = window.webgloo || {};
-webgloo.sc = webgloo.sc || {};
+webgloo.news = webgloo.news || {};
 
 
-/* + webgloo sc question object */
+webgloo.addDebug = function(message) {
+    $("#js-debug").append(message);
+    $("#js-debug").append("<br>");
+    console.log(message);
+  
+};
 
-webgloo.sc.question = { 
+webgloo.clearDebug = function(message) {
+    $("#js-debug").html("");
+};
+
+
+/* + webgloo news post object */
+
+webgloo.news.post = {
+    images : {} ,
+    init : function () {
+        webgloo.news.post.images = {} ;
+    },
     attachEvents : function() {
   
         $("a#open-link").live("click", function(event){
@@ -39,34 +55,33 @@ webgloo.sc.question = {
         $("#add-link").live("click", function(event){
             event.preventDefault();
             var linkData = $("#link-box").val();
-            webgloo.sc.question.addLink(linkData);
+            webgloo.news.post.addLink(linkData);
         }) ;
         
         $("a.remove-link").live("click", function(event){
             event.preventDefault(); 
-            //webgloo.sc.question.removeLink.apply(this);
-            webgloo.sc.question.removeLink($(this));
+            webgloo.news.post.removeLink($(this));
         }) ;
         
          $("a.remove-image").live("click", function(event){
             event.preventDefault(); 
-            webgloo.sc.question.removeImage($(this));
+            webgloo.news.post.removeImage($(this));
         }) ;
          
         $("#add-image").live("click", function(event){
             event.preventDefault();
-            webgloo.sc.question.addImage();
+            webgloo.news.post.addImage();
         }) ;
         
         $('#web-form1').submit(function() {
-            webgloo.sc.question.populateHidden();
+            webgloo.news.post.populateHidden();
             return true;
         });
         
         
     },
     imagePreviewDIV : '<div class="previewImage"> <img src="/{bucket}/{storeName}" class="resize" alt="{originalName}" width="{width}" height="{height}"/> '
-        + ' <div> {originalName} </div>  <a id="{storeName}" class="remove-image" href="" rel="{bucket}"> Remove </a> </div>',
+        + ' <div> {originalName} </div> <a id="{id}" class="remove-image" href=""> Remove </a> </div>',
     
     linkPreviewDIV : '<div class="previewLink"> {link} &nbsp; <a class="remove-link" href="{link}"> Remove</a> </div> ' ,
     
@@ -80,10 +95,8 @@ webgloo.sc.question = {
         });
         
         $("div#media-data").find('a').each(function(index) {
-             var data = {};
-             data.bucket= $(this).attr("rel");
-             data.storeName = $(this).attr("id") ;
-             images.push(data);
+             var imageId = $(this).attr("id");
+             images.push(webgloo.news.post.images[imageId]);
         });
         
         frm = document.forms["web-form1"];
@@ -96,7 +109,7 @@ webgloo.sc.question = {
         
     },
     addLink : function(linkData) {
-        var buffer = webgloo.sc.question.linkPreviewDIV.supplant({"link" : linkData});
+        var buffer = webgloo.news.post.linkPreviewDIV.supplant({"link" : linkData});
         $("#link-data").append(buffer);
     },
     removeLink : function(linkObj) {
@@ -105,10 +118,12 @@ webgloo.sc.question = {
 
     removeImage : function(linkObj) {
        $(linkObj).parent().remove();
+       
     },
     addImage : function(mediaVO) {
-        webgloo.addDebug("Adding image :: " + mediaVO.originalName + " path :: " + mediaVO.storeName);
-        var buffer = webgloo.sc.question.imagePreviewDIV.supplant(mediaVO);
+        webgloo.addDebug(" image :: bucket:: " + mediaVO.bucket + " name :: " + mediaVO.storeName);
+        webgloo.news.post.images[mediaVO.id] = mediaVO ;
+        var buffer = webgloo.news.post.imagePreviewDIV.supplant(mediaVO);
         $("div#media-data").append(buffer);
     
     },
@@ -124,7 +139,7 @@ webgloo.sc.question = {
                 dataObj = JSON.parse(serverData);
                 if(dataObj.code == 0){
                     
-                    webgloo.sc.question.addImage(dataObj.mediaVO);
+                    webgloo.news.post.addImage(dataObj.mediaVO);
                     progress.setComplete();
                     progress.setStatus(dataObj.message);
                     progress.toggleCancel(false);
@@ -146,18 +161,3 @@ webgloo.sc.question = {
     }
     
 }
-
-
-webgloo.addDebug = function(message) {
-    $("#js-debug").append(message);
-    $("#js-debug").append("<br>");
-    console.log(message);
-  
-};
-
-webgloo.clearDebug = function(message) {
-    $("#js-debug").html("");
-};
-
-
-            

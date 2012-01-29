@@ -20,16 +20,16 @@
 
         <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
         
-        <link rel="stylesheet" type="text/css" href="/lib/yui3/grids-min.css">
-        <link rel="stylesheet" type="text/css" href="/css/style.css">
+        <link rel="stylesheet" type="text/css" href="/3p/yui3/grids-min.css">
+        <link rel="stylesheet" type="text/css" href="/css/news.css">
         
-        <script type="text/javascript" src="/lib/jquery/jquery-1.6.4.min.js"></script>
-        <script type="text/javascript" src="/lib/jquery/jquery.validate.1.9.0.min.js"></script>
+        <script type="text/javascript" src="/3p/jquery/jquery-1.6.4.min.js"></script>
+        <script type="text/javascript" src="/3p/jquery/jquery.validate.1.9.0.min.js"></script>
 
 
         <script type="text/javascript">
             $(document).ready(function(){
-                //form validator
+                
                 $("#web-form1").validate({
                     errorLabelContainer: $("#web-form1 div.error")
                 });

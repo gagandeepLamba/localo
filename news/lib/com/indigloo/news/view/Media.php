@@ -15,7 +15,7 @@ namespace com\indigloo\news\view {
         public $bucket ;
         
         public $type ;
-        public $postId ;
+        
         
         static function create($row) {
             
@@ -28,7 +28,6 @@ namespace com\indigloo\news\view {
             $media->bucket = $row['bucket'];
             $media->height = $row['original_height'];
             $media->width = $row['original_width'];
-            $media->postId = $row['post_id'];
             
             return $media ;
         }

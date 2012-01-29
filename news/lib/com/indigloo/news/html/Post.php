@@ -11,9 +11,11 @@ namespace com\indigloo\news\html {
         static function getMainPageSummary($postDBRow) {
            
 		    $html = NULL ;
-			$coverMediaId = $postDBRow['s_media_id'];
+			$imagesJson = $postDBRow['images_json'];
+			$images = json_decode($imagesJson);
 			
-			if(!empty($coverMediaId)) {
+			
+			if(sizeof($images) > 0) {
 
 				$template = $_SERVER['APP_WEB_DIR'].'/fragments/widget/image.tmpl' ;
 				
@@ -23,12 +25,14 @@ namespace com\indigloo\news\html {
 				$view->shortId = $postDBRow['short_id'];
 				$view->seoTitle = $postDBRow['seo_title'];
 				
-				$view->originalName = $postDBRow['original_name'];
-				$view->bucket = $postDBRow['bucket'];
-				$view->storedName = $postDBRow['stored_name'];
+				//use first image
+				$image = $images[0] ;
 				
-				$view->width = $postDBRow['original_width'];
-				$view->height = $postDBRow['original_height'];
+				$view->originalName = $image->originalName;
+				$view->bucket = $image->bucket;
+				$view->storedName = $image->storeName;
+				$view->width = $image->width;
+				$view->height = $image->height;
 				
 				//change height/width
 				$dimensions = Util::getScaledDimensions($view->width,$view->height,510,320);

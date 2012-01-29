@@ -101,43 +101,16 @@ function uploadProgress(file, bytesLoaded, bytesTotal) {
 }
 
 function uploadSuccess(file, serverData) {
-    // The php script may return an error message etc. but the handler event for swfupload
-    // client is still uploadSuccess. we have to parse data returned from server to find known/script
-    // error case.
-    try {
+	//dummy implementation
+	try {
         var progress = new FileProgress(file, this.customSettings.progressTarget);
-        var dataObj ;
-        
-        try{
-            if(webgloo.media.debug) {
-                webgloo.media.addDebug("server returned => " + serverData);
-            }
-            
-			//process server data
-            dataObj = JSON.parse(serverData);
-            
-            if(dataObj.code == 0){
-                //no error object or error is not yes!
-                //process document object received from server
-                webgloo.media.addImage(dataObj.mediaVO);
-                progress.setComplete();
-                progress.setStatus(dataObj.message);
-                progress.toggleCancel(false);
-            }else {
-                //known error
-                progress.setStatus("Error: " + dataObj.message);
-            }
-            
-        } catch(ex) {
-            //we need to gaurd against JSON parsing errors as well
-            progress.setStatus("Error: " + ex.toString());
-        }
-        
-        
+		progress.setStatus("Notice:: override dummy implementation of uploadSuccess!!");
     } catch (ex) {
-        this.debug(ex);
+        progress.setStatus("Error :: " + ex.toString());
     }
+	
 }
+
 
 function uploadError(file, errorCode, message) {
     try {

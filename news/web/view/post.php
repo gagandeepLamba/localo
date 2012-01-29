@@ -4,7 +4,9 @@
     $postDBRow = $postDao->getRecordOnShortId($shortId);
     $postId = $postDBRow['id'];
     
-    $mediaDBRows = $postDao->getMediaOnId($postId);
+    //$mediaDBRows = $postDao->getMediaOnId($postId);
+    //@todo get media DB rows from images_json 
+    $mediaDBRows = array();
     $description = empty($postDBRow['description']) ? $postDBRow['summary'] : $postDBRow['description'] ;
     
 	$metaDescription = strip_tags($postDBRow['summary']);
@@ -12,7 +14,6 @@
 	$metaDescription = \com\indigloo\Util::abbreviate($metaDescription,180);
 
 ?>
-
 
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -24,11 +25,11 @@
         <meta name="keywords" content="27main, pictures,india news, entertainment, indian politics, headline news, offbeat, created by users, bookmarking site">
         <meta name="description" content="<?php echo $metaDescription;  ?>">
         
-        <link rel="stylesheet" type="text/css" href="/lib/yui3/grids-min.css">
-        <link rel="stylesheet" type="text/css" href="/css/style.css">
+        <link rel="stylesheet" type="text/css" href="/3p/yui3/grids-min.css">
+        <link rel="stylesheet" type="text/css" href="/css/news.css">
             
-        <script type="text/javascript" src="/lib/jquery/jquery-1.6.4.min.js"></script>
-        <script type="text/javascript" src="/lib/jquery/jquery.tinycarousel.min.js"></script>
+        <script type="text/javascript" src="/3p/jquery/jquery-1.6.4.min.js"></script>
+        <script type="text/javascript" src="/3p/jquery/jquery.tinycarousel.min.js"></script>
         
         <script type="text/javascript">			
             $(document).ready(function(){				
