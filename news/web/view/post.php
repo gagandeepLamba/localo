@@ -5,8 +5,8 @@
     $postId = $postDBRow['id'];
     
     //$mediaDBRows = $postDao->getMediaOnId($postId);
-    //@todo get media DB rows from images_json 
-    $mediaDBRows = array();
+    //decode images_json  to get imageVO
+	$images = json_decode($postDBRow['images_json']);
     $description = empty($postDBRow['description']) ? $postDBRow['summary'] : $postDBRow['description'] ;
     
 	$metaDescription = strip_tags($postDBRow['summary']);
@@ -63,7 +63,7 @@
                                 <h1> <?php echo $postDBRow['title'] ; ?> </h1>
                             </div>
                             
-                            <?php if(sizeof($mediaDBRows) > 0 ) { include('inc/slider.inc') ; } ?>
+                            <?php if(sizeof($images) > 0 ) { include('inc/slider.inc') ; } ?>
                             
                           
                             <div class="widget">

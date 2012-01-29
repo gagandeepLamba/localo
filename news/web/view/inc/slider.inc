@@ -6,9 +6,9 @@
             <?php
                 $strItem = ' <li><img src="/{bucket}/{storedName}"></li> ';
                 
-                foreach($mediaDBRows as $mediaDBRow) {
+                foreach($images as $image) {
                     $item = str_replace(array(0 => "{bucket}", 1 => "{storedName}"),
-                                        array(0 => $mediaDBRow['bucket'], 1 => $mediaDBRow['stored_name']),
+                                        array(0 => $image->bucket, 1 => $image->storeName),
                                         $strItem);
                     echo $item;
                     
@@ -21,7 +21,7 @@
     <a href="#" class="buttons next">&nbsp;</a>
     <ul class="pager">
         <?php
-            for($i = 0 ; $i < sizeof($mediaDBRows) ; $i++) {
+            for($i = 0 ; $i < sizeof($images) ; $i++) {
                 echo '<li><a rel="'.$i.'" class="pagenum" href="#">'.($i+1).'</a></li>' ;
             }
         
