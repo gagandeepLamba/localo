@@ -9,11 +9,17 @@ namespace com\indigloo\sc\dao {
     
     class Question {
 
+		function getAll() {
+			$rows = mysql\Question::getAll();
+			return $rows ;
+		}
+		
         function create($title,$description,$category,$location,$tags,$linksJson,$imagesJson) {
             $seoTitle = SeoStringUtil::convertNameToSeoKey($title);
             $data = mysql\Question::create($title,$seoTitle,$description,$category,$location,$tags,$linksJson,$imagesJson);
             return $data ;
         }
+		
 
     }
 

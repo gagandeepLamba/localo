@@ -26,6 +26,10 @@
         $mediaVO->width = $uploader->getWidth();
         $mediaVO->bucket = 'media' ;
         
+        $mediaDao = new com\indigloo\sc\dao\Media();
+        $mediaId = $mediaDao->add($mediaVO);
+        $mediaVO->id  = $mediaId;
+        
         $message = 'file upload done!';
         $data = array('code' => 0, 'message' => $message, 'mediaVO' => $mediaVO);
         echo json_encode($data);

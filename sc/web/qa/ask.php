@@ -22,19 +22,19 @@
 
         <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
 
-        <link rel="stylesheet" type="text/css" href="/common/yui3/grids-min.css">
-        <link rel="stylesheet" type="text/css" href="/css/style.css">
+        <link rel="stylesheet" type="text/css" href="/3p/yui3/grids-min.css">
+        <link rel="stylesheet" type="text/css" href="/css/sc.css">
         
-        <script type="text/javascript" src="/common/jquery/jquery-1.6.4.min.js"></script>
-        <script type="text/javascript" src="/common/jquery/jquery.validate.1.9.0.min.js"></script>
+        <script type="text/javascript" src="/3p/jquery/jquery-1.6.4.min.js"></script>
+        <script type="text/javascript" src="/3p/jquery/jquery.validate.1.9.0.min.js"></script>
         <script type="text/javascript" src="/js/sc.js"></script>
         
        
        <!-- swfupload related stuff -->
-        <script type="text/javascript" src="/common/swfupload/swfupload.js"></script>
-        <script type="text/javascript" src="/common/swfupload/js/swfupload.queue.js"></script>
-        <script type="text/javascript" src="/common/swfupload/js/fileprogress.js"></script>
-        <script type="text/javascript" src="/common/swfupload/js/handlers.js"></script>
+        <script type="text/javascript" src="/3p/swfupload/swfupload.js"></script>
+        <script type="text/javascript" src="/3p/swfupload/js/swfupload.queue.js"></script>
+        <script type="text/javascript" src="/3p/swfupload/js/fileprogress.js"></script>
+        <script type="text/javascript" src="/3p/swfupload/js/handlers.js"></script>
         
         <script type="text/javascript">
        
@@ -54,7 +54,7 @@
             
             window.onload = function() {
                 var settings = {
-                    flash_url : "/common/swfupload/swfupload.swf",
+                    flash_url : "/3p/swfupload/swfupload.swf",
                     upload_url: "/test/receiver.php",
                     post_params: {
                         "PHPSESSID" : "<?php echo session_id(); ?>"
@@ -72,7 +72,7 @@
 
                     // Button settings
                     
-					button_image_url: "/common/swfupload/images/XPButtonUploadText_61x22.png",
+					button_image_url: "/3p/swfupload/images/XPButtonUploadText_61x22.png",
                     button_width: "61",
                     button_height: "22",
                     button_placeholder_id: "spanButtonPlaceHolder",
@@ -95,92 +95,7 @@
             
         </script>
        
-       <style type="text/css">
-              .hide-me {
-                     display:none ;
-              }
-              div#link-data {
-              
-              }
-              
-              div#media-data {
-              
-              }
-              
-              div#link-container {
-                     width:600px;
-                     /* margin-top :20px;
-                     margin-bottom :20px; */
-                     padding:20px;
-                     /* border: 1px dotted blue; */
-                     
-              }
-              
-              div#link-container input{
-                     word-spacing: 1px;
-                     line-height: 1.8em;
-                     color: #333;
-                     border: 1px solid #bbb;
-                     width: 400px;
-                     height: 24px;
-                     padding-top:4px;
-              }
-              
-              div#link-container button {
-                     background-color:black;
-                     color:#FFFFFF !important;
-                     text-align :center ;
-                     border-radius:5px;
-                     text-decoration:none
-                     font-weight: bold;
-                     cursor: pointer;
-              }
-              
-              div#image-container{
-                     margin-bottom:20px;
-                     margin-left:40px;
-                     padding:20px;
-                     border:1px dashed #DDD ;
-              }
-
-              #form-wrapper #divstatus{
-                     padding:5px;
-              }
-              
-              #link-data {
-                     margin-top:20px;
-              }
-              
-              #media-data {
-                     width: 580px;
-              }
-              
-              div .previewImage{
-                     position :relative ;
-                     float : left;
-                     padding:11px;
-                     height:180px;
-                     width:180px;
-                     border:2px solid #DDD ;
-                     margin :5px;
-              }
-              
-              div .previewLink{
-                     padding-top:5px;
-                     font-size:11px;
-              }
-              
-              select {
-                     max-width: 220px;
-                     width: 220px;
-                     margin: 0 0 5px;
-                     border: 1px solid #BDC7D8 ;
-                     padding:2px;
-                     
-              }
-              
-              
-       </style>
+       
     </head>
 
     <body>
@@ -202,7 +117,7 @@
 
 
                                     <p class="help-text">
-                                       Please provide details below to register. Use alphanumeric password of atleast 8 characters.
+                                       Please provide details below and post your question.
 
                                     </p>
                                     
@@ -237,11 +152,15 @@
                                                     <td class="field">Category<span class="red-label">*</span> &nbsp;</td>
                                                     <td>
                                                         <select name="category">
-                                                               <option value="1">Baby/Kids </option>
-                                                               <option value="2">Bags/Luggage </option>
+															   <option value="1">Baby</option>
+                                                               <option value="2">Bags</option>
                                                                <option value="3">Camera</option>
-                                                               <option value="4">Clothes</option>
-                                                               <option value="5">Computers/Tablets</option>
+															   <option value="4">Cars</option>
+                                                               <option value="5">Clothes</option>
+                                                               <option value="6">Computers</option>
+															   <option value="7">Home</option>
+															   <option value="8">Mobile</option>
+															   <option value="9">Other</option>
                                                         </select>
                                                     </td>
                                                 </tr>

@@ -9,6 +9,16 @@ namespace com\indigloo\sc\mysql {
         
         const MODULE_NAME = 'com\indigloo\sc\mysql\Question';
 
+		static function getAll() {
+			
+			$mysqli = MySQL\Connection::getInstance()->getHandle();
+            $sql = " select * from sc_question " ;
+			
+            $rows = MySQL\Helper::fetchRows($mysqli, $sql);
+            return $rows;
+			
+		}
+		
         static function create($title,
                                $seoTitle,
                                $description,

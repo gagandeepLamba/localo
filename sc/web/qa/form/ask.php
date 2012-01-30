@@ -10,7 +10,8 @@
     
     if (isset($_POST['save']) && ($_POST['save'] == 'Save')) {
         
-        $fhandler = new Form\Handler('web-form-1', $_POST);
+		//do not munge form data
+        $fhandler = new Form\Handler('web-form-1', $_POST,false);
         $fhandler->addRule('question', 'Question', array('required' => 1, 'maxlength' => 128));
         $fhandler->addRule('tags', 'Tags', array('required' => 1));
         $fhandler->addRule('location', 'Location', array('required' => 1));
