@@ -26,12 +26,14 @@ namespace com\indigloo\sc\mysql {
                                $location,
                                $tags,
                                $linksJson,
-                               $imagesJson) {
+                               $imagesJson,
+							   $privacy,
+							   $sendDeal) {
 
             $mysqli = MySQL\Connection::getInstance()->getHandle();
             $sql = " insert into sc_question(title,seo_title,description,category_id,category, " ;
-            $sql .= " location,tags,links_json,images_json,created_on) ";
-            $sql .= " values(?,?,?,?,?,?,?,?,?,now()) ";
+            $sql .= " location,tags,links_json,images_json,created_on,p_level,send_deal) ";
+            $sql .= " values(?,?,?,?,?,?,?,?,?,now(),?,?) ";
 
             $dbCode = MySQL\Connection::ACK_OK;
             $stmt = $mysqli->prepare($sql);
@@ -39,7 +41,7 @@ namespace com\indigloo\sc\mysql {
             $categoryId = 1 ;
             
             if ($stmt) {
-                $stmt->bind_param("sssisssss",
+                $stmt->bind_param("sssissssssi",
                         $title,
                         $seoTitle,
                         $description,
@@ -48,7 +50,9 @@ namespace com\indigloo\sc\mysql {
                         $location,
                         $tags,
                         $linksJson,
-                        $imagesJson);
+                        $imagesJson,
+						$privacy,
+						$sendDeal);
                 
                       
                 $stmt->execute();

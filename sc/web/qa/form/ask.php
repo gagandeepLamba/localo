@@ -17,7 +17,6 @@
         $fhandler->addRule('location', 'Location', array('required' => 1));
         
         $fvalues = $fhandler->getValues();
-        
         $ferrors = $fhandler->getErrors();
     
         
@@ -28,21 +27,27 @@
             
             header("location: " . $locationOnError);
             exit(1);
+			
         } else {
             
             $questionDao = new com\indigloo\sc\dao\Question();
+			
+			$sendDeal = array_key_exists('send_deal',$_POST) ? 1 : 0 ;
+			
             $data = $questionDao->create($fvalues['question'],
                                 $fvalues['description'],
                                 $fvalues['category'],
                                 $fvalues['location'],
                                 $fvalues['tags'],
                                 $_POST['links_json'],
-                                $_POST['images_json']);
+                                $_POST['images_json'],
+								$fvalues['privacy'],
+								$sendDeal);
     
             $code = $data['code'];
             
             if ($code == com\indigloo\mysql\Connection::ACK_OK ) {
-                $locationOnSuccess = '/qa/thanks.php';
+                $locationOnSuccess = '/';
                 header("location: " . $locationOnSuccess);
                 
             } else {

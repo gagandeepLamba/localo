@@ -13,6 +13,8 @@ create table sc_question(
     category_id int ,
     location varchar(32),
     category varchar(32),
+	p_level varchar(16),
+	send_deal int default 0,
     seo_title varchar(192) not null,
     created_on timestamp default '0000-00-00 00:00:00',
 	updated_on timestamp default '0000-00-00 00:00:00' ,
@@ -33,3 +35,11 @@ create table sc_media(
 	updated_on timestamp default '0000-00-00 00:00:00' ,
 	PRIMARY KEY (id)) ENGINE = MYISAM;
     
+
+--
+-- 30 jan 2012
+--
+
+alter table sc_question add column p_level varchar(16);
+alter table sc_question add column send_deal  int default 0;
+

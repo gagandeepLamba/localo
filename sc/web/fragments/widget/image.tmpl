@@ -1,16 +1,25 @@
 <div class="widget bbd5">
        <h2> <a href="/qa/show.php?id={id}">{title} </a> </h2>
+       <div class="details">
+          <span class="ditem d-name b"> <a href="#"> Anonymous </a> </span>
+          <span class="date">  posted on 20 Jan,2012</span>
+       </div>
        
         <div class="photo">
                      
-                <img src="/{bucket}/{storedName}"  title="{originalName}" width="{width}" height="{height}" alt="{originalName}"/>
+                <img src="/{bucket}/{storedName}"  class="{class}" title="{originalName}" width="{width}" height="{height}" alt="{originalName}"/>
         
                 <div class="regular">
                         {summary}
                 </div>
-            
+                <br style="clear:both"/>
+        </div>
+        <div class="tags">
+              {tags}
         </div>
         
+      
+ 
 </div>
 
 

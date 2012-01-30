@@ -136,7 +136,20 @@
                                                         <input type="text" name="question" maxlength="128" class="required" title="&gt; Queston is required"! value="<?php echo $sticky->get('question'); ?>"/>
                                                     </td>
                                                  </tr>
-                                                 
+                                                 <tr>
+                                                    <td class="field">Privacy<span class="red-label">*</span> &nbsp;</td>
+                                                    <td>
+                                                        <select name="privacy">
+															   <option value="Pulic">Public</option>
+                                                               <option value="Friends">Friends</option>
+															   <option value="Anonymous">Anonymous</option>
+                                                               <option value="Car Fans">Car Fans</option>
+															   <option value="HSR Retail Club">HSR Retail Club</option>
+                                                               
+                                                        </select>
+                                                    </td>
+                                                </tr>
+												 
                                                  <tr>
                                                         <td class="field">Details</td>
                                                         <td>
@@ -152,19 +165,25 @@
                                                     <td class="field">Category<span class="red-label">*</span> &nbsp;</td>
                                                     <td>
                                                         <select name="category">
-															   <option value="1">Baby</option>
-                                                               <option value="2">Bags</option>
-                                                               <option value="3">Camera</option>
-															   <option value="4">Cars</option>
-                                                               <option value="5">Clothes</option>
-                                                               <option value="6">Computers</option>
-															   <option value="7">Home</option>
-															   <option value="8">Mobile</option>
-															   <option value="9">Other</option>
+															   <option value="Baby">Baby</option>
+                                                               <option value="Bags">Bags</option>
+                                                               <option value="Camera">Camera</option>
+															   <option value="Cars">Cars</option>
+                                                               <option value="Clothes">Clothes</option>
+                                                               <option value="Computers">Computers</option>
+															   <option value="Home">Home</option>
+															   <option value="Mobile">Mobile</option>
+															   <option value="Other">Other</option>
                                                         </select>
                                                     </td>
                                                 </tr>
-                                                 
+                                                 <tr>
+                                                        <td class="field">&nbsp;</td>
+                                                        <td>
+                                                            Send deals? <input type="checkbox" style="width:30px;vertical-align:middle;" class="small-checkbox" name="send_deal" value="1" /> Yes!
+                                                        </td>
+                                                 </tr>
+												 
                                                 <tr>
                                                     <td class="field">Tags<span class="red-label">*</span> &nbsp;</td>
                                                     <td> <input  type="text" name="tags" maxlength="64" class="required"  title="&gt; Tags are required!" value="" /></td>

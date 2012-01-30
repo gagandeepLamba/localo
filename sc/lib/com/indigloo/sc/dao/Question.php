@@ -14,9 +14,13 @@ namespace com\indigloo\sc\dao {
 			return $rows ;
 		}
 		
-        function create($title,$description,$category,$location,$tags,$linksJson,$imagesJson) {
+        function create($title,$description,$category,$location,$tags,$linksJson,
+						$imagesJson,$privacy,$sendDeal) {
+			
             $seoTitle = SeoStringUtil::convertNameToSeoKey($title);
-            $data = mysql\Question::create($title,$seoTitle,$description,$category,$location,$tags,$linksJson,$imagesJson);
+            $data = mysql\Question::create($title,$seoTitle,$description,$category,
+										   $location,$tags,$linksJson,$imagesJson,
+										   $privacy,$sendDeal);
             return $data ;
         }
 		
