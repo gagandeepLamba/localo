@@ -11,7 +11,7 @@
      
     $sticky = new Sticky($gWeb->find(Constants::STICKY_MAP,true));
     
-	$questionDao = new \com\indigloo\sc\dao\Question();
+	$questionDao = new \com\indigloo\sc\dao\Note();
     $questionDBRows = $questionDao->getAll();
     
 ?>  
@@ -60,7 +60,7 @@
 								</div>
 								<?php
 									foreach($questionDBRows as $questionDBRow) {
-										$html = \com\indigloo\sc\html\Question::getSummary($questionDBRow);
+										$html = \com\indigloo\sc\html\Note::getSummary($questionDBRow);
 										echo $html ;
 										
 									}

@@ -30,15 +30,18 @@
 			
         } else {
             
-            $questionDao = new com\indigloo\sc\dao\Question();
+            $questionDao = new com\indigloo\sc\dao\Note();
 			
 			$sendDeal = array_key_exists('send_deal',$_POST) ? 1 : 0 ;
-			
-            $data = $questionDao->create($fvalues['question'],
+							   
+            $data = $questionDao->create('QUE',
+								$fvalues['question'],
                                 $fvalues['description'],
                                 $fvalues['category'],
                                 $fvalues['location'],
                                 $fvalues['tags'],
+								'brand',
+								'userId',
                                 $_POST['links_json'],
                                 $_POST['images_json'],
 								$fvalues['privacy'],

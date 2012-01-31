@@ -6,7 +6,7 @@ namespace com\indigloo\sc\html {
     use com\indigloo\sc\view\Media as MediaView ;
     use com\indigloo\Util as Util ;
     
-    class Question {
+    class Note {
         
         static function getSummary($questionDBRow) {
            

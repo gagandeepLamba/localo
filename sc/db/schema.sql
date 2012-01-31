@@ -1,19 +1,20 @@
 
 
-drop table if exists sc_question;
-create table sc_question(
+drop table if exists sc_note;
+create table sc_note(
 	id int(11) NOT NULL auto_increment,
 	title varchar(128) not null,
+	n_type varchar(4),
+	p_level varchar(4),
+	user_id varchar(16),
 	summary varchar(256) ,
     description TEXT ,
     tags varchar(64),
     links_json TEXT ,
     images_json TEXT,
-    location_id int,
-    category_id int ,
     location varchar(32),
     category varchar(32),
-	p_level varchar(16),
+	brand varchar(32),
 	send_deal int default 0,
     seo_title varchar(192) not null,
     created_on timestamp default '0000-00-00 00:00:00',
@@ -36,10 +37,21 @@ create table sc_media(
 	PRIMARY KEY (id)) ENGINE = MYISAM;
     
 
---
--- 30 jan 2012
---
 
-alter table sc_question add column p_level varchar(16);
-alter table sc_question add column send_deal  int default 0;
+  
+drop table if exists sc_user;
+create table sc_user(
+	id int(11) NOT NULL auto_increment,
+	name varchar(64) not null,
+    email varchar(64) not null,
+    location varchar(32) not null,
+	password varchar(32) not null,
+    created_on timestamp default '0000-00-00 00:00:00',
+	updated_on timestamp default '0000-00-00 00:00:00' ,
+	PRIMARY KEY (id)) ENGINE = MYISAM;
+    
+	
+	
+
+drop table if exists sc_question;
 

@@ -5,35 +5,38 @@ namespace com\indigloo\sc\mysql {
     use \com\indigloo\mysql as MySQL;
     use \com\indigloo\Util as Util ;
     
-    class Question {
+    class Note {
         
         const MODULE_NAME = 'com\indigloo\sc\mysql\Question';
 
 		static function getAll() {
 			
 			$mysqli = MySQL\Connection::getInstance()->getHandle();
-            $sql = " select * from sc_question " ;
+            $sql = " select * from sc_note " ;
 			
             $rows = MySQL\Helper::fetchRows($mysqli, $sql);
             return $rows;
 			
 		}
 		
-        static function create($title,
+        static function create($type,
+							   $title,
                                $seoTitle,
                                $description,
                                $category,
                                $location,
                                $tags,
+							   $brand,
+							   $userId,
                                $linksJson,
                                $imagesJson,
-							   $privacy,
+							   $plevel,
 							   $sendDeal) {
 
             $mysqli = MySQL\Connection::getInstance()->getHandle();
-            $sql = " insert into sc_question(title,seo_title,description,category_id,category, " ;
-            $sql .= " location,tags,links_json,images_json,created_on,p_level,send_deal) ";
-            $sql .= " values(?,?,?,?,?,?,?,?,?,now(),?,?) ";
+            $sql = " insert into sc_note(title,seo_title,description,category,location,tags, " ;
+            $sql .= " brand,user_id,links_json,images_json,created_on,p_level,send_deal,n_type) ";
+            $sql .= " values(?,?,?,?,?,?,?,?,?,?,now(),?,?,?) ";
 
             $dbCode = MySQL\Connection::ACK_OK;
             $stmt = $mysqli->prepare($sql);
@@ -41,18 +44,20 @@ namespace com\indigloo\sc\mysql {
             $categoryId = 1 ;
             
             if ($stmt) {
-                $stmt->bind_param("sssissssssi",
+                $stmt->bind_param("sssssssssssis",
                         $title,
                         $seoTitle,
                         $description,
-                        $categoryId,
                         $category,
                         $location,
                         $tags,
+						$brand,
+						$userId,
                         $linksJson,
                         $imagesJson,
-						$privacy,
-						$sendDeal);
+						$plevel,
+						$sendDeal,
+						$type);
                 
                       
                 $stmt->execute();

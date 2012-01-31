@@ -3,7 +3,8 @@
     //qa/ask.php
     include ('sc-app.inc');
     include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
-    
+    include($_SERVER['APP_WEB_DIR'] . '/inc/auth.inc');
+	 
     use com\indigloo\Util;
     use com\indigloo\ui\form\Sticky;
     use com\indigloo\Constants as Constants;
@@ -140,11 +141,10 @@
                                                     <td class="field">Privacy<span class="red-label">*</span> &nbsp;</td>
                                                     <td>
                                                         <select name="privacy">
-															   <option value="Pulic">Public</option>
-                                                               <option value="Friends">Friends</option>
-															   <option value="Anonymous">Anonymous</option>
-                                                               <option value="Car Fans">Car Fans</option>
-															   <option value="HSR Retail Club">HSR Retail Club</option>
+															   <option value="PUB">Public</option>
+                                                               <option value="FRND">Friends</option>
+                                                               <option value="CARF">Car Fans</option>
+															   <option value="HSRR">HSR Retail Club</option>
                                                                
                                                         </select>
                                                     </td>
@@ -158,7 +158,7 @@
                                                  </tr>
                                                  <tr>
                                                     <td class="field">Location<span class="red-label">*</span> &nbsp; </td>
-                                                    <td> <input type="text" name="location" maxlength="32" class="w200 required" minlength="3" title="&gt; Location is required!" value="" /></td>
+                                                    <td> <input type="text" name="location" maxlength="32" class="w200 required" minlength="3" title="&gt; Location is required!" value="<?php echo $sticky->get('location',$userDBRow['location']); ?>" /></td>
                                                 </tr>
                                                  
                                                  <tr>
