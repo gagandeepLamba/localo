@@ -45,6 +45,30 @@ namespace com\indigloo\sc\mysql {
             
             return $code;
         }
+        
+        
+        static function updateInterest($email,$interest) {
+             
+            $mysqli = MySQL\Connection::getInstance()->getHandle();
+            $sql = "  update sc_user set interests = ?  where email = ? ";
+            
+            $code = MySQL\Connection::ACK_OK;
+            $stmt = $mysqli->prepare($sql);
+            
+            if ($stmt) {
+                $stmt->bind_param("ss",$interest,$email);
+                $stmt->execute();
+
+                if ($mysqli->affected_rows != 1) {
+                    $code = MySQL\Error::handle(self::MODULE_NAME, $stmt);
+                }
+                $stmt->close();
+            } else {
+                $code = MySQL\Error::handle(self::MODULE_NAME, $mysqli);
+            }
+            
+            return $code ;
+        }
 
     }
 

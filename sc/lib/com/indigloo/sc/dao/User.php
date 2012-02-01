@@ -43,7 +43,7 @@ namespace com\indigloo\sc\dao {
         
         }
         
-        function getLoggedInUser() {
+        function getUserInSession() {
             $row = NULL ;
             if (isset($_SESSION) && isset($_SESSION['LOGON_TOKEN'])) {
                 $row = $_SESSION['LOGON_USER_DATA'];
@@ -54,6 +54,16 @@ namespace com\indigloo\sc\dao {
             
             return $row ;
             
+        }
+        
+        function setUserInSession($row) {
+            $_SESSION['LOGON_USER_DATA'] = $row;
+                   
+        }
+        
+        function updateInterest($email,$interest) {
+           $code = mysql\User::updateInterest($email,$interest);
+           return $code;
         }
         
     }

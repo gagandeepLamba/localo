@@ -3,7 +3,7 @@
  $userDao = new com\indigloo\sc\dao\User();
  
  if($userDao->isAuthenticated()){
-    $userDBRow = $userDao->getLoggedInUser();
+    $userDBRow = $userDao->getUserInSession();
     include($_SERVER['APP_WEB_DIR'].'/inc/toolbar/user.inc') ;
     
   } else {

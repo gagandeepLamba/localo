@@ -3,14 +3,14 @@
     //sc/index
     include ('sc-app.inc');
     include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
+    include($_SERVER['APP_WEB_DIR'] . '/inc/auth.inc');
     
     use com\indigloo\Util;
     $catDao = new com\indigloo\sc\dao\Category();
 	$catRows = $catDao->getAll();
+    
+    
 	
-	$selectedRows = array("Camera");
-	
-   
 ?>  
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -49,11 +49,37 @@
 			  }) ;
 				
 			  $("#save-selection").click(function(event){
-					  event.preventDefault();
-					  $("#selected").find('.previewImage').each(function(index) {
-							var name = $(this).attr("id");
-							alert(name);
-					 });
+                    event.preventDefault();
+                    
+                    try{
+                        var dataObj = {};
+                        var strCats = '';
+                        
+                        $("#selected").find('.previewImage').each(function(index) {
+                            var name = $(this).attr("id");
+                            strCats = strCats + name + " " ;
+                            
+                        });
+                        
+                        dataObj.data = strCats;
+                        
+                        $.ajax({
+                            url: '/user/form/interests.php' ,
+                            type: 'POST',
+                            dataType: 'html',
+                            data : dataObj,
+                            timeout: 9000,
+                
+                            error: function(XMLHttpRequest, textStatus){
+                                alert("Ajax error :: " + textStatus);
+                            },
+                            success: function(html){
+                                alert(html);
+                            }
+                        }); 
+					 } catch(ex) {
+						alert("Error:: " + ex.toString());
+					 }
 			  }) ;
 				
             });
@@ -64,7 +90,28 @@
     </head>
 
     <body>
-        <?php include($_SERVER['APP_WEB_DIR'] . '/inc/toolbar.inc'); ?>
+        <?php
+            include($_SERVER['APP_WEB_DIR'] . '/inc/toolbar.inc');
+            $selectedRows = array();
+            //print_r($userDBRow);
+            //exit ;
+           
+            if(!empty($userDBRow) && !empty($userDBRow['interests'])) {
+                
+                $strInterests = $userDBRow['interests'];
+                
+                
+                $strInterests = trim($strInterests);
+                $pieces = explode(" ",$strInterests);
+                
+                foreach($pieces as $piece){
+                    if(!empty($piece)) {
+                        array_push($selectedRows,$piece);
+                    }
+                }
+            }
+            
+        ?>
         <div id="body-wrapper">
 				
                 <div id="hd">
