@@ -17,6 +17,7 @@ create table sc_note(
 	brand varchar(32),
 	send_deal int default 0,
     seo_title varchar(192) not null,
+	timeline varchar(32),
     created_on timestamp default '0000-00-00 00:00:00',
 	updated_on timestamp default '0000-00-00 00:00:00' ,
 	PRIMARY KEY (id)) ENGINE = MYISAM;
@@ -50,7 +51,6 @@ create table sc_user(
 	updated_on timestamp default '0000-00-00 00:00:00' ,
 	PRIMARY KEY (id)) ENGINE = MYISAM;
     
-	
 	
 
 drop table if exists sc_question;

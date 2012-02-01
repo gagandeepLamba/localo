@@ -1,15 +1,32 @@
 
 <div class="p20 mt20">
-    <h2> share 27main stories</h2>
+    <h2> <a href="/user/interests.php"> My Interests &raquo;<a/> </h2>
+    
+        
+    <h2> Locations</h2>
     <hr>
-     <!-- FB like - do not show faces -->
-    <div class="p20" > 
-       <div class="fb-like" data-href="<?php echo $pageURI; ?>" data-send="true" data-width="300" data-show-faces="false"></div>
+    <div class="sidebar-box">
+        <ul>
+            <li> <a href="/?stoken=Bangalore&ft=l"> Bangalore </a> </li>
+            <li> <a href="/?stoken=Calcutta&ft=l">Calcutta </a> </li>
+            <li> <a href="/?stoken=Chennai&ft=l">Chennai </a> </li>
+            <li> <a href="/?stoken=Delhi&ft=l"> Delhi </a> </li>
+            <li> <a href="/?stoken=Mumbai&ft=l"> Mumbai </a> </li>
+        </ul>
     </div>
-     
-<div class="ml20">
-  
-</div>
+    
+    <h2> Brands</h2>
+    <hr>
+    <div class="sidebar-box">
+        <ul>
+            <li> <a href="/?stoken=Nokia&ft=b"> Nokia </a> </li>
+            <li> <a href="/?stoken=Samsung&ft=b">Samsung </a> </li>
+            <li> <a href="/?stoken=V-Gaurd&ft=b">V-Gaurd </a> </li>
+            <li> <a href="/?stoken=24hourloot.com&ft=b"> 24hourloot.com </a> </li>
+            
+        </ul>
+    </div>
+
 </div>
 
 

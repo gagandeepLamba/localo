@@ -9,10 +9,27 @@ namespace com\indigloo\sc\dao {
     
     class Note {
 
-		function getAll() {
-			$rows = mysql\Note::getAll();
+		function getAll($stoken,$ft) {
+			$ft = empty($ft) ? 't' : $ft ;
+			$filter = '' ;
+			
+			if(!empty($stoken)) {
+				switch($ft) {
+					case 'b':
+					case 't':
+						$filter = "where tags like '%".$stoken."%' " ;
+						break ;
+					case 'l' :
+						$filter = "where location like '%".$stoken."%' " ;
+						break ;
+					default :
+						break ;	
+				}
+			}
+			$rows = mysql\Note::getAll($filter);
 			return $rows ;
 		}
+		
 		
         function create($type,
 						       $title,
@@ -25,7 +42,8 @@ namespace com\indigloo\sc\dao {
                                $linksJson,
                                $imagesJson,
 							   $plevel,
-							   $sendDeal) {
+							   $sendDeal,
+							   $timeline) {
 			
             $seoTitle = SeoStringUtil::convertNameToSeoKey($title);
             $data = mysql\Note::create($type,
@@ -40,7 +58,8 @@ namespace com\indigloo\sc\dao {
                                $linksJson,
                                $imagesJson,
 							   $plevel,
-							   $sendDeal);
+							   $sendDeal,
+							   $timeline);
             return $data ;
         }
 		

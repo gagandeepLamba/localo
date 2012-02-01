@@ -1,25 +1,23 @@
-<div class="widget bbd5">
+<div class="widget {border}">
+
        <h2> <a href="/qa/show.php?id={id}">{title} </a> </h2>
+       
        <div class="details">
-          <span class="ditem d-name b"> <a href="#"> Anonymous </a> </span>
-          <span class="date">  posted on 20 Jan,2012</span>
+          <span class="b"> <a href="#"> {userId} </a> </span>
+          <span class="date">  {createdOn} </span>
        </div>
        
         <div class="photo">
                      
-                <img src="/{bucket}/{storedName}"  class="{class}" title="{originalName}" width="{width}" height="{height}" alt="{originalName}"/>
+                <img src="/{bucket}/{storedName}"  class="{imageClass}" title="{originalName}" width="{width}" height="{height}" alt="{originalName}"/>
         
                 <div class="regular">
                         {summary}
                 </div>
                 <br style="clear:both"/>
         </div>
-        <div class="tags">
-              {tags}
-        </div>
+        <div class="tags"> {tags} {timeline}  </div>
         
-      
- 
 </div>
 
 

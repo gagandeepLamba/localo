@@ -18,7 +18,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 
-       <head><title> Ask Anything</title>
+       <head><title> share your purchases and reviews</title>
          
 
         <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
@@ -114,25 +114,25 @@
                         <div class="yui3-u-2-3">
                             <div id="content">
 
-                                    <h2> Ask Anything </h2>
+                                    <h2> Share your purchases and reviews</h2>
 
 
                                     <p class="help-text">
-                                       Please provide details below and post your question.
+                                       Please provide details below and post.
 
                                     </p>
                                     
                                     <?php FormMessage::render(); ?>
                             
                                     <div id="form-wrapper">
-                                        <form id="web-form1"  name="web-form1" action="/qa/form/ask.php" enctype="multipart/form-data"  method="POST">
+                                        <form id="web-form1"  name="web-form1" action="/qa/form/share.php" enctype="multipart/form-data"  method="POST">
 
                                             <div class="error">    </div>
 
                                             <table class="form-table">
 
                                                  <tr>
-                                                    <td class="field">Question<span class="red-label">*</span></td>
+                                                    <td class="field">Title<span class="red-label">*</span></td>
                                                     <td>
                                                         <input type="text" name="title" maxlength="128" class="required" title="&gt; Queston is required"! value="<?php echo $sticky->get('question'); ?>"/>
                                                     </td>
@@ -156,10 +156,7 @@
                                                             <textarea  name="description" class="h130" cols="50" rows="4" ><?php echo $sticky->get('description'); ?></textarea>
                                                         </td>
                                                  </tr>
-                                                 <tr>
-                                                    <td class="field">Location<span class="red-label">*</span> &nbsp; </td>
-                                                    <td> <input type="text" name="location" maxlength="32" class="w200 required" minlength="3" title="&gt; Location is required!" value="<?php echo $sticky->get('location',$userDBRow['location']); ?>" /></td>
-                                                </tr>
+                                                 
                                                  
                                                  <tr>
                                                     <td class="field">Category<span class="red-label">*</span> &nbsp;</td>
@@ -177,12 +174,7 @@
                                                         </select>
                                                     </td>
                                                 </tr>
-                                                 <tr>
-                                                        <td class="field">&nbsp;</td>
-                                                        <td>
-                                                            Send deals? <input type="checkbox" style="width:30px;vertical-align:middle;" class="small-checkbox" name="send_deal" value="1" /> Yes!
-                                                        </td>
-                                                 </tr>
+                                        
 												 
                                                 <tr>
                                                     <td class="field">Tags<span class="red-label">*</span> &nbsp;</td>
@@ -251,7 +243,7 @@
                                             <div style="clear: both;"></div>
                                             <input type="hidden" name="links_json" value="" />
                                             <input type="hidden" name="images_json" value="" />
-                                            <input type="hidden" name="entity_type" value="QUE" />
+                                            <input type="hidden" name="entity_type" value="SHAR" />
 											
                                         </form>
                                     </div> <!-- form wrapper -->

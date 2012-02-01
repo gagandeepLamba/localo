@@ -1122,6 +1122,10 @@ img.aligncenter {display: block; margin-left: auto; margin-right: auto}
 		text-align:center;
 	}
 	
+	.sidebar-box {
+		padding:10px;
+		background : #FFFFE0;
+		/* background-color: #FFF0F5 ; */
+	}
 
-
-
+	

@@ -12,7 +12,8 @@
     $sticky = new Sticky($gWeb->find(Constants::STICKY_MAP,true));
     
 	$questionDao = new \com\indigloo\sc\dao\Note();
-    $questionDBRows = $questionDao->getAll();
+    $questionDBRows = $questionDao->getAll($_GET['stoken'], $_GET['ft']);
+	$index = 0 ;
     
 ?>  
 
@@ -51,18 +52,47 @@
 										<a href="/qa/ask.php"> Ask &raquo; </a>
 									</div>
 									<div class="yui3-u navbox">
-										<a href="#"> Wish &raquo;</a>
+										<a href="/qa/wish.php"> Wish &raquo;</a>
 									</div>
 									<div class="yui3-u navbox">
-										<a href="#">Share &raquo;</a>
+										<a href="/qa/share.php">Share &raquo;</a>
 									</div>
 									
-								</div>
-								<?php
-									foreach($questionDBRows as $questionDBRow) {
-										$html = \com\indigloo\sc\html\Note::getSummary($questionDBRow);
-										echo $html ;
+								</div> <!-- top grid -->
+								
+								<div class="yui3-g">
+									<div class="yui3-u-1-2">
+										<?php
+											for($index = 0 ; ($index < sizeof($questionDBRows)) && ($index < 3); $index++) {
+												$questionDBRow = $questionDBRows[$index];
+												$html = \com\indigloo\sc\html\Note::getSummary($questionDBRow,1);
+												echo $html ;
 										
+											}
+										?>
+									</div>
+									<div class="yui3-u-1-2">
+										<?php
+											for($index = 3 ; ($index < sizeof($questionDBRows)) && ($index < 6); $index++) {
+												$questionDBRow = $questionDBRows[$index];
+												$html = \com\indigloo\sc\html\Note::getSummary($questionDBRow,1);
+												echo $html ;
+											}
+										?>
+									</div>
+									
+									
+								</div> <!-- 2 col grid -->
+								
+								
+								
+								
+								<?php
+									for($index = 6; $index < sizeof($questionDBRows) ; $index++) {
+										$questionDBRow = $questionDBRows[$index];
+										$html = \com\indigloo\sc\html\Note::getSummary($questionDBRow,2);
+										echo $html ;
+								
 									}
 								?>
                                    
@@ -73,6 +103,7 @@
                         
                          <div class="yui3-u-1-3">
                             <!-- sidebar -->
+							<?php include($_SERVER['APP_WEB_DIR'] . '/inc/sidebar.inc'); ?>
                         </div> <!-- u-1-3 -->
                         
                     </div> <!-- GRID -->

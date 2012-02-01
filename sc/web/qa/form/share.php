@@ -15,14 +15,14 @@
         $fhandler = new Form\Handler('web-form-1', $_POST,false);
         $fhandler->addRule('title', 'Title', array('required' => 1, 'maxlength' => 128));
         $fhandler->addRule('tags', 'Tags', array('required' => 1));
-        $fhandler->addRule('location', 'Location', array('required' => 1));
+        //$fhandler->addRule('location', 'Location', array('required' => 1));
         
         $fvalues = $fhandler->getValues();
         $ferrors = $fhandler->getErrors();
     
         
         if ($fhandler->hasErrors()) {
-            $locationOnError = '/qa/ask.php' ;
+            $locationOnError = '/qa/share.php' ;
             $gWeb->store(Constants::STICKY_MAP, $fvalues);
             $gWeb->store(Constants::FORM_ERRORS,$fhandler->getErrors());
             
@@ -34,14 +34,12 @@
             $questionDao = new com\indigloo\sc\dao\Note();
 			$userDao = new com\indigloo\sc\dao\User();
 			$userDBRow = $userDao->getUserInSession();
-			
-			$sendDeal = array_key_exists('send_deal',$_POST) ? 1 : 0 ;
-							   
+				   
             $data = $questionDao->create($_POST['entity_type'],
 								$fvalues['title'],
                                 $fvalues['description'],
                                 $fvalues['category'],
-                                $fvalues['location'],
+                                $userDBRow['location'],
                                 $fvalues['tags'],
 								'brand',
 								$userDBRow['email'],
@@ -49,7 +47,7 @@
                                 $_POST['images_json'],
 								$fvalues['privacy'],
 								$sendDeal,
-								0);
+                                0);
     
             $code = $data['code'];
             
@@ -61,7 +59,7 @@
                 $message = sprintf("DB Error: (code is %d) please try again!",$code);
                 $gWeb->store(Constants::STICKY_MAP, $fvalues);
                 $gWeb->store(Constants::FORM_ERRORS,array($message));
-                $locationOnError = '/qa/ask.php' ;
+                $locationOnError = '/qa/share.php' ;
                 header("location: " . $locationOnError);
                 exit(1);
             }

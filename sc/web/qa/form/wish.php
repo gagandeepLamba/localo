@@ -1,5 +1,5 @@
 <?php
-    //qa/form/ask.php
+    //qa/form/wish.php
     
     include 'sc-app.inc';
     include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
@@ -14,15 +14,13 @@
 		//do not munge form data
         $fhandler = new Form\Handler('web-form-1', $_POST,false);
         $fhandler->addRule('title', 'Title', array('required' => 1, 'maxlength' => 128));
-        $fhandler->addRule('tags', 'Tags', array('required' => 1));
-        $fhandler->addRule('location', 'Location', array('required' => 1));
         
         $fvalues = $fhandler->getValues();
         $ferrors = $fhandler->getErrors();
     
         
         if ($fhandler->hasErrors()) {
-            $locationOnError = '/qa/ask.php' ;
+            $locationOnError = '/qa/wish.php' ;
             $gWeb->store(Constants::STICKY_MAP, $fvalues);
             $gWeb->store(Constants::FORM_ERRORS,$fhandler->getErrors());
             
@@ -31,25 +29,23 @@
 			
         } else {
             
-            $questionDao = new com\indigloo\sc\dao\Note();
+            $noteDao = new com\indigloo\sc\dao\Note();
 			$userDao = new com\indigloo\sc\dao\User();
 			$userDBRow = $userDao->getUserInSession();
-			
-			$sendDeal = array_key_exists('send_deal',$_POST) ? 1 : 0 ;
 							   
-            $data = $questionDao->create($_POST['entity_type'],
+            $data = $noteDao->create($_POST['entity_type'],
 								$fvalues['title'],
                                 $fvalues['description'],
-                                $fvalues['category'],
-                                $fvalues['location'],
-                                $fvalues['tags'],
+                                'category',
+                                $userDBRow['location'],
+                                'tags',
 								'brand',
 								$userDBRow['email'],
                                 $_POST['links_json'],
                                 $_POST['images_json'],
 								$fvalues['privacy'],
-								$sendDeal,
-								0);
+								0,
+                                $fvalues['timeline']);
     
             $code = $data['code'];
             
@@ -61,7 +57,7 @@
                 $message = sprintf("DB Error: (code is %d) please try again!",$code);
                 $gWeb->store(Constants::STICKY_MAP, $fvalues);
                 $gWeb->store(Constants::FORM_ERRORS,array($message));
-                $locationOnError = '/qa/ask.php' ;
+                $locationOnError = '/qa/wish.php' ;
                 header("location: " . $locationOnError);
                 exit(1);
             }

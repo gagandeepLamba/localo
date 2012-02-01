@@ -9,10 +9,11 @@ namespace com\indigloo\sc\mysql {
         
         const MODULE_NAME = 'com\indigloo\sc\mysql\Question';
 
-		static function getAll() {
+		static function getAll($filter) {
 			
 			$mysqli = MySQL\Connection::getInstance()->getHandle();
             $sql = " select * from sc_note " ;
+			$sql .= $filter ;
 			
             $rows = MySQL\Helper::fetchRows($mysqli, $sql);
             return $rows;
@@ -31,12 +32,13 @@ namespace com\indigloo\sc\mysql {
                                $linksJson,
                                $imagesJson,
 							   $plevel,
-							   $sendDeal) {
+							   $sendDeal,
+							   $timeline) {
 
             $mysqli = MySQL\Connection::getInstance()->getHandle();
             $sql = " insert into sc_note(title,seo_title,description,category,location,tags, " ;
-            $sql .= " brand,user_id,links_json,images_json,created_on,p_level,send_deal,n_type) ";
-            $sql .= " values(?,?,?,?,?,?,?,?,?,?,now(),?,?,?) ";
+            $sql .= " brand,user_id,links_json,images_json,created_on,p_level,send_deal,n_type,timeline) ";
+            $sql .= " values(?,?,?,?,?,?,?,?,?,?,now(),?,?,?,?) ";
 
             $dbCode = MySQL\Connection::ACK_OK;
             $stmt = $mysqli->prepare($sql);
@@ -44,7 +46,7 @@ namespace com\indigloo\sc\mysql {
             $categoryId = 1 ;
             
             if ($stmt) {
-                $stmt->bind_param("sssssssssssis",
+                $stmt->bind_param("sssssssssssiss",
                         $title,
                         $seoTitle,
                         $description,
@@ -57,7 +59,8 @@ namespace com\indigloo\sc\mysql {
                         $imagesJson,
 						$plevel,
 						$sendDeal,
-						$type);
+						$type,
+						$timeline);
                 
                       
                 $stmt->execute();
