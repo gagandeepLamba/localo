@@ -60,10 +60,14 @@ h1, h2, h3, h4, h5, h6 {
 	margin: 0 0 1em;
 	padding: 0;
 }
-h3, h4 {
-	font-size:20px;
+h3,h4 {
+	font-size:18px;
 	margin:0 0 2px;
 	color:#494949;
+}
+
+h4 {
+	font-size:16px;
 }
 
 input, select, textarea {
