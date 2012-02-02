@@ -47,6 +47,7 @@ create table sc_user(
     email varchar(64) not null,
     location varchar(32) not null,
 	password varchar(32) not null,
+	interests varchar(256),
     created_on timestamp default '0000-00-00 00:00:00',
 	updated_on timestamp default '0000-00-00 00:00:00' ,
 	PRIMARY KEY (id)) ENGINE = MYISAM;

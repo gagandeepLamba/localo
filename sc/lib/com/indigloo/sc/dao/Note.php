@@ -9,6 +9,11 @@ namespace com\indigloo\sc\dao {
     
     class Note {
 
+		function getOnId($noteId) {
+			$row = mysql\Note::getOnId($noteId);
+			return $row ;
+		}
+		
 		function getAll($stoken,$ft) {
 			$ft = empty($ft) ? 't' : $ft ;
 			$filter = '' ;
@@ -63,6 +68,34 @@ namespace com\indigloo\sc\dao {
             return $data ;
         }
 		
+		
+		function update($noteId,
+						       $title,
+                               $description,
+                               $category,
+                               $location,
+                               $tags,
+                               $linksJson,
+                               $imagesJson,
+							   $plevel,
+							   $sendDeal,
+							   $timeline) {
+			
+            $seoTitle = SeoStringUtil::convertNameToSeoKey($title);
+            $data = mysql\Note::update($noteId,
+						       $title,
+							   $seoTitle,
+                               $description,
+                               $category,
+                               $location,
+                               $tags,
+                               $linksJson,
+                               $imagesJson,
+							   $plevel,
+							   $sendDeal,
+							   $timeline);
+            return $data ;
+        }
 
     }
 

@@ -22,7 +22,7 @@
     
         
         if ($fhandler->hasErrors()) {
-            $locationOnError = '/qa/ask.php' ;
+            $locationOnError = '/qa/edit.php' ;
             $gWeb->store(Constants::STICKY_MAP, $fvalues);
             $gWeb->store(Constants::FORM_ERRORS,$fhandler->getErrors());
             
@@ -31,26 +31,25 @@
 			
         } else {
             
-            $questionDao = new com\indigloo\sc\dao\Note();
+            $noteDao = new com\indigloo\sc\dao\Note();
 			$userDao = new com\indigloo\sc\dao\User();
 			$userDBRow = $userDao->getUserInSession();
 			
 			$sendDeal = array_key_exists('send_deal',$_POST) ? 1 : 0 ;
 							   
-            $code = $questionDao->create($_POST['entity_type'],
+            $code = $noteDao->update($_POST['note_id'],
 								$fvalues['title'],
                                 $fvalues['description'],
                                 $fvalues['category'],
                                 $fvalues['location'],
                                 $fvalues['tags'],
-								'brand',
-								$userDBRow['email'],
                                 $_POST['links_json'],
                                 $_POST['images_json'],
 								$fvalues['privacy'],
 								$sendDeal,
 								0);
     
+            
             
             if ($code == com\indigloo\mysql\Connection::ACK_OK ) {
                 $locationOnSuccess = '/';
@@ -60,7 +59,7 @@
                 $message = sprintf("DB Error: (code is %d) please try again!",$code);
                 $gWeb->store(Constants::STICKY_MAP, $fvalues);
                 $gWeb->store(Constants::FORM_ERRORS,array($message));
-                $locationOnError = '/qa/ask.php' ;
+                $locationOnError = '/qa/edit.php' ;
                 header("location: " . $locationOnError);
                 exit(1);
             }

@@ -21,7 +21,17 @@ webgloo.sc = webgloo.sc || {};
 webgloo.sc.question = {
     images : {} ,
     init : function () {
-        webgloo.news.post.images = {} ;
+        webgloo.sc.question.images = {} ;
+        
+        //read from document
+        frm = document.forms["web-form1"];
+        var strImagesJson = frm.images_json.value ;
+        
+        
+        var images = JSON.parse(strImagesJson);
+        for(i = 0 ;i < images.length ; i++) {
+                webgloo.sc.question.addImage(images[i]);
+        }
     },
     attachEvents : function() {
   
@@ -48,7 +58,6 @@ webgloo.sc.question = {
         
         $("a.remove-link").live("click", function(event){
             event.preventDefault(); 
-            //webgloo.sc.question.removeLink.apply(this);
             webgloo.sc.question.removeLink($(this));
         }) ;
         

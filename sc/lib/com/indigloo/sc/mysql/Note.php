@@ -9,6 +9,14 @@ namespace com\indigloo\sc\mysql {
         
         const MODULE_NAME = 'com\indigloo\sc\mysql\Question';
 
+		static function getOnId($noteId) {
+			$mysqli = MySQL\Connection::getInstance()->getHandle();
+            $sql = " select * from sc_note where id = ".$noteId ;
+			
+            $row = MySQL\Helper::fetchRow($mysqli, $sql);
+            return $row;
+		}
+		
 		static function getAll($filter) {
 			
 			$mysqli = MySQL\Connection::getInstance()->getHandle();
@@ -17,6 +25,64 @@ namespace com\indigloo\sc\mysql {
 			
             $rows = MySQL\Helper::fetchRows($mysqli, $sql);
             return $rows;
+			
+		}
+		
+		static function update($noteId,
+						       $title,
+							   $seoTitle,
+                               $description,
+                               $category,
+                               $location,
+                               $tags,
+                               $linksJson,
+                               $imagesJson,
+							   $plevel,
+							   $sendDeal,
+							   $timeline)
+		
+		{
+			
+			$mysqli = MySQL\Connection::getInstance()->getHandle();
+            $sql = " update sc_note set title=?, seo_title=?, description=?, category=?, " ;
+			$sql .= " location=?, tags=?, links_json=?, images_json=?, p_level=?, " ;
+			$sql .= " send_deal=?, timeline=? where id = ?  " ;
+			
+			
+            $code = MySQL\Connection::ACK_OK;
+            $stmt = $mysqli->prepare($sql);
+            
+            
+            if ($stmt) {
+                $stmt->bind_param("sssssssssisi",
+                        $title,
+                        $seoTitle,
+                        $description,
+                        $category,
+                        $location,
+                        $tags,
+                        $linksJson,
+                        $imagesJson,
+						$plevel,
+						$sendDeal,
+						$timeline,
+						$noteId);
+                
+                      
+                $stmt->execute();
+
+                if ($mysqli->affected_rows != 1) {
+                    $code = MySQL\Error::handle(self::MODULE_NAME, $stmt);
+                }
+                $stmt->close();
+            } else {
+                $code = MySQL\Error::handle(self::MODULE_NAME, $mysqli);
+            }
+            
+            
+            return $code ;
+            
+			
 			
 		}
 		
@@ -40,9 +106,9 @@ namespace com\indigloo\sc\mysql {
             $sql .= " brand,user_id,links_json,images_json,created_on,p_level,send_deal,n_type,timeline) ";
             $sql .= " values(?,?,?,?,?,?,?,?,?,?,now(),?,?,?,?) ";
 
-            $dbCode = MySQL\Connection::ACK_OK;
+            $code = MySQL\Connection::ACK_OK;
             $stmt = $mysqli->prepare($sql);
-            $lastInsertId = NULL ;
+            
             $categoryId = 1 ;
             
             if ($stmt) {
@@ -66,19 +132,14 @@ namespace com\indigloo\sc\mysql {
                 $stmt->execute();
 
                 if ($mysqli->affected_rows != 1) {
-                    $dbCode = MySQL\Error::handle(self::MODULE_NAME, $stmt);
+                    $code = MySQL\Error::handle(self::MODULE_NAME, $stmt);
                 }
                 $stmt->close();
             } else {
-                $dbCode = MySQL\Error::handle(self::MODULE_NAME, $mysqli);
+                $code = MySQL\Error::handle(self::MODULE_NAME, $mysqli);
             }
-            
-            if($dbCode == MySQL\Connection::ACK_OK) {     
-                $lastInsertId = MySQL\Connection::getInstance()->getLastInsertId();
-            }
-            
-            return array('code' => $dbCode , 'lastInsertId' => $lastInsertId ) ;
-            
+			
+			return $code ;
         }
 	}
 }
