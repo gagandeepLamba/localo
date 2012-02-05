@@ -7,16 +7,6 @@ namespace com\indigloo\news\controller{
         function process($params,$options) {
             $host = $_SERVER['HTTP_HOST'];
             $host = strtolower($host);
-            
-            //last one is for testing..
-            $allowed = array('www.27main.com', 'www.news.com');
-            
-            if(!in_array($host,$allowed)) {
-                $controller = new \com\indigloo\news\controller\Null();
-                $controller->process(NULL,NULL);
-                exit;
-                
-            }
                 
             $file = $_SERVER['APP_WEB_DIR']. '/view/post.php' ;
             

@@ -8,14 +8,18 @@ namespace com\indigloo\auth\view {
         public $lastName;
         public $userName ;
         public $email ;
+        public $id ;
         
         static function create($row) {
             $user = new User();
+            
             $user->firstName = $row['first_name'] ;
-            $user->lastName = '' ;
+            $user->lastName = $row['last_name'] ;
             $user->userName = $row['user_name'];
             $user->email = $row['email'];
+            $user->id = $row['id'];
             
+            return $user ;
         }
     }
 }

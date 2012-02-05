@@ -11,16 +11,14 @@
 	}
 	
 	body {
-		font-size: 12px;	
-		font-family: Tahoma, Arial, sans-serif;
+		font-family:Verdana, Arial, sans-serif;
+	    font-size:13px;
 		min-height: 100%;
 		margin: 0;
 		padding: 0;
 		position: relative;
 		background: #f0f0f0 url('images/bg.png') repeat-x 0 85px;;
 		color: #494949;
-		
-		
 	}
 	
 	#body-wrapper {
@@ -60,6 +58,14 @@
 		margin: 0 0 1em;
 		padding: 0;
 	}
+	h1 {
+		font-family : Georgia, Tahoma, Arial, sans-serif ;
+		font-size:36px;
+	}
+	h2{
+		font-family: Georgia, Tahoma, Arial, sans-serif ;
+	}
+	
 	h3, h4 {
 		font-size:20px;
 		margin:0 0 2px;
@@ -211,7 +217,7 @@
 		font-size: 24px;
 		float:right;
 		margin-top: 28px;
-		font-family:"Myriad Pro",Arial,Helvetica,Tahoma,sans-serif;
+		/* font-family:"Myriad Pro",Arial,Helvetica,Tahoma,sans-serif; */
 	}
 	
 	#logo {
@@ -269,7 +275,7 @@
 	#hcenter {
 		margin:0 0 0 260px;
 		font-size:16px;
-		font-family:Arial,Helvetica,Tahoma,sans-serif;
+		/* font-family:Arial,Helvetica,Tahoma,sans-serif; */
 		padding-top:27px;
 	}
 	
@@ -306,7 +312,7 @@
 		/* background: url('images/menu-bg.jpg') no-repeat left center; */
 		height: 60px;
 		font-size: 20px;
-		font-family:"Myriad Pro",Arial,Helvetica,Tahoma,sans-serif;
+		/* font-family:"Myriad Pro",Arial,Helvetica,Tahoma,sans-serif; */
 		line-height: 60px;
 	}
 	#main-menu ul {
@@ -398,7 +404,7 @@
 		height:25px;
 		line-height:25px;
 		padding:0 15px;
-		font-family:"Myriad Pro",Arial,Helvetica,Tahoma,sans-serif;
+		/* font-family:"Myriad Pro",Arial,Helvetica,Tahoma,sans-serif; */
 		color:#FFF;
 		text-shadow:1px 1px 1px #333;
 		cursor : hand ;
@@ -425,65 +431,25 @@
 		color:red ;
 	}
 	
-	
-	div .share-toolbar {
-		margin-top:40px;
-		padding: 10px;
-		border:1px solid #EBEBEB ;
+	.details {
 		
-	}
-	
-	div .organization {
-		margin-top : 20px;
-	}
-	
-	
-	/* ----- new styles ------ */
-	
-	
-	.details .ditem {
-		padding:0 7px 0 16px;
-		background:url('images/details_sprite.png') no-repeat 0 0;
-		line-height: 18px;
-	}
-	.details .d-name {background-position:0 0;}
-	.details .d-email {background-position:0 -14px;}
-	.details .d-phone {background-position:0 -28px;}
-	.details .d-address {background-position:0 -42px;}
-	.details .d-edu {background-position:0 -56px;}
-	.details .d-company {background-position:0 -70px;}
-	
-	.skill {
-		color:#727272;
-		margin: 20px 14px;
+		color: #727272;
+		margin: 1px 24px;
 		padding: 10px 0;
-		border-bottom:1px solid #A1A1A1;
-		text-align:justify;
+		text-align: justify;
+		/* background: #FAFAFA; */
+		font-family: Arial;
+		font-size: 12px;
 		
 	}
 	
-	.description {
-		color:#727272;
-		margin: 20px 14px;
-		padding: 10px 0;
-		text-align:justify;
-		
-	}
 	
-	.date {
-		font-weight:bold;
-		color: gray;
-	}
-	
-	
-	
-	/* 100 percent big orange button */
-	div .orange-button {
+	/* 100 percent big site action button */
+	div .blue-button {
 		margin-bottom:10px;
 		margin-top:20px;
-		background-color:#FF7906;
-		color:#FFFFFF;
-		
+		background-color: #0779B3;
+		color:#FFFFFF; 
 		padding:7px 20px;
 		border-radius:5px;
 		text-decoration:none;
@@ -491,13 +457,13 @@
 	
 	}
 	
-	div .orange-button a {
+	div .blue-button a {
 		 color:#FFFFFF;
-		 font-size:13px;
 		 font-weight:bold;
 		 text-align:center;
 	
 	}
+	
 	
 	div .grey-button {
 		margin-bottom:5px;
@@ -517,14 +483,6 @@
 		 font-weight:bold;
 		 text-align:center;
 	
-	}
-	
-	
-	.meta {
-			
-		font-size: 12px;
-		padding: 5px 0;
-		color: gray;
 	}
 	
 	.action-links {
@@ -631,7 +589,7 @@
 	#form-wrapper #fsUploadProgress .legend {
 		color: #8C4;
 		font-size: 14px;
-		font-family: "Myriad Pro",Arial,Helvetica,Tahoma,sans-serif;
+		/* font-family: "Myriad Pro",Arial,Helvetica,Tahoma,sans-serif; */
 		font-weight: bold;
 		padding-top:10px;
 	
@@ -783,14 +741,15 @@
 	.widget {
 		margin-top:10px;
 		margin-bottom: 10px;
-		width: 100%;
+		width: inherit;
 		clear: both;
+		padding:15px;
 	}
 	
 	.widget h2 {
 		font-weight:normal;
-		font-family: 'Georgia','Lucida Grande','Verdana','Arial','Sans-Serif';
-		color: #21759B;
+		
+		color: black;
 		font-size: 20px;
 		margin: 0px 0px 10px 0px;
 		line-height:1;
@@ -867,11 +826,28 @@
 	
 	/* Regular Post */
 	.widget .regular {
-		font-size:        13px;
-		line-height:      18px;
+		font-family : Georgia, Arial, sans-serif ;
+		font-size:  16px;
+		line-height:  24px;
 		text-align: left;
-		color: #3A3A3A;
+		color: black;
+		word-wrap: break-word;
+		
 	}
+	
+	.article-body {
+		font-size: 18px;
+		line-height: 24px;
+		font-family: "Georgia","Times New Roman",serif;
+		color: black;
+		margin: 15px 0;
+		word-wrap: break-word;
+	}
+	
+	.article-body .links{
+		padding:20px;
+	}
+	
 	.edit-bar .widget .regular,
 	.edit-bar div.grid{
 		border-left:1px solid #E7E7E7;
@@ -1077,6 +1053,21 @@
 		font-size:11px;
 	 }
 	 
-	 
+	 #sidebar {
+		padding :20px;
+		min-height:600px;
+		
+	 }
 	
+	#sidebar .block {
+		background :#F1f1f1;
+		min-height: 30px;
+		padding: 20px;
+		margin-bottom: 5px;
+		padding-bottom: 20px;
+		-moz-border-radius: 6px;
+		-webkit-border-radius: 6px;
+		-khtml-border-radius: 6px;
+		border-radius: 6px;
+	}
 

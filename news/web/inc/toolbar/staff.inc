@@ -16,11 +16,9 @@
 		<div id="hcenter">
 				<div id="login">
 					<span class="register"><a href="/">Home</a></span> |
-					<span class="register"><a href="/post/add.php">Submit story</a></span> |
-					<span class="register"><a href="/post/list.php">Posts</a></span> |
-					<span class="register"><a href="#">Links</a></span> |
-					<span class="register"><a href="/user/logout.php">logout</a></span>
-					
+					<span class="register"><a href="/post/add.php">Add Post+</a></span> |
+					<span class="register"><a href="/post/list.php">Dashboard</a></span> |
+					<span class="register"><a href="/user/logout.php">logout</a> (<?php echo $gSessionUser->userName; ?>) </span>
 				</div>
 				
 		</div>

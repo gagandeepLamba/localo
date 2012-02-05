@@ -4,15 +4,20 @@
     $postDBRow = $postDao->getRecordOnShortId($shortId);
     $postId = $postDBRow['id'];
     
-    //$mediaDBRows = $postDao->getMediaOnId($postId);
-    //decode images_json  to get imageVO
-	$images = json_decode($postDBRow['images_json']);
+  
     $description = empty($postDBRow['description']) ? $postDBRow['summary'] : $postDBRow['description'] ;
     
 	$metaDescription = strip_tags($postDBRow['summary']);
 	$metaDescription = trim($metaDescription);
 	$metaDescription = \com\indigloo\Util::abbreviate($metaDescription,180);
 
+    $postedOn = \com\indigloo\Util::formatDBTime($postDBRow['created_on']);
+    
+    $strImagesJson = empty($postDBRow['images_json']) ? '[]' : $postDBRow['images_json'] ;
+    $strLinksJson = empty($postDBRow['links_json']) ? '[]' : $postDBRow['links_json'] ;
+    $images = json_decode($strImagesJson);
+    $links = json_decode($strLinksJson);
+    
 ?>
 
 
@@ -58,20 +63,47 @@
                    
                     <div class="yui3-u-2-3">
 
-                        <div id="main-panel">
+                        <div id="content">
                             <div class="mt20">
                                 <h1> <?php echo $postDBRow['title'] ; ?> </h1>
+                                 <div class="details">
+                                    <span class="b"> <?php echo $postDBRow['user_name'] ; ?> </span>
+                                    <span> posted on <?php echo $postedOn; ?> </span>
+                                </div>
                             </div>
                             
                             <?php if(sizeof($images) > 0 ) { include('inc/slider.inc') ; } ?>
                             
                           
                             <div class="widget">
-                                <div class="regular bbd5">
+                                <div class="article-body">
                                     <?php echo $description ; ?>
+                                    <br/>
+                                    
+                                    <div class="mt20">
+                                        <h3> Story Link </h3>
+                                        <?php
+                                            $strLink = '<a href="{link}" target="_blank"> {link} </a> <br/>' ;
+                                            
+                                            foreach($links as $link) {
+                                                $linkHtml = str_replace("{link}",$link,$strLink);
+                                                echo $linkHtml;
+                                                
+                                            }
+                                        
+                                        ?>
+                                    </div>
+                                    
                                 </div>
                             </div>
                             
+                            <?php
+                                    
+                                if(\com\indigloo\auth\User::isAdmin()) {
+                                    echo \com\indigloo\news\html\Post::getEditPostButton($postDBRow) ;
+                                }
+                            ?>
+                           
                             
                         </div> <!-- content -->
 
@@ -79,11 +111,6 @@
                     
                     <div class="yui3-u-1-3">
                         <?php include($_SERVER['APP_WEB_DIR'] . '/inc/sidebar.inc'); ?>
-                        <div class="p20">
-                        <hr>
-                        short url for mobiles &raquo;<b> 27ma.in/<?php echo $shortId; ?> </b>
-                        </div>
-                        
                     </div>
                     
                     

@@ -32,7 +32,7 @@
             $data = $user::create('news_login',
                                 $fvalues['name'],
                                 'last_name',
-                                $fvalues['email'],
+                                $fvalues['name'],
                                 $fvalues['email'],
                                 $fvalues['password']);
     

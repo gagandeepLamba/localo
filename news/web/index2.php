@@ -30,7 +30,7 @@
 	$start = base_convert($start,36,10);
 	
     $postDao = new \com\indigloo\news\dao\Post();
-	$postDBRows = $postDao->getPostWithMedia($start,$direction);
+	$postDBRows = $postDao->getRecords($start,$direction);
 	$totalPages = $postDao->getTotalPages();
 	$paginator = new \com\indigloo\ui\Pagination($pageNo,$totalPages);
 	

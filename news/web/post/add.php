@@ -10,7 +10,7 @@
     use com\indigloo\ui\form\Message as FormMessage;
     
     $sticky = new Sticky($gWeb->find(Constants::STICKY_MAP,true));
-    
+   
    
 
 ?>
@@ -114,8 +114,7 @@
 
                         <div id="content">
                             <h2> Add new post </h2>
-
-
+                            
                             <p class="help-text">
                                 Please fill in the details below and create your post.
 
@@ -162,9 +161,16 @@
                                         <tr>
                                         <td> &nbsp; </td>
                                             <td>
-                                               <a id="open-link" href="">Add Link</a>
-                                               &nbsp;
-                                               <a id="open-image" href="">Add Image</a> 
+                                               <div class="action-links">
+                                                    <span class="grey-button">
+                                                        <a id="open-link" href="">Add Link</a>
+                                                    </span>
+                                                    &nbsp;&nbsp;
+                                                    <span class="grey-button">
+                                                        <a id="open-image" href="">Add Image</a>
+                                                    </span>
+                                               </div>
+                                               
                                             </td>
                                         
                                        </tr>
@@ -224,7 +230,6 @@
 
 
                                     <!-- hidden fields -->
-                                    <input type="hidden" name="organization_id" value="1234" />
                                     <input type="hidden" name="links_json" value="" />
                                     <input type="hidden" name="images_json" value="" />
                                             

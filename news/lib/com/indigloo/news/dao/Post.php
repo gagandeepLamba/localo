@@ -6,12 +6,16 @@ namespace com\indigloo\news\dao {
     use \com\indigloo\Util as Util ;
     use \com\indigloo\news\mysql as mysql;
     use \com\indigloo\seo\StringUtil as SeoStringUtil ;
-    
+     use \com\indigloo\Configuration as Config ;
+     
     class Post {
 
-        function create($title,$summary,$description,$linksJson,$imagesJson) {
+        function create($title,$summary,$description,
+                        $linksJson,$imagesJson,$userId,$userName) {
+            
             $seoTitle = SeoStringUtil::convertNameToSeoKey($title);
-            $data = mysql\Post::create($title,$seoTitle,$summary,$description,$linksJson,$imagesJson);
+            $data = mysql\Post::create($title,$seoTitle,$summary,$description,
+                                       $linksJson,$imagesJson,$userId,$userName);
             return $data ;
         }
         
@@ -23,8 +27,7 @@ namespace com\indigloo\news\dao {
         function update($postId,$title,$summary,$description,$linksJson,$imagesJson) {
             Util::isEmpty('post_id',$postId);
             $seoTitle = SeoStringUtil::convertNameToSeoKey($title);
-            //@todo - remove unwanted media files
-            $data = mysql\Post::update($postId,$title,$seoTitle,$summary,$description,$html);
+            $data = mysql\Post::update($postId,$title,$seoTitle,$summary,$description,$linksJson,$imagesJson);
             return $data ;
         }
         
@@ -38,29 +41,30 @@ namespace com\indigloo\news\dao {
             return $row ;
         }
         
-        function getLatestPostWithMedia() {
-            //@todo read pagesize from config file
-            $rows = mysql\Post::getLatestPostWithMedia(20);
+        function getLatestRecords() {
+            
+            $pageSize = Config::getInstance()->get_value("system.page.records");
+            $rows = mysql\Post::getLatestRecords($pageSize);
             return $rows ;
 
         }
         
-        function getPostWithMedia($start,$direction) {
-            //@todo read pagesize from config file
-            $rows = mysql\Post::getPostWithMedia($start,$direction,20);
+        function getRecords($start,$direction) {
+            $pageSize = Config::getInstance()->get_value("system.page.records");
+            $rows = mysql\Post::getRecords($start,$direction,$pageSize);
             return $rows ;
 
         }
         
         function getTotalPages() {
-            $count = $this->getPostWithMediaCount();
-            //@todo - replace 20 with value from config
-            $totalPages = ceil($count / 20);
+            $count = $this->getRecordsCount();
+            $pageSize = Config::getInstance()->get_value("system.page.records");
+            $totalPages = ceil($count / $pageSize);
             return $totalPages ;
         }
         
-        function getPostWithMediaCount() {
-            $row = mysql\Post::getPostWithMediaCount();
+        function getRecordsCount() {
+            $row = mysql\Post::getRecordsCount();
             return $row['count'] ;
         }
         

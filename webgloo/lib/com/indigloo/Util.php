@@ -76,7 +76,7 @@ namespace com\indigloo {
          * PHP string time functions
          *
          */
-        static function formatDBTime($original, $format="%d %b %Y") {
+        static function formatDBTime($original, $format="%d-%b, %Y @ %H:%M") {
 
              if (!isset($original) || empty($original)) {
                 trigger_error("Empty or Null timestamp supplied to utility function",E_USER_ERROR);

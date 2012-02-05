@@ -8,22 +8,33 @@ namespace com\indigloo\news\html {
     
     class Post {
         
+		static function getEditPostButton($row){
+			$html = NULL ;
+			$view = new \stdClass;
+			$view->postId = $row['id'];
+			$template = $_SERVER['APP_WEB_DIR'].'/fragments/post/admin-toolbar.tmpl' ;
+			$html = Template::render($template,$view);
+			return $html ;
+		}
+		
         static function getMainPageSummary($postDBRow) {
            
 		    $html = NULL ;
 			$imagesJson = $postDBRow['images_json'];
 			$images = json_decode($imagesJson);
 			
+			$view = new \stdClass;
+			$view->title = $postDBRow['title'];
+			$view->summary = $postDBRow['summary'];
+			$view->shortId = $postDBRow['short_id'];
+			$view->seoTitle = $postDBRow['seo_title'];
+			
+			$view->author = $postDBRow['user_name'];
+			$view->createdOn = \com\indigloo\Util::formatDBTime($postDBRow['created_on']);
 			
 			if(sizeof($images) > 0) {
-
-				$template = $_SERVER['APP_WEB_DIR'].'/fragments/widget/image.tmpl' ;
 				
-				$view = new \stdClass;
-				$view->title = $postDBRow['title'];
-				$view->summary = $postDBRow['summary'];
-				$view->shortId = $postDBRow['short_id'];
-				$view->seoTitle = $postDBRow['seo_title'];
+				$template = $_SERVER['APP_WEB_DIR'].'/fragments/widget/image.tmpl' ;
 				
 				//use first image
 				$image = $images[0] ;
@@ -42,15 +53,7 @@ namespace com\indigloo\news\html {
 				$html = Template::render($template,$view);
 				
 			} else {
-				
 				$template = $_SERVER['APP_WEB_DIR'].'/fragments/widget/text.tmpl' ;
-				
-				$view = new \stdClass;
-				$view->title = $postDBRow['title'];
-				$view->summary = $postDBRow['summary'];
-				$view->shortId = $postDBRow['short_id'];
-				$view->seoTitle = $postDBRow['seo_title'];
-				
 				$html = Template::render($template,$view);
 			}
 			

@@ -26,7 +26,8 @@
        links_json TEXT,
        images_json TEXT,
        seo_title varchar(144),
-       owner_name varchar(64),
+       user_name varchar(32),
+       user_id varchar(32),
        created_on timestamp default '0000-00-00 00:00:00',
        updated_on timestamp default '0000-00-00 00:00:00' ,
        PRIMARY KEY (id)) ENGINE = MYISAM;
@@ -138,26 +139,35 @@
    
    --
    -- 29 jan 2012
-   --
-   -- @todo - script to populate links_json and images_json
-   -- before deleting this reference
-   --
+  
    alter table news_post add column links_json text ;
    alter table news_post add column images_json text;
+   
+   --
+   -- now run images_json script to populate links_json and images_json
+   -- before deleting this reference
+   --
    
    alter table news_media drop column post_id ;
    --
    -- @todo 
    -- update featured image before dropping s_media_id reference
    --
-   alter table news_post drop column s_media_id ;
    
+  
+   alter table news_post drop column s_media_id ;
    DROP TRIGGER IF EXISTS trg_media_insert;
    DROP TRIGGER IF EXISTS trg_media_delete;
-   
-   
    alter table news_post drop column markdown;
    
+   --
+   -- 4Feb 2012
+   --
+   
+   alter table news_post drop column owner_name ;
+   alter table news_post add  column user_name varchar(32);
+   alter table news_post add  column user_id varchar(32);
+   update news_login set user_name = 'Jatayu Krishna' ;
    
    
    

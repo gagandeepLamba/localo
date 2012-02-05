@@ -16,9 +16,8 @@
 		<div id="hcenter">
 				<div id="login">
 				 <span class="register"><a href="/">Home</a></span> |
-				 <span class="register"><a href="/user/login.php">Login</a></span> |
-				 <span class="register"><a href="/link/add.php">Submit link</a></span>
-				 
+				 <span class="register"><a href="/user/login.php">Login</a></span>
+			
 				</div>
 				
 		</div>

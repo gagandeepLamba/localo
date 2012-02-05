@@ -8,16 +8,6 @@ namespace com\indigloo\news\controller{
             
             $host = $_SERVER['HTTP_HOST'];
             $host = strtolower($host);
-             
-            $allowed = array('www.27main.com', 'www.news.com');
-            
-            if(!in_array($host,$allowed)) {
-                //for hosts other than 27ma.in
-                // we do not know this url
-                $controller = new \com\indigloo\news\controller\Null();
-                $controller->process(NULL,NULL);
-                exit;
-            }
             
             $file = $_SERVER['APP_WEB_DIR']. '/view/post.php' ;
             

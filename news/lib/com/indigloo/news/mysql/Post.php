@@ -4,6 +4,8 @@ namespace com\indigloo\news\mysql {
 
     use \com\indigloo\mysql as MySQL;
     use \com\indigloo\Util as Util ;
+    use \com\indigloo\Configuration as Config ;
+    use \com\indigloo\Logger as Logger ;
     
     class Post {
         
@@ -21,25 +23,30 @@ namespace com\indigloo\news\mysql {
         static function getRecordOnShortId($shortId) {
             $mysqli = MySQL\Connection::getInstance()->getHandle();
             $shortId = $mysqli->real_escape_string($shortId);
-
+            
+            
             $sql = " select * from news_post where short_id = '".$shortId. "' " ;
             $row = MySQL\Helper::fetchRow($mysqli, $sql);
             return $row;
         }
         
-        static function getLatestPostWithMedia($pageSize){
+        static function getLatestRecords($pageSize){
             $mysqli = MySQL\Connection::getInstance()->getHandle();
             
             $sql = " select post.* from news_post post" ;
             $sql .= " order by post.id DESC LIMIT " .$pageSize;
-
+            
+            if(Config::getInstance()->is_debug()) {
+                Logger::getInstance()->debug("sql => $sql \n");
+            }
+            
             $rows = MySQL\Helper::fetchRows($mysqli, $sql);
             return $rows;
         
         }
         
             
-        static function getPostWithMedia($start,$direction,$pageSize){
+        static function getRecords($start,$direction,$pageSize){
             $mysqli = MySQL\Connection::getInstance()->getHandle();
             
             // primary key id is an excellent proxy for created_on column
@@ -61,6 +68,10 @@ namespace com\indigloo\news\mysql {
             $sql = " select post.* from news_post post " ;
             $sql .= $predicate ;
             
+            if(Config::getInstance()->is_debug()) {
+                Logger::getInstance()->debug("sql => $sql \n");
+            }
+            
             $rows = MySQL\Helper::fetchRows($mysqli, $sql);
             
             //reverse rows for 'before' direction
@@ -73,11 +84,13 @@ namespace com\indigloo\news\mysql {
             
         }
         
-        static function create($title,$seoTitle,$summary,$description,$linksJson,$imagesJson) {
+        static function create($title,$seoTitle,$summary,$description,
+                               $linksJson,$imagesJson,$userId,$userName) {
 
             $mysqli = MySQL\Connection::getInstance()->getHandle();
-            $sql = " insert into news_post(short_id,title,seo_title,summary,description,links_json,images_json,created_on) ";
-            $sql .= " values(?,?,?,?,?,?,?,now()) ";
+            $sql = " insert into news_post(short_id,title,seo_title,summary,description, " ;
+            $sql .= " links_json,images_json,created_on, user_id, user_name) ";
+            $sql .= " values(?,?,?,?,?,?,?,now(),?,?) ";
 
             $dbCode = MySQL\Connection::ACK_OK;
             $stmt = $mysqli->prepare($sql);
@@ -86,14 +99,16 @@ namespace com\indigloo\news\mysql {
             
             
             if ($stmt) {
-                $stmt->bind_param("sssssss",
+                $stmt->bind_param("sssssssss",
                         $shortId,
                         $title,
                         $seoTitle,
                         $summary,
                         $description,
                         $linksJson,
-                        $imagesJson);
+                        $imagesJson,
+                        $userId,
+                        $userName);
                       
                 $stmt->execute();
 
@@ -144,7 +159,7 @@ namespace com\indigloo\news\mysql {
             
             return array('code' => $dbCode) ;
         }
-        
+         
         static function update($postId,$title,$seoTitle,$summary,$description,$linksJson,$imagesJson) {
             
             $mysqli = MySQL\Connection::getInstance()->getHandle();
@@ -179,7 +194,7 @@ namespace com\indigloo\news\mysql {
             return array('code' => $dbCode) ;
         }
         
-        static function getPostWithMediaCount() {
+        static function getRecordsCount() {
             
             $mysqli = MySQL\Connection::getInstance()->getHandle();
             

@@ -16,6 +16,13 @@
     $postDao = new \com\indigloo\news\dao\Post();
     $postDBRow = $postDao->getRecordOnId($postId);
     
+    $strImagesJson = $sticky->get('images_json',$postDBRow['images_json']) ;
+    $strLinksJson = $sticky->get('links_json',$postDBRow['links_json']) ;
+    
+    $strImagesJson = empty($strImagesJson) ? '[]' : $strImagesJson ;
+    $strLinksJson = empty($strLinksJson) ? '[]' : $strLinksJson ;
+    
+    
 ?>
 
 
@@ -27,26 +34,78 @@
 
         <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
 
-        <link rel="stylesheet" type="text/css" href="/lib/yui3/grids-min.css">
+        <link rel="stylesheet" type="text/css" href="/3p/yui3/grids-min.css">
         <link rel="stylesheet" type="text/css" href="/css/news.css">
         
-        <script type="text/javascript" src="/lib/jquery/jquery-1.6.4.min.js"></script>
-        <script type="text/javascript" src="/lib/jquery/jquery.validate.1.9.0.min.js"></script>
-
-        <link rel="stylesheet" type="text/css" href="/lib/wmd/wmd-news.css" />
-        <script type="text/javascript" src="/lib/wmd/showdown.js"></script>
+        <script type="text/javascript" src="/3p/jquery/jquery-1.6.4.min.js"></script>
+        <script type="text/javascript" src="/3p/jquery/jquery.validate.1.9.0.min.js"></script>
       
-      
+       <script type="text/javascript" src="/js/news.js"></script>
+        
+         <!-- swfupload related stuff -->
+        <script type="text/javascript" src="/3p/swfupload/swfupload.js"></script>
+        <script type="text/javascript" src="/3p/swfupload/js/swfupload.queue.js"></script>
+        <script type="text/javascript" src="/3p/swfupload/js/fileprogress.js"></script>
+        <script type="text/javascript" src="/3p/swfupload/js/handlers.js"></script>
+        
+        
         <script type="text/javascript">
             $(document).ready(function(){
-                //form validator
+                
                 $("#web-form1").validate({
                     errorLabelContainer: $("#web-form1 div.error")
                 });
-
+                
+                webgloo.news.post.attachEvents();
+                webgloo.news.post.init();
+                
             });
+            
+            var swfu;
+            
+            window.onload = function() {
+                var settings = {
+                    flash_url : "/3p/swfupload/swfupload.swf",
+                    upload_url: "/post/receiver.php",
+                    post_params: {
+                        "PHPSESSID" : "<?php echo session_id(); ?>"
+                    },
+                    file_size_limit : "8 MB",
+                    file_types : "*.*",
+                    file_types_description : "All Files",
+                    file_upload_limit : 10,
+                    file_queue_limit : 0,
+                    custom_settings : {
+                        progressTarget : "fsUploadProgress",
+                        cancelButtonId : "btnCancel"
+                    },
+                    debug: false,
 
+                    // Button settings
+                    
+					button_image_url: "/3p/swfupload/images/XPButtonUploadText_61x22.png",
+                    button_width: "61",
+                    button_height: "22",
+                    button_placeholder_id: "spanButtonPlaceHolder",
+					button_cursor:SWFUpload.CURSOR.HAND,
+                    
+                    // handlers.js event handlers
+                    file_queued_handler : fileQueued,
+                    file_queue_error_handler : fileQueueError,
+                    file_dialog_complete_handler : fileDialogComplete,
+                    upload_start_handler : uploadStart,
+                    upload_progress_handler : uploadProgress,
+                    upload_error_handler : uploadError,
+                    upload_success_handler : webgloo.news.post.uploadSuccess,
+                    upload_complete_handler : uploadComplete,
+                    queue_complete_handler : queueComplete
+                };
+
+                swfu = new SWFUpload(settings);
+            };
+            
         </script>
+        
 
     </head>
 
@@ -68,14 +127,12 @@
 
                         <div id="content">
                        
-                            <p class="help-text">
-                                Edit details | <a href="/post/edit-media.php?g_post_id=<?php echo $postId; ?>"> Edit photos </a>
-                                <br>
-                                <br>
-                            <h2> Edit &nbsp;&raquo; <?php echo $postDBRow['title']; ?> </h2>
-                            <p>
-                            </p>
+                            <h2> Edit - <?php echo $postDBRow['title']; ?> </h2>
                             
+                            <p class="help-text">
+                                Please change the details below and edit your post.
+
+                            </p>
                             <?php FormMessage::render(); ?>
                             
                             <div id="form-wrapper">
@@ -86,9 +143,11 @@
                                     <table class="form-table">
 
                                         <tr>
-                                            <td class="field"> Title<span class="red-label">*</span>(Alphanumeric only)</td>
+                                            <td class="field"> </td>
                                             <td>
-                                                <input type="text" name="title" maxlength="128" class="required w580 " title="&nbsp;Title is required" value="<?php echo $sticky->get('title',$postDBRow['title']); ?>"/>
+                                                Title<span class="red-label">*</span> (Alphanumeric only)
+                                                <br/>
+                                                <input type="text" name="title" maxlength="128" class="required w580" title="&nbsp;Title is required" value="<?php echo $sticky->get('title',$postDBRow['title']); ?>"/>
                                             </td>
                                         </tr>
                                         
@@ -96,34 +155,79 @@
                                             <td> &nbsp; </td>
                                             <td>  <span> Summary </span> <br> <textarea  name="summary" class="required h130 w580" title="&nbsp;Summary is required" cols="50" rows="4" ><?php echo $sticky->get('summary',$postDBRow['summary']); ?></textarea> </td>
                                         </tr>
-
                                         <tr>
                                             <td> &nbsp; </td>
                                             <td>
                                                 
+                                                
                                                 <span>
-                                                    Description (You can use
-                                                     
-                                                    <a href="http://daringfireball.net/projects/markdown/" target="_blank">markdown</a>
-                                                    or <a href="http://www.w3.org/TR/xhtml1/" target="_blank">xhtml</a>
-                                                    for formatting)
-                                                </span>
-                                                <br>
+                                                    Description
+                                                    (Use <a href="http://www.w3.org/TR/xhtml1/" target="_blank">xhtml</a> tags for formatting)
                                                     
-                                                <div id="wmd-button-bar" class="wmd-panel wmd-button-bar"></div>
+                                                </span>
                                                 <br/>
-                                                <textarea  id="wmd-input" name="description" class="w580 wmd-panel wmd-input" cols="50" rows="10" ><?php echo $sticky->get('description',$postDBRow['markdown']); ?></textarea> </td>
+                                                <br />
+                                                <textarea name="description" class="w580" cols="50" rows="10" ><?php echo $sticky->get('description',$postDBRow['description']); ?></textarea> </td>
                                         </tr>
                                         
-                                         <tr>
+
+                                        <tr>
+                                        <td> &nbsp; </td>
+                                            <td>
+                                               <div class="action-links">
+                                                    <span class="grey-button">
+                                                        <a id="open-link" href="">Add Link</a>
+                                                    </span>
+                                                    &nbsp;&nbsp;
+                                                    <span class="grey-button">
+                                                        <a id="open-image" href="">Add Image</a>
+                                                    </span>
+                                               </div>
+                                               
+                                            </td>
+                                        
+                                       </tr>
+                                        <tr>
                                             <td> &nbsp; </td>
                                             <td>
-                                                <b> Preview </b>
-                                                <div id="wmd-preview" class="wmd-panel wmd-preview"></div>
+                                                   <div id="link-data"> </div>
+                                                   <div id="media-data"> </div>
                                             </td>
+                                                 
                                         </tr>
-                                         
+                                        
                                     </table>
+                                    
+                                    <div id="link-container" class="hide-me">
+                                        <div id="error"> </div>
+                                        <p> Use a url shortening service like goo.gl to shorten long urls</p>
+                                        Link*&nbsp;<input  id="link-box"  type="text" name="link"  value="" />
+                                        &nbsp; <button  id="add-link">Add</button>
+                                        
+                                      </div>
+                                          
+                                          
+                                    <div id="image-container" class="hide-me">
+                                           <p>
+                                           Click upload and select photos to add.
+                                           </p>
+                                           <div class="fieldset flash" id="fsUploadProgress">
+                                               <span class="legend">Upload Queue</span>
+                                           </div>
+                                           <br />
+                                           
+                                           <div id="divStatus">&nbsp;</div>
+                                           <div>
+                                               <span id="spanButtonPlaceHolder"></span>
+                                               <span>
+                                                   <input class="uploadCancelButton" id="btnCancel" type="button" value="Cancel Upload" onclick="swfu.cancelQueue();" disabled="disabled"/>
+                                               </span>
+                                               
+                                           </div>
+                                           
+                                    </div>
+                                   
+                                    
 
                                     <div class="tc">
                                         By posting information here you agree to the <a href="/help/tc.php" target="_blank"> Terms and Conditions </a>
@@ -141,7 +245,8 @@
 
                                     <!-- hidden fields -->
                                     <input type="hidden" name="post_id" value="<?php echo $postId; ?>" />
-                                     
+                                    <input type="hidden" name="links_json" value='<?php echo $strLinksJson ; ?>' />
+                                    <input type="hidden" name="images_json" value='<?php echo $strImagesJson; ?>' />
                                     <div style="clear: both;"></div>
 
                                 </form>
@@ -170,6 +275,5 @@
             <?php include($_SERVER['APP_WEB_DIR'] . '/inc/site-footer.inc'); ?>
         </div>
         
-        <script type="text/javascript" src="/lib/wmd/wmd.js"></script>
     </body>
 </html>

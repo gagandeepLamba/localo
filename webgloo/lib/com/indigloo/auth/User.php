@@ -50,7 +50,7 @@ namespace com\indigloo\auth {
             return $user ;
         }
         
-        static function login($tableName,$userName,$password) {
+        static function login($tableName,$email,$password) {
             
             $code = -1 ;
             if(empty($tableName)) {
@@ -61,14 +61,14 @@ namespace com\indigloo\auth {
             $mysqli = MySQL\Connection::getInstance()->getHandle();
             
             $password = trim($password);
-            $userName = trim($userName);
+            $email = trim($email);
             
             // change empty password - for time resistant attacks
             if (empty($password)) {
                 $password = "123456789000000000";
             }
 
-            $sql = " select * from {table} where is_active = 1 and user_name = '".$userName. "' " ;
+            $sql = " select * from {table} where is_active = 1 and email = '".$email. "' " ;
             $sql = str_replace("{table}", $tableName, $sql);
             
             $row = MySQL\Helper::fetchRow($mysqli, $sql);
@@ -126,7 +126,8 @@ namespace com\indigloo\auth {
         
         }
         
-        static function getLoggedInUser() {
+        static function getUserInSession() {
+            
             $user = NULL ;
             if (isset($_SESSION) && isset($_SESSION['LOGON_TOKEN'])) {
                 $userDBRow = $_SESSION['LOGON_USER_DATA'];
@@ -147,6 +148,9 @@ namespace com\indigloo\auth {
                 exit(1);
             }
             
+            Util::isEmpty('Email',$email);
+            Util::isEmpty('User Name',$userName);
+            
             $mysqli = MySQL\Connection::getInstance()->getHandle();
 
             // use random salt + login and password
@@ -155,6 +159,7 @@ namespace com\indigloo\auth {
             
             $password = trim($password);
             $userName = trim($userName);
+            $email = trim($email);
             
             $message = $password.$salt;
             $digest = sha1($message);

@@ -34,6 +34,23 @@ webgloo.news.post = {
     images : {} ,
     init : function () {
         webgloo.news.post.images = {} ;
+        
+        //read from document
+        frm = document.forms["web-form1"];
+        
+        var strImagesJson = frm.images_json.value ;
+        var images = JSON.parse(strImagesJson);
+        for(i = 0 ;i < images.length ; i++) {
+                webgloo.news.post.addImage(images[i]);
+        }
+        
+        var strLinksJson = frm.links_json.value ;
+        var links = JSON.parse(strLinksJson);
+        for(i = 0 ;i < links.length ; i++) {
+                webgloo.news.post.addLink(links[i]);
+        }
+        
+        
     },
     attachEvents : function() {
   

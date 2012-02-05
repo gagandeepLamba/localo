@@ -35,12 +35,18 @@
             
         } else {
             
+            if(is_null($gSessionUser)) {
+                $gSessionUser = \com\indigloo\auth\User::getUserInSession();    
+            }
+            
             $postDao = new com\indigloo\news\dao\Post();
             $data = $postDao->create($fvalues['title'],
                                 $fvalues['summary'],
                                 $fvalues['description'],
                                 $fvalues['links_json'],
-                                $fvalues['images_json']);
+                                $fvalues['images_json'],
+                                $gSessionUser->id,
+                                $gSessionUser->userName);
     
             $code = $data['code'];
             
