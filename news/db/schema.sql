@@ -38,10 +38,9 @@
    drop table if exists news_link;
    create table news_link(
        id int(11) NOT NULL auto_increment,
-       title varchar(128) not null,
-       summary TEXT not null ,
-       link varchar(256),
-       owner_name varchar(64),
+       description TEXT,
+       link TEXT not null,
+       author varchar(64),
        created_on timestamp default '0000-00-00 00:00:00',
        updated_on timestamp default '0000-00-00 00:00:00' ,
        PRIMARY KEY (id)) ENGINE = MYISAM;
@@ -84,8 +83,7 @@
        created_on TIMESTAMP  default '0000-00-00 00:00:00',
        updated_on TIMESTAMP   default '0000-00-00 00:00:00',
        PRIMARY KEY (id)) ENGINE =MYISAM ;
-   
-   alter table  news_login add constraint UNIQUE uniq_login (user_name);
+    
    alter table  news_login add constraint UNIQUE uniq_email (email);
    
    
@@ -168,6 +166,29 @@
    alter table news_post add  column user_name varchar(32);
    alter table news_post add  column user_id varchar(32);
    update news_login set user_name = 'Jatayu Krishna' ;
+   
+   --
+   -- update old posts with some user_name
+   --
+   
+   
+  drop table if exists gloo_news;
+   create table gloo_news(
+       id int(11) NOT NULL auto_increment,
+       email varchar(64),
+       name varchar(64),
+       flag int default 0,
+       created_on timestamp default '0000-00-00 00:00:00',
+       updated_on timestamp default '0000-00-00 00:00:00' ,
+       PRIMARY KEY (id)) ENGINE = MYISAM;
+       
+   alter table  gloo_news add constraint UNIQUE uniq_skey (email);
+   
+   --
+   -- 8 Feb 2012
+   --
+   -- recreate news_link table
+   -- 
    
    
    

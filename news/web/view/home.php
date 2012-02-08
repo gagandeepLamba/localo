@@ -66,7 +66,7 @@
                     </div>
                     
                     <div class="yui3-u-1-3">
-                        <?php include($_SERVER['APP_WEB_DIR'] . '/inc/sidebar.inc'); ?>
+                        <?php include($_SERVER['APP_WEB_DIR'] . '/inc/sidebar/default.inc'); ?>
                     </div>
                     
                     

@@ -19,8 +19,8 @@ namespace com\indigloo\news\dao {
             return $data ;
         }
         
-        function createLink($title,$summary,$link) {
-            $data = mysql\Post::createLink($title,$summary,$link);
+        function createLink($author,$link,$description) {
+            $data = mysql\Post::createLink($author,$link,$description);
             return $data ;
         }
         
@@ -49,9 +49,25 @@ namespace com\indigloo\news\dao {
 
         }
         
+        function getLatestLinks() {
+            //$pageSize = Config::getInstance()->get_value("system.page.records");
+            $pageSize = 20 ;
+            $rows = mysql\Post::getLatestLinks($pageSize);
+            return $rows ;
+
+        }
+        
         function getRecords($start,$direction) {
             $pageSize = Config::getInstance()->get_value("system.page.records");
             $rows = mysql\Post::getRecords($start,$direction,$pageSize);
+            return $rows ;
+
+        }
+        
+        function getLinks($start,$direction) {
+            //$pageSize = Config::getInstance()->get_value("system.page.records");
+            $pageSize = 20 ;
+            $rows = mysql\Post::getLinks($start,$direction,$pageSize);
             return $rows ;
 
         }

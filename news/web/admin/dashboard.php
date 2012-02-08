@@ -1,15 +1,14 @@
 <?php
-    //post/list.php
+    //admin/dashboard.php
     include ('news-app.inc');
     include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
-    include($_SERVER['APP_WEB_DIR'] . '/inc/role/staff.inc');
+    include($_SERVER['APP_WEB_DIR'] . '/inc/role/admin.inc');
 	
 	$postDao = new \com\indigloo\news\dao\Post();
-    $postDBRows = $postDao->getRecords();
+    $linkDBRows = $postDao->getLatestLinks();
 
 	use \com\indigloo\auth\User as User ;
-	$isAdmin = (User::isAdmin()) ? true : false ;
-	
+    
 	
 ?>
 
@@ -18,11 +17,11 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 
-    <head><title> All Posts</title>
+    <head><title> Admin Dashboard</title>
 
         <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
 
-        <link rel="stylesheet" type="text/css" href="/lib/yui3/grids-min.css">
+        <link rel="stylesheet" type="text/css" href="/3p/yui3/grids-min.css">
         <link rel="stylesheet" type="text/css" href="/css/news.css">
 
     </head>
@@ -44,44 +43,12 @@
                     <div class="yui3-u-2-3">
 
                         <div id="content">
-							<div class="fb_top">
-								<div class="fb_name navy floatl">
-									All posts
-									
-								</div>
-								
-							</div> <!-- fb_top -->
-							<div>
-								<table class="doc-table pt10">
-									<?php
-										$strRowItem = '<tr class="item"> <td> {count}. </td> <td> {title}</td> ' ;
-										$strRowItem .= '<td><a href="/post/edit.php?g_post_id={postId}"> Edit</a>  </td>';
-										
-										
-										$count = 1;
-										foreach($postDBRows as $postDBRow) {
-											$editLink = ($postDBRow['is_link'] == 1 ) ? '/link/edit.php' : '/post/edit.php' ;
-											
-											$rowItem = str_replace(array( 0 => "{count}", 1=> "{title}", 2=>"{postId}"),
-																   array(0 => $count, 1 => $postDBRow['title'], 2=> $postDBRow['id']),
-																   $strRowItem);
-											
-											if($isAdmin) {
-												$rowItem .= '<td><a href="#"> Delete</a>  </td> </tr>';
-											}
-											
-											echo $rowItem;	
-											$count++ ;
-											
-										}
-									
-									
-									?>
-									
-									
-                                </table>
-								
-							</div>
+							<h2> Admin Dashboard </h2>
+							<?php foreach($linkDBRows as $linkDBRow) {
+                                echo \com\indigloo\news\html\Link::getSummary($linkDBRow) ;
+                            }
+                            
+                            ?>
 							
                         </div> <!-- content -->
 

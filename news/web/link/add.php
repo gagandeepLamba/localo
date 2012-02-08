@@ -2,7 +2,9 @@
     //link/add.php
     include ('news-app.inc');
     include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
-      
+    //@see http://www.google.com/recaptcha
+    include($_SERVER['WEBGLOO_LIB_ROOT'] . '/ext/recaptchalib.php');
+    
     use com\indigloo\Util;
     use com\indigloo\ui\form\Sticky;
     use com\indigloo\Constants as Constants;
@@ -17,15 +19,15 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 
-    <head><title> Post a news item</title>
+    <head><title> Submit your story</title>
 
         <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
 
-        <link rel="stylesheet" type="text/css" href="/lib/yui3/grids-min.css">
+        <link rel="stylesheet" type="text/css" href="/3p/yui3/grids-min.css">
         <link rel="stylesheet" type="text/css" href="/css/news.css">
         
-        <script type="text/javascript" src="/lib/jquery/jquery-1.6.4.min.js"></script>
-        <script type="text/javascript" src="/lib/jquery/jquery.validate.1.9.0.min.js"></script>
+        <script type="text/javascript" src="/3p/jquery/jquery-1.6.4.min.js"></script>
+        <script type="text/javascript" src="/3p/jquery/jquery.validate.1.9.0.min.js"></script>
 
       
         <script type="text/javascript">
@@ -58,11 +60,11 @@
                     <div class="yui3-u-2-3">
 
                         <div id="content">
-                            <h2> Submit a link </h2>
+                            <h2> Submit your story </h2>
 
 
                             <p class="help-text">
-                                Read something interesting? Please send us a link.
+                                Read something interesting? Please share it with us.
 
                             </p>
 
@@ -74,40 +76,43 @@
                                     <div class="error">    </div>
 
                                     <table class="form-table">
-
                                         <tr>
-                                            <td class="field"> Title<span class="red-label">*</span></td>
+                                            <td class="field"> Link<span class="color-red">*</span></td>
+                                        </tr>
+                                        <tr>
                                             <td>
-                                                <input type="text" name="title" maxlength="128" class="required w580" title="&nbsp;Title is required" value="<?php echo $sticky->get('title'); ?>"/>
+                                                <input type="text" name="link" class="required w580" title="&nbsp;Link is required" value="<?php echo $sticky->get('link'); ?>"/>
                                             </td>
                                         </tr>
                                         
                                         <tr>
-                                            <td> &nbsp; </td>
+                                            <td class="field"> Your name or email<span class="color-red">*</span></td>
+                                        </tr>
+                                        <tr>
                                             <td>
-                                            <br>    
-                                            <span>
-                                                    
-                                                Summary (You can use
-                                                <a href="http://daringfireball.net/projects/markdown/" target="_blank">markdown</a>
-                                                or <a href="http://www.w3.org/TR/xhtml1/" target="_blank">xhtml</a>
-                                                for formatting)
-                                                
-                                            </span>
-                                            <br>
-                                            <textarea name="summary" class="required h130 w580" title="&nbsp;Summary is required" cols="50" rows="4" ><?php echo $sticky->get('summary'); ?></textarea> </td>
+                                                <input type="text" name="author" maxlength="64" class="required w580" title="&nbsp;Your name or email is required" value="<?php echo $sticky->get('author','Anonymous'); ?>"/>
+                                            </td>
                                         </tr>
                                         
                                         <tr>
-                                            <td class="field"> Link<span class="red-label">*</span></td>
+                                           <td>  <span> Description </span> </td>
+                                        </tr>
+                                        <tr>
                                             <td>
-                                                <input type="text" name="link" maxlength="128" class="required w580" title="&nbsp;Link is required" value="<?php echo $sticky->get('link'); ?>"/>
+                                                <textarea name="description" class="h130 w580" cols="50" rows="4" ><?php echo $sticky->get('description'); ?></textarea> </td>
                                             </td>
                                         </tr>
-                                      
+                                     
                                     </table>
-
-                                    <div class="tc">
+                                    <div class="ml20">
+                                        <?php
+                                            $publickey = "6Ld7Xs0SAAAAAI_v62wXq28C_XeE5FQCBYMFG6vU"; 
+                                            echo recaptcha_get_html($publickey);
+                                       ?>
+                                           
+                                    </div>
+                                    
+                                    <div class="p20">
                                         By posting information here you agree to the <a href="/help/tc.php" target="_blank"> Terms and Conditions </a>
                                         imposed by this website. Please read them carefully.
                                     </div>
@@ -135,7 +140,7 @@
                     </div>
                     
                     <div class="yui3-u-1-3">
-                        <?php include($_SERVER['APP_WEB_DIR'] . '/inc/sidebar.inc'); ?>
+                        <?php include($_SERVER['APP_WEB_DIR'] . '/inc/sidebar/link-add.inc'); ?>
                     </div>
                     
                     

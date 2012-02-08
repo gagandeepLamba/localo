@@ -45,7 +45,22 @@ namespace com\indigloo\news\mysql {
         
         }
         
+        static function getLatestLinks($pageSize){
+            $mysqli = MySQL\Connection::getInstance()->getHandle();
             
+            $sql = " select link.* from news_link link " ;
+            $sql .= " order by link.id DESC LIMIT " .$pageSize;
+            
+            
+            if(Config::getInstance()->is_debug()) {
+                Logger::getInstance()->debug("sql => $sql \n");
+            }
+            
+            $rows = MySQL\Helper::fetchRows($mysqli, $sql);
+            return $rows;
+        
+        }
+        
         static function getRecords($start,$direction,$pageSize){
             $mysqli = MySQL\Connection::getInstance()->getHandle();
             
@@ -131,10 +146,10 @@ namespace com\indigloo\news\mysql {
             
         }
 
-         static function createLink($title,$summary,$link) {
+         static function createLink($author,$link,$description) {
 
             $mysqli = MySQL\Connection::getInstance()->getHandle();
-            $sql = " insert into news_link(title,summary,link,created_on) ";
+            $sql = " insert into news_link(author,link,description,created_on) ";
             $sql .= " values(?,?,?,now()) ";
 
             $dbCode = MySQL\Connection::ACK_OK;
@@ -142,9 +157,9 @@ namespace com\indigloo\news\mysql {
             
             if ($stmt) {
                 $stmt->bind_param("sss",
-                        $title,
-                        $summary,
-                        $link);
+                        $author,
+                        $link,
+                        $description);
                         
 
                 $stmt->execute();
