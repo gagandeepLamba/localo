@@ -23,7 +23,30 @@
 
         <link rel="stylesheet" type="text/css" href="/3p/yui3/grids-min.css">
         <link rel="stylesheet" type="text/css" href="/css/news.css">
-
+        
+        <script type="text/javascript" src="/3p/jquery/jquery-1.6.4.min.js"></script>
+         <!-- fancybox -->
+        <script type="text/javascript" src="/3p/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+        <link rel="stylesheet" href="/3p/fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
+        
+        <script type="text/javascript">
+            
+            $(document).ready(function(){
+                
+               $(".fbox").fancybox({
+                    'title'             : 'press esc to close',
+                    'width'				: '75%',
+                    'height'			: '75%',
+                    'autoScale'     	: false,
+                    'transitionIn'		: 'none',
+                    'transitionOut'		: 'none',
+                    'type'				: 'iframe'
+                });
+            });
+                
+            
+        </script>
+        
     </head>
 
 
@@ -44,8 +67,11 @@
 
                         <div id="content">
 							<h2> Admin Dashboard </h2>
-							<?php foreach($linkDBRows as $linkDBRow) {
-                                echo \com\indigloo\news\html\Link::getSummary($linkDBRow) ;
+							<?php
+                            $count = 1;
+                            foreach($linkDBRows as $linkDBRow) {
+                                echo \com\indigloo\news\html\Link::getSummary($linkDBRow,$count) ;
+                                $count++ ;
                             }
                             
                             ?>

@@ -9,12 +9,22 @@ namespace com\indigloo\news\html {
         
 		
 		
-        static function getSummary($linkDBRow) {
-           
-		    $html = NULL ;
-			$html = $linkDBRow['link'];
-            return $html ;
+        static function getSummary($linkDBRow,$count) {
+            $html = NULL ;
+			$view = new \stdClass;
 			
+            $view->id = $linkDBRow['id'];
+            $view->author = $linkDBRow['author'];
+            $view->link = $linkDBRow['link'];
+            $view->description = $linkDBRow['description'];
+            $view->createdOn = Util::formatDBTime($linkDBRow['created_on']);
+            
+            
+            $view->bgclass = ( ($count%2) == 0 )? 'lightyellowbg': '' ;
+            
+			$template = $_SERVER['APP_WEB_DIR'].'/fragments/link/summary.tmpl' ;
+			$html = Template::render($template,$view);
+			return $html ;
         }
         
     }
