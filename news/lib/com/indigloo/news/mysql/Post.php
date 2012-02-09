@@ -99,6 +99,40 @@ namespace com\indigloo\news\mysql {
             
         }
         
+        static function getLinks($index,$direction,$pageSize){
+            $mysqli = MySQL\Connection::getInstance()->getHandle();
+            $predicate = '' ;
+            
+            if($direction == 'after') {
+                $predicate = " where link.id < ".$index ;
+                $predicate .= " order by link.id DESC LIMIT " .$pageSize;
+            } else if($direction == 'before'){
+                $predicate = " where link.id > ".$index ;
+                $predicate .= " order by link.id ASC LIMIT " .$pageSize;
+            } else {
+                trigger_error("Unknow sort direction in query", E_USER_ERROR);
+            }
+            
+            $sql = " select link.* from news_link link " ;
+            $sql .= $predicate ;
+            
+            if(Config::getInstance()->is_debug()) {
+                Logger::getInstance()->debug("sql => $sql \n");
+            }
+            
+            $rows = MySQL\Helper::fetchRows($mysqli, $sql);
+            
+            //reverse rows for 'before' direction
+            if($direction == 'before') {
+                $results = array_reverse($rows) ;
+                return $results ;
+            }
+            
+            return $rows;
+            
+        }
+        
+        
         static function create($title,$seoTitle,$summary,$description,
                                $linksJson,$imagesJson,$userId,$userName) {
 
@@ -212,12 +246,19 @@ namespace com\indigloo\news\mysql {
         static function getRecordsCount() {
             
             $mysqli = MySQL\Connection::getInstance()->getHandle();
-            
             $sql = " select count(id) as count from news_post " ;  
             $row = MySQL\Helper::fetchRow($mysqli, $sql);
             return $row;
         }
         
+        static function getLinksCount() {
+            
+            $mysqli = MySQL\Connection::getInstance()->getHandle();
+            
+            $sql = " select count(id) as count from news_link " ;  
+            $row = MySQL\Helper::fetchRow($mysqli, $sql);
+            return $row;
+        }
     }
 
 }

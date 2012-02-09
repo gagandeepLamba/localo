@@ -4,11 +4,38 @@
     include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
     include($_SERVER['APP_WEB_DIR'] . '/inc/role/admin.inc');
 	
-	$postDao = new \com\indigloo\news\dao\Post();
-    $linkDBRows = $postDao->getLatestLinks();
+	
 	use \com\indigloo\auth\User as User ;
     
     
+    $startId = NULL;
+    $endId = NULL ;
+    $linkDBRows = NULL ;
+    
+    $postDao = new \com\indigloo\news\dao\Post();
+    
+    if(array_key_exists('after',$_GET)) {
+        $index = base_convert($_GET['after'],36,10);
+        $linkDBRows = $postDao->getLinks($index,'after');
+	} elseif (array_key_exists('before',$_GET)) {
+        $index = base_convert($_GET['before'],36,10);
+		$linkDBRows = $postDao->getLinks($index,'before');
+	} else {
+        $linkDBRows = $postDao->getLatestLinks();
+    }
+    
+    
+    if(sizeof($linkDBRows) > 0 ) {
+        $startId = $linkDBRows[0]['id'] ;
+        $endId =   $linkDBRows[sizeof($linkDBRows)-1]['id'] ;
+    }
+    
+    $pageNo = array_key_exists('pageNo',$_GET) ? $_GET['pageNo'] : 1 ;
+    
+    $totalLinks = $postDao->getTotalLinks();
+    $paginator = new \com\indigloo\ui\Pagination($pageNo,$totalLinks);
+            
+                                    
 	
 ?>
 
@@ -84,6 +111,8 @@
                                 </form>
                              </div>
                              
+                            <?php $paginator->render('/admin/dashboard.php',$startId,$endId);  ?>
+                           
                         </div> <!-- content -->
 
                     </div>

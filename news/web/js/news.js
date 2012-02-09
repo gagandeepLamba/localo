@@ -48,10 +48,10 @@ webgloo.news.admin = {
         
         switch(code) {
             case 'A' :
-                text = 'Accepted &nbsp; <img src="/css/images/plus-icon.png"/>' ;
+                text = '<img src="/css/images/plus-icon.png"/>&nbsp;Accepted' ;
                 break ;
             case 'T' :
-                text = 'Trash &nbsp;<img src="/css/images/minus-icon.png"/>' ;
+                text = '<img src="/css/images/minus-icon.png"/>&nbsp;Trash' ;
                 break ;
             default :
                 break ;

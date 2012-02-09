@@ -50,8 +50,7 @@ namespace com\indigloo\news\dao {
         }
         
         function getLatestLinks() {
-            //$pageSize = Config::getInstance()->get_value("system.page.records");
-            $pageSize = 20 ;
+            $pageSize = Config::getInstance()->get_value("admin.dashboard.records");
             $rows = mysql\Post::getLatestLinks($pageSize);
             return $rows ;
 
@@ -65,8 +64,7 @@ namespace com\indigloo\news\dao {
         }
         
         function getLinks($start,$direction) {
-            //$pageSize = Config::getInstance()->get_value("system.page.records");
-            $pageSize = 20 ;
+            $pageSize = Config::getInstance()->get_value("admin.dashboard.records");
             $rows = mysql\Post::getLinks($start,$direction,$pageSize);
             return $rows ;
 
@@ -79,8 +77,20 @@ namespace com\indigloo\news\dao {
             return $totalPages ;
         }
         
+        function getTotalLinks() {
+            $count = $this->getLinksCount();
+            $pageSize = Config::getInstance()->get_value("admin.dashboard.records");
+            $totalPages = ceil($count / $pageSize);
+            return $totalPages ;
+        }
+        
         function getRecordsCount() {
             $row = mysql\Post::getRecordsCount();
+            return $row['count'] ;
+        }
+        
+        function getLinksCount() {
+            $row = mysql\Post::getLinksCount();
             return $row['count'] ;
         }
         
