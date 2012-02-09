@@ -1,17 +1,19 @@
 
 <div id="link-{id}" class="widget {bgclass}">
+
    <h3> <a href="{link}" class="fbox">{link} </a> </h2>
-    
+    <span id="state">Not Decided Yet!</span>    
     <div class="regular">
        {author} posted on {createdOn}
        <br/>
        {description}
 
     </div>
+    
      <div class="action-links">
-        <span class="grey-button"><a href="#"> Accept </a> </span>                       
+        <span class="grey-button"><a id={id} class="accept-link" href=""> Accept </a> </span>                       
         &nbsp;
-        <span class="grey-button"><a href="#"> Reject </a> </span> 
+        <span class="grey-button"><a id={id} class="trash-link" href=""> Trash </a> </span> 
     </div>
 </div>
 

@@ -171,6 +171,33 @@
 	}
 	
 	
+	.vertical{
+		width:1em;
+		text-transform:uppercase;
+		letter-spacing :40px; /* arbitrary letter spacing for vertical */
+	}
+	
+	#feedback{
+		position:fixed;
+		top:200px;
+		right:0px;
+		background-color:orange;
+		padding:5px;
+		font-size:14px;
+		font-weight:bold;
+	}
+	
+	* html #feedback { position: absolute;}
+	
+	 select {
+		max-width: 220px;
+		width: 220px;
+		margin: 0 0 5px;
+		border: 1px solid #BDC7D8 ;
+		padding:2px;
+			
+	 }
+	 
 	/* - Common classes */
 	
 	
@@ -237,7 +264,7 @@
 	#search-top {
 		float: right;
 		height: 24px;
-		width: 308px;
+		width: 340px;
 		font-family:Arial,Helvetica,Tahoma,sans-serif;
 		padding-top: 28px;
 	}
@@ -246,7 +273,7 @@
 		float:right;
 		background:#FFF;
 		height:16px;
-		width:175px;
+		width:316px;
 	}
 	#searchform #s {
 		border:none;
@@ -254,9 +281,10 @@
 		font-family:"Myriad Pro",Arial,Helvetica,Tahoma,sans-serif;
 		color:#949494;
 		padding: 1px 5px;
-		width: 140px;
+		width: 290px;
 		outline:none;
 	}
+	
 	#searchform .but {
 		border:none;
 		background:transparent;
@@ -313,46 +341,20 @@
 		background-position: 0 -36px;
 	}
 	
-	
-	/* --------------- Menu --------------- */
-	
-	#main-menu {
-		/* background: url('images/menu-bg.jpg') no-repeat left center; */
-		height: 60px;
-		font-size: 20px;
-		/* font-family:"Myriad Pro",Arial,Helvetica,Tahoma,sans-serif; */
-		line-height: 60px;
-	}
-	#main-menu ul {
-		list-style:none;
-		margin:0;
-		padding:0;
-		text-align: center;
-		color: #b9b9b9;
-		width:662px;
-	}
-	#main-menu ul li {
-		display:inline;
-		
-	}
-	#main-menu ul li a {
-		margin: 0 12px;
-	}
-	
 	#f-menu {}
 	#f-menu ul {
-		list-style:none;
-		margin:8px 0 0;
-		padding:0;
-		font-size:14px;
+			list-style:none;
+			margin:8px 0 0;
+			padding:0;
+			font-size:14px;
 	}
 	#f-menu ul li {
-		display:inline;
+			display:inline;
 	}
 	#f-menu ul li a {
-		color:#dbdada;
-		font-weight:bold;
-		margin:0 7px;
+			color:#dbdada;
+			font-weight:bold;
+			margin:0 7px;
 	}
 	
 	
@@ -440,12 +442,10 @@
 	}
 	
 	.details {
-		
 		color: #727272;
 		margin: 1px 24px;
 		padding: 10px 0;
 		text-align: justify;
-		/* background: #FAFAFA; */
 		font-family: Arial;
 		font-size: 12px;
 		
@@ -500,64 +500,6 @@
 		padding: 10px 0;
 		margin-left:30px;
 	}
-	
-	/* ------ top filter ------ */
-	
-	.fb_top {
-		font-size:14px;
-		font-weight:bold;
-		font-family:Arial;
-		height:18px;
-		line-height:18px;
-		padding-bottom:20px;
-		border-bottom :3px solid #3E71B5;
-	}
-	
-	.fb_top .fb_name {
-		
-		padding-left:25px;
-		padding-right: 8px;
-	}
-	.fb_top .fb_filter {
-		padding-left:8px;
-		padding-right: 10px;
-		position:relative;
-	}
-	.fb_top .afilter {
-		
-		padding-right:15px;
-		color: #3E71B5;
-		/* text-decoration :underline; */
-	}
-	.fb_top .fb_selector {
-		border: 1px solid #BBBBBB;
-		position:absolute;
-		right: 0;
-		background:#FFF;
-		padding:5px 10px;
-		display: none;
-	}
-	.fb_top .fb_selector a {
-		color: #3E71B5;
-		display:block;
-		padding: 0 10px;
-	}
-	.fb_top .fb_selector a:hover {
-		background: #3E71B5;
-		color:#FFF;
-		text-decoration:none;
-	}
-	.fb_selector a.current {
-		color:#111;
-		cursor:default;
-	}
-	.fb_selector a.current:hover {
-		color:#111;
-		background:transparent;
-	}
-	
-	/* --- end top filter --- */
-	
 	
 	/* +star rating */
 	
@@ -646,6 +588,7 @@
 		background-color: #FFFFCC;
 		overflow: hidden;
 	}
+	
 	/* Error */
 	
 	.red {
@@ -729,7 +672,7 @@
 	
 	/* --- end - swfupload styles --- */
 	
-	/* +news application styles */
+	/* + our application styles */
 	
 	#js-debug {
 		background : #FFFFFF ;
@@ -856,13 +799,6 @@
 		padding:20px;
 	}
 	
-	.edit-bar .widget .regular,
-	.edit-bar div.grid{
-		border-left:1px solid #E7E7E7;
-		border-right:1px solid #E7E7E7;
-		padding: 9px 9px 0;
-		background: none;
-	}
 	.widget .regular p{
 		margin-bottom: 5px;
 		text-indent :20px;
@@ -943,6 +879,7 @@
 		max-height: 300px;
 	}
 	
+	/* end: jquery tiny carousel */
 	
 	
 	/* + pagination  */
@@ -966,34 +903,8 @@
 		border-color: #2E6AB1;
 	}
 	
-	.vertical{
-		width:1em;
-		text-transform:uppercase;
-		letter-spacing :40px; /* arbitrary letter spacing for vertical */
-	}
-	
-	#feedback{
-		position:fixed;
-		top:200px;
-		right:0px;
-		background-color:orange;
-		padding:5px;
-		font-size:14px;
-		font-weight:bold;
-	}
-	
-	* html #feedback { position: absolute;}
-	
-	 select {
-		max-width: 220px;
-		width: 220px;
-		margin: 0 0 5px;
-		border: 1px solid #BDC7D8 ;
-		padding:2px;
-			
-	 }
 	 
-	 /* + links and images preview classes */
+	 /* + post links and images preview classes */
 	.hide-me {
 		display:none ;
 	 }

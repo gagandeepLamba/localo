@@ -41,6 +41,7 @@
        description TEXT,
        link TEXT not null,
        author varchar(64),
+       state varchar(1) default 'N',
        created_on timestamp default '0000-00-00 00:00:00',
        updated_on timestamp default '0000-00-00 00:00:00' ,
        PRIMARY KEY (id)) ENGINE = MYISAM;
@@ -190,6 +191,6 @@
    -- recreate news_link table
    -- 
    
-   
+   alter table news_link add column state varchar(1) default 'N' ;
    
 

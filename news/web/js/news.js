@@ -28,6 +28,76 @@ webgloo.clearDebug = function(message) {
 };
 
 
+/* +  webgloo news admin object */
+
+webgloo.news.admin = {
+    states : {},
+    init : function() {
+        strStates = $("#states_json").val();
+        webgloo.addDebug(" states => " + strStates);
+        var mStates = JSON.parse(strStates);
+        
+        for(var id in mStates) {
+            console.log("id =" + id + " state => " + mStates[id]);
+            webgloo.news.admin.setState(id,mStates[id]);
+        }
+        
+    },
+    getStateText : function(code) {
+        text = 'Not Decided Yet!' ;
+        
+        switch(code) {
+            case 'A' :
+                text = 'Accepted &nbsp; <img src="/css/images/plus-icon.png"/>' ;
+                break ;
+            case 'T' :
+                text = 'Trash &nbsp;<img src="/css/images/minus-icon.png"/>' ;
+                break ;
+            default :
+                break ;
+                
+        }
+        
+        return text ;
+    },
+    attachEvents : function() {
+        $(".fbox").fancybox({
+            'title'             : 'press esc to close',
+            'width'				: '75%',
+            'height'			: '75%',
+            'autoScale'     	: false,
+            'transitionIn'		: 'none',
+            'transitionOut'		: 'none',
+            'type'				: 'iframe'
+        });
+        
+        $(".accept-link").live("click", function(event){
+            event.preventDefault();
+            var id = $(this).attr("id");
+            webgloo.news.admin.setState(id,'A');
+            
+        }) ;
+        
+        $(".trash-link").live("click", function(event){
+            event.preventDefault();
+            var id = $(this).attr("id");
+            webgloo.news.admin.setState(id,'T');
+        }) ;
+        
+
+    },
+    setState : function(id,code) {
+        webgloo.news.admin.states[id] = code ;
+        var text = webgloo.news.admin.getStateText(code);
+        $("#link-"+id+ " #state").html(text);
+        //store back in document
+        var strStates = JSON.stringify(webgloo.news.admin.states);
+        console.log("states stringified => " +strStates);
+        $("#states_json").val(strStates);
+    }
+    
+    
+}
 /* + webgloo news post object */
 
 webgloo.news.post = {
@@ -41,13 +111,13 @@ webgloo.news.post = {
         var strImagesJson = frm.images_json.value ;
         var images = JSON.parse(strImagesJson);
         for(i = 0 ;i < images.length ; i++) {
-                webgloo.news.post.addImage(images[i]);
+            webgloo.news.post.addImage(images[i]);
         }
         
         var strLinksJson = frm.links_json.value ;
         var links = JSON.parse(strLinksJson);
         for(i = 0 ;i < links.length ; i++) {
-                webgloo.news.post.addLink(links[i]);
+            webgloo.news.post.addLink(links[i]);
         }
         
         

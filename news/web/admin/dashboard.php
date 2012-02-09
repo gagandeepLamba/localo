@@ -6,8 +6,8 @@
 	
 	$postDao = new \com\indigloo\news\dao\Post();
     $linkDBRows = $postDao->getLatestLinks();
-
 	use \com\indigloo\auth\User as User ;
+    
     
 	
 ?>
@@ -29,19 +29,13 @@
         <script type="text/javascript" src="/3p/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
         <link rel="stylesheet" href="/3p/fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
         
+        <script type="text/javascript" src="/js/news.js"></script>
+        
         <script type="text/javascript">
             
             $(document).ready(function(){
-                
-               $(".fbox").fancybox({
-                    'title'             : 'press esc to close',
-                    'width'				: '75%',
-                    'height'			: '75%',
-                    'autoScale'     	: false,
-                    'transitionIn'		: 'none',
-                    'transitionOut'		: 'none',
-                    'type'				: 'iframe'
-                });
+                webgloo.news.admin.init();
+                webgloo.news.admin.attachEvents();
             });
                 
             
@@ -67,15 +61,29 @@
 
                         <div id="content">
 							<h2> Admin Dashboard </h2>
+                             
 							<?php
-                            $count = 1;
-                            foreach($linkDBRows as $linkDBRow) {
-                                echo \com\indigloo\news\html\Link::getSummary($linkDBRow,$count) ;
-                                $count++ ;
-                            }
+                                $count = 1;
+                                $json = array();
+                                foreach($linkDBRows as $linkDBRow) {
+                                    echo \com\indigloo\news\html\Link::getSummary($linkDBRow,$count) ;
+                                    $count++ ;
+                                    $json[$linkDBRow['id']] = $linkDBRow['state'];
+                                }
+                                $json = json_encode($json);
                             
                             ?>
-							
+                            
+							<div id="form-wrapper">
+                                <form id="web-form1" class="web-form" name="web-form1" action="/admin/form/dashboard.php" enctype="multipart/form-data"  method="POST">
+                                    <input id="states_json" name="states_json" type="hidden" value ='<?php echo $json; ?>' />
+                                    <div id="link-container">
+                                        <button class="submit" type="submit" name="save" value="Save" onclick="this.setAttribute('value','Save');" ><span>Click to Save the changes!</span></button>    
+                                    </div>
+                                    
+                                </form>
+                             </div>
+                             
                         </div> <!-- content -->
 
                     </div>
@@ -86,7 +94,7 @@
                     
                     
                 </div> <!-- GRID -->
-
+                
 
             </div> <!-- bd -->
 
