@@ -13,11 +13,18 @@ namespace com\indigloo {
             
         //accept an array of param and values and add to
         // this base URI
-        static function addQueryParameters($url, $params) {
+        static function addQueryParameters($url, $params,$ignore=NULL) {
             //existing params
             $q = self::getQueryParams($url);
             //params values will replace the one in q
             $q2 = array_merge($q, $params);
+            
+            if(!is_null($ignore) && is_array($ignore)) {
+                foreach($ignore as $key) {
+                    unset($q2[$key]); 
+                }
+            }
+            
             $fragment = \parse_url($url, PHP_URL_FRAGMENT);
             $path = \parse_url($url, PHP_URL_PATH);
             $newUrl = self::createUrl($path, $q2, $fragment);

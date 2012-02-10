@@ -285,9 +285,10 @@
 		outline:none;
 	}
 	
-	#searchform .but {
-		border:none;
-		background:transparent;
+	#searchform .button {
+		
+		background: url(images/search-btn.png) center no-repeat;
+		border: 0;
 		cursor:pointer;
 		vertical-align:top;
 	}
@@ -988,5 +989,9 @@
 		-webkit-border-radius: 6px;
 		-khtml-border-radius: 6px;
 		border-radius: 6px;
+	}
+	
+	#content hr{
+		
 	}
 

@@ -46,30 +46,38 @@ namespace com\indigloo\ui {
             return $this->pageNo - 1 ;
         }
             
-        function render($pageURI,$start,$end) {
+        function render($homeURI,$startId,$endId) {
             
-            if(empty($start) || empty($end)) {
+            if(empty($startId) || empty($endId)) {
                 return '' ;
             }
             
             //convert to base36
-            $start = base_convert($start,10,36) ;
-            $end = base_convert($end,10,36) ;
+            $startId = base_convert($startId,10,36) ;
+            $endId = base_convert($endId,10,36) ;
              
             printf("<div class=\"pagination\">");
-            printf("<span class=\"nextprev\"> <a href=\"/\">Home</a> &nbsp;&nbsp;</span>");
+            printf("<span class=\"nextprev\"> <a href=\"%s\">Home</a> &nbsp;&nbsp;</span>",$homeURI);
             
             if($this->hasPrevious()){
                
-                $bparams = array('before' => $start, 'pageNo' => $this->previousPage());
-                $previousURI = Url::addQueryParameters($pageURI,$bparams);
+                $params = Url::getQueryParams($_SERVER['REQUEST_URI']);
+                $bparams = array('before' => $startId, 'pageNo' => $this->previousPage());
+                
+                $q = array_merge($params,$bparams);
+                $ignore = array('after');
+                
+                $previousURI = Url::addQueryParameters($homeURI,$q,$ignore);
                 printf("<span class=\"nextprev\"> <a href=\"%s\">&lt;&nbsp;Previous</a> </span>",$previousURI);
             }
             
             if($this->hasNext()){
-               
-                $nparams = array('after' => $end, 'pageNo' => $this->nextPage()) ;
-                $nextURI = Url::addQueryParameters($pageURI,$nparams);
+                $params = Url::getQueryParams($_SERVER['REQUEST_URI']); 
+                $nparams = array('after' => $endId, 'pageNo' => $this->nextPage()) ;
+                $q = array_merge($params,$nparams);
+                
+                $ignore = array('before');
+                $nextURI = Url::addQueryParameters($homeURI,$q,$ignore);
                 printf("<span class=\"nextprev\"> <a href=\"%s\">&nbsp;Next&nbsp;&gt;</a> </span>",$nextURI);
             }
             

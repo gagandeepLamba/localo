@@ -17,13 +17,14 @@
     if(array_key_exists('after',$_GET)) {
         $index = base_convert($_GET['after'],36,10);
         $linkDBRows = $postDao->getLinks($index,'after');
+        
 	} elseif (array_key_exists('before',$_GET)) {
         $index = base_convert($_GET['before'],36,10);
 		$linkDBRows = $postDao->getLinks($index,'before');
+        
 	} else {
         $linkDBRows = $postDao->getLatestLinks();
     }
-    
     
     if(sizeof($linkDBRows) > 0 ) {
         $startId = $linkDBRows[0]['id'] ;
@@ -88,7 +89,8 @@
 
                         <div id="content">
 							<h2> Admin Dashboard </h2>
-                             
+                            <hr>
+                                
 							<?php
                                 $count = 1;
                                 $json = array();
@@ -101,15 +103,7 @@
                             
                             ?>
                             
-							<div id="form-wrapper">
-                                <form id="web-form1" class="web-form" name="web-form1" action="/admin/form/dashboard.php" enctype="multipart/form-data"  method="POST">
-                                    <input id="states_json" name="states_json" type="hidden" value ='<?php echo $json; ?>' />
-                                    <div id="link-container">
-                                        <button class="submit" type="submit" name="save" value="Save" onclick="this.setAttribute('value','Save');" ><span>Click to Save the changes!</span></button>    
-                                    </div>
-                                    
-                                </form>
-                             </div>
+							
                              
                             <?php $paginator->render('/admin/dashboard.php',$startId,$endId);  ?>
                            
@@ -118,7 +112,8 @@
                     </div>
                     
                     <div class="yui3-u-1-3">
-                        <?php include($_SERVER['APP_WEB_DIR'] . '/inc/sidebar/default.inc'); ?>
+                        <?php include($_SERVER['APP_WEB_DIR'] . '/inc/sidebar/admin/default.inc'); ?>
+                        
                     </div>
                     
                     

@@ -6,9 +6,10 @@
 		</div>
 
 		<div id="search-top">
-				<form method="get" id="searchform" action="">	
+				<form method="get" id="searchform" action="<?php echo $_SERVER['REQUEST_URI']; ?>">	
 						<input type="text" onblur="if (this.value == '') {this.value = 'Search';}" onfocus="if (this.value == 'Search') {this.value = '';}" value="Search" class="text" name="s" id="s"> 
-						<input type="image" class="but" src="/css/images/search-btn.png" value=" "> 
+						<input type="submit" class="button"  value=" ">
+						
 				</form>
 				
 		</div>
