@@ -26,9 +26,11 @@ namespace com\indigloo\media {
     class FileUpload extends \com\indigloo\media\Upload {
 
         private $storeName ;
-
+        private $prefix ;
+        
         function __construct() {
             parent::__construct();
+            $this->prefix ='';
         }
 
         function __destruct() {
@@ -37,6 +39,14 @@ namespace com\indigloo\media {
 
         public function getStoreName() {
             return $this->storeName;
+        }
+        
+        public function setPrefix($prefix){
+            $this->prefix = $prefix ;
+        }
+        
+        public function getPrefix() {
+            return $this->prefix;
         }
         
         public function process($fieldName) {
@@ -76,8 +86,8 @@ namespace com\indigloo\media {
 
         function store($sBlobData) {
            
-            $token = $this->name . date(DATE_RFC822);
-            $this->storeName = substr(md5($token), rand(1, 15), 16).rand(1, 4096);
+            $token = $this->name.date(DATE_RFC822);
+            $this->storeName = substr(md5($token), rand(1, 15), 16).rand(1,4096);
             $pos = strrpos($this->name, '.');
             
             if ($pos != false) {
@@ -86,9 +96,15 @@ namespace com\indigloo\media {
                 $this->storeName =  $this->storeName. '.' . $extension;
             } 
             
+            $this->storeName =  $this->prefix.$this->storeName.
 
             $fp = NULL;
+            //system.upload.path has a trailing slash
             $path = Config::getInstance()->get_value('system.upload.path').$this->storeName;
+            
+            if(!file_exists(dirname($path))) {
+                mkdir(dirname($path), 0755, true);
+            }
             
             if(Config::getInstance()->is_debug()){
                 Logger::getInstance()->debug(" file name = $this->name, mime = $mime ");

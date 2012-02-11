@@ -39,7 +39,6 @@ namespace com\indigloo\media {
         private $size;
         private $mime;
         private $maxSize;
-        private $orgId;
         private $fileData;
         private $name;
 
@@ -63,12 +62,11 @@ namespace com\indigloo\media {
             $this->isError = $flag;
         }
 
-        //No empty setter
         public function isRequired() {
             return $this->isRequired;
         }
 
-        // if file field can be empty on form
+        /* do we allow empty file field on form? */
         public function setRequired($flag) {
             $this->isRequired = $flag;
         }
@@ -112,15 +110,7 @@ namespace com\indigloo\media {
         public function setName($name) {
             $this->name = $name;
         }
-
-        public function getOrgId() {
-            return $this->orgId;
-        }
-
-        public function setOrgId($orgId) {
-            $this->orgId = $orgId;
-        }
-
+        
         public function getFileData() {
             return $this->fileData;
         }
