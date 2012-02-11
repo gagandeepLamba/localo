@@ -5,7 +5,13 @@
     
     use com\indigloo\Util as Util;
     
+    //add file path prefix
+    
     $uploader = new com\indigloo\media\ImageUpload();
+    
+    /* media/application/year/month */
+    $prefix = sprintf("%s/%s/%s/",'news',date('Y'),date('m')) ;
+    $uploader->setPrefix($prefix);
     $uploader->process("Filedata");
     
     

@@ -31,6 +31,16 @@ namespace com\indigloo\news\dao {
             return $data ;
         }
         
+        function updateLinkState($linkIds,$state) {
+            if(empty($linkIds)) {
+                return ;
+            }
+            
+            $code = mysql\Post::updateLinkState($linkIds,$state);
+            return $code ;
+            
+        }
+        
         function getRecordOnId($postId) {
             $row = mysql\Post::getRecordOnId($postId);
             return $row ;

@@ -243,6 +243,19 @@ namespace com\indigloo\news\mysql {
             return array('code' => $dbCode) ;
         }
         
+        static function updateLinkState($linkIds,$state) {
+            
+            $mysqli = MySQL\Connection::getInstance()->getHandle();
+            $csids = implode(",", $linkIds);
+             
+            $sql = "update news_link set state = '".$state."' " ;
+            $sql = $sql. " where id in (".$csids.") " ;
+           
+            $code = MySQL\Connection::ACK_OK;
+            MySQL\Helper::executeSQL($mysqli,$sql);
+            return $code ;
+        }
+        
         static function getRecordsCount() {
             
             $mysqli = MySQL\Connection::getInstance()->getHandle();
