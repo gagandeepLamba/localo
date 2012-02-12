@@ -20,6 +20,7 @@ webgloo.sc = webgloo.sc || {};
 
 webgloo.sc.question = {
     images : {} ,
+	debug : false ,
     init : function () {
         webgloo.sc.question.images = {} ;
         
@@ -30,7 +31,7 @@ webgloo.sc.question = {
         
         var images = JSON.parse(strImagesJson);
         for(i = 0 ;i < images.length ; i++) {
-                webgloo.sc.question.addImage(images[i]);
+            webgloo.sc.question.addImage(images[i]);
         }
     },
     attachEvents : function() {
@@ -118,7 +119,10 @@ webgloo.sc.question = {
        $(linkObj).parent().remove();
     },
     addImage : function(mediaVO) {
-        webgloo.addDebug(" image :: bucket:: " + mediaVO.bucket + " name :: " + mediaVO.storeName);
+		if(webgloo.sc.question.debug){
+			webgloo.addDebug(" image :: bucket:: " + mediaVO.bucket + " name :: " + mediaVO.storeName);
+		}
+		
         webgloo.sc.question.images[mediaVO.id] = mediaVO ;
         var buffer = webgloo.sc.question.imagePreviewDIV.supplant(mediaVO);
         $("div#media-data").append(buffer);

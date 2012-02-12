@@ -6,6 +6,11 @@
     use com\indigloo\Util as Util;
     
     $uploader = new com\indigloo\media\ImageUpload();
+    
+    /* upload_path/ + application/ + year/month/date/ */
+    $prefix = sprintf("%s/%s/",'sc',date('Y/m/d')) ;
+    $uploader->setPrefix($prefix);
+    
     $uploader->process("Filedata");
     
     

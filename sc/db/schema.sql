@@ -54,5 +54,31 @@ create table sc_user(
     
 	
 
-drop table if exists sc_question;
+
+drop table if exists sc_list;
+create table sc_list(
+	id int(11) NOT NULL auto_increment,
+	name varchar(16) not null,
+    code varchar(8) not null,
+    display varchar(32) not null,
+	ui_order int not null ,
+	PRIMARY KEY (id)) ENGINE = MYISAM;
+    
+	
+	
+insert into sc_list(name,ui_order,code,display) values('CATEGORY',1, 'BABY', 'Baby / Kids');
+insert into sc_list(name,ui_order,code,display) values('CATEGORY',2, 'BEAUTY', 'Beauty');
+insert into sc_list(name,ui_order,code,display) values('CATEGORY',3, 'BOOK', 'Books');
+insert into sc_list(name,ui_order,code,display) values('CATEGORY',4, 'CLOTH', 'Clothes');
+
+insert into sc_list(name,ui_order,code,display) values('CATEGORY',5, 'MFASHION', 'Fashion - Male');
+insert into sc_list(name,ui_order,code,display) values('CATEGORY',6, 'FFASHION', 'Fashion - Female');
+
+insert into sc_list(name,ui_order,code,display) values('CATEGORY',7, 'HEALTH', 'Health / Fitness');
+insert into sc_list(name,ui_order,code,display) values('CATEGORY',8, 'HOME', 'Home + Interior');
+insert into sc_list(name,ui_order,code,display) values('CATEGORY',9, 'GADGET', 'Camera/Mobiles/Gadgets');
+insert into sc_list(name,ui_order,code,display) values('CATEGORY',10, 'COMPUTER', 'Computer/Laptops');
+
+
+
 

@@ -32,8 +32,8 @@
         
        
        <!-- swfupload related stuff -->
-        <script type="text/javascript" src="/3p/swfupload/swfupload.js"></script>
-        <script type="text/javascript" src="/3p/swfupload/js/swfupload.queue.js"></script>
+        <script type="text/javascript" src="/3p/swfuploadv2.5b3/swfupload.js"></script>
+        <script type="text/javascript" src="/3p/swfuploadv2.5b3/js/swfupload.queue.js"></script>
         <script type="text/javascript" src="/3p/swfupload/js/fileprogress.js"></script>
         <script type="text/javascript" src="/3p/swfupload/js/handlers.js"></script>
         
@@ -42,8 +42,7 @@
             $(document).ready(function(){
                 
                 $("#web-form1").validate({
-                    errorLabelContainer: $("#web-form1 div.error")
-                    
+                    errorLabelContainer: $("#web-form1 div.error") 
                 });
                 
                 webgloo.sc.question.attachEvents();
@@ -54,41 +53,42 @@
             var swfu;
             
             window.onload = function() {
-                var settings = {
-                    flash_url : "/3p/swfupload/swfupload.swf",
-                    upload_url: "/test/receiver.php",
-                    post_params: {
-                        "PHPSESSID" : "<?php echo session_id(); ?>"
-                    },
-                    file_size_limit : "8 MB",
-                    file_types : "*.*",
-                    file_types_description : "All Files",
-                    file_upload_limit : 10,
-                    file_queue_limit : 0,
-                    custom_settings : {
-                        progressTarget : "fsUploadProgress",
-                        cancelButtonId : "btnCancel"
-                    },
-                    debug: false,
+              var settings = {
+			  flash_url : "/3p/swfuploadv2.5b3/swfupload.swf",
+			  flash9_url : "/3p/swfuploadv2.5b3/swfupload_fp9.swf",
+			  upload_url: "/test/receiver.php",
+			  post_params: {
+				  "PHPSESSID" : "<?php echo session_id(); ?>"
+			  },
+			  file_size_limit : "8 MB",
+			  file_types : "*.*",
+			  file_types_description : "All Files",
+			  file_upload_limit : 10,
+			  file_queue_limit : 0,
+			  custom_settings : {
+				  progressTarget : "fsUploadProgress",
+				  cancelButtonId : "btnCancel"
+			  },
+			  debug: false,
 
-                    // Button settings
-                    
-					button_image_url: "/3p/swfupload/images/XPButtonUploadText_61x22.png",
-                    button_width: "61",
-                    button_height: "22",
-                    button_placeholder_id: "spanButtonPlaceHolder",
-					button_cursor:SWFUpload.CURSOR.HAND,
-                    
-                    // handlers.js event handlers
-                    file_queued_handler : fileQueued,
-                    file_queue_error_handler : fileQueueError,
-                    file_dialog_complete_handler : fileDialogComplete,
-                    upload_start_handler : uploadStart,
-                    upload_progress_handler : uploadProgress,
-                    upload_error_handler : uploadError,
-                    upload_success_handler : webgloo.sc.question.uploadSuccess,
-                    upload_complete_handler : uploadComplete,
-                    queue_complete_handler : queueComplete
+			  // Button settings
+			  
+			  button_image_url: "/3p/swfupload/images/XPButtonUploadText_61x22.png",
+			  button_width: "61",
+			  button_height: "22",
+			  button_placeholder_id: "spanButtonPlaceHolder",
+			  button_cursor:SWFUpload.CURSOR.HAND,
+			  
+			  // handlers.js event handlers
+			  file_queued_handler : fileQueued,
+			  file_queue_error_handler : fileQueueError,
+			  file_dialog_complete_handler : fileDialogComplete,
+			  upload_start_handler : uploadStart,
+			  upload_progress_handler : uploadProgress,
+			  upload_error_handler : uploadError,
+			  upload_success_handler : webgloo.sc.question.uploadSuccess,
+			  upload_complete_handler : uploadComplete,
+			  queue_complete_handler : queueComplete
                 };
 
                 swfu = new SWFUpload(settings);
@@ -108,17 +108,17 @@
                 </div>
                 <div id="bd">
 
-                    <div class="yui3-g">
+                     <div class="yui3-g">
                        
                 
                         <div class="yui3-u-2-3">
                             <div id="content">
 
-                                    <h2> Ask Anything </h2>
+                                    <h2> Ask your Question </h2>
 
 
                                     <p class="help-text">
-                                       Please provide details below and post your question.
+                                      &nbsp;
 
                                     </p>
                                     
@@ -137,53 +137,29 @@
                                                         <input type="text" name="title" maxlength="128" class="required" title="&gt; Queston is required"! value="<?php echo $sticky->get('question'); ?>"/>
                                                     </td>
                                                  </tr>
-                                                 <tr>
-                                                    <td class="field">Privacy<span class="red-label">*</span> &nbsp;</td>
+												  <tr>
+                                                    <td class="field">Category<span class="red-label">*</span> &nbsp;</td>
                                                     <td>
-                                                        <select name="privacy">
-															   <option value="PUB">Public</option>
-                                                               <option value="FRND">Friends</option>
-                                                               <option value="CARF">Car Fans</option>
-															   <option value="HSRR">HSR Retail Club</option>
-                                                               
-                                                        </select>
+														<?php
+														    $selectBoxDao = new \com\indigloo\sc\dao\SelectBox();
+														    $catRows = $selectBoxDao->get('CATEGORY');
+															echo \com\indigloo\ui\SelectBox::render('category',$catRows);	   	   
+																													
+														?>
+														
                                                     </td>
                                                 </tr>
-												 
                                                  <tr>
-                                                        <td class="field">Details</td>
-                                                        <td>
-                                                            <textarea  name="description" class="h130" cols="50" rows="4" ><?php echo $sticky->get('description'); ?></textarea>
-                                                        </td>
+														<td class="field">Details</td>
+														<td>
+															<textarea  name="description" class="h130" cols="50" rows="4" ><?php echo $sticky->get('description'); ?></textarea>
+														</td>
                                                  </tr>
                                                  <tr>
                                                     <td class="field">Location<span class="red-label">*</span> &nbsp; </td>
                                                     <td> <input type="text" name="location" maxlength="32" class="w200 required" minlength="3" title="&gt; Location is required!" value="<?php echo $sticky->get('location',$userDBRow['location']); ?>" /></td>
                                                 </tr>
-                                                 
-                                                 <tr>
-                                                    <td class="field">Category<span class="red-label">*</span> &nbsp;</td>
-                                                    <td>
-                                                        <select name="category">
-															   <option value="Baby">Baby</option>
-                                                               <option value="Bags">Bags</option>
-                                                               <option value="Camera">Camera</option>
-															   <option value="Cars">Cars</option>
-                                                               <option value="Clothes">Clothes</option>
-                                                               <option value="Computers">Computers</option>
-															   <option value="Home">Home</option>
-															   <option value="Mobile">Mobile</option>
-															   <option value="Other">Other</option>
-                                                        </select>
-                                                    </td>
-                                                </tr>
-                                                 <tr>
-                                                        <td class="field">&nbsp;</td>
-                                                        <td>
-                                                            Send deals? <input type="checkbox" style="width:30px;vertical-align:middle;" class="small-checkbox" name="send_deal" value="1" /> Yes!
-                                                        </td>
-                                                 </tr>
-												 
+                                          
                                                 <tr>
                                                     <td class="field">Tags<span class="red-label">*</span> &nbsp;</td>
                                                     <td> <input  type="text" name="tags" maxlength="64" class="required"  title="&gt; Tags are required!" value="" /></td>
