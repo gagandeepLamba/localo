@@ -1,5 +1,5 @@
 <?php
-    //user/form/register.php
+    //sc/user/form/login.php
     
     include 'sc-app.inc';
     include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
@@ -32,11 +32,12 @@
             header("location: ".$locationOnError);
             exit(1);
         } else {
-           
-            $userDao = new com\indigloo\sc\dao\User();
-            $code = $userDao->login($fvalues['email'],
+            
+            $data = \com\indigloo\auth\User::login('sc_user',
+                                $fvalues['email'],
                                 $fvalues['password']);
             
+            $code = $data['code'];
             
             if ($code > 0 ) {
                 header("location: ".$forwardURI);
@@ -46,6 +47,8 @@
                 $gWeb->store(Constants::STICKY_MAP, $fvalues);
                 $gWeb->store(Constants::FORM_ERRORS,array("Error: wrong login or password"));
                 $locationOnError = '/user/login.php?q='.$forwardURI ;
+                
+
                 header("location: ".$locationOnError);
                 exit(1);
             }

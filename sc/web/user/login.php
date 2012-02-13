@@ -56,12 +56,12 @@
                         <div class="yui3-u-2-3">
                             <div id="content">
 
-                                    <h3> Login</h3>
+                                    <h3> Sign in</h3>
 
 
-                                    <p class="help-text">
+                                    <p class="help-text"> </p>
                                     
-                                    </p>
+                                    
                                     
                                      <?php FormMessage::render(); ?>
 
@@ -102,7 +102,7 @@
                                     </div> <!-- form wrapper -->
 
                                     <div>
-                                        No account? <a href="/user/add.php"> Register</a>
+                                        No account? <a href="/user/register.php"> Register</a>
                             
                                     </div>
 

@@ -1,6 +1,6 @@
 <?php
 
-    //sc/index
+    //sc/user/register.php
     include ('sc-app.inc');
     include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
     
@@ -16,7 +16,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 
-       <head><title> 3mik.com - Home page  </title>
+       <head><title> User registration page  </title>
          
 
         <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
@@ -74,38 +74,39 @@
 
 
                                     <p class="help-text">
-                                       Please provide details below to register. Use alphanumeric password of atleast 8 characters.
+                                       Please provide details below to register. Password should be atleast 8 characters.
 
                                     </p>
                                     
                                     <?php FormMessage::render(); ?>
                             
                                     <div id="form-wrapper">
-                                        <form id="web-form1"  name="web-form1" action="/user/form/add.php" enctype="multipart/form-data"  method="POST">
+                                        <form id="web-form1"  name="web-form1" action="/user/form/register.php" enctype="multipart/form-data"  method="POST">
 
                                             <div class="error">    </div>
 
                                             <table class="form-table">
 
                                                  <tr>
-                                                    <td class="field"> Name<span class="red-label">*</span></td>
+                                                    <td class="field">First Name<span class="red-label">*</span></td>
                                                     <td>
-                                                        <input type="text" name="name" maxlength="32" class="required" title="&nbsp;Name is required" value="<?php echo $sticky->get('name'); ?>"/>
+                                                        <input type="text" name="first_name" maxlength="32" class="required" title="&nbsp;First Name is required" value="<?php echo $sticky->get('name'); ?>"/>
+                                                    </td>
+                                                 </tr>
+												  <tr>
+                                                    <td class="field">Last Name<span class="red-label">*</span></td>
+                                                    <td>
+                                                        <input type="text" name="last_name" maxlength="32" class="required" title="&nbsp;Last Name is required" value="<?php echo $sticky->get('name'); ?>"/>
                                                     </td>
                                                  </tr>
 
                                                   <tr>
                                                     <td class="field"> Email<span class="red-label">*</span></td>
                                                     <td>
-                                                        <input type="text" id="email" name="email" maxlength="64" class="required mail" title="&nbsp;wrong email" value="<?php echo $sticky->get('email'); ?>"/>
+                                                        <input type="text" id="email" name="email" maxlength="64" class="required mail" title="&nbsp;Enter a valid email" value="<?php echo $sticky->get('email'); ?>"/>
                                                     </td>
                                                 </tr>
-												   <tr>
-                                                    <td class="field"> Location<span class="red-label">*</span></td>
-                                                    <td>
-                                                        <input type="text" name="location" maxlength="32" class="required" title="&nbsp;Location is required" value="<?php echo $sticky->get('location'); ?>"/>
-                                                    </td>
-                                                </tr>
+								
 												   
                                                  <tr>
                                                     <td class="field">Password<span class="red-label">*</span> &nbsp; </td>
@@ -137,13 +138,13 @@
                             </div> <!-- content -->
 
 
-                        </div> <!-- u-2-3 -->
+                        </div>
                         
                          <div class="yui3-u-1-3">
-                            <!-- sidebar -->
-                        </div> <!-- u-1-3 -->
+                             <?php include('sidebar/register.inc'); ?>
+                        </div> 
                         
-                    </div> <!-- GRID -->
+                    </div>
 
 
                 </div> <!-- bd -->

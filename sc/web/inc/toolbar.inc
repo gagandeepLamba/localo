@@ -1,12 +1,13 @@
 <?php
 
- $userDao = new com\indigloo\sc\dao\User();
+ use \com\indigloo\auth\User as User;
  
- if($userDao->isAuthenticated()){
-    $userDBRow = $userDao->getUserInSession();
+ if(User::isAuthenticated()){
+    $gSessionUser = User::getUserInSession();
     include($_SERVER['APP_WEB_DIR'].'/inc/toolbar/user.inc') ;
-    
+
   } else {
+
     include($_SERVER['APP_WEB_DIR'].'/inc/toolbar/default.inc') ;
   }
   

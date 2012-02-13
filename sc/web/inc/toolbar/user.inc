@@ -10,7 +10,7 @@
 				 <span class="register"><a href="/">Home</a></span>
 				 &nbsp;|&nbsp
 				 <span class="register"><a href="/user/logout.php">Logout</a></span>
-				 &nbsp;(<?php echo $userDBRow['email']; ?>)
+				 &nbsp;(<?php echo $gSessionUser->firstName; ?>)
 				</div>
 				
 		</div>

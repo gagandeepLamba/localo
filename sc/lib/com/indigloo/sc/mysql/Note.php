@@ -20,7 +20,7 @@ namespace com\indigloo\sc\mysql {
 		static function getAll($filter) {
 			
 			$mysqli = MySQL\Connection::getInstance()->getHandle();
-            $sql = " select * from sc_note " ;
+            $sql = " select * from sc_note order by id desc " ;
 			$sql .= $filter ;
 			
             $rows = MySQL\Helper::fetchRows($mysqli, $sql);

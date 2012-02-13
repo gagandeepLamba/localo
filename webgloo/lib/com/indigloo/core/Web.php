@@ -111,7 +111,7 @@ namespace com\indigloo\core {
 
                 if (Config::getInstance()->is_debug()) {
                     Logger::getInstance()->debug('web >> storing in session >> key is:: ' . $key);
-                    Logger::getInstance()->debug($value);
+                    Logger::getInstance()->debug(Util::stringify($value));
                 }
             }
         }
@@ -123,7 +123,7 @@ namespace com\indigloo\core {
                 $value = $_SESSION[$key];
                 if (Config::getInstance()->is_debug()) {
                     Logger::getInstance()->debug('web >> fetching from session >> key is:: ' . $key);
-                    Logger::getInstance()->debug($value);
+                    Logger::getInstance()->debug(Util::stringify($value));
                 }
 
                 if ($destroy) {

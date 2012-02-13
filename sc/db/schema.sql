@@ -39,20 +39,27 @@ create table sc_media(
     
 
 
-  
-drop table if exists sc_user;
-create table sc_user(
-	id int(11) NOT NULL auto_increment,
-	name varchar(64) not null,
-    email varchar(64) not null,
-    location varchar(32) not null,
-	password varchar(32) not null,
-	interests varchar(256),
-    created_on timestamp default '0000-00-00 00:00:00',
-	updated_on timestamp default '0000-00-00 00:00:00' ,
-	PRIMARY KEY (id)) ENGINE = MYISAM;
+  drop table if exists sc_user;
+   CREATE TABLE sc_user (
+       id int(11) NOT NULL auto_increment,
+       user_name varchar(64) not null,
+       password varchar(64) not null,
+       first_name varchar(32) not null,
+       last_name varchar(32) not null,
+       email varchar(64) not null,
+       is_staff int default 0 ,
+       is_admin int default 0,
+       is_active int not null default 1,
+       salt varchar(16) not null,
+       login_on TIMESTAMP  default '0000-00-00 00:00:00',
+       created_on TIMESTAMP  default '0000-00-00 00:00:00',
+       updated_on TIMESTAMP   default '0000-00-00 00:00:00',
+       PRIMARY KEY (id)) ENGINE =MYISAM ;
     
-	
+   alter table  sc_user add constraint UNIQUE uniq_email (email);
+   
+   
+   
 
 
 drop table if exists sc_list;
@@ -78,6 +85,7 @@ insert into sc_list(name,ui_order,code,display) values('CATEGORY',7, 'HEALTH', '
 insert into sc_list(name,ui_order,code,display) values('CATEGORY',8, 'HOME', 'Home + Interior');
 insert into sc_list(name,ui_order,code,display) values('CATEGORY',9, 'GADGET', 'Camera/Mobiles/Gadgets');
 insert into sc_list(name,ui_order,code,display) values('CATEGORY',10, 'COMPUTER', 'Computer/Laptops');
+insert into sc_list(name,ui_order,code,display) values('CATEGORY',11, 'OTHER', 'Others');
 
 
 

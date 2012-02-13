@@ -3,7 +3,7 @@
     //qa/ask.php
     include ('sc-app.inc');
     include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
-    include($_SERVER['APP_WEB_DIR'] . '/inc/auth.inc');
+    include($_SERVER['APP_WEB_DIR'] . '/inc/role/user.inc');
 	 
     use com\indigloo\Util;
     use com\indigloo\ui\form\Sticky;
@@ -21,15 +21,18 @@
        <head><title> Ask Anything</title>
          
 
-        <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+       <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
 
-        <link rel="stylesheet" type="text/css" href="/3p/yui3/grids-min.css">
-        <link rel="stylesheet" type="text/css" href="/css/sc.css">
+       <link rel="stylesheet" type="text/css" href="/3p/yui3/grids-min.css">
+       <link rel="stylesheet" type="text/css" href="/css/sc.css">
         
-        <script type="text/javascript" src="/3p/jquery/jquery-1.6.4.min.js"></script>
-        <script type="text/javascript" src="/3p/jquery/jquery.validate.1.9.0.min.js"></script>
-        <script type="text/javascript" src="/js/sc.js"></script>
-        
+       <script type="text/javascript" src="/3p/jquery/jquery-1.6.4.min.js"></script>
+       <script type="text/javascript" src="/3p/jquery/jquery.validate.1.9.0.min.js"></script>
+       <script type="text/javascript" src="/js/sc.js"></script>
+	   
+	   <!-- autocomplete plugin -->
+       <link rel="stylesheet" type="text/css" href="/3p/autocomplete/dyve/jquery.autocomplete.css">
+	   <script type="text/javascript" src="/3p/autocomplete/dyve/jquery.autocomplete.js" ></script>
        
        <!-- swfupload related stuff -->
         <script type="text/javascript" src="/3p/swfuploadv2.5b3/swfupload.js"></script>
@@ -41,11 +44,23 @@
        
             $(document).ready(function(){
                 
-                $("#web-form1").validate({
-                    errorLabelContainer: $("#web-form1 div.error") 
-                });
+              $("#web-form1").validate({
+					 errorLabelContainer: $("#web-form1 div.error") 
+              });
                 
-                webgloo.sc.question.attachEvents();
+              webgloo.sc.question.attachEvents();
+
+			  $("#ac3").autocomplete({
+					 data: [
+							['bangalore', 1],
+							['chennai', 2],
+							['delhi', 3],
+							['kolkata',4],
+							['hyderabad',5],
+							['mumbai', 6]
+						]
+			  });
+
             });
        
               
@@ -156,8 +171,8 @@
 														</td>
                                                  </tr>
                                                  <tr>
-                                                    <td class="field">Location<span class="red-label">*</span> &nbsp; </td>
-                                                    <td> <input type="text" name="location" maxlength="32" class="w200 required" minlength="3" title="&gt; Location is required!" value="<?php echo $sticky->get('location',$userDBRow['location']); ?>" /></td>
+                                                    <td class="field">Location</td>
+                                                    <td> <input id="ac3" type="text" name="location" maxlength="32" class="w200" value="<?php echo $sticky->get('location'); ?>" /></td>
                                                 </tr>
                                           
                                                 <tr>
@@ -236,13 +251,13 @@
                             </div> <!-- content -->
 
 
-                        </div> <!-- u-2-3 -->
+                        </div> 
                         
                          <div class="yui3-u-1-3">
-                            <!-- sidebar -->
-                        </div> <!-- u-1-3 -->
+                             <?php include('sidebar/ask.inc'); ?>
+                        </div> 
                         
-                    </div> <!-- GRID -->
+                    </div> 
 
 
                 </div> <!-- bd -->

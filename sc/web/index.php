@@ -13,8 +13,7 @@
     
 	$questionDao = new \com\indigloo\sc\dao\Note();
     $questionDBRows = $questionDao->getAll($_GET['stoken'], $_GET['ft']);
-	$index = 0 ;
-    
+	
 ?>  
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -46,50 +45,10 @@
                        
                 
                         <div class="yui3-u-2-3">
-                            <div id="content">
-								<div class="yui3-g">
-									<div class="yui3-u navbox">
-										<a href="/qa/ask.php"> Ask &raquo; </a>
-									</div>
-									<div class="yui3-u navbox">
-										<a href="/qa/wish.php"> Wish &raquo;</a>
-									</div>
-									<div class="yui3-u navbox">
-										<a href="/qa/share.php">Share &raquo;</a>
-									</div>
-									
-								</div> <!-- top grid -->
-								
-								<div class="yui3-g">
-									<div class="yui3-u-1-2">
-										<?php
-											for($index = 0 ; ($index < sizeof($questionDBRows)) && ($index < 3); $index++) {
-												$questionDBRow = $questionDBRows[$index];
-												$html = \com\indigloo\sc\html\Note::getSummary($questionDBRow,1);
-												echo $html ;
-										
-											}
-										?>
-									</div>
-									<div class="yui3-u-1-2">
-										<?php
-											for($index = 3 ; ($index < sizeof($questionDBRows)) && ($index < 6); $index++) {
-												$questionDBRow = $questionDBRows[$index];
-												$html = \com\indigloo\sc\html\Note::getSummary($questionDBRow,1);
-												echo $html ;
-											}
-										?>
-									</div>
-									
-									
-								</div> <!-- 2 col grid -->
-								
-								
-								
+                            <div id="content">	
 								
 								<?php
-									for($index = 6; $index < sizeof($questionDBRows) ; $index++) {
-										$questionDBRow = $questionDBRows[$index];
+									foreach($questionDBRows as $questionDBRow) {
 										$html = \com\indigloo\sc\html\Note::getSummary($questionDBRow,2);
 										echo $html ;
 								
@@ -99,15 +58,14 @@
                             </div> <!-- content -->
 
 
-                        </div> <!-- u-2-3 -->
+                        </div> 
                         
                          <div class="yui3-u-1-3">
                             <!-- sidebar -->
-							<?php include($_SERVER['APP_WEB_DIR'] . '/inc/sidebar.inc'); ?>
-                        </div> <!-- u-1-3 -->
+							<?php include($_SERVER['APP_WEB_DIR'] . '/inc/sidebar/home.inc'); ?>
+                        </div>
                         
-                    </div> <!-- GRID -->
-
+                    </div>
 
                 </div> <!-- bd -->
 
