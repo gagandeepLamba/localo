@@ -2,16 +2,25 @@
 <div id="sidebar">
     <div class="highlight">
         <p>
-           <b> Why we need your email? </b>
-			we need your email to  identify you on our site. We respect your privacy
-			and do not display or use your email in any other way.
+           <b> What is a good question? </b>
+			Please be specific. A focused and on the topic question has a better chance
+			to get answered. 
         </p>
         <p>
-            <b> What is a good password? </b>
-			A Good password should be hard to guess for people who know you.
-			Do not use proper nouns or dictionary words.
+            <b> Why should I include my location? </b>
+			People can suggest answers or places that will be near your place or inside your city.
+			That would help you narrow down the suggestions.
         </p>
-        
+        <p>
+            <b> How many tags? </b>
+			Including a lot of tags is not needed. Think of keywords that can help
+			Others locate this question quickly. Again, please be specific.
+        </p>
+		<p>
+            <b> Add link </b>
+			You can add links from other websites and sources.
+        </p>
+
     </div>
 </div>
 

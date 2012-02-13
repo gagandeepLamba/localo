@@ -2,21 +2,22 @@
 
        <h2> <a href="/qa/show.php?id={id}">{title} </a> </h2>
        
-       <div class="details">
-          <span class="b"> <a href="#"> {userId} </a> </span>
-          <span class="date">  {createdOn} </span>
+       <div class="author">
+          <span class="b"> <a href="#"> {userName} </a> </span>
+          <span class="date"> posted on {createdOn} </span>
        </div>
        
         <div class="photo">
                      
-                <img src="/{bucket}/{storedName}"  class="{imageClass}" title="{originalName}" width="{width}" height="{height}" alt="{originalName}"/>
+                <img src="/{bucket}/{storedName}"  class="{imageClass}" title="{originalName}"  alt="{originalName}"/>
         
                 <div class="regular">
                         {summary}
                 </div>
                 <br style="clear:both"/>
         </div>
-        <div class="tags"> {tags} {timeline}  </div>
+        
+        <div class="tags"> Tags&nbsp;{tags} </div>
         
 </div>
 

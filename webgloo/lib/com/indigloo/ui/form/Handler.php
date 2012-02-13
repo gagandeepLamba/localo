@@ -12,19 +12,26 @@ namespace com\indigloo\ui\form {
         private $fname;
         private $ferrors;
         private $fvalues;
-        private $processed;
         private $translate ;
         
+        /*
+         *
+         * @param translate : signals whether form elements should be run through
+         * PHP htmlspecialchars function or not. By default we translate all form
+         * elements to gaurd against xss and script attacks.
+         * 
+        */
+
+
         function __construct($fname, $post,$translate=true) {
             $this->fname = $fname;
             $this->post = $post;
-            //collection of processed key-value pairs
+            
             //keys are form element names
             // and values are output of form handler
             $this->fvalues = array();
-            //errors array
             $this->ferrors = array();
-            $this->processed = array();
+            
             $this->translate = $translate;
         }
 
@@ -33,15 +40,12 @@ namespace com\indigloo\ui\form {
                 trigger_error(' Form handler POST array not set', E_USER_ERROR);
             }
 
-            //get processed value first
             $value = NULL;
 
             if (isset($this->post[$name])) {
                 $value = trim($this->post[$name]);
-                //Apply rules on this value and store
-                $this->processValue($name, $displayName, $value, $rules);
-                //processed this element
-                array_push($this->processed, $name);
+                $this->processElement($name, $displayName, $value, $rules);
+
             } else {
                 //this key is not found in post
                 // this represents a coding issue, not a form error
@@ -49,34 +53,20 @@ namespace com\indigloo\ui\form {
                 trigger_error(' Form handler POST does not have element :: ' . $name, E_USER_ERROR);
             }
         }
-
-        function processValue($name, $displayName, $value, $rules) {
-            //see size of error queue before processing this element
-            $errorSize1 = sizeof($this->ferrors);
-
+        
+        function processElement($name, $displayName, $value, $rules) {
+            
             foreach ($rules as $ruleName => $ruleCondition) {
-                $this->processRule($ruleName, $ruleCondition, $displayName, $value);
+                $this->processRule($ruleName, $ruleCondition, $name,$displayName, $value);
             }
-
-            //see error queue size after processing this value
-            $errorSize2 = sizeof($this->ferrors);
-            if ($errorSize2 == $errorSize1) {
-                //Add to values collection if we found no error
-                //All rules processed - add to collection
-                // we run the rules on raw version
-                // but we should add the sanitized version for our consumption
-
-                $this->fvalues[$name] = $this->getSecureHtml($value);
-            } else {
-                if (Config::getInstance()->is_debug()) {
-                    Logger::getInstance()->debug("Form processed $name and rules :: ");
-                    Logger::getInstance()->debug($rules);
-                    Logger::getInstance()->debug("Errors found :: " . ($errorSize2 - $errorSize1));
-                }
+            
+            if (Config::getInstance()->is_debug()) {
+                Logger::getInstance()->debug("Processed form element $name");
             }
+            
         }
 
-        function processRule($ruleName, $ruleCondition, $displayName, $value) {
+        function processRule($ruleName, $ruleCondition, $name,$displayName, $value) {
 
             switch ($ruleName) {
                 case 'maxlength' :
@@ -113,6 +103,11 @@ namespace com\indigloo\ui\form {
                         array_push($this->ferrors, $displayName . " is not equal to :: " . $ruleCondition);
                     }
                     break;
+                case 'noprocess' :
+                    $this->fvalues[$name] = $value ;
+                    break ;
+                default:
+                    break;
             }
         }
 
@@ -128,15 +123,13 @@ namespace com\indigloo\ui\form {
         }
 
         function getValues() {
+
             foreach ($this->post as $key => $value) {
-                if (in_array($key, $this->processed)) {
-                    //already done
-                    // because we ran some rules there
-                } else {
-                    //add sanitized output
+                if (!in_array($key, $this->fvalues)) {
                     $this->fvalues[$key] = $this->getSecureHtml($value);
                 }
             }
+
             return $this->fvalues;
         }
 
@@ -158,7 +151,7 @@ namespace com\indigloo\ui\form {
             $this->fvalues[$name] = $value;
         }
 
-        function getSecureHtml($x) {
+        private function getSecureHtml($x) {
             if($this->translate)
                 return trim(htmlspecialchars($x, ENT_QUOTES));
             else

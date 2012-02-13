@@ -5,14 +5,15 @@ namespace com\indigloo\sc\mysql {
     use \com\indigloo\mysql as MySQL;
     use \com\indigloo\Util as Util ;
     
-    class Note {
+    class Question {
         
         const MODULE_NAME = 'com\indigloo\sc\mysql\Question';
 
-		static function getOnId($noteId) {
+		static function getOnId($questionId) {
 			$mysqli = MySQL\Connection::getInstance()->getHandle();
-            $sql = " select * from sc_note where id = ".$noteId ;
+			$questionId = $mysqli->real_escape_string($questionId);
 			
+            $sql = " select * from sc_question where id = ".$questionId ;
             $row = MySQL\Helper::fetchRow($mysqli, $sql);
             return $row;
 		}
@@ -20,7 +21,7 @@ namespace com\indigloo\sc\mysql {
 		static function getAll($filter) {
 			
 			$mysqli = MySQL\Connection::getInstance()->getHandle();
-            $sql = " select * from sc_note order by id desc " ;
+            $sql = " select * from sc_question order by id desc " ;
 			$sql .= $filter ;
 			
             $rows = MySQL\Helper::fetchRows($mysqli, $sql);
@@ -28,7 +29,7 @@ namespace com\indigloo\sc\mysql {
 			
 		}
 		
-		static function update($noteId,
+		static function update($questionId,
 						       $title,
 							   $seoTitle,
                                $description,
@@ -36,17 +37,13 @@ namespace com\indigloo\sc\mysql {
                                $location,
                                $tags,
                                $linksJson,
-                               $imagesJson,
-							   $plevel,
-							   $sendDeal,
-							   $timeline)
+                               $imagesJson)
 		
 		{
 			
 			$mysqli = MySQL\Connection::getInstance()->getHandle();
-            $sql = " update sc_note set title=?, seo_title=?, description=?, category=?, " ;
-			$sql .= " location=?, tags=?, links_json=?, images_json=?, p_level=?, " ;
-			$sql .= " send_deal=?, timeline=? where id = ?  " ;
+            $sql = " update sc_question set title=?, seo_title=?, description=?, category_code =?, " ;
+			$sql .= " location=?, tags=?, links_json=?, images_json=? where id = ? " ;
 			
 			
             $code = MySQL\Connection::ACK_OK;
@@ -54,7 +51,7 @@ namespace com\indigloo\sc\mysql {
             
             
             if ($stmt) {
-                $stmt->bind_param("sssssssssisi",
+                $stmt->bind_param("ssssssssi",
                         $title,
                         $seoTitle,
                         $description,
@@ -63,10 +60,7 @@ namespace com\indigloo\sc\mysql {
                         $tags,
                         $linksJson,
                         $imagesJson,
-						$plevel,
-						$sendDeal,
-						$timeline,
-						$noteId);
+						$questionId);
                 
                       
                 $stmt->execute();
@@ -82,51 +76,39 @@ namespace com\indigloo\sc\mysql {
             
             return $code ;
             
-			
-			
 		}
 		
-        static function create($type,
-							   $title,
+        static function create($title,
                                $seoTitle,
                                $description,
                                $category,
                                $location,
                                $tags,
-							   $brand,
-							   $userId,
+							   $userEmail,
+							   $userName,
                                $linksJson,
-                               $imagesJson,
-							   $plevel,
-							   $sendDeal,
-							   $timeline) {
+                               $imagesJson) {
 
             $mysqli = MySQL\Connection::getInstance()->getHandle();
-            $sql = " insert into sc_note(title,seo_title,description,category,location,tags, " ;
-            $sql .= " brand,user_id,links_json,images_json,created_on,p_level,send_deal,n_type,timeline) ";
-            $sql .= " values(?,?,?,?,?,?,?,?,?,?,now(),?,?,?,?) ";
+            $sql = " insert into sc_question(title,seo_title,description,category_code,location,tags, " ;
+            $sql .= " user_email,user_name,links_json,images_json,created_on) ";
+            $sql .= " values(?,?,?,?,?,?,?,?,?,?,now()) ";
 
             $code = MySQL\Connection::ACK_OK;
             $stmt = $mysqli->prepare($sql);
             
-            $categoryId = 1 ;
-            
             if ($stmt) {
-                $stmt->bind_param("sssssssssssiss",
+                $stmt->bind_param("ssssssssss",
                         $title,
                         $seoTitle,
                         $description,
                         $category,
                         $location,
-                        $tags,
-						$brand,
-						$userId,
+						$tags,
+						$userEmail,
+						$userName,
                         $linksJson,
-                        $imagesJson,
-						$plevel,
-						$sendDeal,
-						$type,
-						$timeline);
+                        $imagesJson);
                 
                       
                 $stmt->execute();

@@ -1,35 +1,39 @@
 <?php
 
-    //sc/index
+    //sc/qa/show.php
     include ('sc-app.inc');
     include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
     
-    use com\indigloo\Util;
+    use com\indigloo\Util as Util;
     use com\indigloo\ui\form\Sticky;
     use com\indigloo\Constants as Constants;
     use com\indigloo\ui\form\Message as FormMessage;
      
     $sticky = new Sticky($gWeb->find(Constants::STICKY_MAP,true));
     
-	$noteId = NULL ;
+	$questionId = NULL ;
     if(!array_key_exists('id',$_GET)) {
-        trigger_error('REQ missing id',E_USER_ERROR);
+        trigger_error('question id is missing from request',E_USER_ERROR);
     } else {
-        $noteId = $_GET['id'];
+        $questionId = $_GET['id'];
     }
     
     
-    $noteDao = new com\indigloo\sc\dao\Note();
-    $noteDBRow = $noteDao->getOnId($noteId);
-    $imagesJson = $noteDBRow['images_json'];
+    $questionDao = new com\indigloo\sc\dao\Question();
+    $questionDBRow = $questionDao->getOnId($questionId);
+    $imagesJson = $questionDBRow['images_json'];
     $images = json_decode($imagesJson);
     
+    $answerDao = new com\indigloo\sc\dao\Answer();
+    $answerDBRows = $answerDao->getOnQuestionId($questionId);
+
+
 ?>  
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 
-       <head><title> 3mik.com - Home page  </title>
+       <head><title> 3mik.com - <?php echo $questionDBRow['title']; ?>  </title>
          
 
         <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
@@ -39,11 +43,16 @@
         
         <script type="text/javascript" src="/3p/jquery/jquery-1.6.4.min.js"></script>
         <script type="text/javascript" src="/3p/jquery/jquery.tinycarousel.min.js"></script>
+        <script type="text/javascript" src="/3p/jquery/jquery.validate.1.9.0.min.js"></script>
         
         <script type="text/javascript">			
             $(document).ready(function(){				
                         
                 $('#slider-code').tinycarousel({ pager: true });
+
+				$("#web-form1").validate({
+					errorLabelContainer: $("#web-form1 div.error") 
+				});
                 
             });
         </script>
@@ -72,35 +81,36 @@
                                 <?php if(sizeof($images) > 0 ) { include('inc/slider.inc') ; } ?>
                             
                                
-                                <div class="widget bbd5 p20">
-                                    <h2> <?php echo $noteDBRow['title'] ; ?> </h2>
-                                    <div class="details">
-                                       <span class="b"> Posted by: <a href="#"> <?php echo $noteDBRow['user_id'] ; ?> </a> </span>
-                                       <span class="date">  on <?php echo $noteDBRow['created_on'] ; ?> </span>
+                                <div class="widget lightbg">
+                                    <h2> <?php echo $questionDBRow['title'] ; ?> </h2>
+                                    <div class="author">
+                                       <span class="b"><a href="#"> <?php echo $questionDBRow['user_name'] ; ?> </a> </span>
+                                       <span class="date">  posted on <?php echo Util::formatDBTime($questionDBRow['created_on']) ; ?> </span>
                                     </div>
                                         
                                      <div class="regular">
-                                        <?php echo $noteDBRow['description'] ; ?>
+                                        <?php echo $questionDBRow['description'] ; ?>
                                      </div>
-                                     <div class="mt20">
-                                        <div style="color:#AAA;"> <?php echo $noteDBRow['tags']; ?> </div>
-                                        <div style="color:#AAA;"> Time Line &dash;&nbsp;<?php echo $noteDBRow['timeline']; ?> </div>
-                                        <span style="color:red"> + Interested in Deals</span>
-                                        
-                                    </div>
+                                    
+                                    <div class="mt20 tags"> Tags&nbsp;<?php echo $questionDBRow['tags']; ?> </div>
+                                    
                                 </div>
-                               
+						
+                                <div class="mt20 thick-dashed-border">
+									<h3> Answers </h3>
+								</div>
+								<div class="ml40">
+									<?php
+										foreach($answerDBRows as $answerDBRow) {
+											echo \com\indigloo\sc\html\Answer::getSummary($answerDBRow) ;
+										}
+										
+									?>
+								</div>
+
                                 <br/>
-                               
-                               
-                                  <div class="action-links"> 
-                                    <span class="grey-button"> <a href="#"> Forward</a> </span>
-                                    &nbsp;
-                                    <span class="grey-button"> <a href="#"> Bookmark</a> </span>
-                                     &nbsp;
-                                    <span class="grey-button"> <a href="#"> Tweet</a> </span>
-                                 </div>
-                                  
+
+                                <?php FormMessage::render(); ?>
                                 <div id="form-wrapper">
                                     <form id="web-form1"  name="web-form1" action="/qa/form/answer.php" enctype="multipart/form-data"  method="POST">
     
@@ -112,9 +122,8 @@
                                                 
                                              </tr>
                                              <tr>
-                                                
                                                 <td>
-                                                    <textarea  name="answer" class="h130" cols="50" rows="4" ><?php echo $sticky->get('answer'); ?></textarea>
+                                                    <textarea  name="answer" class="required h130" title="Answer is required" cols="50" rows="4" ><?php echo $sticky->get('answer'); ?></textarea>
                                                 </td>
                                              </tr>
                                         </table>
@@ -125,7 +134,9 @@
                                             </a>
                                             
                                         </div>
-                                      
+
+                                       <input type="hidden" name="question_id" value="<?php echo $questionDBRow['id']; ?>" />
+									   <input type="hidden" name="q" value="<?php echo $_SERVER['REQUEST_URI']; ?>" />
                                         
                                     </form>
                                 </div> <!-- form wrapper -->
@@ -133,14 +144,14 @@
                             </div> <!-- content -->
 
 
-                        </div> <!-- u-2-3 -->
+                        </div> 
                         
                          <div class="yui3-u-1-3">
                             <!-- sidebar -->
-							<?php include($_SERVER['APP_WEB_DIR'] . '/inc/sidebar.inc'); ?>
-                        </div> <!-- u-1-3 -->
+							
+                        </div>
                         
-                    </div> <!-- GRID -->
+                    </div> 
 
 
                 </div> <!-- bd -->

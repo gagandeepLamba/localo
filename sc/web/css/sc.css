@@ -155,7 +155,10 @@
 	.w200 {width:200px; }
 	.f13 {font-size :13px;}
 	.mt20 {margin-top :20px; }
+	
 	.ml20 {margin-left :20px; }
+	.ml40 {margin-left :40px; }
+	
 	.b {font-weight : bold ;}
 	.gray {color : gray; }
 	.pt10 {padding-top:10px;}
@@ -163,7 +166,9 @@
 	.bbd5 {
 		border-bottom : 1px solid #D5D5D5 ;
 	}
-	
+	.thick-dashed-border {
+		border-bottom : 2px dashed black ;
+	}
 	
 	/* - Common classes */
 	
@@ -453,36 +458,12 @@
 	/* ----- new styles ------ */
 	
 	
-	.details .ditem {
-		padding:0 7px 0 16px;
-		background:url('images/details_sprite.png') no-repeat 0 0;
-		line-height: 18px;
+	.author{
+		margin-left:30px;
+		padding: 7px 0px 7px 0px ;
+		font-size : 12px;
 	}
-	.details .d-name {background-position:0 0;}
-	.details .d-email {background-position:0 -14px;}
-	.details .d-phone {background-position:0 -28px;}
-	.details .d-address {background-position:0 -42px;}
-	.details .d-edu {background-position:0 -56px;}
-	.details .d-company {background-position:0 -70px;}
-	
-	.skill {
-		color:#727272;
-		margin: 20px 14px;
-		padding: 10px 0;
-		border-bottom:1px solid #A1A1A1;
-		text-align:justify;
-		
-	}
-	
-	.description {
-		color:#727272;
-		margin: 20px 14px;
-		padding: 10px 0;
-		text-align:justify;
-		
-	}
-	
-	
+
 	/* 100 percent big orange button */
 	div .orange-button {
 		margin-bottom:10px;
@@ -493,7 +474,7 @@
 		padding:7px 20px;
 		border-radius:5px;
 		text-decoration:none;
-		 text-align:center;
+		text-align:center;
 	
 	}
 	
@@ -943,7 +924,7 @@
 		
 	}
 	
-	.widget .tags {
+	.tags {
 		font-size: 13px;
 		font-family : arial,sans-serif,serif;
 		padding:10px 0px 20px 10px;
@@ -1114,3 +1095,8 @@
 			background-color:#FFF1A8;
 		}
 		
+		.lightbg {
+			background-color : #f0fff0;
+			padding :20px;
+			border-radius:10px;
+		}

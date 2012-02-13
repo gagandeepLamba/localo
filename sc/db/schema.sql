@@ -1,28 +1,36 @@
 
 
-drop table if exists sc_note;
-create table sc_note(
+drop table if exists sc_question;
+create table sc_question(
 	id int(11) NOT NULL auto_increment,
 	title varchar(128) not null,
-	n_type varchar(4),
-	p_level varchar(4),
-	user_id varchar(16),
-	summary varchar(256) ,
+	seo_title varchar(192),
+	user_email varchar(64) not null,
+	user_name varchar(64) not null,
     description TEXT ,
     tags varchar(64),
     links_json TEXT ,
     images_json TEXT,
     location varchar(32),
-    category varchar(32),
-	brand varchar(32),
-	send_deal int default 0,
-    seo_title varchar(192) not null,
-	timeline varchar(32),
+    category_code varchar(16),
     created_on timestamp default '0000-00-00 00:00:00',
 	updated_on timestamp default '0000-00-00 00:00:00' ,
 	PRIMARY KEY (id)) ENGINE = MYISAM;
     
+
+drop table if exists sc_answer;
+create table sc_answer(
+	id int(11) NOT NULL auto_increment,
+	question_id int not null ,
+	user_email varchar(64) not null,
+	user_name varchar(64) not null,
+    answer TEXT ,
+    created_on timestamp default '0000-00-00 00:00:00',
+	updated_on timestamp default '0000-00-00 00:00:00' ,
+	PRIMARY KEY (id)) ENGINE = MYISAM;
     
+   
+ 
 drop table if exists sc_media;
 create table sc_media(
 	id int(11) NOT NULL auto_increment,
@@ -71,7 +79,12 @@ create table sc_list(
 	ui_order int not null ,
 	PRIMARY KEY (id)) ENGINE = MYISAM;
     
-	
+
+--	
+-- drop old tables
+--
+drop table sc_note;
+
 	
 insert into sc_list(name,ui_order,code,display) values('CATEGORY',1, 'BABY', 'Baby / Kids');
 insert into sc_list(name,ui_order,code,display) values('CATEGORY',2, 'BEAUTY', 'Beauty');

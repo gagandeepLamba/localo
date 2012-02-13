@@ -33,6 +33,12 @@ webgloo.sc.question = {
         for(i = 0 ;i < images.length ; i++) {
             webgloo.sc.question.addImage(images[i]);
         }
+
+		var strLinksJson = frm.links_json.value ;
+        var links = JSON.parse(strLinksJson);
+        for(i = 0 ;i < links.length ; i++) {
+            webgloo.sc.question.addLink(links[i]);
+        }
     },
     attachEvents : function() {
   

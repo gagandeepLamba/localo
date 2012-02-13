@@ -12,6 +12,12 @@
      
     $sticky = new Sticky($gWeb->find(Constants::STICKY_MAP,true));
     
+    $strImagesJson = $sticky->get('images_json') ;
+    $strLinksJson = $sticky->get('links_json') ;
+    
+    $strImagesJson = empty($strImagesJson) ? '[]' : $strImagesJson ;
+    $strLinksJson = empty($strLinksJson) ? '[]' : $strLinksJson ;
+
     
 ?>  
 
@@ -49,6 +55,7 @@
               });
                 
               webgloo.sc.question.attachEvents();
+			  webgloo.sc.question.init();
 
 			  $("#ac3").autocomplete({
 					 data: [
@@ -57,7 +64,8 @@
 							['delhi', 3],
 							['kolkata',4],
 							['hyderabad',5],
-							['mumbai', 6]
+							['mumbai', 6],
+							['calcutta', 7]
 						]
 			  });
 
@@ -149,7 +157,7 @@
                                                  <tr>
                                                     <td class="field">Question<span class="red-label">*</span></td>
                                                     <td>
-                                                        <input type="text" name="title" maxlength="128" class="required" title="&gt; Queston is required"! value="<?php echo $sticky->get('question'); ?>"/>
+                                                        <input type="text" name="title" maxlength="128" class="required" title="&gt; Queston is required"! value="<?php echo $sticky->get('title'); ?>"/>
                                                     </td>
                                                  </tr>
 												  <tr>
@@ -177,7 +185,7 @@
                                           
                                                 <tr>
                                                     <td class="field">Tags<span class="red-label">*</span> &nbsp;</td>
-                                                    <td> <input  type="text" name="tags" maxlength="64" class="required"  title="&gt; Tags are required!" value="" /></td>
+                                                    <td> <input  type="text" name="tags" maxlength="64" class="required"  title="&gt; Tags are required!" value="<?php echo $sticky->get('tags'); ?>" /></td>
                                                 </tr>
                                                  
                                                 <tr>
@@ -240,8 +248,8 @@
                                             </div>
                                             
                                             <div style="clear: both;"></div>
-                                            <input type="hidden" name="links_json" value="" />
-                                            <input type="hidden" name="images_json" value="" />
+                                            <input type="hidden" name="links_json" value='<?php echo $strLinksJson ; ?>' />
+                                            <input type="hidden" name="images_json" value='<?php echo $strImagesJson ; ?>' />
                                             <input type="hidden" name="entity_type" value="QUE" />
 											
                                         </form>
