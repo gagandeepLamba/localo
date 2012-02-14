@@ -514,13 +514,6 @@
 		color: gray;
 	}
 	
-	.action-links {
-		font-weight: bold;
-		font-size: 14px;
-		color: #28C;
-		padding: 10px 0;
-		margin-left:30px;
-	}
 	
 	/* ------ top filter ------ */
 	
@@ -1093,6 +1086,13 @@
 		.highlight {
 			padding:10px;
 			background-color:#FFF1A8;
+		}
+		
+		.block {
+			padding:20px;
+			/* background-color : #f0fff0; */
+			border:1px solid #A3A3A3;
+			font-size :15px;
 		}
 		
 		.lightbg {

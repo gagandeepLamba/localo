@@ -14,6 +14,11 @@ namespace com\indigloo\sc\dao {
 			return $row ;
 		}
 		
+		function getLatestOnUserEmail($email) {
+			$rows = mysql\Question::getLatestOnUserEmail($email);
+			return $rows ;
+		}
+		
 		function getAll($stoken,$ft) {
 			$ft = empty($ft) ? 't' : $ft ;
 			$filter = '' ;

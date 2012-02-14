@@ -14,6 +14,11 @@ namespace com\indigloo\sc\dao {
 			return $rows ;
 		}
 		
+		function getLatestOnUserEmail($email) {
+			$rows = mysql\Answer::getLatestOnUserEmail($email);
+			return $rows ;
+		}
+		
         function create($questionId,
 						$answer,
 						$userEmail,

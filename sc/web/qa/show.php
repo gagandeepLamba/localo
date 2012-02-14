@@ -97,7 +97,7 @@
                                 </div>
 						
                                 <div class="mt20 thick-dashed-border">
-									<h3> Answers </h3>
+									<h3> &nbsp; </h3>
 								</div>
 								<div class="ml40">
 									<?php

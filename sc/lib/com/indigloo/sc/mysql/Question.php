@@ -18,6 +18,18 @@ namespace com\indigloo\sc\mysql {
             return $row;
 		}
 		
+		static function getLatestOnUserEmail($email) {
+			$mysqli = MySQL\Connection::getInstance()->getHandle();
+			$email = $mysqli->real_escape_string($email);
+			
+			$sql = " select * from sc_question where user_email = '".$email. "' " ;
+			$sql .= " order by id desc LIMIT 5 " ;
+			
+			$rows = MySQL\Helper::fetchRows($mysqli, $sql);
+            return $rows;
+		
+		}
+		
 		static function getAll($filter) {
 			
 			$mysqli = MySQL\Connection::getInstance()->getHandle();

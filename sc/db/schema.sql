@@ -22,6 +22,7 @@ drop table if exists sc_answer;
 create table sc_answer(
 	id int(11) NOT NULL auto_increment,
 	question_id int not null ,
+	title varchar(128) ,
 	user_email varchar(64) not null,
 	user_name varchar(64) not null,
     answer TEXT ,
@@ -99,6 +100,30 @@ insert into sc_list(name,ui_order,code,display) values('CATEGORY',8, 'HOME', 'Ho
 insert into sc_list(name,ui_order,code,display) values('CATEGORY',9, 'GADGET', 'Camera/Mobiles/Gadgets');
 insert into sc_list(name,ui_order,code,display) values('CATEGORY',10, 'COMPUTER', 'Computer/Laptops');
 insert into sc_list(name,ui_order,code,display) values('CATEGORY',11, 'OTHER', 'Others');
+
+
+--
+-- patch: 14 feb 2012
+--
+
+alter table sc_answer add column title varchar(128);
+
+
+
+DROP TRIGGER IF EXISTS trg_answer_title;
+
+delimiter //
+CREATE TRIGGER trg_answer_title BEFORE INSERT ON sc_answer
+    FOR EACH ROW
+    BEGIN
+	DECLARE p_title  varchar(128) ;
+	SELECT title into p_title from sc_question where id = NEW.question_id ;
+	set NEW.title = p_title ;
+	
+    END;//
+delimiter ;
+
+update sc_answer answer set answer.title = (select title from sc_question where id = answer.question_id) ;
 
 
 

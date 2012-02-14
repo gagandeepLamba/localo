@@ -10,6 +10,8 @@
 				 <span class="register"><a href="/">Home</a></span>
 				 &nbsp;|&nbsp
 				 <span class="register"><a href="/user/logout.php">Logout</a></span>
+				  &nbsp;|&nbsp
+				 <span class="register"><a href="/user/dashboard.php">My Account</a></span>
 				 &nbsp;(<?php echo $gSessionUser->firstName; ?>)
 				</div>
 				
