@@ -162,6 +162,7 @@
 	.b {font-weight : bold ;}
 	.gray {color : gray; }
 	.pt10 {padding-top:10px;}
+	.p10 {padding:10px;}
 	.p20 {padding:20px;}
 	.bbd5 {
 		border-bottom : 1px solid #D5D5D5 ;
@@ -995,108 +996,110 @@
 	
 	/* + */
 	
-		.hide-me {
-			display:none ;
-		}
-		div#link-data {
-		
-		}
-		
-		div#media-data {
-		
-		}
-		
-		div#link-container {
-			   width:600px;
-			   /* margin-top :20px;
-			   margin-bottom :20px; */
-			   padding:20px;
-			   /* border: 1px dotted blue; */
-			   
-		}
-		
-		div#link-container input{
-			   word-spacing: 1px;
-			   line-height: 1.8em;
-			   color: #333;
-			   border: 1px solid #bbb;
-			   width: 400px;
-			   height: 24px;
-			   padding-top:4px;
-		}
-		
-		div#link-container button {
-			   background-color:black;
-			   color:#FFFFFF !important;
-			   text-align :center ;
-			   border-radius:5px;
-			   text-decoration:none
-			   font-weight: bold;
-			   cursor: pointer;
-		}
-		
-		div#image-container{
-			   margin-bottom:20px;
-			   margin-left:40px;
-			   padding:20px;
-			   border:1px dashed #DDD ;
-		}
+	.hide-me {
+		display:none ;
+	}
+	div#link-data {
 	
-		#form-wrapper #divstatus{
-			   padding:5px;
-		}
-		
-		#link-data {
-			   margin-top:20px;
-		}
-		
-		#media-data {
-			   width: 580px;
-		}
-		
-		div .previewImage{
-			   position :relative ;
-			   float : left;
-			   padding:11px;
-			   height:180px;
-			   width:180px;
-			   border:2px solid #DDD ;
-			   margin :5px;
-		}
-		
-		div .previewLink{
-			   padding-top:5px;
-			   font-size:11px;
-		}
-		
-		select {
-			   max-width: 220px;
-			   width: 220px;
-			   margin: 0 0 5px;
-			   border: 1px solid #BDC7D8 ;
-			   padding:2px;
-			   
-		}
-		
-		#sidebar {
-			padding :20px;
-			min-height:600px;
-		}
+	}
 	
-		.highlight {
-			padding:10px;
-			background-color:#FFF1A8;
-		}
-		
-		.block {
-			padding:20px;
-			/* background-color : #f0fff0; */
-			border:1px solid #A3A3A3;
-			font-size :15px;
-		}
-		
-		.lightbg {
-			background-color : #f0fff0;
-			padding :20px;
-			border-radius:10px;
-		}
+	div#media-data {
+	
+	}
+	
+	div#link-container {
+		   width:600px;
+		   /* margin-top :20px;
+		   margin-bottom :20px; */
+		   padding:20px;
+		   /* border: 1px dotted blue; */
+		   
+	}
+	
+	div#link-container input{
+		   word-spacing: 1px;
+		   line-height: 1.8em;
+		   color: #333;
+		   border: 1px solid #bbb;
+		   width: 400px;
+		   height: 24px;
+		   padding-top:4px;
+	}
+	
+	div#link-container button {
+		   background-color:black;
+		   color:#FFFFFF !important;
+		   text-align :center ;
+		   border-radius:5px;
+		   text-decoration:none
+		   font-weight: bold;
+		   cursor: pointer;
+	}
+	
+	div#image-container{
+		   margin-bottom:20px;
+		   margin-left:40px;
+		   padding:20px;
+		   border:1px dashed #DDD ;
+	}
+
+	#form-wrapper #divstatus{
+		   padding:5px;
+	}
+	
+	#link-data {
+		   margin-top:20px;
+	}
+	
+	#media-data {
+		   width: 580px;
+	}
+	
+	div .previewImage{
+		   position :relative ;
+		   float : left;
+		   padding:11px;
+		   height:180px;
+		   width:180px;
+		   border:2px solid #DDD ;
+		   margin :5px;
+	}
+	
+	div .previewLink{
+		   padding-top:5px;
+		   font-size:11px;
+	}
+	
+	select {
+		   max-width: 220px;
+		   width: 220px;
+		   margin: 0 0 5px;
+		   border: 1px solid #BDC7D8 ;
+		   padding:2px;
+		   
+	}
+	
+	#sidebar {
+		padding :20px;
+		min-height:600px;
+	}
+
+	.highlight {
+		padding:10px;
+		background-color:#FFF1A8;
+	}
+	
+	.block {
+		padding:10px;
+		/* background-color : #f0fff0; */
+		border:1px solid #a3a3a3;
+		font-size :15px;
+		min-height :160px;
+		margin-bottom:10px;
+	}
+	
+	.lightbg {
+		background-color : #f0fff0;
+		padding :20px;
+		border-radius:10px;
+	}

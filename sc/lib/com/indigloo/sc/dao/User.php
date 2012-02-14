@@ -5,8 +5,7 @@ namespace com\indigloo\sc\dao {
     
     use \com\indigloo\Util as Util ;
     use \com\indigloo\sc\mysql as mysql;
-    use \com\indigloo\seo\StringUtil as SeoStringUtil ;
-    
+     
     class User {
 
 		function getOnId($userId) {
@@ -14,6 +13,12 @@ namespace com\indigloo\sc\dao {
 			return $rows ;
 		}
 		
+        function update($userId,$firstName,$lastName) {
+            $code = mysql\User::update($userId,$firstName,$lastName);
+            return $code ;
+        }
+        
+        
     }
 
 }

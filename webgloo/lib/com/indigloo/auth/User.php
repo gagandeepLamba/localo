@@ -195,6 +195,50 @@ namespace com\indigloo\auth {
             return array('code' => $dbCode);
         }
         
+        static function changePassword($tableName,$email,$password) {
+            
+             if(empty($tableName)) {
+                trigger_error("User Table name is not supplied",E_USER_ERROR);
+                exit(1);
+            }
+            
+            Util::isEmpty('Email',$email);
+            Util::isEmpty('Password',$password);
+            
+            
+            $dbCode = MySQL\Connection::ACK_OK;
+            $mysqli = MySQL\Connection::getInstance()->getHandle();
+            
+            // get random salt
+            $salt = substr(md5(uniqid(rand(), true)), 0, 8);
+            $password = trim($password);
+            $message = $password.$salt ;
+
+            //create SHA-1 digest from email and password
+            // we store this digest in table
+            $digest = sha1($message);
+            
+            $sql = " update {table} set updated_on=now(), salt=?, password=? where email = ? " ;
+            $sql = str_replace("{table}", $tableName, $sql);
+            
+       
+            $stmt = $mysqli->prepare($sql);
+        
+            if($stmt) {
+                $stmt->bind_param("ssi",
+                        $salt,
+                        $digest,
+                        $email);
+    
+                $stmt->execute();
+                $stmt->close();
+    
+            } else {
+                $dbCode = Gloo_MySQL_Error::handle(self::MODULE_NAME, $mysqli);
+            }
+
+            return array('code' => $dbCode);
+        }
         
     }
 
