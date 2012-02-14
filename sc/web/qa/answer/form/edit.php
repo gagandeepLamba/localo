@@ -1,5 +1,5 @@
 <?php
-    //qa/form/ask.php
+    //qa/answer/form/edit.php
     
     include 'sc-app.inc';
     include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
@@ -16,19 +16,14 @@
 
     if (isset($_POST['save']) && ($_POST['save'] == 'Save')) {
         
-		//do not munge form data
         $fhandler = new Form\Handler('web-form-1', $_POST);
-        $fhandler->addRule('title', 'Title', array('required' => 1, 'maxlength' => 128));
-        $fhandler->addRule('tags', 'Tags', array('required' => 1));
+        $fhandler->addRule('answer', 'Answer', array('required' => 1));
         
-		$fhandler->addRule('links_json', 'links_json', array('noprocess' => 1));
-		$fhandler->addRule('images_json', 'images_json', array('noprocess' => 1));
-		
         $fvalues = $fhandler->getValues();
         $ferrors = $fhandler->getErrors();
 		
         if ($fhandler->hasErrors()) {
-            $locationOnError = Url::createUrl('/qa/edit.php', array('id' => $fvalues['question_id'])) ;
+            $locationOnError = Url::createUrl('/qa/answer/edit.php', array('id' => $fvalues['answer_id'])) ;
             $gWeb->store(Constants::STICKY_MAP, $fvalues);
             $gWeb->store(Constants::FORM_ERRORS,$fhandler->getErrors());
             
@@ -37,17 +32,12 @@
 			
         } else {
             
-            $questionDao = new com\indigloo\sc\dao\Question();
+            $answerDao = new com\indigloo\sc\dao\Answer();
 							   
-            $code = $questionDao->update(
-								$fvalues['question_id'],
-								$fvalues['title'],
-                                $fvalues['description'],
-                                $fvalues['category'],
-                                $fvalues['location'],
-                                $fvalues['tags'],
-                                $_POST['links_json'],
-                                $_POST['images_json']);
+            $code = $answerDao->update(
+								$fvalues['answer_id'],
+								$fvalues['answer']
+								);
             
             if ($code == com\indigloo\mysql\Connection::ACK_OK ) {
                 $locationOnSuccess = Url::createUrl('/qa/show.php', array('id' => $fvalues['question_id'])) ;
@@ -57,7 +47,7 @@
                 $message = sprintf("DB Error: (code is %d) please try again!",$code);
                 $gWeb->store(Constants::STICKY_MAP, $fvalues);
                 $gWeb->store(Constants::FORM_ERRORS,array($message));
-                $locationOnError = Url::createUrl('/qa/edit.php', array('id' => $fvalues['question_id'])) ;
+                $locationOnError = Url::createUrl('/qa/answer/edit.php', array('id' => $fvalues['answer_id'])) ;
                 header("location: " . $locationOnError);
                 exit(1);
             }

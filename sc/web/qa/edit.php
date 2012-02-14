@@ -14,7 +14,7 @@
     
     $questionId = NULL ;
 	
-    if(!array_key_exists('id',$_GET)) {
+    if(!array_key_exists('id',$_GET) || empty($_GET['id'])) {
         trigger_error('question id is missing from request',E_USER_ERROR);
     } else {
         $questionId = $_GET['id'];
@@ -155,11 +155,12 @@
                         <div class="yui3-u-2-3">
                             <div id="content">
 
-                                    <h2> Ask Anything </h2>
+                                    <h1> Edit Question </h1>
+									<hr>
 
 
                                     <p class="help-text">
-                                       Please provide details below and post your question.
+                                       Please update your question and click Save.
 
                                     </p>
                                     

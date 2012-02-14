@@ -18,6 +18,15 @@ namespace com\indigloo\sc\mysql {
             return $rows;
 		}
 		
+		static function getOnId($answerId) {
+			$mysqli = MySQL\Connection::getInstance()->getHandle();
+			$answerId = $mysqli->real_escape_string($answerId);
+			
+            $sql = " select * from sc_answer where id = ".$answerId ;
+            $row = MySQL\Helper::fetchRow($mysqli, $sql);
+            return $row;
+		}
+		
 		static function getLatestOnUserEmail($email) {
 			$mysqli = MySQL\Connection::getInstance()->getHandle();
 			$email = $mysqli->real_escape_string($email);
@@ -62,6 +71,28 @@ namespace com\indigloo\sc\mysql {
 			
 			return $code ;
         }
+		
+		static function update($answerId,$answer) {
+			
+			$code = MySQL\Connection::ACK_OK ;
+			$mysqli = MySQL\Connection::getInstance()->getHandle();
+			$sql = "update sc_answer set answer = ? where id = ? " ;
+			
+			
+			$stmt = $mysqli->prepare($sql);
+            
+            if ($stmt) {
+                $stmt->bind_param("si",$answer,$answerId) ;
+                $stmt->execute();
+                $stmt->close();
+				
+            } else {
+                $code = MySQL\Error::handle(self::MODULE_NAME, $mysqli);
+            }
+			
+			return $code ;
+			
+		}
 	}
 }
 ?>

@@ -141,6 +141,18 @@ namespace com\indigloo\auth {
             
         }
          
+        static function tryUserInSession() {
+            
+            $user = NULL ;
+            if (isset($_SESSION) && isset($_SESSION['LOGON_TOKEN'])) {
+                $userDBRow = $_SESSION['LOGON_USER_DATA'];
+                $user =  UserVO::create($userDBRow);
+            }
+            
+            return $user ;
+            
+        }
+        
         static function create($tableName,$firstName,$lastName,$userName,$email,$password) {
             
             if(empty($tableName)) {

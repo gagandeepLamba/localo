@@ -109,7 +109,6 @@ insert into sc_list(name,ui_order,code,display) values('CATEGORY',11, 'OTHER', '
 alter table sc_answer add column title varchar(128);
 
 
-
 DROP TRIGGER IF EXISTS trg_answer_title;
 
 delimiter //
@@ -122,6 +121,10 @@ CREATE TRIGGER trg_answer_title BEFORE INSERT ON sc_answer
 	
     END;//
 delimiter ;
+
+-- 
+-- 14 Feb 2012 : data patch
+-- 
 
 update sc_answer answer set answer.title = (select title from sc_question where id = answer.question_id) ;
 

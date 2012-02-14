@@ -14,6 +14,16 @@ namespace com\indigloo\sc\dao {
 			return $rows ;
 		}
 		
+		function getOnId($answerId) {
+			$rows = mysql\Answer::getOnId($answerId);
+			return $rows ;
+		}
+		
+		function update($answerId,$answer) {
+			$code = mysql\Answer::update($answerId,$answer) ;
+			return $code ;
+		}
+		
 		function getLatestOnUserEmail($email) {
 			$rows = mysql\Answer::getLatestOnUserEmail($email);
 			return $rows ;

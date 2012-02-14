@@ -21,6 +21,23 @@ namespace com\indigloo\sc\html {
 			
 		}
 		
+		static function getEditBar($sessionUser,$questionDBRow) {
+			
+			$html = NULL ;
+			
+			if(is_null($sessionUser) ||  ($sessionUser->email != $questionDBRow['user_email'])) {
+				return '' ;
+			}
+			
+			$template = $_SERVER['APP_WEB_DIR'].'/fragments/question/edit-bar.tmpl' ;
+			$view = new \stdClass;
+			$view->id = $questionDBRow['id'];
+			
+			$html = Template::render($template,$view);
+			return $html ;
+						
+		}
+		
         static function getSummary($questionDBRow) {
            
 		    $html = NULL ;
@@ -43,7 +60,7 @@ namespace com\indigloo\sc\html {
 			if(sizeof($images) > 0) {
 				$view->imageClass = 'alignleft resize' ;
 				
-				$template = $_SERVER['APP_WEB_DIR'].'/fragments/widget/image.tmpl' ;
+				$template = $_SERVER['APP_WEB_DIR'].'/fragments/question/image.tmpl' ;
 				
 				/* image stuff */
 				$image = $images[0] ;
@@ -59,7 +76,7 @@ namespace com\indigloo\sc\html {
 				
 			} else {
 				
-				$template = $_SERVER['APP_WEB_DIR'].'/fragments/widget/text.tmpl' ;
+				$template = $_SERVER['APP_WEB_DIR'].'/fragments/question/text.tmpl' ;
 				$html = Template::render($template,$view);
 			}
 			

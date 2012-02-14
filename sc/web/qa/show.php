@@ -12,7 +12,7 @@
     $sticky = new Sticky($gWeb->find(Constants::STICKY_MAP,true));
     
 	$questionId = NULL ;
-    if(!array_key_exists('id',$_GET)) {
+    if(!array_key_exists('id',$_GET) || empty($_GET['id'])) {
         trigger_error('question id is missing from request',E_USER_ERROR);
     } else {
         $questionId = $_GET['id'];
@@ -27,6 +27,13 @@
     $answerDao = new com\indigloo\sc\dao\Answer();
     $answerDBRows = $answerDao->getOnQuestionId($questionId);
 
+	if(is_null($gSessionUser)) {
+		$user = \com\indigloo\auth\User::tryUserInSession();
+		if(!is_null($user)) {
+			$gSessionUser = $user ;
+		}
+	}
+	
 
 ?>  
 
@@ -95,14 +102,16 @@
                                     <div class="mt20 tags"> Tags&nbsp;<?php echo $questionDBRow['tags']; ?> </div>
                                     
                                 </div>
-						
+								
+								<?php echo \com\indigloo\sc\html\Question::getEditBar($gSessionUser,$questionDBRow) ; ?>
+								
                                 <div class="mt20 thick-dashed-border">
 									<h3> &nbsp; </h3>
 								</div>
 								<div class="ml40">
 									<?php
 										foreach($answerDBRows as $answerDBRow) {
-											echo \com\indigloo\sc\html\Answer::getSummary($answerDBRow) ;
+											echo \com\indigloo\sc\html\Answer::getSummary($gSessionUser,$answerDBRow) ;
 										}
 										
 									?>
