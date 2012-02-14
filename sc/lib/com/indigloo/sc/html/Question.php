@@ -7,6 +7,20 @@ namespace com\indigloo\sc\html {
     
     class Question {
         
+		static function getLinkView($questionDBRow) {
+			$html = NULL ;
+			
+			$view = new \stdClass;
+			$view->id = $questionDBRow['id'] ;
+			$view->title = $questionDBRow['title'] ;
+			$view->createdOn = Util::formatDBTime($questionDBRow['created_on']);
+			
+			$template = $_SERVER['APP_WEB_DIR'].'/fragments/question/link-view.tmpl' ;
+			$html = Template::render($template,$view);
+			return $html ;
+			
+		}
+		
         static function getSummary($questionDBRow) {
            
 		    $html = NULL ;

@@ -19,6 +19,11 @@ namespace com\indigloo\sc\dao {
 			return $rows ;
 		}
 		
+		function getAllOnUserEmail($email) {
+			$rows = mysql\Question::getAllOnUserEmail($email);
+			return $rows ;
+		}
+		
 		function getAll($stoken,$ft) {
 			$ft = empty($ft) ? 't' : $ft ;
 			$filter = '' ;

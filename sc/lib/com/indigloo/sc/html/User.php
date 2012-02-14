@@ -48,7 +48,7 @@ namespace com\indigloo\sc\html {
 			$buffer .= "</ul> " ;
 			
 			$view->links = $buffer ;
-			$view->moreLink = '/qa/user/all.php?user_id='.$userId ;
+			$view->moreLink = '/user/data/question.php';
 			
 			$html = Template::render($template,$view);
 			
@@ -78,7 +78,7 @@ namespace com\indigloo\sc\html {
 			$buffer .= "</ul> " ;
 			
 			$view->links = $buffer ;
-			$view->moreLink = '/qa/user/all.php?user_id='.$userId ;
+			$view->moreLink = '#' ;
 			
 			$html = Template::render($template,$view);
 			
