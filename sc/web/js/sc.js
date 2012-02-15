@@ -15,6 +15,75 @@ String.prototype.supplant = function (o) {
 webgloo = window.webgloo || {};
 webgloo.sc = webgloo.sc || {};
 
+/* +webgloo sc answer object */
+
+webgloo.sc.answer = {
+	debug : false,
+	 linkPreviewDIV : '<div class="previewLink"> {link} &nbsp; '
+		+ ' <a class="remove-link" href="{link}"> Remove</a> </div> ' ,
+	 
+	init : function() {
+		frm = document.forms["web-form1"];
+		
+		var strLinksJson = frm.links_json.value ;
+        var links = JSON.parse(strLinksJson);
+        for(i = 0 ;i < links.length ; i++) {
+            webgloo.sc.answer.addLink(links[i]);
+        }
+	},
+	attachEvents : function() {
+		$("a#open-link").live("click", function(event){
+            event.preventDefault();
+            $("#link-container").slideDown("slow");
+        }) ;
+		
+		$("#add-link").live("click", function(event){
+            event.preventDefault();
+            var linkData = jQuery.trim($("#link-box").val());
+			
+			if( linkData == '' ) {
+				return ;
+			} else {
+				webgloo.sc.answer.addLink(linkData);
+			}
+			
+        }) ;
+        
+        $("a.remove-link").live("click", function(event){
+            event.preventDefault(); 
+            webgloo.sc.answer.removeLink($(this));
+        }) ;
+		
+		$('#web-form1').submit(function() {
+            webgloo.sc.answer.populateHidden();
+            return true;
+        });
+		 
+	},
+	
+    populateHidden : function () {
+    
+        var links = new Array() ;
+        
+        $("div#link-data").find('a').each(function(index) {
+            links.push($(this).attr("href"));
+        });
+        
+        frm = document.forms["web-form1"];
+        
+        var strLinks = JSON.stringify(links);
+        frm.links_json.value = strLinks ;
+        
+    },
+    addLink : function(linkData) {
+        var buffer = webgloo.sc.answer.linkPreviewDIV.supplant({"link" : linkData});
+        $("#link-data").append(buffer);
+    },
+    removeLink : function(linkObj) {
+        $(linkObj).parent().remove();
+    }
+	
+}
 
 /* + webgloo sc question object */
 
@@ -25,6 +94,8 @@ webgloo.sc.question = {
         webgloo.sc.question.images = {} ;
         
         //read from document
+		//@todo - right now we assume that both form elements
+		// are on page
         frm = document.forms["web-form1"];
         var strImagesJson = frm.images_json.value ;
         
@@ -59,8 +130,14 @@ webgloo.sc.question = {
         
         $("#add-link").live("click", function(event){
             event.preventDefault();
-            var linkData = $("#link-box").val();
-            webgloo.sc.question.addLink(linkData);
+            var linkData = jQuery.trim($("#link-box").val());
+			
+			if( linkData == '' ) {
+				return ;
+			} else {
+				webgloo.sc.question.addLink(linkData);
+			}
+            
         }) ;
         
         $("a.remove-link").live("click", function(event){

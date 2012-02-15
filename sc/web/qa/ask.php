@@ -214,7 +214,7 @@
                                             <div id="error"> </div>
                                             <p> Use a url shortening service like goo.gl to shorten long urls</p>
                                             Link*&nbsp;<input  id="link-box"  type="text" name="link"  value="" />
-                                            &nbsp; <button  id="add-link">Add</button>
+                                            &nbsp; <button  class="form-button" id="add-link">Add</button>
                                             
                                           </div>
                                           

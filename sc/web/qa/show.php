@@ -51,7 +51,8 @@
         <script type="text/javascript" src="/3p/jquery/jquery-1.6.4.min.js"></script>
         <script type="text/javascript" src="/3p/jquery/jquery.tinycarousel.min.js"></script>
         <script type="text/javascript" src="/3p/jquery/jquery.validate.1.9.0.min.js"></script>
-        
+        <script type="text/javascript" src="/js/sc.js"></script>
+			
         <script type="text/javascript">			
             $(document).ready(function(){				
                         
@@ -60,6 +61,10 @@
 				$("#web-form1").validate({
 					errorLabelContainer: $("#web-form1 div.error") 
 				});
+				
+				webgloo.sc.answer.attachEvents();
+				webgloo.sc.answer.init();
+
                 
             });
         </script>
@@ -108,6 +113,7 @@
                                 <div class="mt20 thick-dashed-border">
 									<h3> &nbsp; </h3>
 								</div>
+								<div class="orange-button" style="width:auto;float:right"> <a href="#form-wrapper">Answer this Question</a> </div>
 								<div class="ml40">
 									<?php
 										foreach($answerDBRows as $answerDBRow) {
@@ -127,15 +133,29 @@
     
                                         <table class="form-table">
                                             <tr>
-                                                <td class="field">Your Answer</td>
+                                                <td class="field">Your Answer&nbsp;|&nbsp;<a id="open-link" href="#form-wrapper">Add Link</a></td>
                                                 
                                              </tr>
+											
                                              <tr>
                                                 <td>
                                                     <textarea  name="answer" class="required h130" title="Answer is required" cols="50" rows="4" ><?php echo $sticky->get('answer'); ?></textarea>
                                                 </td>
                                              </tr>
+											 <tr>
+												<td> <div id="link-data"> </div> </td> 
+											</tr>
+											
                                         </table>
+										
+										<div id="link-container" class="hide-me">
+                                            <div id="error"> </div>
+                                            <p> Use a url shortening service like goo.gl to shorten long urls</p>
+                                            Link*&nbsp;<input  id="link-box"  type="text" name="link"  value="" />
+                                            &nbsp; <button class="form-button" id="add-link">Add</button>
+                                            
+                                        </div>
+										<hr>
                                          <div class="button-container">
                                             <button class="form-button" type="submit" name="save" value="Save" onclick="this.setAttribute('value','Save');" ><span>Save</span></button>
                                              <a href="/">
@@ -146,7 +166,8 @@
 
                                        <input type="hidden" name="question_id" value="<?php echo $questionDBRow['id']; ?>" />
 									   <input type="hidden" name="q" value="<?php echo $_SERVER['REQUEST_URI']; ?>" />
-                                        
+                                       <input type="hidden" name="links_json" value='[]' />
+									   
                                     </form>
                                 </div> <!-- form wrapper -->
                                

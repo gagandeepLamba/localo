@@ -56,6 +56,11 @@
 			iSteps = Math.max(1, Math.ceil(oPages.length / options.display) - iLeftover);
 			iCurrent = Math.min(iSteps, Math.max(1, options.start)) -2;
 			oContent.css(bAxis ? 'width' : 'height', (iPageSize * oPages.length));
+			
+			/* iLeftOver > 0 can cause alignment troubles */
+			console.log("page size => " + iPageSize + " steps => " + iSteps );
+			console.log( " total width => "+ iPageSize * oPages.length + "left over => " + iLeftover);
+			
 			oSelf.move(1);
 			setEvents();
 			return oSelf;

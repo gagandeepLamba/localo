@@ -36,7 +36,7 @@
         $mediaVO->id  = $mediaId;
         $mediaVO->postId = $postId;
         
-        $dimensions = Util::getScaledDimensions($mediaVO->width,$mediaVO->height,320);
+        $dimensions = Util::foldX($mediaVO->width,$mediaVO->height,320);
         $mediaVO->height = $dimensions['height'];
         $mediaVO->width = $dimensions['width'];
         

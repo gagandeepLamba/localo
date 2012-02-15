@@ -46,7 +46,7 @@ namespace com\indigloo\news\html {
 				$view->height = $image->height;
 				
 				//change height/width
-				$dimensions = Util::getScaledDimensions($view->width,$view->height,510,320);
+				$dimensions = Util::foldXY($view->width,$view->height,510,320);
 				$view->height = $dimensions['height'];
 				$view->width = $dimensions['width'];
 				

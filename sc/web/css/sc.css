@@ -419,7 +419,8 @@
 		padding:0 15px;
 		font-family:"Myriad Pro",Arial,Helvetica,Tahoma,sans-serif;
 		color:#FFF;
-		text-shadow:1px 1px 1px #333;
+		/* text-shadow:1px 1px 1px #333; */
+		font-weight : bold ;
 		cursor : hand ;
 	}
 	
@@ -927,6 +928,9 @@
 	}
 	
 	/* + jquery tiny carousel */
+	/*  @see js file : iLeftover > 0 cause trouble  in alignment */
+	/* viewport h:w should be same as overview.li h:w, slider-code.h = viewport.h +45px */
+	/* viewport h:w should be in 3:4 aspect ratio */
 	
 	#slider-code { height:345px; overflow:hidden; }
 	#slider-code .viewport {
@@ -954,7 +958,16 @@
 	}
 	#slider-code .active { color: #fff; background-color:  #555555; }
 	#slider-code a { font-size:14px; font-weight:bold;}
-	/* automatic resiizng for all slider code images */
+	
+	
+	/*
+	 * Here is the trick for resizing slider images. Slider images
+	 * are full size images that we force to fit into a 400x300 window
+	 * without resizing we will only get an inset of large images
+	 * 
+	 */
+	  
+	
 	#slider-code img {
 		width: auto;
 		height: auto;
@@ -995,7 +1008,7 @@
 	}
 	
 	
-	/* + */
+	/* + link and image previews */
 	
 	.hide-me {
 		display:none ;
@@ -1027,14 +1040,16 @@
 		   padding-top:4px;
 	}
 	
+	
 	div#link-container button {
+		   /*
 		   background-color:black;
 		   color:#FFFFFF !important;
 		   text-align :center ;
 		   border-radius:5px;
 		   text-decoration:none
 		   font-weight: bold;
-		   cursor: pointer;
+		   cursor: pointer; */
 	}
 	
 	div#image-container{

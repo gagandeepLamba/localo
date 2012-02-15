@@ -166,40 +166,48 @@ namespace com\indigloo {
             return $kb;
         }
         
-        //@todo - scaling is plain wrong - need to fix!
-        static function getScaledDimensions($width, $height, $frameWidth, $frameHeight=NULL) {
-
-            if (empty($frameHeight)) {
-                //Determine frame height from original aspect ratio
-                $frameHeight = ($height / $width) * ($frameWidth);
+        /*
+         * given a fixed width of container w0, try to fold a width=w, height=h box so that
+         * the original aspect ratio is preserved. There is No restriction on height
+         * 
+         */
+        static function foldX($w,$h,$w0) {
+            if($w > $w0 ) {
+                $w2 = $w0 ;
+                $h2 = floor(($w0/$w) * $h) ;
             }
-    
-            //first try original dimensions for frame
-            $newHeight = $height;
-            $newWidth = $width;
-    
-            //calculate new height/ width using aspect-ratio
-            if ($newHeight > $frameHeight) {
-                $aspectRatio = ($frameHeight / $newHeight);
-                $newHeight = $aspectRatio * $newHeight;
-                $newWidth = $aspectRatio * $newWidth;
-            }
-    
-            if ($newWidth > $frameWidth) {
-                $aspectRatio = ($frameWidth / $newWidth);
-                $newHeight = $aspectRatio * $newHeight;
-                $newWidth = $aspectRatio * $newWidth;
-            }
-    
-            //Round up to nearest integer
-            $newWidth = floor($newWidth);
-            $newHeight = floor($newHeight);
-            $dimensions = array('width' => $newWidth, 'height' => $newHeight);
-            return $dimensions;
+            
+            return array("width" => $w2, "height" => $h2);
             
         }
-    
-
+        
+        /*
+         * given a container with width = w0 and height = h0, try to fit an element
+         * of width=w, height=h so that the original (w/h) aspect is preserved.
+         * this algorithm will terminate in 2 steps
+         * 
+         */
+         
+        static function foldXY($w,$h,$w0,$h0) {
+            
+            if(($h <= $h0) && ($w <= $w0)) {
+                //terminate 
+                return array("width" => $w, "height" => $h);
+            }
+            
+            if($w > $w0 ) {
+                $w2 = $w0 ;
+                $h2 = floor(($w0/$w)*$h) ;
+                return self::foldXY($w2,$h2,$w0,$h0) ;
+            }
+            
+            if($h > $h0 ) {
+                $h2 = $h0 ;
+                $w2 = floor(($h0/$h)*$w);
+                return self::foldXY($w2,$h2,$w0,$h0) ;
+            }
+        }
+        
     }
 
 }
