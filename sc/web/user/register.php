@@ -3,6 +3,8 @@
     //sc/user/register.php
     include ('sc-app.inc');
     include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
+	//@see http://www.google.com/recaptcha
+    include($_SERVER['WEBGLOO_LIB_ROOT'] . '/ext/recaptchalib.php');
     
     use com\indigloo\Util;
     use com\indigloo\ui\form\Sticky;
@@ -120,7 +122,15 @@
 
                                                 
                                             </table>
-
+											
+											<div class="ml20">
+												<?php
+													$publickey = "6Lc3p80SAAAAAJvGjs1RyMl8zHBRtg1sf1nRwnJn"; 
+													echo recaptcha_get_html($publickey);
+											   ?>
+												   
+											</div>
+											
                                             <div class="button-container">
                                                 <button class="form-button" type="submit" name="register" value="Register" onclick="this.setAttribute('value','Register');" ><span>Register</span></button>
                                                  <a href="/">

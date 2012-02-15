@@ -3,7 +3,8 @@
     
     include 'sc-app.inc';
     include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
-
+	include($_SERVER['WEBGLOO_LIB_ROOT'] . '/ext/recaptchalib.php');
+     
     
     use com\indigloo\ui\form as Form;
     use com\indigloo\Constants as Constants ;
@@ -19,6 +20,17 @@
         $fvalues = $fhandler->getValues();
         $ferrors = $fhandler->getErrors();
     
+		//captcha code
+        $privatekey = "6Lc3p80SAAAAABtSCxk0iHeZDRrMxvC0XTTqJpHI";
+        $resp = recaptcha_check_answer ($privatekey,
+                                $_SERVER["REMOTE_ADDR"],
+                                $_POST["recaptcha_challenge_field"],
+                                $_POST["recaptcha_response_field"]);
+
+        if (!$resp->is_valid) {
+            $fhandler->addError("Wrong answer to Captcha! Please try again!");
+        }
+		
         
         if ($fhandler->hasErrors()) {
             $locationOnError = '/user/register.php' ;
