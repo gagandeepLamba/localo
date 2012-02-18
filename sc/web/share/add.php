@@ -36,7 +36,7 @@
 		}
 		
 		#btnUpload {
-			width: 90px; height: 28px;
+			width: 90px; height: 28px; padding-top:0px;
 		}
 		
 		</style>
@@ -60,8 +60,51 @@
         
         <script type="text/javascript">
        
+			var settings = {
+				flash_url : "/3p/swfuploadv2.5b3/swfupload.swf",
+				flash9_url : "/3p/swfuploadv2.5b3/swfupload_fp9.swf",
+				upload_url: "/test/receiver.php",
+				post_params: {
+					"PHPSESSID" : "<?php echo session_id(); ?>"
+				},
+				file_size_limit : "4 MB",
+				file_types : "*.*",
+				file_types_description : "All Files",
+				file_upload_limit : 10,
+				file_queue_limit : 0,
+				custom_settings : {
+					progressTarget : "fsUploadProgress",
+					cancelButtonId : "btnCancel" 
+				},
+				debug: false,
+				
+				/* button_image_url: "/3p/swfupload/images/XPButtonUploadText_61x22.png",*/
+				button_window_mode: SWFUpload.WINDOW_MODE.TRANSPARENT,
+				button_width: "90",
+				button_height: "28",
+				button_placeholder_id: "spanButtonPlaceHolder",
+				button_cursor:SWFUpload.CURSOR.HAND,
+
+				
+				
+				// handlers.js event handlers
+				file_queued_handler : fileQueued,
+				file_queue_error_handler : fileQueueError,
+				file_dialog_complete_handler : webgloo.sc.question.fileDialogComplete,
+				upload_start_handler : uploadStart,
+				upload_progress_handler : uploadProgress,
+				upload_error_handler : uploadError,
+				upload_success_handler : webgloo.sc.question.uploadSuccess,
+				upload_complete_handler : uploadComplete,
+				queue_complete_handler : webgloo.sc.question.queueComplete,
+				
+				// SWFObject settings
+				minimum_flash_version : "9.0.28"
+				};
+			
             $(document).ready(function(){
-                
+            
+				
               $("#web-form1").validate({
 					 errorLabelContainer: $("#web-form1 div.error") 
               });
@@ -81,57 +124,10 @@
 						]
 			  });
 
+			  var swfu = new SWFUpload(settings);
             });
 			
-              
-            var swfu;
-			SWFUpload.onload = function () {
-		
-				var settings = {
-					flash_url : "/3p/swfuploadv2.5b3/swfupload.swf",
-					flash9_url : "/3p/swfuploadv2.5b3/swfupload_fp9.swf",
-					upload_url: "/test/receiver.php",
-					post_params: {
-						"PHPSESSID" : "<?php echo session_id(); ?>"
-					},
-					file_size_limit : "4 MB",
-					file_types : "*.*",
-					file_types_description : "All Files",
-					file_upload_limit : 10,
-					file_queue_limit : 0,
-					custom_settings : {
-						progressTarget : "fsUploadProgress",
-						cancelButtonId : "btnCancel" 
-					},
-					debug: false,
-					
-					/* button_image_url: "/3p/swfupload/images/XPButtonUploadText_61x22.png",*/
-					button_window_mode: SWFUpload.WINDOW_MODE.TRANSPARENT,
-					button_width: "90",
-					button_height: "28",
-					button_placeholder_id: "spanButtonPlaceHolder",
-					button_cursor:SWFUpload.CURSOR.HAND,
-
-					
-					
-					// handlers.js event handlers
-					file_queued_handler : fileQueued,
-					file_queue_error_handler : fileQueueError,
-					file_dialog_complete_handler : webgloo.sc.question.fileDialogComplete,
-					upload_start_handler : uploadStart,
-					upload_progress_handler : uploadProgress,
-					upload_error_handler : uploadError,
-					upload_success_handler : webgloo.sc.question.uploadSuccess,
-					upload_complete_handler : uploadComplete,
-					queue_complete_handler : webgloo.sc.question.queueComplete,
-					
-					// SWFObject settings
-					minimum_flash_version : "9.0.28"
-				};
-		
-				swfu = new SWFUpload(settings);
-			}
-		
+            
         </script>
        
        
