@@ -15,7 +15,7 @@ namespace com\indigloo\mysql {
         private $connxId;
         
         //DB  codes
-        const ACK_OK = 0;
+        const ACK_OK = 1;
         const DUPLICATE_KEY = 1;
 
         private function __construct() {

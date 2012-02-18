@@ -40,8 +40,7 @@ namespace com\indigloo {
         }
 
         static function array2nl($arr) {
-            //lambda style function
-            // Anonymous callback @see create_function() on php.net
+            
             $str = array_reduce($arr, create_function('$a,$b', 'return $a."\n".$b ;'));
             return $str;
         }

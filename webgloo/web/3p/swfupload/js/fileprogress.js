@@ -94,7 +94,7 @@ FileProgress.prototype.setComplete = function () {
     var oSelf = this;
     this.setTimer(setTimeout(function () {
         oSelf.disappear();
-    }, 10000));
+    }, 5000));
 };
 FileProgress.prototype.setError = function () {
     this.fileProgressElement.className = "progressContainer red";
@@ -104,7 +104,7 @@ FileProgress.prototype.setError = function () {
     var oSelf = this;
     this.setTimer(setTimeout(function () {
         oSelf.disappear();
-    }, 5000));
+    }, 7000));
 };
 FileProgress.prototype.setCancelled = function () {
     this.fileProgressElement.className = "progressContainer";
@@ -114,7 +114,7 @@ FileProgress.prototype.setCancelled = function () {
     var oSelf = this;
     this.setTimer(setTimeout(function () {
         oSelf.disappear();
-    }, 2000));
+    }, 4000));
 };
 FileProgress.prototype.setStatus = function (status) {
     this.fileProgressElement.childNodes[2].innerHTML = status;

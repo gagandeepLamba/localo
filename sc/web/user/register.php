@@ -124,11 +124,12 @@
                                             </table>
 											
 											<div class="ml20">
+												<p> Type the two words in the image below </p>
 												<?php
 													$publickey = "6Lc3p80SAAAAAJvGjs1RyMl8zHBRtg1sf1nRwnJn"; 
 													echo recaptcha_get_html($publickey);
 											   ?>
-												   
+														
 											</div>
 											
                                             <div class="button-container">

@@ -64,9 +64,9 @@ function fileDialogComplete(numFilesSelected, numFilesQueued) {
         if (numFilesSelected > 0) {
             document.getElementById(this.customSettings.cancelButtonId).disabled = false;
         }
-		
         /* I want auto start the upload and I can do that here */
         this.startUpload();
+		
     } catch (ex)  {
         this.debug(ex);
     }
@@ -101,7 +101,7 @@ function uploadProgress(file, bytesLoaded, bytesTotal) {
 }
 
 function uploadSuccess(file, serverData) {
-	//dummy implementation
+	//Dummy implementation
 	try {
         var progress = new FileProgress(file, this.customSettings.progressTarget);
 		progress.setStatus("Notice:: override dummy implementation of uploadSuccess!!");
@@ -168,10 +168,12 @@ function uploadComplete(file) {
     if (this.getStats().files_queued === 0) {
         document.getElementById(this.customSettings.cancelButtonId).disabled = true;
     }
+	
 }
 
 // This event comes from the Queue Plugin
 function queueComplete(numFilesUploaded) {
     var status = document.getElementById("divStatus");
     status.innerHTML = numFilesUploaded + " file" + (numFilesUploaded === 1 ? "" : "s") + " uploaded.";
+	
 }

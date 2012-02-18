@@ -15,7 +15,7 @@ create table sc_question(
     category_code varchar(16),
     created_on timestamp default '0000-00-00 00:00:00',
 	updated_on timestamp default '0000-00-00 00:00:00' ,
-	PRIMARY KEY (id)) ENGINE = MYISAM;
+	PRIMARY KEY (id)) ENGINE = InnoDB;
     
 
 drop table if exists sc_answer;
@@ -28,7 +28,7 @@ create table sc_answer(
     answer TEXT ,
     created_on timestamp default '0000-00-00 00:00:00',
 	updated_on timestamp default '0000-00-00 00:00:00' ,
-	PRIMARY KEY (id)) ENGINE = MYISAM;
+	PRIMARY KEY (id)) ENGINE = InnoDB;
     
    
  
@@ -44,7 +44,7 @@ create table sc_media(
     original_width int ,
     created_on timestamp default '0000-00-00 00:00:00',
 	updated_on timestamp default '0000-00-00 00:00:00' ,
-	PRIMARY KEY (id)) ENGINE = MYISAM;
+	PRIMARY KEY (id)) ENGINE = InnoDB;
     
 
 
@@ -63,7 +63,7 @@ create table sc_media(
        login_on TIMESTAMP  default '0000-00-00 00:00:00',
        created_on TIMESTAMP  default '0000-00-00 00:00:00',
        updated_on TIMESTAMP   default '0000-00-00 00:00:00',
-       PRIMARY KEY (id)) ENGINE =MYISAM ;
+       PRIMARY KEY (id)) ENGINE =InnoDB ;
     
    alter table  sc_user add constraint UNIQUE uniq_email (email);
    
@@ -78,7 +78,7 @@ create table sc_list(
     code varchar(8) not null,
     display varchar(32) not null,
 	ui_order int not null ,
-	PRIMARY KEY (id)) ENGINE = MYISAM;
+	PRIMARY KEY (id)) ENGINE = InnoDB;
     
 
 --	
@@ -128,6 +128,11 @@ delimiter ;
 
 update sc_answer answer set answer.title = (select title from sc_question where id = answer.question_id) ;
 
+--
+-- switch engine to InnoDB
+-- 
+-- alter table sc_answer  ENGINE = InnoDB;
+-- SELECT TABLE_NAME, ENGINE FROM information_schema.TABLES where TABLE_SCHEMA='scdb' ;
 
 
 

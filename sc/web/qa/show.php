@@ -149,7 +149,7 @@
                                         </table>
 										
 										<div id="link-container" class="hide-me">
-                                            <div id="error"> </div>
+                                            <div id="message"> </div>
                                             <p> Use a url shortening service like goo.gl to shorten long urls</p>
                                             Link*&nbsp;<input  id="link-box"  type="text" name="link"  value="" />
                                             &nbsp; <button class="form-button" id="add-link">Add</button>

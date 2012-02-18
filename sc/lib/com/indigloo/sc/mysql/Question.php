@@ -113,6 +113,8 @@ namespace com\indigloo\sc\mysql {
                                $linksJson,
                                $imagesJson) {
 
+			
+			
             $mysqli = MySQL\Connection::getInstance()->getHandle();
             $sql = " insert into sc_question(title,seo_title,description,category_code,location,tags, " ;
             $sql .= " user_email,user_name,links_json,images_json,created_on) ";

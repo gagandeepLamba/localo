@@ -76,6 +76,10 @@ webgloo.sc.answer = {
         
     },
     addLink : function(linkData) {
+		//issue an ajax request
+		// get html back
+		// append this html
+		
         var buffer = webgloo.sc.answer.linkPreviewDIV.supplant({"link" : linkData});
         $("#link-data").append(buffer);
     },
@@ -89,7 +93,9 @@ webgloo.sc.answer = {
 
 webgloo.sc.question = {
     images : {} ,
-	debug : false ,
+	debug : false,
+	numSelected : 0 ,
+	uploadError : false ,
     init : function () {
         webgloo.sc.question.images = {} ;
         
@@ -128,6 +134,16 @@ webgloo.sc.question = {
             $(window).scrollTop($("#image-container").position().top) ;
         }) ;
         
+		$("a#close-image").live("click", function(event){
+            event.preventDefault();
+            $("#image-container").slideUp("slow");
+        }) ;
+		
+		$("a#close-link").live("click", function(event){
+            event.preventDefault();
+            $("#link-container").slideUp("slow");
+        }) ;
+		
         $("#add-link").live("click", function(event){
             event.preventDefault();
             var linkData = jQuery.trim($("#link-box").val());
@@ -137,7 +153,7 @@ webgloo.sc.question = {
 			} else {
 				webgloo.sc.question.addLink(linkData);
 			}
-            
+            $("#link-container").slideUp("slow");
         }) ;
         
         $("a.remove-link").live("click", function(event){
@@ -162,8 +178,8 @@ webgloo.sc.question = {
         
         
     },
-    imagePreviewDIV : '<div class="previewImage"> <img src="/{bucket}/{storeName}" class="resize" alt="{originalName}" width="{width}" height="{height}"/> '
-        + ' <div> {originalName} </div>  <a id="{id}" class="remove-image" href="" > Remove </a> </div>',
+    imagePreviewDIV : '<div class="previewImage" id="image-{id}"><img src="/{bucket}/{storeName}" class="resize" alt="{originalName}" width="{width}" height="{height}"/> '
+        + '<div class="previewImageAction"> <a id="{id}" class="remove-image" href="" > Remove </a> </div> </div>',
     
     linkPreviewDIV : '<div class="previewLink"> {link} &nbsp; <a class="remove-link" href="{link}"> Remove</a> </div> ' ,
     
@@ -195,11 +211,14 @@ webgloo.sc.question = {
         $("#link-data").append(buffer);
     },
     removeLink : function(linkObj) {
-        $(linkObj).parent().remove();
+		$(linkObj).parent().remove();
     },
 
     removeImage : function(linkObj) {
-       $(linkObj).parent().remove();
+		var id = $(linkObj).attr("id");
+		var imageId = "#image-" +id ;
+		console.log("removing image :: " + imageId);
+		$("#image-"+id).remove();
     },
     addImage : function(mediaVO) {
 		if(webgloo.sc.question.debug){
@@ -229,12 +248,14 @@ webgloo.sc.question = {
                     progress.toggleCancel(false);
                 }else {
                     //known error
+					webgloo.sc.question.uploadError = true ;
                     progress.setStatus("Error :: " + dataObj.message);
                 }
                 
                 
             } catch(ex) {
                 //catch JSON parsing errors
+				webgloo.sc.question.uploadError = true ;
                 progress.setStatus("Error: " + ex.toString());
             }
             
@@ -242,7 +263,29 @@ webgloo.sc.question = {
         } catch (ex) {
             this.debug(ex);
         }
-    }
+    },
+	fileDialogComplete : function(numFilesSelected, numFilesQueued) {
+		try {
+			if (numFilesSelected > 0) {
+				document.getElementById(this.customSettings.cancelButtonId).disabled = false;
+			}
+			webgloo.sc.question.uploadError = false ;
+			webgloo.sc.question.numSelected = numFilesSelected ;
+			
+			/* I want auto start the upload and I can do that here */
+			this.startUpload();
+			
+		} catch (ex)  {
+			this.debug(ex);
+		}
+	},
+	queueComplete: function (numFilesUploaded) {
+		console.log(" files uploaded :: " + numFilesUploaded);
+		console.log(" files selected :: " + webgloo.sc.question.numSelected);
+		if((numFilesUploaded == webgloo.sc.question.numSelected) && !webgloo.sc.question.uploadError) {
+			$("#image-container").slideUp();
+		}
+	}
     
 }
 
