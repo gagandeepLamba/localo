@@ -28,6 +28,18 @@
          
 
        <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+	   
+	<style type="text/css">
+		.swfupload {
+			position: absolute;
+			z-index: 1;
+		}
+		
+		#btnUpload {
+			width: 90px; height: 28px;
+		}
+		
+		</style>
 
        <link rel="stylesheet" type="text/css" href="/3p/yui3/grids-min.css">
        <link rel="stylesheet" type="text/css" href="/css/sc.css">
@@ -93,10 +105,10 @@
 					},
 					debug: false,
 					
-					button_image_url: "/3p/swfupload/images/XPButtonUploadText_61x22.png",
+					/* button_image_url: "/3p/swfupload/images/XPButtonUploadText_61x22.png",*/
 					button_window_mode: SWFUpload.WINDOW_MODE.TRANSPARENT,
-					button_width: "61",
-					button_height: "22",
+					button_width: "90",
+					button_height: "28",
 					button_placeholder_id: "spanButtonPlaceHolder",
 					button_cursor:SWFUpload.CURSOR.HAND,
 
@@ -186,12 +198,13 @@
 													<div id="image-container" class="hide-me">
                                                 
 														<div class="fieldset flash" id="fsUploadProgress">
-															<span class="legend">click upload and select photos</span>
+															<span class="legend">click Select Files to upload photos</span>
 														</div>
                                                         
 														<div>
 															<span id="spanButtonPlaceHolder"> </span>
-															</span>
+															<input id="btnUpload" class="black-button" type="button" value="Select Files" style="" />
+
 															<span>
 																<input class="uploadCancelButton hide-me" id="btnCancel" type="button" value="Cancel Upload" onclick="swfu.cancelQueue();" disabled="disabled"/>
 															</span>
@@ -204,7 +217,7 @@
 														<div id="error"> </div>
 														<p> Use a url shortening service like goo.gl to shorten long urls</p>
 														Link*&nbsp;<input  id="link-box"  type="text" name="link"  value="" />
-														&nbsp; <button  class="form-button" id="add-link">Add</button>
+														&nbsp; <button  class="black-button" id="add-link">Add</button>
 														<br>
 														<a href="#form-wrapper" id="close-link">close&nbsp;&raquo;</a>
 													</div> <!-- link add -->

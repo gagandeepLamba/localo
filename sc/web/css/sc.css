@@ -1027,15 +1027,14 @@
 	}
 	
 	
-	div#link-container button {
-		   /*
-		   background-color:black;
-		   color:#FFFFFF !important;
-		   text-align :center ;
-		   border-radius:5px;
-		   text-decoration:none
-		   font-weight: bold;
-		   cursor: pointer; */
+	.black-button {
+		background-color:black;
+		color:#FFFFFF !important;
+		text-align :center ;
+		border-radius:5px;
+		text-decoration:none
+		font-weight: bold;
+		cursor: pointer;
 	}
 	
 	div#image-container{
@@ -1070,7 +1069,7 @@
 	div .previewImage{
 		   padding:11px;
 		   height:100px;
-		   width:450px;
+		   width:470px;
 		   border:1px solid gainsboro ;
 		   margin :5px;
 		   background-color: whiteSmoke ;
