@@ -97,14 +97,14 @@
 				upload_success_handler : webgloo.sc.question.uploadSuccess,
 				upload_complete_handler : uploadComplete,
 				queue_complete_handler : webgloo.sc.question.queueComplete,
-				
+				swfupload_loaded_handler : webgloo.sc.question.swfLoadComplete,
 				// SWFObject settings
 				minimum_flash_version : "9.0.28"
 				};
 			
+			
             $(document).ready(function(){
-            
-				
+              var swfu = new SWFUpload(settings);
               $("#web-form1").validate({
 					 errorLabelContainer: $("#web-form1 div.error") 
               });
@@ -124,7 +124,7 @@
 						]
 			  });
 
-			  var swfu = new SWFUpload(settings);
+			  
             });
 			
             
@@ -194,7 +194,7 @@
 													<div id="image-container" class="hide-me">
                                                 
 														<div class="fieldset flash" id="fsUploadProgress">
-															<span class="legend">click Select Files to upload photos</span>
+															&nbsp;
 														</div>
                                                         
 														<div>

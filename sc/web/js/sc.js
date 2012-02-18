@@ -95,10 +95,11 @@ webgloo.sc.question = {
     images : {} ,
 	debug : false,
 	numSelected : 0 ,
+	flashLoaded : false,
 	uploadError : false ,
     init : function () {
         webgloo.sc.question.images = {} ;
-        
+        webgloo.sc.question.flashLoaded = false ;
         //read from document
 		//@todo - right now we assume that both form elements
 		// are on page
@@ -129,9 +130,7 @@ webgloo.sc.question = {
         
         $("a#open-image").live("click", function(event){
             event.preventDefault();
-            $("#link-container").slideUp("slow");
-            $("#image-container").slideDown("slow");
-            $(window).scrollTop($("#image-container").position().top) ;
+			webgloo.sc.question.openImageContainer();
         }) ;
         
 		$("a#close-image").live("click", function(event){
@@ -183,6 +182,17 @@ webgloo.sc.question = {
     
     linkPreviewDIV : '<div class="previewLink"> {link} &nbsp; <a class="remove-link" href="{link}"> Remove</a> </div> ' ,
     
+	openImageContainer: function() {
+		if(!webgloo.sc.question.flashLoaded) {
+			alert("flash =>" + webgloo.sc.question.flashLoaded);
+			setTimeout(webgloo.sc.question.openImageContainer,500);
+		}
+		
+		$("#link-container").slideUp("slow");
+		$("#image-container").slideDown("slow");
+		$(window).scrollTop($("#image-container").position().top) ;
+	},
+	
     populateHidden : function () {
     
         var links = new Array() ;
@@ -285,6 +295,10 @@ webgloo.sc.question = {
 		if((numFilesUploaded == webgloo.sc.question.numSelected) && !webgloo.sc.question.uploadError) {
 			$("#image-container").slideUp();
 		}
+	},
+	swfLoadComplete : function() {
+		//flash is loaded now
+		webgloo.sc.question.flashLoaded = true ;
 	}
     
 }
