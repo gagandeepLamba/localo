@@ -36,9 +36,10 @@
         } else {
             
             $questionDao = new com\indigloo\sc\dao\Question();
+			$title = Util::abbreviate($fvalues['description'],128);
 			
             $code = $questionDao->create(
-								'title',
+								$title,
                                 $fvalues['description'],
                                 $fvalues['category'],
                                 'location',

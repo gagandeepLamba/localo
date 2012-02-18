@@ -183,16 +183,15 @@ webgloo.sc.question = {
     linkPreviewDIV : '<div class="previewLink"> {link} &nbsp; <a class="remove-link" href="{link}"> Remove</a> </div> ' ,
     
 	openImageContainer: function() {
-		if(!webgloo.sc.question.flashLoaded) {
+		
+		if(!webgloo.sc.question.flashLoaded){
 			$("#ajax-message").html("loading...");
-			console.log("flash load status =>" + webgloo.sc.question.flashLoaded);
-			setTimeout(webgloo.sc.question.openImageContainer,500);
 		}
 		
-		$("#ajax-message").html("");
 		$("#link-container").slideUp("slow");
 		$("#image-container").slideDown("slow");
 		$(window).scrollTop($("#image-container").position().top) ;
+			
 	},
 	
     populateHidden : function () {
@@ -300,7 +299,12 @@ webgloo.sc.question = {
 	},
 	swfLoadComplete : function() {
 		//flash is loaded now
-		webgloo.sc.question.flashLoaded = true ;
+		if(!webgloo.sc.question.flashLoaded){
+			webgloo.sc.question.flashLoaded = true ;
+			$("#ajax-message").html("");
+		}
+		
+		
 	}
     
 }
