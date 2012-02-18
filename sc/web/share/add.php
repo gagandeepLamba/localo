@@ -184,7 +184,8 @@
                                                 <td>
 													<a id="open-link" href="">Add Link</a>
 													&nbsp;
-													<a id="open-image" href="">Add Photo</a> 
+													<a id="open-image" href="">Add Photo</a>
+													<div id="ajax-message"></div>
                                                  </td>
                                                  
                                                 </tr>

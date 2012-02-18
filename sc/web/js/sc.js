@@ -184,10 +184,12 @@ webgloo.sc.question = {
     
 	openImageContainer: function() {
 		if(!webgloo.sc.question.flashLoaded) {
-			alert("flash =>" + webgloo.sc.question.flashLoaded);
+			$("#ajax-message").html("loading...");
+			console.log("flash load status =>" + webgloo.sc.question.flashLoaded);
 			setTimeout(webgloo.sc.question.openImageContainer,500);
 		}
 		
+		$("#ajax-message").html("");
 		$("#link-container").slideUp("slow");
 		$("#image-container").slideDown("slow");
 		$(window).scrollTop($("#image-container").position().top) ;
