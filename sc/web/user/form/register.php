@@ -42,7 +42,7 @@
         } else {
 
             $userName = $fvalues['first_name']. ' '.$fvalues['last_name'];
-            \com\indigloo\auth\User::create('sc_user',
+            $data = \com\indigloo\auth\User::create('sc_user',
 								$fvalues['first_name'],
                                 $fvalues['last_name'],
 								$userName,

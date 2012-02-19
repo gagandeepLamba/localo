@@ -5,30 +5,27 @@
     
     use com\indigloo\Util as Util;
     
-    $uploader = new com\indigloo\media\ImageUpload();
     
+    
+    $pipe = new \com\indigloo\media\Upload();
+    
+    $store = new \com\indigloo\media\FileUpload($pipe);
     /* upload_path/ + application/ + year/month/date/ */
     $prefix = sprintf("%s/%s/",'sc',date('Y/m/d')) ;
-    $uploader->setPrefix($prefix);
+    $store->setPrefix($prefix);
     
+    $uploader = new com\indigloo\media\ImageUpload($store);
     $uploader->process("Filedata");
     
+    $errors = $uploader->getErrors() ;
     
-    if ($uploader->hasError()) {
-        
-        $message = $uploader->getErrorMessage();
-        $data = array('code' => 500, 'message' => $message);
+    if (sizeof($errors) > 0 ) {
+        $data = array('code' => 500, 'message' => $errors[0]);
         echo json_encode($data);
     
     } else {
         
-        $mediaVO = new com\indigloo\sc\view\Media();
-        $mediaVO->mime =$uploader->getMime();
-        $mediaVO->storeName = $uploader->getStoreName();
-        $mediaVO->size = $uploader->getSize();
-        $mediaVO->originalName = $uploader->getName();
-        $mediaVO->height = $uploader->getHeight();
-        $mediaVO->width = $uploader->getWidth();
+        $mediaVO = $uploader->getMediaData();
         $mediaVO->bucket = 'media' ;
         
         $mediaDao = new com\indigloo\sc\dao\Media();

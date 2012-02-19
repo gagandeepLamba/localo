@@ -185,7 +185,7 @@ webgloo.sc.question = {
 	openImageContainer: function() {
 		
 		if(!webgloo.sc.question.flashLoaded){
-			$("#ajax-message").html("loading...");
+			$("#ajax-message").html("loading flash component ...");
 		}
 		
 		$("#link-container").slideUp("slow");

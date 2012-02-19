@@ -25,6 +25,7 @@ namespace com\indigloo\media {
     use com\indigloo\Logger;
     
     class Upload {
+        
         const ERROR_FIELD_MISSING = " No file found in post! Did you upload a file?";
         const ERROR_INI_SIZE= " file size greater than php.ini upload_max_file ";
         const ERROR_PARTIAL = " partial file received ";
@@ -34,36 +35,25 @@ namespace com\indigloo\media {
 
         private $isRequired;
         private $isEmpty;
-        private $isError;
-        private $errorMessage;
-        private $size;
-        private $mime;
-        private $maxSize;
+        private $errors;
         private $fileData;
-        private $name;
+        private $mediaData ;
 
         function __construct() {
 
             $this->isRequired = true;
-            $this->isError = false;
+            $this->errors = array();
             $this->isEmpty = false;
             $this->fileData = NULL;
+            $this->mediaData = new \com\indigloo\media\Data();
         }
 
         function __destruct() {
             
         }
 
-        public function hasError() {
-            return $this->isError;
-        }
-
-        public function setError($flag) {
-            $this->isError = $flag;
-        }
-
-        public function isRequired() {
-            return $this->isRequired;
+        public function getErrors() {
+            return $this->errors;
         }
 
         /* do we allow empty file field on form? */
@@ -71,44 +61,8 @@ namespace com\indigloo\media {
             $this->isRequired = $flag;
         }
 
-        public function getErrorMessage() {
-            return $this->errorMessage;
-        }
-
-        public function setErrorMessage($message) {
-            $this->errorMessage = $errorMessage;
-        }
-
-        public function getMime() {
-            return $this->mime;
-        }
-
-        public function setMime($mime) {
-            $this->mime = $mime;
-        }
-
-        public function getMaxSize() {
-            return $this->maxSize;
-        }
-
-        public function setMaxSize($size) {
-            $this->maxSize = $size;
-        }
-
-        public function getSize() {
-            return $this->size;
-        }
-
-        public function setSize($size) {
-            $this->size = $size;
-        }
-
-        public function getName() {
-            return $this->name;
-        }
-
-        public function setName($name) {
-            $this->name = $name;
+        public function getMediaData() {
+            return $this->mediaData;
         }
         
         public function getFileData() {
@@ -118,21 +72,24 @@ namespace com\indigloo\media {
         public function isEmpty() {
             return $this->isEmpty;
         }
+        
+        private function addError($error) {
+            array_push($this->errors,$error) ;
+        }
+        
 
         public function process($fieldName) {
+            
             $maxSize = Config::getInstance()->max_file_size();
             if (empty($maxSize) || is_null($maxSize)) {
                 trigger_error('file maxsize is not set in config file',E_USER_ERROR);
             }
             
-            $this->setMaxSize($maxSize);
-            
             if (!isset($_FILES[$fieldName]) || empty($_FILES[$fieldName]['name'])) {
                 // error when files are required on web form
                 if ($this->isRequired) {
-                    $this->isError = true;
-                    $this->errorMessage = self::ERROR_FIELD_MISSING;
-                    // ok otherwise
+                    $this->addError(self::ERROR_FIELD_MISSING);
+                    
                 } else {
                     $this->isEmpty = true;
                 }
@@ -140,30 +97,24 @@ namespace com\indigloo\media {
             }
 
             // form field is set
-            $this->fileData = $_FILES[$fieldName];
-            //get original file name
-            $this->name = $_FILES[$fieldName]['name'];
-
+            $fdata = $_FILES[$fieldName];
+            
             /* check for all possible error codes */
-            switch ($this->fileData['error']) {
+            switch ($fdata['error']) {
                 case UPLOAD_ERR_INI_SIZE:
                     // image size > php.ini setting
-                    $this->isError = true;
-                    $this->errorMessage = self::ERROR_INI_SIZE;
+                     $this->addError(self::ERROR_INI_SIZE);
                     break;
-
 
                 case UPLOAD_ERR_PARTIAL :
                     // partial upload
-                    $this->isError = true;
-                    $this->errorMessage = self::ERROR_PARTIAL;
+                    $this->addError(self::ERROR_PARTIAL);
                     break;
 
                 case UPLOAD_ERR_NO_FILE:
                     // no file selected for upload
                     if ($this->isRequired) {
-                        $this->isError = true;
-                        $this->errorMessage = self::ERROR_NO_FILE;
+                        $this->addError(self::ERROR_NO_FILE);
                     }
 
                     break;
@@ -171,25 +122,40 @@ namespace com\indigloo\media {
                 case UPLOAD_ERR_FORM_SIZE:
                     // file too large vis-a-vis hidden form field
                     // Users can fake this one
-                    $this->isError = true;
-                    $this->errorMessage = self::ERROR_FILE_SIZE . $this->maxSize;
+                    $this->addError(self::ERROR_FILE_SIZE.$maxSize);
                     break;
+                
                 case UPLOAD_ERR_OK :
                     //check for file data size
-                    if ($this->fileData['size'] > $this->maxSize) {
-                        // image size too large
-                        $this->isError = true;
-                        $this->errorMessage = self::ERROR_FILE_SIZE . $this->maxSize;
+                    if ($fdata['size'] > $maxSize) {
+                        // file size too large
+                        $this->addError(self::ERROR_FILE_SIZE.$maxSize);
                     }
                     break;
                 default :
                     // unknown error
-                    $this->isError = true;
-                    $this->errorMessage = self::ERROR_UNKNOWN;
+                    $this->addError(self::ERROR_UNKNOWN);
             }
+    
+            if(sizeof($this->errors) > 0 ) {
+                return ;
+            }
+            
+           
+            
+            $this->mediaData->originalName = $fdata['name'];
+            $this->mediaData->mime = $fdata['type'];
+            
+            $ftmp = $fdata['tmp_name'];
+            $oTempFile = fopen($ftmp, "rb");
+            
+            $size = filesize($ftmp);
+            $this->mediaData->size = $size ;
+            $this->fileData = fread($oTempFile, $size);
+            
+            return ;
         }
-
-        // process over
+        
     }
 
 }

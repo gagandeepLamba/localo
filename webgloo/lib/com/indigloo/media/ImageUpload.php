@@ -6,32 +6,40 @@ namespace com\indigloo\media {
     use com\indigloo\Configuration as Config;
     use com\indigloo\Logger;
     
-    class ImageUpload extends \com\indigloo\media\FileUpload {
+    class ImageUpload  {
 
-        private $height ;
-        private $width ;
+       
+        private $store ;
+        private $mediaData ;
+        private $errors ;
         
-        function __construct() {
-            parent::__construct();
+        function __construct($store) {
+            $this->store = $store ;
+            $this->errors = array() ;
+            $this->mediaData = NULL ;
         }
 
         function __destruct() {
-            parent::__destruct();
+            
         }
         
-        public function getWidth() {
-            return $this->width;
+        public function getMediaData() {
+            return $this->mediaData;
         }
-
-        public function getHeight() {
-            return $this->height;
+        
+        public function getErrors() {
+            return $this->errors;
         }
-         
+        
         public function process($fieldName) {
-            $sBlobData = parent::getOriginalFileData($fieldName);
+            $sBlobData = $this->store->getOriginalFileData($fieldName);
+            $this->errors = $this->store->getErrors();
+            $this->mediaData = $this->store->getMediaData();
+            
             //do image specific processing here
             $this->computeHW($sBlobData);
-            parent::store($sBlobData);
+            $storeName = $this->store->persist($this->mediaData->originalName,$sBlobData);
+            $this->mediaData->storeName = $storeName;
         }
         
         public function computeHW($sBlobData) {
@@ -45,8 +53,8 @@ namespace com\indigloo\media {
             }
             
             //original width and height
-            $this->width = imagesx($oSourceImage);
-            $this->height = imagesy($oSourceImage);
+            $this->mediaData->width = imagesx($oSourceImage);
+            $this->mediaData->height = imagesy($oSourceImage);
             
         }
         

@@ -23,22 +23,30 @@ namespace com\indigloo\media {
     use com\indigloo\Configuration as Config;
     use com\indigloo\Logger;
     
-    class FileUpload extends \com\indigloo\media\Upload {
+    class FileUpload {
 
-        private $storeName ;
         private $prefix ;
+        private $pipe ;
+        private $mediaData ;
+        private $errors ;
         
-        function __construct() {
-            parent::__construct();
+        function __construct($pipe) {
+            $this->pipe = $pipe ;
             $this->prefix ='';
+            $this->errors = array();
+            
         }
 
         function __destruct() {
-            parent::__destruct();
+        
         }
 
-        public function getStoreName() {
-            return $this->storeName;
+        public function getMediaData() {
+            return $this->mediaData;
+        }
+        
+        public function getErrors() {
+            return $this->errors;
         }
         
         public function setPrefix($prefix){
@@ -49,74 +57,64 @@ namespace com\indigloo\media {
             return $this->prefix;
         }
         
-        public function process($fieldName) {
+        function process($fieldName) {
             $sBlobData = $this->getOriginalFileData($fieldName);
-            $this->store($sBlobData);
+            $this->persist($sBlobData);
         }
         
-        public function getOriginalFileData($fieldName){
-            parent::process($fieldName);
+        function getOriginalFileData($fieldName){
             
-            //error or empty field - return
-            if (parent::hasError() || parent::isEmpty()) {
-                return NULL;
+            $this->pipe->process($fieldName);
+            $this->errors = $this->pipe->getErrors();
+            $this->mediaData = $this->pipe->getMediaData();
+            
+            if(sizeof($this->errors) > 0 ) {
+                return ;
             }
             
-            $fileData = parent::getFileData();
+            $sBlobData = $this->pipe->getFileData();
             
-            if (is_null($fileData)) {
+            if (is_null($sBlobData)) {
                 trigger_error('File processing returned Null Data', E_USER_ERROR);
             }
             
-            $ftmp = $fileData['tmp_name'];
-            $fname = $fileData['name'];
-            $mime = $fileData['type'];
-            $this->name = $fname ;
-            
-            $oTempFile = fopen($ftmp, "rb");
-            $size = filesize($ftmp);
-            
-            //set size and MIME type
-            parent::setSize($size);
-            parent::setMime($mime);
-            
-            $sBlobData = fread($oTempFile, $size);
             return $sBlobData ;
         }
 
-        function store($sBlobData) {
-           
-            $token = $this->name.date(DATE_RFC822);
-            $this->storeName = substr(md5($token), rand(1, 15), 16).rand(1,4096);
-            $pos = strrpos($this->name, '.');
+        function persist($name,$sBlobData) {
+            
+            $token = $name.date(DATE_RFC822);
+            $storeName = substr(md5($token), rand(1, 15), 16).rand(1,4096);
+            $pos = strrpos($name, '.');
             
             if ($pos != false) {
                 //separate filename and extension
-                $extension = substr($this->name, $pos + 1);
-                $this->storeName =  $this->storeName. '.' . $extension;
+                $extension = substr($name, $pos + 1);
+                $storeName =  $storeName. '.' . $extension;
             } 
             
-            $this->storeName =  $this->prefix.$this->storeName.
-
+            $storeName =  $this->prefix.$storeName.
+            
+            
             $fp = NULL;
             //system.upload.path has a trailing slash
-            $path = Config::getInstance()->get_value('system.upload.path').$this->storeName;
+            $path = Config::getInstance()->get_value('system.upload.path').$storeName;
             
             if(!file_exists(dirname($path))) {
                 mkdir(dirname($path), 0755, true);
             }
             
             if(Config::getInstance()->is_debug()){
-                Logger::getInstance()->debug(" file name = $this->name, mime = $mime ");
+                Logger::getInstance()->debug(" file name = $name");
                 Logger::getInstance()->debug(" storage path is => $path ");
             }
             
             //open file in write mode
             $fp = fopen($path, 'w');
             fwrite($fp, $sBlobData);
-            fclose($fp);
+            fclose($fp);   
             
-         
+            return $storeName;
         }
 
     }
