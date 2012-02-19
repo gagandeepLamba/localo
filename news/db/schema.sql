@@ -30,7 +30,7 @@
        user_id varchar(32),
        created_on timestamp default '0000-00-00 00:00:00',
        updated_on timestamp default '0000-00-00 00:00:00' ,
-       PRIMARY KEY (id)) ENGINE = MYISAM;
+       PRIMARY KEY (id)) ENGINE = InnoDB;
        
    alter table  news_post add constraint UNIQUE uniq_skey (short_id);
    
@@ -44,7 +44,7 @@
        state varchar(1) default 'N',
        created_on timestamp default '0000-00-00 00:00:00',
        updated_on timestamp default '0000-00-00 00:00:00' ,
-       PRIMARY KEY (id)) ENGINE = MYISAM;
+       PRIMARY KEY (id)) ENGINE = InnoDB;
        
        
        
@@ -61,7 +61,7 @@
        original_width int ,
        created_on timestamp default '0000-00-00 00:00:00',
        updated_on timestamp default '0000-00-00 00:00:00' ,
-       PRIMARY KEY (id)) ENGINE = MYISAM;
+       PRIMARY KEY (id)) ENGINE = InnoDB;
        
    
    --
@@ -83,7 +83,7 @@
        login_on TIMESTAMP  default '0000-00-00 00:00:00',
        created_on TIMESTAMP  default '0000-00-00 00:00:00',
        updated_on TIMESTAMP   default '0000-00-00 00:00:00',
-       PRIMARY KEY (id)) ENGINE =MYISAM ;
+       PRIMARY KEY (id)) ENGINE =InnoDB ;
     
    alter table  news_login add constraint UNIQUE uniq_email (email);
    
@@ -115,7 +115,7 @@
        owner_name varchar(64),
        created_on timestamp default '0000-00-00 00:00:00',
        updated_on timestamp default '0000-00-00 00:00:00' ,
-       PRIMARY KEY (id)) ENGINE = MYISAM;
+       PRIMARY KEY (id)) ENGINE = InnoDB;
        
        
    --
@@ -181,7 +181,7 @@
        flag int default 0,
        created_on timestamp default '0000-00-00 00:00:00',
        updated_on timestamp default '0000-00-00 00:00:00' ,
-       PRIMARY KEY (id)) ENGINE = MYISAM;
+       PRIMARY KEY (id)) ENGINE = InnoDB;
        
    alter table  gloo_news add constraint UNIQUE uniq_skey (email);
    

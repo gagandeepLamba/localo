@@ -5,34 +5,28 @@
     
     use com\indigloo\Util as Util;
     
-    //add file path prefix
+     
+    $pipe = new \com\indigloo\media\Upload();
     
-    $uploader = new com\indigloo\media\ImageUpload();
+    $store = new \com\indigloo\media\FileUpload($pipe);
+    /* upload_path/ + application/ + year/month/date/ */
+    $prefix = sprintf("%s/%s/",'news',date('Y/m/d')) ;
+    $store->setPrefix($prefix);
     
-    /* media/application/year/month */
-    $prefix = sprintf("%s/%s/%s/",'news',date('Y'),date('m')) ;
-    $uploader->setPrefix($prefix);
+    $uploader = new com\indigloo\media\ImageUpload($store);
     $uploader->process("Filedata");
     
+    $errors = $uploader->getErrors() ;
+
     
-    if ($uploader->hasError()) {
-        
-        $message = $uploader->getErrorMessage();
-        $data = array('code' => 500, 'message' => $message);
+    if (sizeof($errors) > 0 ) {
+        $data = array('code' => 500, 'message' => $errors[0]);
         echo json_encode($data);
     
     } else {
         
-        
-        $mediaVO = new com\indigloo\news\view\Media();
-        $mediaVO->mime =$uploader->getMime();
-        $mediaVO->storeName = $uploader->getStoreName();
-        $mediaVO->size = $uploader->getSize();
-        $mediaVO->originalName = $uploader->getName();
-        $mediaVO->height = $uploader->getHeight();
-        $mediaVO->width = $uploader->getWidth();
+        $mediaVO = $uploader->getMediaData();
         $mediaVO->bucket = 'media' ;
-        
         
         $mediaDao = new com\indigloo\news\dao\Media();
         $mediaId = $mediaDao->add($mediaVO);
