@@ -104,9 +104,9 @@
 					
 					<form  id="web-form1"  name="web-form1" action="/share/form/add.php" enctype="multipart/form-data"  method="POST">
 						<div class="row">
-							<div class="span1">&nbsp;</div>
 							
-							<div class="span5 offset2">
+							
+							<div class="span4">
 								Category&nbsp;
 								<?php
 										$selectBoxDao = new \com\indigloo\sc\dao\SelectBox(); 
@@ -115,11 +115,10 @@
 									?>
 								
 							</div>
-						
+							<div class="span4"><div id="image-uploader"> </div></div>
 						</div>
 						<table class="form-table">
 							
-							<tr> <td><div id="image-uploader"> </div></td></tr>
 							
 							<tr>
 								<td>
@@ -146,7 +145,7 @@
 						
 						
 					
-						<div class="button-container"> 
+						<div class="form-actions"> 
 							<button class="btn btn-primary" type="submit" name="save" value="Save" onclick="this.setAttribute('value','Save');" ><span>Save your changes</span></button> 
 							<a href="/"> <button class="btn" type="button" name="cancel"><span>Cancel</span></button> </a>
 						</div>
