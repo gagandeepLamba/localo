@@ -17,8 +17,6 @@
 		margin: 0;
 		padding: 0;
 		position: relative;
-		/* background: #f0f0f0 url('images/bg.png') repeat-x 0 85px; */
-		/* color: #494949; */
 		background : #FFFFFF ;
 	}
 	
@@ -184,9 +182,7 @@
 	
 	
 	#header {
-		background:#2288cc;
 		padding: 10px;
-		height: 67px;
 		color:#FFF;
 	}
 	

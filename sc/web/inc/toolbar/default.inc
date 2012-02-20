@@ -1,25 +1,23 @@
 
 <div id="header">
-	<div class="h-content">
-		<div rel="home" id="logo">
-				<h3> <a href="/"> <img src="/css/images/logo.png" alt="logo" /> </a> </h3>
-		</div>
-       <div id="search-top">
-				<form method="POST" id="searchform" action="<?php echo $_SERVER['REQUEST_URI']; ?>">	
-						<input type="text" onblur="if (this.value == '') {this.value = 'Search';}" onfocus="if (this.value == 'Search') {this.value = '';}" value="Search" class="text" name="s" id="s"> 
-						<input type="submit" class="button"  value=" ">
-						
-				</form>
-		</div>
-		<div id="hcenter">
-				<div id="login">
-				 <span class="register"><a href="/">Home</a></span>
-				 &nbsp;|&nbsp;
-				<span class="register"><a href="/user/login.php">Login</a></span>
-				</div>
-				
-		</div>
+	<div class="navbar">
+		<div class="navbar-inner">
+		  <div class="container">
+			<a class="brand" href="#">3mik.com...</a>
 		
 		
-	</div>
-</div>
+			<ul class="nav">
+				<li class="active">
+				  <a href="http://www.3mik.com">Home</a>
+				</li>
+				<li><a href="/test/ful/single.php">Share</a></li>
+				<li><a href="/qa/ask.php">Ask</a></li>
+				<li class="divider-vertical"></li>
+				<li><a href="/user/login.php">login</a></li>
+			</ul> <!-- fixed links -->
+			
+		  </div>
+		</div>
+	</div> <!-- navbar -->
+</div> <!-- header -->
+

@@ -45,6 +45,10 @@
 			.qq-upload-list {
 				/* display :none ;*/
 			}
+			#site-search{
+				height:28px;
+				width:480px;
+			}
 		</style>
 	  
         <script type="text/javascript">
@@ -83,13 +87,17 @@
 			<div class="row">
 				<div class="span12">
 					<?php include($_SERVER['APP_WEB_DIR'] . '/inc/toolbar.inc'); ?>
-				</div>
+				</div> 
+				
 			</div>
+			
 			<div class="row">
 				<div class="span12">
-					 <?php include($_SERVER['APP_WEB_DIR'] . '/inc/banner.inc'); ?>
+					<?php include($_SERVER['APP_WEB_DIR'] . '/inc/banner.inc'); ?>
 				</div>
 			</div>
+			
+			
 			<div class="row">
 				<div class="span8">
 					
@@ -97,8 +105,6 @@
 					<div class="page-header">
 						<h2> Share your wisdom </h2>
 					</div>
-					
-					
 					
 					<?php FormMessage::render(); ?>
 					
