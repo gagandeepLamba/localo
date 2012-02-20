@@ -41,13 +41,11 @@ namespace com\indigloo\media {
         public function process($originalName) {
 			
             $this->mediaData->originalName = $originalName ;
-            //@todo set $this->mediaData->mime
-			//@todo $this->mediaData->size = $realSize ;
-			$this->mediaData->mime = 'mime/dummy' ;
-			$this->mediaData->size = 1024 ;
-			
             $this->fileData = file_get_contents('php://input') ;
-            
+			
+            $this->mediaData->mime = 'application/octet-stream' ;
+			$this->mediaData->size = strlen($this->fileData); ;
+			
             
             return ;
         }

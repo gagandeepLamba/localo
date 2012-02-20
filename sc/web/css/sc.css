@@ -17,8 +17,9 @@
 		margin: 0;
 		padding: 0;
 		position: relative;
-		background: #f0f0f0 url('images/bg.png') repeat-x 0 85px;;
-		color: #494949;
+		/* background: #f0f0f0 url('images/bg.png') repeat-x 0 85px; */
+		/* color: #494949; */
+		background : #FFFFFF ;
 	}
 	
 	#body-wrapper {
@@ -755,12 +756,7 @@
 		
 	}
 	
-	.resize {
-		width: auto;
-		height: auto;
-		max-width: 100px;
-		max-height: 100px;
-	}
+	
 	
 	.widget {
 		margin-top:10px;
@@ -1060,8 +1056,8 @@
 		   position :relative ;
 		   float : left;
 		   padding:11px;
-		   height:180px;
-		   width:180px;
+		   height:120px;
+		   width:160px;
 		   border:2px solid #DDD ;
 		   margin :5px;
 	}
@@ -1076,6 +1072,17 @@
 		 
 	}
 	
+		
+	.thumbnail-1 {
+		width: auto;
+		height: auto;
+		max-width: 120px;
+		max-height: 90px;
+		margin-bottom : 5px;
+	}
+
+
+
 	div .previewImageAction {
 		float:right ;
 		margin-top:80px;
@@ -1086,14 +1093,6 @@
 		width:500px;
 	}
 	
-	select {
-		   max-width: 220px;
-		   width: 220px;
-		   margin: 0 0 5px;
-		   border: 1px solid #BDC7D8 ;
-		   padding:2px;
-		   
-	}
 	
 	#sidebar {
 		padding :20px;

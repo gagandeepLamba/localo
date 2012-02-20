@@ -144,7 +144,9 @@ webgloo.sc.question = {
         }) ;
 		
         $("#add-link").live("click", function(event){
+			console.log("inside add-link click");
             event.preventDefault();
+			
             var linkData = jQuery.trim($("#link-box").val());
 			
 			if( linkData == '' ) {
@@ -152,6 +154,7 @@ webgloo.sc.question = {
 			} else {
 				webgloo.sc.question.addLink(linkData);
 			}
+			
             $("#link-container").slideUp("slow");
         }) ;
         
@@ -177,8 +180,8 @@ webgloo.sc.question = {
         
         
     },
-    imagePreviewDIV : '<div class="previewImage" id="image-{id}"><img src="/{bucket}/{storeName}" class="resize" alt="{originalName}" width="{width}" height="{height}"/> '
-        + '<div class="previewImageAction"> <a id="{id}" class="remove-image" href="" > Remove </a> </div> </div>',
+    imagePreviewDIV : '<div class="stackImage" id="image-{id}"><img src="/{bucket}/{storeName}" class="thumbnail-1" alt="{originalName}" width="{width}" height="{height}"/> '
+        + '<div> <a class="remove-image" id="{id}" href="">Remove</a> </div> </div>',
     
     linkPreviewDIV : '<div class="previewLink"> {link} &nbsp; <a class="remove-link" href="{link}"> Remove</a> </div> ' ,
     
