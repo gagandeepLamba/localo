@@ -1,6 +1,6 @@
 
 <div id="sidebar">
-    <div class="highlight">
+    <div class="well">
         <p>
            <b> Why we need your email? </b>
 			we need your email to  identify you on our site. We respect your privacy

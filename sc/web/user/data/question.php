@@ -23,59 +23,47 @@
          
 
         <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
-
-        <link rel="stylesheet" type="text/css" href="/3p/yui3/grids-min.css">
+		<link rel="stylesheet" type="text/css" href="/3p/bootstrap/css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="/css/sc.css">
-        
-  
+		<script type="text/javascript" src="/3p/jquery/jquery-1.7.1.min.js"></script>
+		<script type="text/javascript" src="/3p/bootstrap/js/bootstrap.js"></script>
+		
        
     </head>
 
-    <body>
-        <?php include($_SERVER['APP_WEB_DIR'] . '/inc/toolbar.inc'); ?>
-        <div id="body-wrapper">
+     <body>
+		<div class="container">
+			<div class="row">
+				<div class="span12">
+					<?php include($_SERVER['APP_WEB_DIR'] . '/inc/toolbar.inc'); ?>
+				</div> 
 				
-                <div id="hd">
-                    <?php include($_SERVER['APP_WEB_DIR'] . '/inc/banner.inc'); ?>
-                </div>
-				
-                <div id="bd">
-
-                    <div class="yui3-g">
-                       
-                
-                        <div class="yui3-u-2-3">
-                            <div id="content">	
-								<h1> Questions asked by <?php echo $gSessionUser->firstName; ?> </h1>
-								<hr>
+			</div>
+			
+			<div class="row">
+				<div class="span12">
+					<?php include($_SERVER['APP_WEB_DIR'] . '/inc/banner.inc'); ?>
+				</div>
+			</div>
+			
+			
+			<div class="row">
+				<div class="span8">
+					<div class="page-header">
+						<h2> Questions asked by <?php echo $gSessionUser->firstName; ?> </h2>
+					</div>
 									
-								<?php
-									foreach($questionDBRows as $questionDBRow) {
-										$html = \com\indigloo\sc\html\Question::getLinkView($questionDBRow);
-										echo $html ;
-								
-									}
-								?>
-                                   
-                            </div> <!-- content -->
-
-
-                        </div> 
-                        
-                         <div class="yui3-u-1-3">
-                            <!-- sidebar -->
-							
-                        </div>
-                        
-                    </div>
-
-                </div> <!-- bd -->
-
-
-              <div id="js-debug"> </div>
-              
-              
-        </div> <!-- body wrapper -->
+					<?php
+						foreach($questionDBRows as $questionDBRow) {
+							$html = \com\indigloo\sc\html\Question::getLinkView($questionDBRow);
+							echo $html ;
+					
+						}
+					?>
+				</div>
+			</div>
+		</div> <!-- container -->
+		
         <div id="ft">
             <?php include($_SERVER['APP_WEB_DIR'] . '/inc/site-footer.inc'); ?>
         </div>

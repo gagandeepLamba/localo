@@ -7,7 +7,7 @@
 
 			<ul class="nav">
 				<li class="active">
-				  <a href="http://www.3mik.com">Home</a>
+				  <a href="/">Home</a>
 				</li>
 				<li><a href="/test/ful/single.php">Share</a></li>
 				<li><a href="/qa/ask.php">Ask</a></li>

@@ -36,64 +36,50 @@
     
 
         <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
-
-        <link rel="stylesheet" type="text/css" href="/3p/yui3/grids-min.css">
+		<link rel="stylesheet" type="text/css" href="/3p/bootstrap/css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="/css/sc.css">
-        
+		<script type="text/javascript" src="/3p/jquery/jquery-1.7.1.min.js"></script>
+		<script type="text/javascript" src="/3p/bootstrap/js/bootstrap.js"></script>
+		
        
     </head>
 
     <body>
-        <?php include($_SERVER['APP_WEB_DIR'] . '/inc/toolbar.inc'); ?>
-        <div id="body-wrapper">
+		<div class="container">
+			<div class="row">
+				<div class="span12">
+					<?php include($_SERVER['APP_WEB_DIR'] . '/inc/toolbar.inc'); ?>
+				</div> 
 				
-                <div id="hd">
-                    <?php include($_SERVER['APP_WEB_DIR'] . '/inc/banner.inc'); ?>
-                </div>
-				
-                <div id="bd">
-
-                    <div class="yui3-g">
-                       
-                
-                        <div class="yui3-u-2-3">
-                            <div id="content">
-								<h1> Account Page </h1>
-								<hr>
-								
-								<?php echo \com\indigloo\sc\html\User::getProfile($userDBRow) ; ?>
-								<div class="yui3-g">
-									<div class="yui3-u-1-2">
-										<?php echo \com\indigloo\sc\html\User::getQuestionBox($userId,$questionDBRows) ;  ?>
-									</div>
-									<div class="yui3-u-1-2">
-										<?php echo \com\indigloo\sc\html\User::getAnswerBox($userId,$answerDBRows) ;  ?>
-									</div>
-								</div> <!-- 1x2 grid -->
-								
-								
-								
-							  
-							  
-                            </div> <!-- content -->
-
-
-                        </div> 
-                        
-                         <div class="yui3-u-1-3">
-                             <?php include('sidebar/register.inc'); ?>
-                        </div>
-                        
-                    </div> 
-
-
-                </div> <!-- bd -->
-
-
-              <div id="js-debug"> </div>
-              
-              
-        </div> <!-- body wrapper -->
+			</div>
+			
+			<div class="row">
+				<div class="span12">
+					<?php include($_SERVER['APP_WEB_DIR'] . '/inc/banner.inc'); ?>
+				</div>
+			</div>
+			
+			
+			<div class="row">
+				<div class="span8">
+					<div class="page-header">
+						<h2> Account page of <?php echo $gSessionUser->firstName; ?> </h2>
+					</div>
+					<div>
+						<?php echo \com\indigloo\sc\html\User::getProfile($userDBRow) ; ?>
+						<div class="row">
+							<div class="span4">
+								<?php echo \com\indigloo\sc\html\User::getQuestionBox($userId,$questionDBRows) ;  ?>
+							</div>
+							<div class="span4">
+								<?php echo \com\indigloo\sc\html\User::getAnswerBox($userId,$answerDBRows) ;  ?>
+							</div>
+						</div> <!-- 1x2 grid -->
+					</div>	<!-- content -->
+				</div>
+			</div>
+		</div> <!-- container -->
+		
         <div id="ft">
             <?php include($_SERVER['APP_WEB_DIR'] . '/inc/site-footer.inc'); ?>
         </div>

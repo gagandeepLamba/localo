@@ -24,56 +24,47 @@
 
         <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
 
-        <link rel="stylesheet" type="text/css" href="/3p/yui3/grids-min.css">
+        <link rel="stylesheet" type="text/css" href="/3p/bootstrap/css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="/css/sc.css">
-        
-  
+		<script type="text/javascript" src="/3p/jquery/jquery-1.7.1.min.js"></script>
+		<script type="text/javascript" src="/3p/bootstrap/js/bootstrap.js"></script>
+		
        
     </head>
 
-    <body>
-        <?php include($_SERVER['APP_WEB_DIR'] . '/inc/toolbar.inc'); ?>
-        <div id="body-wrapper">
+     <body>
+		<div class="container">
+			<div class="row">
+				<div class="span12">
+					<?php include($_SERVER['APP_WEB_DIR'] . '/inc/toolbar.inc'); ?>
+				</div> 
 				
-                <div id="hd">
-                    <?php include($_SERVER['APP_WEB_DIR'] . '/inc/banner.inc'); ?>
-                </div>
-				
-                <div id="bd">
-
-                    <div class="yui3-g">
-                       
-                
-                        <div class="yui3-u-2-3">
-                            <div id="content">	
-								
-								<?php
-									foreach($questionDBRows as $questionDBRow) {
-										$html = \com\indigloo\sc\html\Question::getSummary($questionDBRow);
-										echo $html ;
-								
-									}
-								?>
-                                   
-                            </div> <!-- content -->
-
-
-                        </div> 
-                        
-                         <div class="yui3-u-1-3">
-                            <!-- sidebar -->
-							<?php include($_SERVER['APP_WEB_DIR'] . '/inc/sidebar/home.inc'); ?>
-                        </div>
-                        
-                    </div>
-
-                </div> <!-- bd -->
-
-
-              <div id="js-debug"> </div>
+			</div>
+			
+			<div class="row">
+				<div class="span12">
+					<?php include($_SERVER['APP_WEB_DIR'] . '/inc/banner.inc'); ?>
+				</div>
+			</div>
+			
+			
+			<div class="row">
+				<div class="span8">
+					<div>
+						<?php
+							foreach($questionDBRows as $questionDBRow) {
+								$html = \com\indigloo\sc\html\Question::getSummary($questionDBRow);
+								echo $html ;
+						
+							}
+						?>
+						   
+					</div><!-- content -->
+				</div> 
+			</div>
+		</div>  
               
-              
-        </div> <!-- body wrapper -->
+       
         <div id="ft">
             <?php include($_SERVER['APP_WEB_DIR'] . '/inc/site-footer.inc'); ?>
         </div>

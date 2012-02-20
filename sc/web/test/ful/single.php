@@ -41,15 +41,7 @@
 		 
 		<script type="text/javascript" src="/3p/ful/valums/fileuploader.js" ></script>
 		<script type="text/javascript" src="/js/sc.js"></script>
-		<style type="text/css">
-			.qq-upload-list {
-				/* display :none ;*/
-			}
-			#site-search{
-				height:28px;
-				width:480px;
-			}
-		</style>
+		
 	  
         <script type="text/javascript">
        
