@@ -102,7 +102,14 @@ namespace com\indigloo {
             $input = preg_replace('/\s\s+/', ' ', $input);
             return $input;
         }
-
+        
+        /*
+         * if you are not bothered about words breaking in the middle
+         * then use php  substr. abbreviate is good for preserving "proper"
+         * words.
+         * 
+         */
+        
         static function abbreviate($input,$width) {
             if(empty($input)) return $input ;
             
