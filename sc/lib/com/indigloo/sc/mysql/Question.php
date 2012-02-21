@@ -42,11 +42,11 @@ namespace com\indigloo\sc\mysql {
 		}
 		
 		
-		static function getAll($filter) {
+		static function getAll() {
 			
 			$mysqli = MySQL\Connection::getInstance()->getHandle();
-            $sql = " select * from sc_question order by id desc " ;
-			$sql .= $filter ;
+            $sql = " select * from sc_question order by id desc LIMIT 50" ;
+			
 			
             $rows = MySQL\Helper::fetchRows($mysqli, $sql);
             return $rows;

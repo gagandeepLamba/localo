@@ -20,19 +20,8 @@
 		background : #FFFFFF ;
 	}
 	
-	#body-wrapper {
-		width:960px;
-		margin-left:80px;
-		background:#FFF;
-		border-left: 1px solid #bfbebe;
-		border-right: 1px solid #bfbebe;
-		border-bottom: 1px solid #bfbebe;
-		padding: 15px;
-		-webkit-border-radius: 0 0 5px 5px;
-		-moz-border-radius: 0 0 5px 5px;
-		border-radius: 0 0 5px 5px;
-	
-		
+	.dark-body{
+		background-color:#E9E9E9;
 	}
 	
 	a {
@@ -57,20 +46,6 @@
 		margin: 0 0 1em;
 		padding: 0;
 	}
-	h1 {
-		font-size :18px;	
-	}
-	h2 {
-		font-size:16px;	
-	}
-	h3{
-		margin:0 0 2px;
-		color:#494949;
-	}
-	
-	h4 {
-		font-size:12px;
-	}
 	
 	input, select, textarea {
 		font-family: inherit;
@@ -82,8 +57,6 @@
 		margin: 0 0 1em 0;
 		padding: 0;
 	}
-	
-	/* - Global resets */
 	
 	
 	/* + Common classes */
@@ -103,45 +76,9 @@
 		background: #a1a1a1;
 	}
 	
-	input.text {
-	}
-	
-	input.submit {
-	}
-	
-	table.reset {
-		border: 0;
-		border-collapse: collapse;
-	}
-	
-	table.reset td,
-	table.reset th {
-		padding: 0;
-	}
-	
-	ul.reset {
-		list-style-type: none;
-		margin: 0;
-		padding: 0;
-	}
-	
-	ul.reset li {
-		margin: 0;
-		padding: 0;
-	}
-	
-	
 	.clear {clear:both;}
 	.floatl {float:left;}
 	.floatr {float:right;}
-	
-	/*
-	  * generic red and green will interfere with
-	  * .green and .red classes used by swfupload progress bar
-	  * (see swfupload/js/fileprogress.js)
-	  * and that is kind of stupid..
-	  * 
-	  */
 	
 	.color-red {color:#f80813;}
 	.red-label {color:red;}
@@ -163,23 +100,13 @@
 	.pt10 {padding-top:10px;}
 	.p10 {padding:10px;}
 	.p20 {padding:20px;}
+	
 	.bbd5 {
 		border-bottom : 1px solid #D5D5D5 ;
 	}
 	.thick-dashed-border {
 		border-bottom : 2px dashed black ;
 	}
-	
-	/* - Common classes */
-	
-	
-	
-	.h-content,
-	.f-content {
-		width: 960px;
-		margin: 0 auto;
-	}
-	
 	
 	#header {
 		padding: 10px;
@@ -196,103 +123,17 @@
 		text-decoration : none;
 	}
 	
-	#banner {
-		background:url('images/head-bg.jpg') no-repeat center 0;
-		height:207px;
-    }
-	
 	#content {
 		padding-top:10px;
 		min-height : 600px;
 	}
 	
-	
-	#footer {
-		background:#000000;
-		padding:16px 0 6px;
-		font-family: Arial, Helvetica, sans-serif;
-		color: #bfbebe;
-		margin-top:28px;
-	}
-	
-	/* --------------- Header --------------- */
-	
-	#banner h3 {
-		
-		color:#2288cc;
-        font-size: 36px;
-        float:right;
-        margin-top: 88px;
-        font-family:"Myriad Pro",Arial,Helvetica,Tahoma,sans-serif;
-		
-	}
-	
-	#logo {
-		margin-top:18px;
-		float: left;
-	}
-	
-	#search-top {
-		float: right;
-		height: 24px;
-		width: 340px;
-		font-family:Arial,Helvetica,Tahoma,sans-serif;
-		padding-top: 28px;
-	}
-	
-	#searchform {
-		float:right;
-		background:#FFF;
-		height:16px;
-		width:316px;
-	}
-	#searchform #s {
-		border:none;
-		background:transparent;
-		font-family:"Myriad Pro",Arial,Helvetica,Tahoma,sans-serif;
-		color:#949494;
-		padding: 1px 5px;
-		width: 290px;
-		outline:none;
-	}
-	
-	#searchform .button {
-		
-		background: url(images/search-btn.png) center no-repeat;
-		border: 0;
-		cursor:pointer;
-		vertical-align:top;
-	}
-		
-		
-	#login {
-		font-size:11px;
-		padding-top: 2px;
-	}
-	
-	#login a {color:#FFF;}
-	#login .loginout {
-		background: url("images/login-bg.png") no-repeat scroll 0 0 transparent;
-		padding: 0 2px 0 14px;
-	}
-	
-	#login .register {
-		background: url('images/login-bg.png') no-repeat right bottom;
-		padding:0 14px 0 2px;
-	}
-	
-	#hcenter {
-		margin:0 0 0 260px;
-		font-size:16px;
-		font-family:Arial,Helvetica,Tahoma,sans-serif;
-		padding-top:27px;
-	}
-	
-	
-	/* --------------- Footer --------------- */
+	/* + Footer */
 	
 	.f-content {
 		text-align:right;
+		width: 960px;
+		margin: 0 auto;
 	}
 	
 	#copyright {
@@ -314,31 +155,14 @@
 		background-position: 0 -36px;
 	}
 	
+	#footer {
+		background:#000000;
+		padding:16px 0 6px;
+		font-family: Arial, Helvetica, sans-serif;
+		color: #bfbebe;
+		margin-top:28px;
+	}
 	
-	/* --------------- Menu --------------- */
-	
-	#main-menu {
-		/* background: url('images/menu-bg.jpg') no-repeat left center; */
-		height: 60px;
-		font-size: 20px;
-		font-family:"Myriad Pro",Arial,Helvetica,Tahoma,sans-serif;
-		line-height: 60px;
-	}
-	#main-menu ul {
-		list-style:none;
-		margin:0;
-		padding:0;
-		text-align: center;
-		color: #b9b9b9;
-		width:662px;
-	}
-	#main-menu ul li {
-		display:inline;
-		
-	}
-	#main-menu ul li a {
-		margin: 0 12px;
-	}
 	
 	#f-menu {}
 	#f-menu ul {
@@ -357,7 +181,7 @@
 	}
 	
 	
-	/* forms stuff */
+	/* + custom web forms stuff */
 	
 	div #form-wrapper {
 		margin-left: 20px;
@@ -403,26 +227,6 @@
 	.form-table .h430{ height: 430px;}
 	
 	
-	.button-container {
-		padding:10px;
-	}
-	
-	.form-button {
-		background:url('/css/images/btn-bg.png') repeat-x 0 0;
-		border:none;
-		border-left:1px solid #344b86;
-		border-right:1px solid #445a8f;
-		height:25px;
-		line-height:25px;
-		padding:0 15px;
-		font-family:"Myriad Pro",Arial,Helvetica,Tahoma,sans-serif;
-		color:#FFF;
-		/* text-shadow:1px 1px 1px #333; */
-		font-weight : bold ;
-		cursor : hand ;
-	}
-	
-	
 	div .form-error {
 		margin-bottom: 10px;
 		margin-top: 10px;
@@ -444,19 +248,7 @@
 	}
 	
 	
-	div .share-toolbar {
-		margin-top:40px;
-		padding: 10px;
-		border:1px solid #EBEBEB ;
-		
-	}
-	
-	div .organization {
-		margin-top : 20px;
-	}
-	
-	
-	/* ----- new styles ------ */
+	/* ----- sc app styles ------ */
 	
 	
 	.author{
@@ -507,252 +299,7 @@
 	
 	}
 	
-	
-	.meta {
-			
-		font-size: 12px;
-		padding: 5px 0;
-		color: gray;
-	}
-	
-	
-	/* ------ top filter ------ */
-	
-	.fb_top {
-		font-size:14px;
-		font-weight:bold;
-		font-family:Arial;
-		height:18px;
-		line-height:18px;
-		padding-bottom:20px;
-		border-bottom :3px solid #3E71B5;
-	}
-	
-	.fb_top .fb_name {
-		
-		padding-left:25px;
-		padding-right: 8px;
-	}
-	.fb_top .fb_filter {
-		padding-left:8px;
-		padding-right: 10px;
-		position:relative;
-	}
-	.fb_top .afilter {
-		
-		padding-right:15px;
-		color: #3E71B5;
-		/* text-decoration :underline; */
-	}
-	.fb_top .fb_selector {
-		border: 1px solid #BBBBBB;
-		position:absolute;
-		right: 0;
-		background:#FFF;
-		padding:5px 10px;
-		display: none;
-	}
-	.fb_top .fb_selector a {
-		color: #3E71B5;
-		display:block;
-		padding: 0 10px;
-	}
-	.fb_top .fb_selector a:hover {
-		background: #3E71B5;
-		color:#FFF;
-		text-decoration:none;
-	}
-	.fb_selector a.current {
-		color:#111;
-		cursor:default;
-	}
-	.fb_selector a.current:hover {
-		color:#111;
-		background:transparent;
-	}
-	
-	/* --- end top filter --- */
-	
-	
-	/* star rating */
-	
-	.rating-static {
-	  width: 60px;
-	  height: 16px;
-	  display: block;
-	  background: url('images/star-rating.png') 0 0 no-repeat;
-	}
-	
-	
-	.rating-50 { background-position: 0 0; }
-	.rating-40 { background-position: -12px 0; }
-	.rating-30 { background-position: -24px 0; }
-	.rating-20 { background-position: -36px 0; }
-	.rating-10 { background-position: -48px 0; }
-	.rating-0 { background-position: -60px 0; }
-	
-	.rating-5  { background-position: -48px -16px; }
-	.rating-15 { background-position: -36px -16px; }
-	.rating-25 { background-position: -24px -16px; }
-	.rating-35 { background-position: -12px -16px; }
-	.rating-45 { background-position: 0 -16px; }
-	
-	/* end - star rating */
-	
-	.doc-table {
-		font-weight : normal ;
-		font-size :13px;
-		
-	}
-	
-	.doc-table td {
-		padding: 5px 20px 0 0;
-	}
-	
-	/* style - swfupload */
-	#form-wrapper #fsUploadProgress .legend {
-		font-size: 14px;
-		font-weight: bold;
-		padding-top:10px;
-	
-	}
-	
-	
-	#form-wrapper .fieldset {
-		/* padding: 10px; */
-		width: 400px;
-		margin-bottom:5px;
-	
-	}
-	
-	#form-wrapper #divStatus {
-		padding:20px;
-		
-	}
-	
-	.uploadCancelButton{
-		margin-left: 5px;
-		font-size: 18px;
-		height: 22px;
-		font-weight: bold ;
-		padding:1px;
-		
-	}
-	
-	.progressWrapper {
-		width: 357px;
-		overflow: hidden;
-	}
-	
-	.progressContainer {
-		margin: 5px;
-		padding: 4px;
-		border: solid 1px #E8E8E8;
-		background-color: #F7F7F7;
-		overflow: hidden;
-	}
-	
-	.message {
-		margin: 1em 0;
-		padding: 10px 20px;
-		border: solid 1px #FFDD99;
-		background-color: #FFFFCC;
-		overflow: hidden;
-	}
-	/* Error */
-	
-	.red {
-		border: solid 1px #B50000;
-		background-color: #FFEBEB;
-	}
-	
-	/* Current */
-	.green {
-		border: solid 1px #DDF0DD;
-		background-color: #EBFFEB;
-	}
-	
-	/* Complete */
-	.blue {
-		border: solid 1px #CEE2F2;
-		background-color: #F0F5FF;
-	}
-	
-	.progressName {
-		font-size: 8pt;
-		font-weight: 700;
-		color: #555;
-		width: 323px;
-		height: 14px;
-		text-align: left;
-		white-space: nowrap;
-		overflow: hidden;
-	}
-	
-	.progressBarInProgress,
-	.progressBarComplete,
-	.progressBarError {
-		font-size: 0;
-		width: 0%;
-		height: 2px;
-		background-color: blue;
-		margin-top: 2px;
-	}
-	
-	.progressBarComplete {
-		width: 100%;
-		background-color: green;
-		visibility: hidden;
-	}
-	
-	.progressBarError {
-		width: 100%;
-		background-color: red;
-		visibility: hidden;
-	}
-	
-	.progressBarStatus {
-		margin-top: 2px;
-		width: 337px;
-		font-size: 7pt;
-		font-family: Arial;
-		text-align: left;
-		white-space: nowrap;
-	}
-	
-	a.progressCancel {
-		font-size: 0;
-		display: block;
-		height: 14px;
-		width: 14px;
-		background-image: url(/3p/swfupload/images/cancelbutton.gif);
-		background-repeat: no-repeat;
-		background-position: -14px 0px;
-		float: right;
-	}
-	
-	a.progressCancel:hover {
-		background-position: 0px 0px;
-	}
-	
-	.swfupload {
-		vertical-align: top;
-	}
-	
-	
-	/* --- end - swfupload styles --- */
-	
-	/* +news application styles */
-	
-	#js-debug {
-		background : #FFFFFF ;
-		color:red ;
-		font-size: 11px;
-		padding:20px;
-		
-	}
-	
-	
+	/* +widgets */
 	
 	.widget {
 		margin-top:10px;
@@ -770,21 +317,20 @@
 		line-height:1;
 		text-align: left;
 	}
+	
 	.widget h2 a {
 		color: #005689;
 		text-decoration: none;
 	}
 	
 	.widget h3{
-			font-weight: bold;
+		font-weight: bold;
 	}
 	
 	.widget h4{
-			font-weight: bold;
-			font-size:12px;
+		font-weight: bold;
+		font-size:12px;
 	}
-	
-	/* Photo Post */
 	
 	.widget .photo {
 		padding: 10px;
@@ -801,8 +347,7 @@
 	.widget .photo img {
 		max-width:90%;
 		border:6px solid #d5d5d5;
-		/* auto width means bigger images will flow out of containers */
-		/* width: auto; */
+		
 	}
 	
 	/* image and video alignment */
@@ -828,7 +373,6 @@
 	
 	.widget .video{
 		width: 100%;
-		
 	}
 	
 	.widget a{
@@ -999,23 +543,23 @@
 	
 	div#link-container {
 		   
-		   background-color:#f0fff0;
-		   width:460px;
-		   /* margin-top :20px;
-		   margin-bottom :20px; */
-		   padding:20px;
-		   /* border: 1px dotted blue; */
-		   
+		background-color:#f0fff0;
+		width:460px;
+		/* margin-top :20px;
+		margin-bottom :20px; */
+		padding:20px;
+		/* border: 1px dotted blue; */
+		
 	}
 	
 	div#link-container input{
-		   word-spacing: 1px;
-		   line-height: 1.8em;
-		   color: #333;
-		   border: 1px solid #bbb;
-		   width: 330px;
-		   height: 24px;
-		   padding-top:4px;
+		word-spacing: 1px;
+		line-height: 1.8em;
+		color: #333;
+		border: 1px solid #bbb;
+		width: 330px;
+		height: 24px;
+		padding-top:4px;
 	}
 	
 	
@@ -1116,8 +660,35 @@
 	}
 
 	#site-search{
-		height:28px;
-		width:480px;
+		margin-top:10px;
+		height:24px;
+		width:280px;
 	}
+	
+	/* + homepage tiles */
+	div #tiles{
+		/* background-color:#E9E9E9; */
+	}
+	
+	.tile {
+		width:250px;
+		margin:2px;
+		border:1px solid #DEDEDE ;
+		float:left ;
+		padding:10px;
+		background-color: #fff;
+		border-radius :2px;
+	}
+	
+	.tile .photo {
+		padding: 10px;
+		
+	}
+	
+	.tile .photo img {
+		max-width:200px;
+		border:5px solid #d5d5d5;
+	}
+	
 	
 	

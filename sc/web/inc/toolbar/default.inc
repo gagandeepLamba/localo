@@ -16,6 +16,10 @@
 				<li><a href="/user/login.php">login</a></li>
 			</ul> <!-- fixed links -->
 			
+			<form>
+				<input id="site-search" name="s" type="text" class="search-query" placeholder="Search">
+			</form>
+			
 		  </div>
 		</div>
 	</div> <!-- navbar -->

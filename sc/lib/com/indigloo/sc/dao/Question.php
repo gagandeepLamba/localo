@@ -24,24 +24,8 @@ namespace com\indigloo\sc\dao {
 			return $rows ;
 		}
 		
-		function getAll($stoken,$ft) {
-			$ft = empty($ft) ? 't' : $ft ;
-			$filter = '' ;
-			
-			if(!empty($stoken)) {
-				switch($ft) {
-					case 'b':
-					case 't':
-						$filter = "where tags like '%".$stoken."%' " ;
-						break ;
-					case 'l' :
-						$filter = "where location like '%".$stoken."%' " ;
-						break ;
-					default :
-						break ;	
-				}
-			}
-			$rows = mysql\Question::getAll($filter);
+		function getAll() {
+			$rows = mysql\Question::getAll();
 			return $rows ;
 		}
 		

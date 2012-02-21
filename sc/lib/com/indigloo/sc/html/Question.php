@@ -58,9 +58,8 @@ namespace com\indigloo\sc\html {
 
 				
 			if(sizeof($images) > 0) {
-				$view->imageClass = 'alignleft resize' ;
 				
-				$template = $_SERVER['APP_WEB_DIR'].'/fragments/question/image.tmpl' ;
+				$template = $_SERVER['APP_WEB_DIR'].'/fragments/tile/image.tmpl' ;
 				
 				/* image stuff */
 				$image = $images[0] ;
@@ -68,15 +67,18 @@ namespace com\indigloo\sc\html {
 				$view->originalName = $image->originalName;
 				$view->bucket = $image->bucket;
 				$view->storedName = $image->storeName;
-				$view->width = $image->width;
-				$view->height = $image->height;
+				
+				$newxy = Util::foldX($image->width,$image->height,200);
+				
+				$view->width = $newxy["width"];
+				$view->height = $newxy["height"];
 				
 				/* image stuff end */
 				$html = Template::render($template,$view);
 				
 			} else {
 				
-				$template = $_SERVER['APP_WEB_DIR'].'/fragments/question/text.tmpl' ;
+				$template = $_SERVER['APP_WEB_DIR'].'/fragments/tile/text.tmpl' ;
 				$html = Template::render($template,$view);
 			}
 			

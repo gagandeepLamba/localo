@@ -12,7 +12,7 @@
     $sticky = new Sticky($gWeb->find(Constants::STICKY_MAP,true));
     
 	$questionDao = new \com\indigloo\sc\dao\Question();
-    $questionDBRows = $questionDao->getAll($_GET['stoken'], $_GET['ft']);
+    $questionDBRows = $questionDao->getAll();
 	
 ?>  
 
@@ -28,11 +28,25 @@
         <link rel="stylesheet" type="text/css" href="/css/sc.css">
 		<script type="text/javascript" src="/3p/jquery/jquery-1.7.1.min.js"></script>
 		<script type="text/javascript" src="/3p/bootstrap/js/bootstrap.js"></script>
+		<script type="text/javascript" src="/3p/jquery/masonary/jquery.masonry.min.js"></script>
+	    
 		
-       
+		<script type="text/javascript">
+			/* column width = css width + margin */
+			$(document).ready(function(){
+				var $container = $('#tiles');
+				$container.imagesLoaded(function(){
+					$container.masonry({
+						itemSelector : '.tile'
+						
+					});
+				});
+			});
+		</script>
+		
     </head>
 
-     <body>
+     <body class="dark-body">
 		<div class="container">
 			<div class="row">
 				<div class="span12">
@@ -49,8 +63,8 @@
 			
 			
 			<div class="row">
-				<div class="span8">
-					<div>
+				<div class="span12">
+					<div id="tiles">
 						<?php
 							foreach($questionDBRows as $questionDBRow) {
 								$html = \com\indigloo\sc\html\Question::getSummary($questionDBRow);
@@ -59,10 +73,12 @@
 							}
 						?>
 						   
-					</div><!-- content -->
+					</div><!-- tiles -->
 				</div> 
 			</div>
-		</div>  
+			
+			
+		</div>  <!-- container -->
               
        
         <div id="ft">

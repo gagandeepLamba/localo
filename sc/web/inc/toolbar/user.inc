@@ -28,7 +28,10 @@
 				  </ul>
 				</li>
 		  </ul> <!-- Account links -->
-		
+			
+			<form>
+				<input id="site-search" name="s" type="text" class="search-query" placeholder="Search">
+			</form>
 			
 		  </div>
 		</div>
