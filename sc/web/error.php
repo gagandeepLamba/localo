@@ -19,7 +19,7 @@
         
              body {
                 text-align: center;
-                color: white ;
+                color: black ;
             }
             
             .centered {
@@ -28,29 +28,27 @@
                 left: 50%;
                 margin-top: -175px;
                 margin-left: -230px;
-                font-family : courier,Arial, sans-serif ;
-                font-size : 14px;
+                font-family : Arial, sans-serif ;
+                font-size : 13px;
             }
 
             #mini_inner {
-                background-color: black;
-                width:360px ;
+                background-color: whiteSmoke;
+                width:400px ;
                 padding: 50px;
-                height:250px;
-                -moz-border-radius: 4px;
-                -webkit-border-radius: 4px;
-                border-radius: 4px;
-                -moz-box-shadow: 0 0 10px rgba(0,0,0,0.5);
-                -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.5);
+                /* height:225px; */
+                border-radius: 10px;
                 z-index:1;
             }
+
+			#mini_inner a {
+				text-decoration : none ;
+
+			}
            
-           #mini_inner a {
-                color : white ;
-           }
             .error{
                 display :block ;
-                color :yellow ;
+                color :red ;
             }
 
 
@@ -61,12 +59,12 @@
         <div id="mini_inner" class="centered">
             <img src="/css/images/alert.png" alt="alert" class="alert">
             <h1> Error! We Apologize.</h1>
-            <p>This page has encountered an error.
-                <span class="error"> <?php echo $error ; ?></span>
-                To know more you can examine the logs or contact your administrator.
-                <br/>
-                <br/>
-                Go back to  <a href="/"> Home page</a>.</p>
+            <p>This page has encountered an error </p>
+			<div class="error"> <?php echo $error ; ?> </div>
+			<br>
+			<p> To know more you can examine the logs or contact your administrator. </p>
+			<br>
+			Go back to  <a href="/"> Home page</a>
         </div>
 
 
