@@ -128,7 +128,7 @@
 							</tr>
 							<tr>
 								<td>
-									<div id="link-preview"> </div>
+									<div id="link-preview"> <div id="image"> </div> </div>
 									<div id="link-data"> </div>
 									<div id="image-data"> </div>
 								</td>

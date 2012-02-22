@@ -1,0 +1,3 @@
+
+share - Add - sidebar
+remove form-message style from sc.css
