@@ -24,18 +24,20 @@ namespace com\indigloo\sc\html {
 		static function getEditBar($sessionUser,$questionDBRow) {
 			
 			$html = NULL ;
+			$id = $questionDBRow['id'] ;
+
+			$buffer = '<span> <a class="btn btn-primary" href="#form-wrapper">Add Comment</a></span>' ;
 			
-			if(is_null($sessionUser) ||  ($sessionUser->email != $questionDBRow['user_email'])) {
-				return '' ;
+			if(!is_null($sessionUser) && ($sessionUser->email == $questionDBRow['user_email'])) {
+				$buffer .= '<span> <a class="btn btn-primary" href="/qa/edit.php?id='.$id.'">Edit</a></span>' ;
 			}
 			
 			$template = $_SERVER['APP_WEB_DIR'].'/fragments/question/edit-bar.tmpl' ;
 			$view = new \stdClass;
-			$view->id = $questionDBRow['id'];
 			
+			$view->content = $buffer;
 			$html = Template::render($template,$view);
 			return $html ;
-						
 		}
 		
         static function getSummary($questionDBRow) {

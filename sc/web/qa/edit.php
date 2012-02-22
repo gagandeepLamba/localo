@@ -1,6 +1,6 @@
 <?php
 
-    //sc/qa/new.php
+    //sc/qa/edit.php
     include ('sc-app.inc');
     include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
     include($_SERVER['APP_WEB_DIR'] . '/inc/role/user.inc');
@@ -11,14 +11,27 @@
     use com\indigloo\ui\form\Message as FormMessage;
      
     $sticky = new Sticky($gWeb->find(Constants::STICKY_MAP,true));
-    
-    $strImagesJson = $sticky->get('images_json') ;
-    $strLinksJson = $sticky->get('links_json') ;
-    
+
+	$questionId = NULL ;
+
+    if(!array_key_exists('id',$_GET) || empty($_GET['id'])) {
+        trigger_error('question id is missing from request',E_USER_ERROR);
+    } else {
+        $questionId = $_GET['id'];
+    }
+
+
+    $questionDao = new com\indigloo\sc\dao\Question();
+    $questionDBRow = $questionDao->getOnId($questionId);
+    $imagesJson = $questionDBRow['images_json'];
+
+
+    $strImagesJson = $sticky->get('images_json',$questionDBRow['images_json']) ;
+    $strLinksJson = $sticky->get('links_json',$questionDBRow['links_json']) ;
+
     $strImagesJson = empty($strImagesJson) ? '[]' : $strImagesJson ;
     $strLinksJson = empty($strLinksJson) ? '[]' : $strLinksJson ;
 
-    
 ?>  
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -38,7 +51,7 @@
 		<script type="text/javascript" src="/3p/bootstrap/js/bootstrap.js"></script>
 		 
 		<script type="text/javascript" src="/3p/ful/valums/fileuploader.js" ></script>
-		<script type="text/javascript" src="/3p/json2.js" ></script>
+		<script type="text/javascript" src="/js/json2.js"></script>
 		<script type="text/javascript" src="/js/sc.js"></script>
 		
 	  
@@ -50,7 +63,7 @@
 					   errorLabelContainer: $("#web-form1 div.error") 
 				});
 					
-				webgloo.media.init(["image","link"]);
+				webgloo.media.init(["link","image"]);
 				webgloo.media.attachEvents();
 				  
 				var uploader = new qq.FileUploader({
@@ -61,10 +74,8 @@
 						 webgloo.media.addImage(responseJSON.mediaVO);
 					}
 				});
-			 
             });
 			
-            
         </script>
        
        
@@ -96,8 +107,10 @@
 					
 					<?php FormMessage::render(); ?>
 					
-					<form  id="web-form1"  name="web-form1" action="/qa/form/new.php" enctype="multipart/form-data"  method="POST">
+					<form  id="web-form1"  name="web-form1" action="/qa/form/edit.php" enctype="multipart/form-data"  method="POST">
 						<div class="row">
+							
+							
 							<div class="span4">
 								Category&nbsp;
 								<?php
@@ -107,16 +120,15 @@
 									?>
 								
 							</div>
-							<div class="span4">
-								<div id="image-uploader"> </div>
-							</div>
-						</div> <!-- top row -->
+							<div class="span4"><div id="image-uploader"> </div></div>
+						</div>
 						<table class="form-table">
+							
 							
 							<tr>
 								<td>
 									<label>Details</label>
-									<textarea  name="description" class="required h130 w500" cols="50" rows="4" ><?php echo $sticky->get('description'); ?></textarea>
+									<textarea  name="description" class="required h130 w500" cols="50" rows="4" ><?php echo $sticky->get('description',$questionDBRow['description']); ?></textarea>
 								</td>
 							</tr>
 							<tr>
@@ -145,18 +157,20 @@
 						 
 						<input type="hidden" name="links_json" value='<?php echo $strLinksJson ; ?>' />
 						<input type="hidden" name="images_json" value='<?php echo $strImagesJson ; ?>' />
-						<input type="hidden" name="q" value="<?php echo $_SERVER["REQUEST_URI"]; ?>" />
-												
+						<input type="hidden" name="question_id" value="<?php echo $questionDBRow['id'];?>" />	
+						<input type="hidden" name="q" value="<?php echo $_SERVER["REQUEST_URI"];?>" />	
+						        
 					</form>
+					
 									
 				   
-				</div> <!-- span8 -->
+				</div> <!-- content -->
 				
 				<div class="span4">
 					 <?php include($_SERVER['APP_WEB_DIR'] .'/qa/sidebar/ask.inc'); ?>
 				</div>
 			
-			</div> <!-- row -->
+			</div>
 			
 		</div> <!-- container -->   
                       

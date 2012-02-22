@@ -21,23 +21,19 @@
         
         $fvalues = $fhandler->getValues();
         $ferrors = $fhandler->getErrors();
+		$qUrl = $fvalues['q'];
 		
         if ($fhandler->hasErrors()) {
-            $locationOnError = Url::createUrl('/qa/answer/edit.php', array('id' => $fvalues['answer_id'])) ;
             $gWeb->store(Constants::STICKY_MAP, $fvalues);
             $gWeb->store(Constants::FORM_ERRORS,$fhandler->getErrors());
             
-            header("location: " . $locationOnError);
+            header("location: " . $qUrl);
             exit(1);
 			
         } else {
             
             $answerDao = new com\indigloo\sc\dao\Answer();
-							   
-            $code = $answerDao->update(
-								$fvalues['answer_id'],
-								$fvalues['answer']
-								);
+            $code = $answerDao->update( $fvalues['answer_id'], $fvalues['answer']);
             
             if ($code == com\indigloo\mysql\Connection::ACK_OK ) {
                 $locationOnSuccess = Url::createUrl('/qa/show.php', array('id' => $fvalues['question_id'])) ;
@@ -47,8 +43,7 @@
                 $message = sprintf("DB Error: (code is %d) please try again!",$code);
                 $gWeb->store(Constants::STICKY_MAP, $fvalues);
                 $gWeb->store(Constants::FORM_ERRORS,array($message));
-                $locationOnError = Url::createUrl('/qa/answer/edit.php', array('id' => $fvalues['answer_id'])) ;
-                header("location: " . $locationOnError);
+                header("location: " . $qUrl);
                 exit(1);
             }
             

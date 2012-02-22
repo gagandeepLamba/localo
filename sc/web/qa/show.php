@@ -51,27 +51,27 @@
 		<script type="text/javascript" src="/3p/jquery/jquery-1.7.1.min.js"></script>
 		<script type="text/javascript" src="/3p/bootstrap/js/bootstrap.js"></script>
 		
-        <script type="text/javascript" src="/3p/jquery/jquery.tinycarousel.min.js"></script>
         <script type="text/javascript" src="/3p/jquery/jquery.validate.1.9.0.min.js"></script>
+
+        <script type="text/javascript" src="/3p/json2.js"></script>
         <script type="text/javascript" src="/js/sc.js"></script>
 			
         <script type="text/javascript">			
             $(document).ready(function(){				
-                        
-                $('#slider-code').tinycarousel({ pager: true });
+
+				webgloo.media.init(["link"]);
+				webgloo.media.attachEvents();
 
 				$("#web-form1").validate({
 					errorLabelContainer: $("#web-form1 div.error") 
 				});
-				
-				webgloo.sc.answer.attachEvents();
-				webgloo.sc.answer.init();
 
-                
+				$('#myCarousel').carousel({
+				  interval: 2000
+				});
+				
             });
         </script>
-        
-  
        
     </head>
 
@@ -94,30 +94,29 @@
 			<div class="row">
 				<div class="span8">
                            
-				<?php if(sizeof($images) > 0 ) { include('inc/slider.inc') ; } ?>
+				<?php if(sizeof($images) > 0 ) { include('inc/carousel.inc') ; } ?>
 			
 				<div class="widget well">
-					<h2> <?php echo $questionDBRow['title'] ; ?> </h2>
+					 <div class="regular">
+						<?php echo $questionDBRow['description'] ; ?>
+					 </div>
 					<div class="author">
 					   <span class="b"><a href="#"> <?php echo $questionDBRow['user_name'] ; ?> </a> </span>
 					   <span class="date">  posted on <?php echo Util::formatDBTime($questionDBRow['created_on']) ; ?> </span>
 					</div>
-						
-					 <div class="regular">
-						<?php echo $questionDBRow['description'] ; ?>
-					 </div>
 					
-					<div class="mt20 tags"> Tags&nbsp;<?php echo $questionDBRow['tags']; ?> </div>
+					<div class="tags"> Tags&nbsp;<?php echo $questionDBRow['tags']; ?> </div>
 					
 				</div>
 				
 				<?php echo \com\indigloo\sc\html\Question::getEditBar($gSessionUser,$questionDBRow) ; ?>
 				
-				<div class="mt20 thick-dashed-border">
-					<h3> &nbsp; </h3>
+				
+				<div class="page-header">
+					<h2>Comments </h2>
 				</div>
-				<div class="orange-button" style="width:auto;float:right"> <a href="#form-wrapper">Answer this Question</a> </div>
-				<div class="ml40">
+
+				<div>
 					<?php
 						foreach($answerDBRows as $answerDBRow) {
 							echo \com\indigloo\sc\html\Answer::getSummary($gSessionUser,$answerDBRow) ;
@@ -129,19 +128,15 @@
                 <br/>
 
                 <?php FormMessage::render(); ?>
-				
+				<div id="form-wrapper">	
 				<form id="web-form1"  name="web-form1" action="/qa/form/answer.php" enctype="multipart/form-data"  method="POST">
 
 					<div class="error">  </div>
 
 					<table class="form-table">
-						<tr>
-							<td class="field">Your Answer</td>
-						 </tr>
-						
 						 <tr>
 							<td>
-								<textarea  name="answer" class="required h130" title="Answer is required" cols="50" rows="4" ><?php echo $sticky->get('answer'); ?></textarea>
+								<textarea  name="answer" class="required h130 w500" title="Answer is required" cols="50" rows="4" ><?php echo $sticky->get('answer'); ?></textarea>
 							</td>
 						 </tr>
 						 
@@ -149,17 +144,14 @@
 					</table>
 					
 					 <div class="form-actions">
-						<button class="btn btn-primary" type="submit" name="save" value="Save" onclick="this.setAttribute('value','Save');" ><span>Add your answer</span></button>
-						 <a href="/">
-							<button class="btn" type="button" name="cancel"><span>Cancel</span></button>
-						</a>
-						
+						<button class="btn btn-primary" type="submit" name="save" value="Save" onclick="this.setAttribute('value','Save');" ><span>Add your comment</span></button>
 					</div>
 
 				   <input type="hidden" name="question_id" value="<?php echo $questionDBRow['id']; ?>" />
 				   <input type="hidden" name="q" value="<?php echo $_SERVER['REQUEST_URI']; ?>" />
 				   
 				</form>
+				</div> <!-- wrapper -->
 				
 			</div>
 		</div>

@@ -1,5 +1,5 @@
 <?php
-    //qa/form/ask.php
+    //qa/form/edit.php
     
     include 'sc-app.inc';
     include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
@@ -16,36 +16,32 @@
 
     if (isset($_POST['save']) && ($_POST['save'] == 'Save')) {
         
-		//do not munge form data
         $fhandler = new Form\Handler('web-form-1', $_POST);
-        $fhandler->addRule('title', 'Title', array('required' => 1, 'maxlength' => 128));
-        $fhandler->addRule('tags', 'Tags', array('required' => 1));
         
 		$fhandler->addRule('links_json', 'links_json', array('noprocess' => 1));
 		$fhandler->addRule('images_json', 'images_json', array('noprocess' => 1));
 		
         $fvalues = $fhandler->getValues();
         $ferrors = $fhandler->getErrors();
+		$qUrl = $fvalues['q'];
 		
         if ($fhandler->hasErrors()) {
-            $locationOnError = Url::createUrl('/qa/edit.php', array('id' => $fvalues['question_id'])) ;
             $gWeb->store(Constants::STICKY_MAP, $fvalues);
             $gWeb->store(Constants::FORM_ERRORS,$fhandler->getErrors());
-            
-            header("location: " . $locationOnError);
+            header("location: " . $qUrl);
             exit(1);
 			
         } else {
             
             $questionDao = new com\indigloo\sc\dao\Question();
-							   
+			$title = Util::abbreviate($fvalues['description'],128);		
             $code = $questionDao->update(
 								$fvalues['question_id'],
-								$fvalues['title'],
+								$title,
                                 $fvalues['description'],
                                 $fvalues['category'],
-                                $fvalues['location'],
-                                $fvalues['tags'],
+                                'location',
+                                'tags',
                                 $_POST['links_json'],
                                 $_POST['images_json']);
             
@@ -57,8 +53,7 @@
                 $message = sprintf("DB Error: (code is %d) please try again!",$code);
                 $gWeb->store(Constants::STICKY_MAP, $fvalues);
                 $gWeb->store(Constants::FORM_ERRORS,array($message));
-                $locationOnError = Url::createUrl('/qa/edit.php', array('id' => $fvalues['question_id'])) ;
-                header("location: " . $locationOnError);
+                header("location: " . $qUrl);
                 exit(1);
             }
             
