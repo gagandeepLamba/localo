@@ -18,7 +18,8 @@ namespace com\indigloo\ui\form {
             $errors = $gWeb->find(Constants::FORM_ERRORS,true);
             
             if(sizeof($errors) > 0 ) {
-                printf("<div class=\"form-error\">");
+                printf("<div class=\"alert alert-block alert-error\">");
+                printf("<a class=\"close\" data-dismiss=\"alert\" href=\"#\">x</a>");
                 printf("<ul>");
                 foreach($errors as $error) {
                     printf("<li>  %s </li>", $error);
@@ -29,7 +30,8 @@ namespace com\indigloo\ui\form {
             }
             
             if(sizeof($messages) > 0 ) {
-                printf("<div class=\"form-message\">");
+                printf("<div class=\"alert\">");
+                printf("<a class=\"close\" data-dismiss=\"alert\" href=\"#\">x</a>");
                 printf("<ul>");
                 foreach($messages as $message) {
                     printf("<li>  %s </li>", $error);

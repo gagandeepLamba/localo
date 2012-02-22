@@ -63,7 +63,6 @@
     
     }
 	
-	
 	/*
 	$path = $_GET['qqfile'];
 	$path = "/Users/rjha/web/upload/ful/".$path;

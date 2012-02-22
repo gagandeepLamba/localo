@@ -1,5 +1,5 @@
 <?php
-    //qa/form/ask.php
+    //qa/form/new.php
     
     include 'sc-app.inc';
     include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
@@ -15,53 +15,49 @@
     
     if (isset($_POST['save']) && ($_POST['save'] == 'Save')) {
         
-		//do not munge form data
         $fhandler = new Form\Handler('web-form-1', $_POST);
-        $fhandler->addRule('title', 'Title', array('required' => 1, 'maxlength' => 128));
-        $fhandler->addRule('tags', 'Tags', array('required' => 1));
 
         $fhandler->addRule('links_json', 'links_json', array('noprocess' => 1));
 		$fhandler->addRule('images_json', 'images_json', array('noprocess' => 1));
 		
         $fvalues = $fhandler->getValues();
         $ferrors = $fhandler->getErrors();
+
+		$qUrl = $fvalues['q'];
     
         
         if ($fhandler->hasErrors()) {
-            $locationOnError = '/qa/ask.php' ;
             $gWeb->store(Constants::STICKY_MAP, $fvalues);
             $gWeb->store(Constants::FORM_ERRORS,$fhandler->getErrors());
             
-            header("location: " . $locationOnError);
+            header("location: " . $qUrl);
             exit(1);
 			
         } else {
             
             $questionDao = new com\indigloo\sc\dao\Question();
-			
+			$title = Util::abbreviate($fvalues['description'],128);		
+
             $code = $questionDao->create(
-								$fvalues['title'],
+								$title,
                                 $fvalues['description'],
                                 $fvalues['category'],
-                                $fvalues['location'],
-                                $fvalues['tags'],
+                                'location',
+                                'tags',
 								$gSessionUser->email,
 								$gSessionUser->firstName,
                                 $_POST['links_json'],
                                 $_POST['images_json']);
 								
     
-            
             if ($code == com\indigloo\mysql\Connection::ACK_OK ) {
-                $locationOnSuccess = '/';
-                header("location: " . $locationOnSuccess);
+                header("location: /qa/thanks.php" );
                 
             } else {
                 $message = sprintf("DB Error: (code is %d) please try again!",$code);
                 $gWeb->store(Constants::STICKY_MAP, $fvalues);
                 $gWeb->store(Constants::FORM_ERRORS,array($message));
-                $locationOnError = '/qa/ask.php' ;
-                header("location: " . $locationOnError);
+                header("location: " . $qUrl);
                 exit(1);
             }
             

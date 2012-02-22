@@ -9,8 +9,8 @@
 				<li class="active">
 				  <a href="/">Home</a>
 				</li>
-				<li><a href="/test/ful/single.php">Share</a></li>
-				<li><a href="/qa/ask.php">Ask</a></li>
+				<li><a href="/share/new.php">Share</a></li>
+				<li><a href="/qa/new.php">Ask</a></li>
 			</ul> <!-- fixed links -->
 			
 			

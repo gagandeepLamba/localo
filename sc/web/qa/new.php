@@ -1,6 +1,8 @@
 <?php
 
-    //sc/share/new.php
+	//test page using valums ajax file uploader
+	// http://valums.com/ajax-upload/
+    //test/ful/single.php
     include ('sc-app.inc');
     include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
     include($_SERVER['APP_WEB_DIR'] . '/inc/role/user.inc');
@@ -38,7 +40,6 @@
 		<script type="text/javascript" src="/3p/bootstrap/js/bootstrap.js"></script>
 		 
 		<script type="text/javascript" src="/3p/ful/valums/fileuploader.js" ></script>
-		<script type="text/javascript" src="/3p/json2.js" ></script>
 		<script type="text/javascript" src="/js/sc.js"></script>
 		
 	  
@@ -50,19 +51,23 @@
 					   errorLabelContainer: $("#web-form1 div.error") 
 				});
 					
-				webgloo.media.init(["image", "link"]);
-				webgloo.media.attachEvents();
+				webgloo.sc.question.attachEvents();
+				webgloo.sc.question.init();
 				  
 				var uploader = new qq.FileUploader({
 					element: document.getElementById('image-uploader'),
-					action: '/upload/image.php',
+					action: '/test/ful/sr1.php',
 					debug: true,
 					onComplete: function(id, fileName, responseJSON) {
-						webgloo.media.addImage(responseJSON.mediaVO);
+						console.log(responseJSON);
+						 webgloo.sc.question.addImage(responseJSON.mediaVO);
 					}
 				});
+				
+				
 			 
             });
+			
             
         </script>
        
@@ -95,7 +100,7 @@
 					
 					<?php FormMessage::render(); ?>
 					
-					<form  id="web-form1"  name="web-form1" action="/qa/form/new.php" enctype="multipart/form-data"  method="POST">
+					<form  id="web-form1"  name="web-form1" action="/share/form/add.php" enctype="multipart/form-data"  method="POST">
 						<div class="row">
 							
 							
@@ -128,9 +133,8 @@
 							</tr>
 							<tr>
 								<td>
-									<div id="link-preview"> </div>
 									<div id="link-data"> </div>
-									<div id="image-data"> </div>
+									<div id="media-data"> </div>
 								</td>
 							</tr>
 							
@@ -143,10 +147,10 @@
 							<button class="btn btn-primary" type="submit" name="save" value="Save" onclick="this.setAttribute('value','Save');" ><span>Save your changes</span></button> 
 							<a href="/"> <button class="btn" type="button" name="cancel"><span>Cancel</span></button> </a>
 						</div>
-						<!-- put json data in single quotes to avoid interpreting double quotes --> 
+						 
 						<input type="hidden" name="links_json" value='<?php echo $strLinksJson ; ?>' />
 						<input type="hidden" name="images_json" value='<?php echo $strImagesJson ; ?>' />
-						<input type="hidden" name="q" value="<?php echo $_SERVER["REQUEST_URI"]; ?>" />
+												
 						        
 					</form>
 					
@@ -155,7 +159,7 @@
 				</div> <!-- content -->
 				
 				<div class="span4">
-					<!-- sidebar -->
+					 <?php include($_SERVER['APP_WEB_DIR'] .'/qa/sidebar/ask.inc'); ?>
 				</div>
 			
 			</div>
