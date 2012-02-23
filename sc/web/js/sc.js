@@ -50,28 +50,11 @@ webgloo.media = {
             event.preventDefault();
             var link = jQuery.trim($("#link-box").val());
 			if( link == '' ) {return ; }
+			else {
+				webgloo.media.addLink(link);
+
+			}
 		 	
-			$("#link-preview").html('<img src="/css/images/ajax_loader.gif" alt="spinner" />');	
- 			var dataObj = new Object();
-        	dataObj.q = link;
-			//issue an ajax request
-			$.ajax({
-				url: '/ajax/url/extract.php' ,
-				type: 'POST',
-				dataType: 'json',
-				data : dataObj,
-				timeout: 9000,
-
-				error: function(XMLHttpRequest, response){
-					console.log(response);
-					$("#link-preview").html(response);
-				},
-				success: function(response){
-               		console.log("link preview fetched from server"); 
-					webgloo.media.showLinkData(response);
-				}
-			}); //ajax call end
-
         }) ;
         
         $("a.remove-link").live("click", function(event){
@@ -142,25 +125,7 @@ webgloo.media = {
         var buffer = webgloo.media.imagePreviewDIV.supplant(mediaVO);
         $("div#image-data").append(buffer);
     
-    },
-	showLinkData : function(response) {
-		
-		//issue :- relative URL vs. full URL
-		//error - when images array is empty
-		var code = response.code ;
-		if(code != 1 ) {
-			console.log("server error happened");
-		}
-
-		var dataObj = response.data ;
-		var images = dataObj.images ;
-		console.log(dataObj);
-
-		$("#link-preview").html('');
-		$("#link-preview").append(dataObj.title);
-		$("#link-preview").append('<img src="' +  images[0] + '" />');
-
-	}
+    }
 }
 
 

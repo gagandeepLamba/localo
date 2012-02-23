@@ -39,6 +39,18 @@ namespace com\indigloo\sc\mysql {
 		
 		}
 		
+		static function getAllOnUserEmail($email) {
+			$mysqli = MySQL\Connection::getInstance()->getHandle();
+			$email = $mysqli->real_escape_string($email);
+			
+			$sql = " select * from sc_answer where user_email = '".$email. "' " ;
+			$sql .= " order by id desc" ;
+			
+			$rows = MySQL\Helper::fetchRows($mysqli, $sql);
+            return $rows;
+		
+		}
+		
         static function create($questionId,
 								$answer,
 								$userEmail,

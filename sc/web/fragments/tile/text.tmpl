@@ -1,16 +1,22 @@
 
 <div class="tile">
    <div class="description">
-	 {summary}
+	 {description}
    </div>
    
    <div class="author">
-      <span class="b"> <a href="#"> {userName} </a> </span>
-      <span class="date">on {createdOn} </span>
+	<div class="floatr">
+			<img src="/nuke/twitter-icon.png" height="32" width="32" alt="icon" /> 		
+		</div>
+
+		<div>
+			<span class="b"> <a href="#">{userName}</a> </span>
+			<span class="b">{createdOn} </span>
+			<span>{tags} </span>
+		</div>
    </div>
    
-   <div class="tags"> Tags&nbsp;{tags} </div>
-  <div class="floatr"><a href="/qa/show.php?id={id}">More&nbsp;&#8594;</a></div>
+  <div><a href="/qa/show.php?id={id}">More&nbsp;&#8594;</a></div>
     
 </div>
 

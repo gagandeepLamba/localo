@@ -21,10 +21,10 @@
 	$userDBRow = $userDao->getonId($userId);
 	
 	$questionDao = new \com\indigloo\sc\dao\Question() ;
-	$questionDBRows = $questionDao->getLatestOnUserEmail($gSessionUser->email);
+	$questionDBRows = $questionDao->getAllOnUserEmail($gSessionUser->email);
 	
 	$answerDao = new \com\indigloo\sc\dao\Answer() ;
-	$answerDBRows = $answerDao->getLatestOnUserEmail($gSessionUser->email);
+	$answerDBRows = $answerDao->getAllOnUserEmail($gSessionUser->email);
 	
 	
 ?>  
@@ -32,7 +32,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 
-       <head><title> 3mik.com - Account page of <?php echo $userDBRow['first_name']; ?>  </title>
+       <head><title> 3mik.com - page of <?php echo $userDBRow['first_name']; ?>  </title>
     
 
         <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
@@ -40,7 +40,13 @@
         <link rel="stylesheet" type="text/css" href="/css/sc.css">
 		<script type="text/javascript" src="/3p/jquery/jquery-1.7.1.min.js"></script>
 		<script type="text/javascript" src="/3p/bootstrap/js/bootstrap.js"></script>
-		
+		<script>
+			$(document).ready(function(){
+
+			});
+
+		</script>
+
        
     </head>
 
@@ -61,21 +67,43 @@
 			
 			
 			<div class="row">
-				<div class="span8">
+				<div class="span12">
 					<div class="page-header">
-						<h2> Account page of <?php echo $gSessionUser->firstName; ?> </h2>
+						<h2> <?php echo $gSessionUser->firstName; ?> </h2>
 					</div>
-					<div>
-						<?php echo \com\indigloo\sc\html\User::getProfile($userDBRow) ; ?>
-						<div class="row">
-							<div class="span4">
-								<?php echo \com\indigloo\sc\html\User::getQuestionBox($userId,$questionDBRows) ;  ?>
+					<?php echo \com\indigloo\sc\html\User::getProfile($gSessionUser,$userDBRow) ; ?>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="span9">
+					<div class="tabbable mt20">
+						<ul class="nav nav-tabs">
+							<li class="active"><a href="#post" data-toggle="tab">Posts</a></li>
+							<li><a href="#comment" data-toggle="tab">Comments</a></li>
+						</ul>
+						<div class="tab-content">
+							<div class="tab-pane active" id="post">
+								<h1>Posts</h1>
+								<?php 
+									foreach($questionDBRows as $questionDBRow){
+										echo \com\indigloo\sc\html\Question::getWidget($questionDBRow);
+									}
+								?>
+								
 							</div>
-							<div class="span4">
-								<?php echo \com\indigloo\sc\html\User::getAnswerBox($userId,$answerDBRows) ;  ?>
+							<div class="tab-pane" id="comment">
+								<h1>Comments</h1>
+								<?php 
+									foreach($answerDBRows as $answerDBRow){
+										echo \com\indigloo\sc\html\Answer::getWidget($gSessionUser,$answerDBRow);
+									}
+								?>
+
 							</div>
-						</div> <!-- 1x2 grid -->
-					</div>	<!-- content -->
+						</div>	
+					</div> <!-- tab wrapper -->
+
 				</div>
 			</div>
 		</div> <!-- container -->

@@ -28,6 +28,11 @@ namespace com\indigloo\sc\dao {
 			$rows = mysql\Answer::getLatestOnUserEmail($email);
 			return $rows ;
 		}
+	
+		function getAllOnUserEmail($email) {
+			$rows = mysql\Answer::getAllOnUserEmail($email);
+			return $rows ;
+		}
 		
         function create($questionId,
 						$answer,

@@ -8,11 +8,10 @@ namespace com\indigloo\sc\html {
     
     class User {
         
-        static function getProfile($userDBRow) {
-           
+		private static function getPrivateProfile($userDBRow) {
 		    $html = NULL ;
 			$view = new \stdClass;
-			$template = $_SERVER['APP_WEB_DIR'].'/fragments/user/profile.tmpl' ;
+			$template = $_SERVER['APP_WEB_DIR'].'/fragments/user/profile/private.tmpl' ;
 			
 			
 			$view->name = $userDBRow['first_name']. ' '.$userDBRow['last_name'];
@@ -22,7 +21,26 @@ namespace com\indigloo\sc\html {
 			$html = Template::render($template,$view);
 			
             return $html ;
-			
+	
+
+		}
+
+		public static function getPublicProfile($userDBRow) {
+			return 'public' ;
+
+		}
+
+        static function getProfile($sessionUser,$userDBRow) {
+		    $html = NULL ;
+          	//private view needs owner
+			if(!is_null($sessionUser) && ($sessionUser->email == $userDBRow['email'])) {
+				$html = self::getPrivateProfile($userDBRow);
+			} else {
+				$html = self::getPublicProfile($userDBRow);
+
+			}
+			return $html ;
+		  			
         }
 		
 		static function getQuestionBox($userId, $questionDBRows) {

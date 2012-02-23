@@ -48,7 +48,7 @@ namespace com\indigloo\sc\html {
 			
 			$view = new \stdClass;
 			$view->title = $questionDBRow['title'];
-			$view->summary = $questionDBRow['description'];
+			$view->description = $questionDBRow['description'];
 			$view->id = $questionDBRow['id'];
 			
 				
@@ -87,6 +87,52 @@ namespace com\indigloo\sc\html {
             return $html ;
 			
         }
+
+
+		 static function getWidget($questionDBRow) {
+           
+		    $html = NULL ;
+			$imagesJson = $questionDBRow['images_json'];
+			$images = json_decode($imagesJson);
+			
+			$view = new \stdClass;
+			$view->description = $questionDBRow['description'];
+			$view->id = $questionDBRow['id'];
+			
+				
+			$view->userName = $questionDBRow['user_name'];
+			$view->createdOn = Util::formatDBTime($questionDBRow['created_on']);
+			$view->tags = $questionDBRow['tags'];
+			
+			if(sizeof($images) > 0) {
+				
+				$template = $_SERVER['APP_WEB_DIR'].'/fragments/widget/image.tmpl' ;
+				
+				/* image stuff */
+				$image = $images[0] ;
+				
+				$view->originalName = $image->originalName;
+				$view->bucket = $image->bucket;
+				$view->storedName = $image->storeName;
+				
+				$newxy = Util::foldX($image->width,$image->height,200);
+				
+				$view->width = $newxy["width"];
+				$view->height = $newxy["height"];
+				
+				/* image stuff end */
+				$html = Template::render($template,$view);
+				
+			} else {
+				
+				$template = $_SERVER['APP_WEB_DIR'].'/fragments/widget/text.tmpl' ;
+				$html = Template::render($template,$view);
+			}
+			
+            return $html ;
+			
+        }
+
         
     }
     
