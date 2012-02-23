@@ -2,8 +2,7 @@
 	<div class="navbar">
 		<div class="navbar-inner">
 		  <div class="container">
-			<a class="brand" href="#">3mik.com...</a>
-
+		<a class="brand" href="/">3mik.com	<span class="beta">BETA</span> </a>
 
 			<ul class="nav">
 				<li class="active">

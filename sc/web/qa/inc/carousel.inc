@@ -18,7 +18,14 @@
             
             ?>
   </div>
-  <!-- Carousel nav -->
-  <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-  <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+
+  <?php if($count >1 ) { ?>
+	  <!-- Carousel nav -->
+	  <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+	  <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+  <?php } ?>
+
 </div> <!-- carousel -->
+
+<div class="mt20 p20"> Total Images <b> <?php echo $count; ?> </b> </div>
+

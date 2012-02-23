@@ -59,15 +59,12 @@
         <script type="text/javascript">			
             $(document).ready(function(){				
 
-				webgloo.media.init(["link"]);
-				webgloo.media.attachEvents();
-
 				$("#web-form1").validate({
 					errorLabelContainer: $("#web-form1 div.error") 
 				});
 
 				$('#myCarousel').carousel({
-				  interval: 2000
+				  interval: 5000
 				});
 				
             });
@@ -92,25 +89,11 @@
 			
 			
 			<div class="row">
-				<div class="span8">
+				<div class="span9">
                            
-				<?php if(sizeof($images) > 0 ) { include('inc/carousel.inc') ; } ?>
-			
-				<div class="widget well">
-					 <div class="regular">
-						<?php echo $questionDBRow['description'] ; ?>
-					 </div>
-					<div class="author">
-					   <span class="b"><a href="#"> <?php echo $questionDBRow['user_name'] ; ?> </a> </span>
-					   <span class="date">  posted on <?php echo Util::formatDBTime($questionDBRow['created_on']) ; ?> </span>
-					</div>
-					
-					<div class="tags"> Tags&nbsp;<?php echo $questionDBRow['tags']; ?> </div>
-					
-				</div>
-				
+				<?php if(sizeof($images) > 0 ) { include('inc/carousel.inc') ; } ?> 
+				<?php echo \com\indigloo\sc\html\Question::getDetail($questionDBRow) ; ?>
 				<?php echo \com\indigloo\sc\html\Question::getEditBar($gSessionUser,$questionDBRow) ; ?>
-				
 				
 				<div class="page-header">
 					<h2>Comments </h2>

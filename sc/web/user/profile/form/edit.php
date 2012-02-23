@@ -33,7 +33,7 @@
 				$gSessionUser = \com\indigloo\auth\User::getUserInSession();
 			}
 			
-            $userDao= new \com\indigloo\sc\dao\user();
+            $userDao= new \com\indigloo\sc\dao\User();
 			$code = $userDao->update($gSessionUser->id,$fvalues['first_name'], $fvalues['last_name']) ;
             
             if ($code == com\indigloo\mysql\Connection::ACK_OK ) {

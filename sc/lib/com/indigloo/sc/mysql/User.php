@@ -19,7 +19,8 @@ namespace com\indigloo\sc\mysql {
 		}
 		
 		static function update($userId,$firstName,$lastName) {
-			
+			$code = MySQL\Connection::ACK_OK;
+
 			$mysqli = MySQL\Connection::getInstance()->getHandle();
 			$sql = " update sc_user set first_name = ? , last_name = ? where id = ?" ;
 			
@@ -35,8 +36,10 @@ namespace com\indigloo\sc\mysql {
 				$stmt->close();
 				
 			} else {
-				Gloo_MySQL_Error::handle(self::MODULE_NAME, $mysqli);
+				$code = Gloo_MySQL_Error::handle(self::MODULE_NAME, $mysqli);
 			}
+
+			return $code ;
 		}
 		
 	}

@@ -1,24 +1,27 @@
 <div class="widget bbd5">
-	<div class="photo">
-		<a href="/qa/show.php?id={id}"> <img src="/{bucket}/{storedName}" class="alignleft" width="{width}" height="{height}" title="{originalName}"  alt="{originalName}"/>
-        </a> 
+	<div class="row">
+		<div class="span7">
 
+			<div class="photo">
+				<a href="/qa/show.php?id={id}"> <img src="/{bucket}/{storedName}" class="alignleft" width="{width}" height="{height}" title="{originalName}"  alt="{originalName}"/> </a> 
+
+			</div>
+			<div class="description">
+				{description}
+			</div>
+			<div class="tags">{tags} </div>
+		</div> <!-- span7-->
+		<div class="span2">
+
+			<div class="author">
+				<img src="/nuke/twitter-icon.png" height="32" width="32" alt="icon" /> 		
+				<div class="meta">
+					<span class="b"> <a href="#">{userName}</a></span>
+					<br>
+					<span class="b">{createdOn}</span>
+				</div>	
+			</div>
+			<div><a href="/qa/show.php?id={id}">More&nbsp;&#8594;</a></div>
+		</div> <!-- span2-->
 	</div>
-	<div class="description">
-		{description}
-
-		<div class="author floatr">
-		   <div><b><a href="#"> {userName}</a></b> </div>
-		   <div><b>{createdOn}</b> </div>
-		   <div> <img src="/nuke/twitter-icon.png" height="32" width="32"   alt="icon" /> </div>
-		</div>
-	
-		<div class="tags">{tags} </div>
-
-	</div>
-	<br style="clear:both"/>
-
-
-
 </div>
-<div class="floatr"><a href="/qa/show.php?id={id}">Show Details&nbsp;&#8594;</a></div>

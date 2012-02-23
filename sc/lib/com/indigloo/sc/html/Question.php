@@ -88,10 +88,28 @@ namespace com\indigloo\sc\html {
 			
         }
 
+		static function getDetail($questionDBRow) {
+			$html = NULL ;
+			
+			$view = new \stdClass;
+			$view->description = $questionDBRow['description'];
+			$view->id = $questionDBRow['id'];
+			
+				
+			$view->userName = $questionDBRow['user_name'];
+			$view->createdOn = Util::formatDBTime($questionDBRow['created_on']);
+			$view->tags = $questionDBRow['tags'];
 
-		 static function getWidget($questionDBRow) {
+			
+			$template = $_SERVER['APP_WEB_DIR'].'/fragments/question/detail.tmpl' ;
+			$html = Template::render($template,$view);
+			
+			return $html ;	
+		}
+
+		static function getWidget($questionDBRow) {
            
-		    $html = NULL ;
+			$html = NULL ;
 			$imagesJson = $questionDBRow['images_json'];
 			$images = json_decode($imagesJson);
 			
@@ -104,7 +122,7 @@ namespace com\indigloo\sc\html {
 			$view->createdOn = Util::formatDBTime($questionDBRow['created_on']);
 			$view->tags = $questionDBRow['tags'];
 			
-			if(sizeof($images) > 0) {
+			if(!empty($images) && (sizeof($images) > 0)) {
 				
 				$template = $_SERVER['APP_WEB_DIR'].'/fragments/widget/image.tmpl' ;
 				

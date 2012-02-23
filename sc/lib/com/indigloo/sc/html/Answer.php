@@ -7,7 +7,24 @@ namespace com\indigloo\sc\html {
     use com\indigloo\Util as Util ;
     
     class Answer {
-        
+
+		static function getSummary($sessionUser,$answerDBRow) {
+           
+		    $html = NULL ;
+			$view = new \stdClass;
+			$template = $_SERVER['APP_WEB_DIR'].'/fragments/answer/summary.tmpl' ;
+			
+			
+			$view->answer = $answerDBRow['answer'];
+			$view->createdOn = Util::formatDBTime($answerDBRow['created_on']);
+			$view->userName = $answerDBRow['user_name'] ;
+			
+			$html = Template::render($template,$view);
+			
+            return $html ;
+
+		}
+
         static function getWidget($sessionUser,$answerDBRow) {
            
 		    $html = NULL ;

@@ -699,4 +699,19 @@
 		padding: 3px 20px 3px 0px;
 
 	}	
-	
+
+	.author img { 
+		float:left; 
+		padding:0px 10px 0px 0px;
+	}	
+
+	.author .meta {
+		padding:0px;
+		margin:0px;
+	}
+
+	.beta {
+		vertical-align: sub ;
+		font-size:11px;
+	}
+
