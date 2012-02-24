@@ -1,9 +1,19 @@
-<?php
+<?php   
 
     use \com\indigloo\ui\Pagination as Pagination;
     use \com\indigloo\Url as Url;
-    
+    use \com\indigloo\Configuration as Config;
+
+	$postDao = new \com\indigloo\news\dao\Post();
+	$total = $postDao->getRecordsCount();
+
+	$qparams = Url::getQueryParams($_SERVER['REQUEST_URI']);
+	$pageSize =	Config::getInstance()->get_value("system.page.records");
+	$paginator = new \com\indigloo\ui\Pagination($qparams,$total,$pageSize);	
+
+	$postDBRows = $postDao->getRecords($paginator);
     $pageURI = 'http://www.27main.com' ;
+
 ?>
 
 
@@ -58,7 +68,7 @@
                             ?>
                             
                             <?php
-                                $paginator->render('/index2.php',$start,$end);
+                                $paginator->render('/',$start,$end);
                             ?>
                             
                         </div> <!-- content -->

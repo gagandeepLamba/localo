@@ -51,10 +51,9 @@ namespace com\indigloo\news\dao {
             return $row ;
         }
         
-        function getLatestRecords() {
+        function getLatestRecords($count) {
             
-            $pageSize = Config::getInstance()->get_value("system.page.records");
-            $rows = mysql\Post::getLatestRecords($pageSize);
+            $rows = mysql\Post::getLatestRecords($count);
             return $rows ;
 
         }
@@ -66,11 +65,27 @@ namespace com\indigloo\news\dao {
 
         }
         
-        function getRecords($start,$direction) {
-            $pageSize = Config::getInstance()->get_value("system.page.records");
-            $rows = mysql\Post::getRecords($start,$direction,$pageSize);
-            return $rows ;
+        function getRecords($paginator) {
+			$params = $paginator->getDBParams();
+			$count = $paginator->getPageSize();
 
+			if($paginator->isHome()){
+				return $this->getLatestRecords($count);
+
+			}else {
+				//convert back to base10
+				$start = $params['start'];
+				$direction = $params['direction'];
+
+				if(empty($start) || empty($direction)){
+					trigger_error('No start or direction DB params in paginator', E_USER_ERROR);
+				}
+
+				$start = base_convert($start,36,10);
+				$rows = mysql\Post::getRecords($start,$direction,$count);
+
+				return $rows ;
+			}
         }
         
         function getLinks($start,$direction) {
@@ -78,20 +93,6 @@ namespace com\indigloo\news\dao {
             $rows = mysql\Post::getLinks($start,$direction,$pageSize);
             return $rows ;
 
-        }
-        
-        function getTotalPages() {
-            $count = $this->getRecordsCount();
-            $pageSize = Config::getInstance()->get_value("system.page.records");
-            $totalPages = ceil($count / $pageSize);
-            return $totalPages ;
-        }
-        
-        function getTotalLinks() {
-            $count = $this->getLinksCount();
-            $pageSize = Config::getInstance()->get_value("admin.dashboard.records");
-            $totalPages = ceil($count / $pageSize);
-            return $totalPages ;
         }
         
         function getRecordsCount() {
