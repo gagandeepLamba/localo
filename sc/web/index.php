@@ -5,14 +5,22 @@
     include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
     
     use com\indigloo\Util;
+    use com\indigloo\Url;
     use com\indigloo\ui\form\Sticky;
     use com\indigloo\Constants as Constants;
     use com\indigloo\ui\form\Message as FormMessage;
-     
+	use \com\indigloo\Configuration as Config ;
+  
     $sticky = new Sticky($gWeb->find(Constants::STICKY_MAP,true));
-    
+
 	$questionDao = new \com\indigloo\sc\dao\Question();
-    $questionDBRows = $questionDao->getAll();
+	$total = $questionDao->getTotalCount();
+
+	$qparams = Url::getQueryParams($_SERVER['REQUEST_URI']);
+	$pageSize =	$count = Config::getInstance()->get_value("main.page.items");
+	$paginator = new \com\indigloo\ui\Pagination($qparams,$total,$pageSize);	
+
+    $questionDBRows = $questionDao->getPaged($paginator);
 	
 ?>  
 
@@ -63,9 +71,18 @@
 			
 			
 			<div class="row">
-				<div class="span12">
+				<div class="span11">
 					<div id="tiles">
 						<?php
+
+							$startId = NULL ;
+							$endId = NULL ;	
+
+							if(sizeof($questionDBRows) > 0 ) { 
+								$startId = $questionDBRows[0]['id'] ;
+								$endId =   $questionDBRows[sizeof($questionDBRows)-1]['id'] ;
+							}	
+
 							foreach($questionDBRows as $questionDBRow) {
 								$html = \com\indigloo\sc\html\Question::getSummary($questionDBRow);
 								echo $html ;
@@ -74,7 +91,21 @@
 						?>
 						   
 					</div><!-- tiles -->
+
+					<?php $paginator->render('/',$startId,$endId);  ?>
+
 				</div> 
+				<div class="span1">
+					<div id="feedback" class="vertical">
+						<a href="/share/feedback.php">
+							Y O U R    
+							<br />
+							<br />
+						    F E E D B A C K 	
+						</a>
+					</div>	
+
+				</div>
 			</div>
 			
 			

@@ -715,3 +715,29 @@
 		font-size:11px;
 	}
 
+	.vertical{
+		width:1em;
+		text-transform:uppercase;
+		letter-spacing :40px; /* arbitrary letter spacing for vertical */
+	}
+
+	.vertical a {
+		text-decoration : none;
+		color: white;
+		color: black;
+
+	}
+        
+	#feedback{
+		position:fixed;
+		top:200px;
+		right:0px;
+		/* background-color:orange; */
+		background-color:#333;
+		background-color:#B94A48;
+		background-color:#F89406;
+		padding:5px;
+		font-size:14px;
+		font-weight:bold;
+	}
+

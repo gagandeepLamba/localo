@@ -51,7 +51,8 @@ namespace com\indigloo {
             if (empty($query)) {
                 return $params;
             } else {
-                //found query explode on &
+				//PHP parse_url will return the part after ?
+				// for /q?arg1=v1&arg2=v2, we will get arg1=1v1&arg2=v2
                 $q = explode("&", $query);
                 foreach ($q as $token) {
                     //break on = to get name value pairs

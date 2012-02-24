@@ -4,6 +4,7 @@ namespace com\indigloo\sc\mysql {
 
     use \com\indigloo\mysql as MySQL;
     use \com\indigloo\Util as Util ;
+    use \com\indigloo\Configuration as Config ;
     
     class Question {
         
@@ -42,17 +43,63 @@ namespace com\indigloo\sc\mysql {
 		}
 		
 		
-		static function getAll() {
+		static function getLatest($count) {
 			
 			$mysqli = MySQL\Connection::getInstance()->getHandle();
-            $sql = " select * from sc_question order by id desc LIMIT 50" ;
-			
+            $sql = " select * from sc_question order by id desc LIMIT ".$count ;
 			
             $rows = MySQL\Helper::fetchRows($mysqli, $sql);
             return $rows;
 			
 		}
-		
+
+		static function getTotalCount() {
+			$mysqli = MySQL\Connection::getInstance()->getHandle();
+            $sql = " select count(id) as count from sc_question " ;  
+            $row = MySQL\Helper::fetchRow($mysqli, $sql);
+            return $row;
+
+		}
+
+		static function getPaged($start,$direction,$count) {
+			$mysqli = MySQL\Connection::getInstance()->getHandle();
+            
+            // primary key id is an excellent proxy for created_on column
+            // latest posts has max(id) and appears on top
+            // so AFTER (NEXT) means id < latest post id
+            
+            $sql = " select q.* from sc_question q " ;
+            $predicate = '' ;
+            
+            if($direction == 'after') {
+                $predicate = " where q.id < ".$start ;
+                $predicate .= " order by q.id DESC LIMIT " .$count;
+
+            } else if($direction == 'before'){
+                $predicate = " where q.id > ".$start ;
+                $predicate .= " order by q.id ASC LIMIT " .$count;
+            } else {
+                trigger_error("Unknow sort direction in query", E_USER_ERROR);
+            }
+            
+            $sql .= $predicate ;
+            
+            if(Config::getInstance()->is_debug()) {
+                Logger::getInstance()->debug("sql => $sql \n");
+            }
+            
+            $rows = MySQL\Helper::fetchRows($mysqli, $sql);
+            
+            //reverse rows for 'before' direction
+            if($direction == 'before') {
+                $results = array_reverse($rows) ;
+                return $results ;
+            }
+            
+            return $rows;	
+
+		}
+
 		static function update($questionId,
 						       $title,
 							   $seoTitle,

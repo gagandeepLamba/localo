@@ -3,8 +3,8 @@
 	<div class="f-content">
 		<div id="f-menu" class="floatl">
 			<ul>
-				<li><a href="#"> Feedback </a> |</li>
-				<li><a href="#"> FAQ </a> |</li>
+				<li><a href="/share/feedback.php"> Send suggestions and feedback </a> |</li>
+				<li><a href="#"> FAQ </a> </li>
 			</ul>
 			</div>
 			<div id="social" class="floatr">
