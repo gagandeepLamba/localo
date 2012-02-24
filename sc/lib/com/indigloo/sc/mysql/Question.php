@@ -10,6 +10,9 @@ namespace com\indigloo\sc\mysql {
         
         const MODULE_NAME = 'com\indigloo\sc\mysql\Question';
 
+		//DB columns for filters
+		const EMAIL_COLUMN = "user_email" ;
+
 		static function getOnId($questionId) {
 			$mysqli = MySQL\Connection::getInstance()->getHandle();
 			$questionId = $mysqli->real_escape_string($questionId);
@@ -19,49 +22,37 @@ namespace com\indigloo\sc\mysql {
             return $row;
 		}
 		
-		static function getLatestOnUserEmail($email) {
-			$mysqli = MySQL\Connection::getInstance()->getHandle();
-			$email = $mysqli->real_escape_string($email);
-			
-			$sql = " select * from sc_question where user_email = '".$email. "' " ;
-			$sql .= " order by id desc LIMIT 5 " ;
-			
-			$rows = MySQL\Helper::fetchRows($mysqli, $sql);
-            return $rows;
-		
-		}
-		
-		static function getAllOnUserEmail($email) {
-			$mysqli = MySQL\Connection::getInstance()->getHandle();
-			$email = $mysqli->real_escape_string($email);
-			
-			$sql = " select * from sc_question where user_email = '".$email. "' " ;
-			$sql .= " order by id desc" ;
-			
-			$rows = MySQL\Helper::fetchRows($mysqli, $sql);
-            return $rows;
-		}
-		
-		
-		static function getLatest($count) {
+		static function getLatest($count,$dbfilter) {
 			
 			$mysqli = MySQL\Connection::getInstance()->getHandle();
-            $sql = " select * from sc_question order by id desc LIMIT ".$count ;
+
+			$condition = '' ;
+			if(array_key_exists(self::EMAIL_COLUMN,$dbfilter)) {
+				$condition = " where user_email = '".$dbfilter[self::EMAIL_COLUMN]. "' " ;
+			}
+
+			$sql = " select * from sc_question ".$condition." order by id desc LIMIT ".$count ;
 			
             $rows = MySQL\Helper::fetchRows($mysqli, $sql);
             return $rows;
 			
 		}
 
-		static function getTotalCount() {
+		static function getTotalCount($dbfilter) {
 			$mysqli = MySQL\Connection::getInstance()->getHandle();
-            $sql = " select count(id) as count from sc_question " ;  
+
+			$condition = '';
+			if(array_key_exists(self::EMAIL_COLUMN,$dbfilter)) {
+				$condition = " where user_email = '".$dbfilter[self::EMAIL_COLUMN]. "' " ;
+			}
+
+            $sql = " select count(id) as count from sc_question ".$condition ;
             $row = MySQL\Helper::fetchRow($mysqli, $sql);
             return $row;
 
 		}
 
-		static function getPaged($start,$direction,$count) {
+		static function getPaged($start,$direction,$count,$dbfilter) {
 			$mysqli = MySQL\Connection::getInstance()->getHandle();
             
             // primary key id is an excellent proxy for created_on column
@@ -70,13 +61,20 @@ namespace com\indigloo\sc\mysql {
             
             $sql = " select q.* from sc_question q " ;
             $predicate = '' ;
-            
+			$condition = '' ;
+
+			if(array_key_exists(self::EMAIL_COLUMN,$dbfilter)) {
+				$condition = " and user_email = '".$dbfilter[self::EMAIL_COLUMN]. "' " ;
+			}
+
             if($direction == 'after') {
                 $predicate = " where q.id < ".$start ;
+                $predicate .= $condition ;
                 $predicate .= " order by q.id DESC LIMIT " .$count;
 
             } else if($direction == 'before'){
                 $predicate = " where q.id > ".$start ;
+                $predicate .= $condition ;
                 $predicate .= " order by q.id ASC LIMIT " .$count;
             } else {
                 trigger_error("Unknow sort direction in query", E_USER_ERROR);
