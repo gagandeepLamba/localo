@@ -113,7 +113,9 @@ namespace com\indigloo\core {
                     Logger::getInstance()->debug('web >> storing in session >> key is:: ' . $key);
                     Logger::getInstance()->debug(Util::stringify($value));
                 }
-            }
+            } else {
+				trigger_error("No web session found", E_USER_ERROR);
+			}
         }
 
         function find($key, $destroy=false) {

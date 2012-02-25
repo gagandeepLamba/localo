@@ -181,9 +181,11 @@ namespace com\indigloo {
             if($w > $w0 ) {
                 $w2 = $w0 ;
                 $h2 = floor(($w0/$w) * $h) ;
+                return array("width" => $w2, "height" => $h2);
+            } else {
+                //return original
+                return array("width" => $w, "height" => $h);
             }
-            
-            return array("width" => $w2, "height" => $h2);
             
         }
         

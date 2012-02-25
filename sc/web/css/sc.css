@@ -752,11 +752,18 @@
 	}
 	
 	.facebook-login {
-		float:left ;
+		float:left;
+		padding:5px 10px 5px 20px;
+		background:#3B5998 ;
+		border-radius :8px;
+		margin-left:20px;
+		width:140px;
+	}
+	
+	.facebook-login a {
+		color: white ;
 	}
 	
 	.twitter-login a {
 		color: white ;
 	}
-	
-	

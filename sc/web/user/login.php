@@ -5,16 +5,20 @@
     use com\indigloo\Util;
     use com\indigloo\ui\form\Sticky;
     use com\indigloo\Constants as Constants;
+    use com\indigloo\Configuration as Config;
     use com\indigloo\ui\form\Message as FormMessage;
      
     $sticky = new Sticky($gWeb->find(Constants::STICKY_MAP,true));
     $fwdURI = empty($_GET['q']) ? '' : $_GET['q'] ;
-    $_SESSION["state"] = "rajeev" ;
     
-    $fbDialogUrl = "https://www.facebook.com/dialog/oauth?client_id=" ;
-    $fbDialogUrl .= "282966715106633&redirect_uri=" ;
-    $fbDialogUrl .= "http://www.3mik.com/callback/fb2.php&scope=email";
-    $fbDialogUrl .= "&state=".$_SESSION['state']
+    $stoken = Util::getMD5GUID();
+    $gWeb->store("fb_state",$stoken);
+   
+    $fbAppId = Config::getInstance()->get_value("facebook.app.id");
+    $fbCallback = "http://www.3mik.com/callback/fb2.php&scope=email" ;
+    
+    $fbDialogUrl = "https://www.facebook.com/dialog/oauth?client_id=".$fbAppId ;
+    $fbDialogUrl .= "&redirect_uri=".urlencode($fbCallback)."&state=".$stoken ;
     
 ?>  
 
@@ -73,7 +77,7 @@
                                                     
                     <?php FormMessage::render(); ?>
                     <div class="wrapper">
-                        <div class="twitter-login">
+                        <div class="facebook-login">
                            <div> <a href="<?php echo $fbDialogUrl; ?>"> Login with Facebook</a></div>
                         </div>
                         <div class="twitter-login">
