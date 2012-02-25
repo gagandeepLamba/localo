@@ -34,14 +34,39 @@
                 $("#web-form1").validate({
                     errorLabelContainer: $("#web-form1 div.error")
                 });
+                
+                window.fbAsyncInit = function() {
+                    FB.init({
+                      appId      : '282966715106633',
+                      status     : true, 
+                      cookie     : true,
+                      xfbml      : true,
+                      oauth      : true,
+                    });
+                  
+                    FB.Event.subscribe('auth.login', function(response) {
+                        window.location = "<?php echo $host; ?>/callback/facebook.php";
+                    });
+              
+                };
+                
+                (function(d){
+                   var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+                   js = d.createElement('script'); js.id = id; js.async = true;
+                   js.src = "//connect.facebook.net/en_US/all.js";
+                   d.getElementsByTagName('head')[0].appendChild(js);
+                 }(document));
 
             });
             
         </script>
+					
+							  
 
     </head>
 
      <body>
+        <div id="fb-root"></div>
 		<div class="container">
 			<div class="row">
 				<div class="span12">
@@ -64,7 +89,11 @@
                     </div>
                                                     
                     <?php FormMessage::render(); ?>
-
+                    <div class="wrapper">
+                        <div class="fb-login-button" data-scope="email">Login with Facebook</div>
+                        <div class="mt20"> <a href="/user/twitter-login.php"> Login with Twitter</a></div>
+                    </div> <!-- wrapper -->
+                    
                     <form id="web-form1"  name="web-form1" action="/user/form/login.php" enctype="multipart/form-data"  method="POST">
 
                         <div class="error">    </div>
@@ -100,7 +129,8 @@
                     
                     <div>
                         No account? <a href="/user/register.php"> Register</a>
-            
+                        Use  <a href="/user/twitter-login.php"> Twitter</a>
+                          
                     </div>
                 </div>
             </div>
