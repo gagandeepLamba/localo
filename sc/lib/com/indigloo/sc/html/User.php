@@ -43,67 +43,6 @@ namespace com\indigloo\sc\html {
 		  			
         }
 		
-		static function getQuestionBox($userId, $questionDBRows) {
-			
-		    $html = NULL ;
-			$view = new \stdClass;
-			$template = $_SERVER['APP_WEB_DIR'].'/fragments/common/link-box.tmpl' ;
-			
-			$view->header = 'Questions' ;
-			
-			$buffer = ' <ul>';
-			$link_template = '<li> <a href="/qa/show.php?id={id}" > {name} </a> </li>' ;
-			
-			foreach($questionDBRows as $questionDBRow) {
-				
-				$link = str_replace(array("{id}", "{name}"),
-									array($questionDBRow['id'], $questionDBRow['title']) ,
-									$link_template);
-				
-				$buffer .= $link ;
-			}
-			
-			$buffer .= "</ul> " ;
-			
-			$view->links = $buffer ;
-			$view->moreLink = '/user/data/question.php';
-			
-			$html = Template::render($template,$view);
-			
-            return $html ;
-		}
-		
-		static function getAnswerBox($userId, $answerDBRows) {
-			
-		    $html = NULL ;
-			$view = new \stdClass;
-			$template = $_SERVER['APP_WEB_DIR'].'/fragments/common/link-box.tmpl' ;
-			
-			$view->header = 'Answers' ;
-			
-			$buffer = ' <ul>';
-			$link_template = '<li> <a href="/qa/show.php?id={id}" > {name} </a> </li>' ;
-			
-			foreach($answerDBRows as $answerDBRow) {
-				
-				$link = str_replace(array("{id}", "{name}"),
-									array($answerDBRow['question_id'], $answerDBRow['title']) ,
-									$link_template);
-				
-				$buffer .= $link ;
-			}
-			
-			$buffer .= "</ul> " ;
-			
-			$view->links = $buffer ;
-			$view->moreLink = '#' ;
-			
-			$html = Template::render($template,$view);
-			
-            return $html ;
-		}
-		
-        
     }
     
 }

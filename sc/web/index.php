@@ -17,7 +17,7 @@
 	$total = $questionDao->getTotalCount();
 
 	$qparams = Url::getQueryParams($_SERVER['REQUEST_URI']);
-	$pageSize =	$count = Config::getInstance()->get_value("main.page.items");
+	$pageSize =	Config::getInstance()->get_value("main.page.items");
 	$paginator = new \com\indigloo\ui\Pagination($qparams,$total,$pageSize);	
 
     $questionDBRows = $questionDao->getPaged($paginator);
@@ -80,7 +80,7 @@
 
 							if(sizeof($questionDBRows) > 0 ) { 
 								$startId = $questionDBRows[0]['id'] ;
-								$endId =   $questionDBRows[sizeof($questionDBRows)-1]['id'] ;
+								$endId =  $questionDBRows[sizeof($questionDBRows)-1]['id'] ;
 							}	
 
 							foreach($questionDBRows as $questionDBRow) {

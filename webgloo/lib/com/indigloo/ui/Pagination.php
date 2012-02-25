@@ -91,9 +91,6 @@ namespace com\indigloo\ui {
             //convert to base36
             $startId = base_convert($startId,10,36) ;
             $endId = base_convert($endId,10,36) ;
-             
-            //printf("<div class=\"pagination\">");
-            //printf("<span class=\"nextprev\"> <a href=\"%s\">Home</a> &nbsp;&nbsp;</span>",$homeURI);
 			printf("<ul class=\"pager\">");
             
             if($this->hasPrevious()){
@@ -103,7 +100,6 @@ namespace com\indigloo\ui {
                 $ignore = array('gpa');
                 
                 $previousURI = Url::addQueryParameters($homeURI,$q,$ignore);
-                //printf("<span class=\"nextprev\"> <a href=\"%s\">&lt;&nbsp;Previous</a> </span>",$previousURI);
                 printf("<li> <a href=\"%s\">&larr; Previous</a> </li>",$previousURI);
             }
             
@@ -113,15 +109,11 @@ namespace com\indigloo\ui {
                 $ignore = array('gpb');
 
                 $nextURI = Url::addQueryParameters($homeURI,$q,$ignore);
-                //printf("<span class=\"nextprev\"> <a href=\"%s\">&nbsp;Next&nbsp;&gt;</a> </span>",$nextURI);
                 printf("<li> <a href=\"%s\">Next &rarr;</a> </li>",$nextURI);
             }
             
             printf("</ul>");
-            
         }
-        
-        
     }
 
 }

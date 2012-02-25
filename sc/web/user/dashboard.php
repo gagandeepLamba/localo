@@ -6,6 +6,8 @@
     include($_SERVER['APP_WEB_DIR'] . '/inc/role/user.inc');
 	
     use com\indigloo\Util as Util;
+    use com\indigloo\Url as Url;
+    use com\indigloo\Configuration as Config;
     use com\indigloo\ui\form\Sticky;
     use com\indigloo\Constants as Constants;
     use com\indigloo\ui\form\Message as FormMessage;
@@ -20,13 +22,19 @@
     $userDao = new \com\indigloo\sc\dao\User() ;
 	$userDBRow = $userDao->getonId($userId);
 	
-	$questionDao = new \com\indigloo\sc\dao\Question() ;
-	$questionDBRows = $questionDao->getAllOnUserEmail($gSessionUser->email);
-	
-	$answerDao = new \com\indigloo\sc\dao\Answer() ;
-	$answerDBRows = $answerDao->getAllOnUserEmail($gSessionUser->email);
-	
-	
+	$qparams = Url::getQueryParams($_SERVER['REQUEST_URI']);
+
+	$ptab = 'active' ;
+	$ctab = '';
+	$tab = 'inc/post.php';
+
+	if(array_key_exists('tab',$qparams) && $qparams['tab'] == 'comment') {
+		$tab = 'inc/comment.php' ;
+		$ptab = '' ;
+		$ctab = 'active' ;
+
+	}
+
 ?>  
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -42,7 +50,7 @@
 		<script type="text/javascript" src="/3p/bootstrap/js/bootstrap.js"></script>
 		<script>
 			$(document).ready(function(){
-
+				
 			});
 
 		</script>
@@ -77,32 +85,14 @@
 
 			<div class="row">
 				<div class="span9">
-					<div class="tabbable mt20">
+					<div class="mt20">
 						<ul class="nav nav-tabs">
-							<li class="active"><a href="#post" data-toggle="tab">Posts</a></li>
-							<li><a href="#comment" data-toggle="tab">Comments</a></li>
+						<li class="<?php echo $ptab; ?>"> <a href="/user/dashboard.php?tab=post#post">Posts</a></li>
+						<li class="<?php echo $ctab; ?>"> <a href="/user/dashboard.php?tab=comment#comment">Comments</a></li>
 						</ul>
-						<div class="tab-content">
-							<div class="tab-pane active" id="post">
-								<h1>Posts</h1>
-								<?php 
-									foreach($questionDBRows as $questionDBRow){
-										echo \com\indigloo\sc\html\Question::getWidget($questionDBRow);
-									}
-								?>
-								
-							</div>
-							<div class="tab-pane" id="comment">
-								<h1>Comments</h1>
-								<?php 
-									foreach($answerDBRows as $answerDBRow){
-										echo \com\indigloo\sc\html\Answer::getWidget($gSessionUser,$answerDBRow);
-									}
-								?>
 
-							</div>
-						</div>	
-					</div> <!-- tab wrapper -->
+						<?php include($tab); ?>
+					</div> <!-- wrapper -->
 
 				</div>
 			</div>
