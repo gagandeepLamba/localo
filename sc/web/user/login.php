@@ -9,6 +9,12 @@
      
     $sticky = new Sticky($gWeb->find(Constants::STICKY_MAP,true));
     $fwdURI = empty($_GET['q']) ? '' : $_GET['q'] ;
+    $_SESSION["state"] = "rajeev" ;
+    
+    $fbDialogUrl = "https://www.facebook.com/dialog/oauth?client_id=" ;
+    $fbDialogUrl .= "282966715106633&redirect_uri=" ;
+    $fbDialogUrl .= "http://www.3mik.com/callback/fb2.php&scope=email";
+    $fbDialogUrl .= "&state=".$_SESSION['state']
     
 ?>  
 
@@ -35,38 +41,15 @@
                     errorLabelContainer: $("#web-form1 div.error")
                 });
                 
-                window.fbAsyncInit = function() {
-                    FB.init({
-                      appId      : '282966715106633',
-                      status     : true, 
-                      cookie     : true,
-                      xfbml      : true,
-                      oauth      : true,
-                    });
-                  
-                    FB.Event.subscribe('auth.login', function(response) {
-                        window.location = "<?php echo $host; ?>/callback/facebook.php";
-                    });
-              
-                };
-                
-                (function(d){
-                   var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
-                   js = d.createElement('script'); js.id = id; js.async = true;
-                   js.src = "//connect.facebook.net/en_US/all.js";
-                   d.getElementsByTagName('head')[0].appendChild(js);
-                 }(document));
-
             });
             
         </script>
 					
 							  
-
     </head>
 
      <body>
-        <div id="fb-root"></div>
+        
 		<div class="container">
 			<div class="row">
 				<div class="span12">
@@ -90,14 +73,12 @@
                                                     
                     <?php FormMessage::render(); ?>
                     <div class="wrapper">
-                        <div class="facebook-login">
-                            <div class="fb-login-button" data-show-faces="false" size="large" data-scope="email">Login with Facebook</div>
+                        <div class="twitter-login">
+                           <div> <a href="<?php echo $fbDialogUrl; ?>"> Login with Facebook</a></div>
                         </div>
                         <div class="twitter-login">
-                            <div class="">
+                            <div>
                                 <a href="/user/twitter-login.php"> Login with Twitter</a>
-                                &nbsp;
-                            
                             </div>
                         </div>
                         <img src="/nuke/twitter-bird.png" width="30" height="30"/>
