@@ -15,7 +15,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 
-       <head><title> login page</title>
+       <head><title> 3mik.com - login page</title>
          
 
         <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
@@ -85,15 +85,33 @@
 			<div class="row">
 				<div class="span8">
                     <div class="page-header">
-                        <h2> Sign In </h2>
+                        <h2> Login Page </h2>
                     </div>
                                                     
                     <?php FormMessage::render(); ?>
                     <div class="wrapper">
-                        <div class="fb-login-button" data-scope="email">Login with Facebook</div>
-                        <div class="mt20"> <a href="/user/twitter-login.php"> Login with Twitter</a></div>
+                        <div class="facebook-login">
+                            <div class="fb-login-button" data-show-faces="false" size="large" data-scope="email">Login with Facebook</div>
+                        </div>
+                        <div class="twitter-login">
+                            <div class="">
+                                <a href="/user/twitter-login.php"> Login with Twitter</a>
+                                &nbsp;
+                            
+                            </div>
+                        </div>
+                        <img src="/nuke/twitter-bird.png" width="30" height="30"/>
                     </div> <!-- wrapper -->
+                    <div class="mt20 alert alert-info">
+                        You can login with a facebook or twitter account on this site.
+                        However for better site experience we suggest you create a 3mik.com account
+                    </div>
                     
+                    <div class="page-header">
+                        <h2> Login with 3mik.com account </h2>
+                         No 3mik.com account? <a href="/user/register.php"> Register for a new account</a> (Free and takes just 30 seconds!)
+                    </div>
+                      
                     <form id="web-form1"  name="web-form1" action="/user/form/login.php" enctype="multipart/form-data"  method="POST">
 
                         <div class="error">    </div>
@@ -128,8 +146,8 @@
                     </form>
                     
                     <div>
-                        No account? <a href="/user/register.php"> Register</a>
-                        Use  <a href="/user/twitter-login.php"> Twitter</a>
+                   
+                
                           
                     </div>
                 </div>
