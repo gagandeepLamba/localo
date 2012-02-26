@@ -17,7 +17,17 @@ namespace com\indigloo\sc\mysql {
             $row = MySQL\Helper::fetchRow($mysqli, $sql);
             return $row;
 		}
+
+		static function getOnLoginId($loginId) {
+			$mysqli = MySQL\Connection::getInstance()->getHandle();
+			$loginId = $mysqli->real_escape_string($loginId);
+			
+            $sql = " select * from sc_user where login_id = ".$loginId ;
+            $row = MySQL\Helper::fetchRow($mysqli, $sql);
+            return $row;
+		}
 		
+
 		static function update($userId,$firstName,$lastName) {
 			$code = MySQL\Connection::ACK_OK;
 

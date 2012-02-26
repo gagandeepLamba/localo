@@ -7,14 +7,14 @@ namespace com\indigloo\sc\html {
     
     class Question {
         
-			static function getEditBar($sessionUser,$questionDBRow) {
+			static function getEditBar($login,$questionDBRow) {
 			
 			$html = NULL ;
 			$id = $questionDBRow['id'] ;
 
 			$buffer = '<span> <a class="btn btn-primary" href="#form-wrapper">Add Comment</a></span>' ;
 			
-			if(!is_null($sessionUser) && ($sessionUser->email == $questionDBRow['user_email'])) {
+			if(!is_null($login) && ($login->id == $questionDBRow['login_id'])) {
 				$buffer .= '<span> <a class="btn btn-primary" href="/qa/edit.php?id='.$id.'">Edit</a></span>' ;
 			}
 			

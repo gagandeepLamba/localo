@@ -10,8 +10,8 @@
     use \com\indigloo\Util as Util ;
     use \com\indigloo\Url as Url ;
 	
-	if(is_null($gSessionUser)) {
-		$gSessionUser = \com\indigloo\auth\User::getUserInSession();
+	if(is_null($gSessionLogin)) {
+		$gSessionLogin = \com\indigloo\sc\auth\Login::getLoginInSession();
 	}
 
     if (isset($_POST['save']) && ($_POST['save'] == 'Save')) {

@@ -1,7 +1,7 @@
 <?php
-	use \com\indigloo\auth\User as User ;
+	use \com\indigloo\sc\auth\Login as Login ;
  
-	if(!User::isAuthenticated()){
+	if(!Login::isValid()){
 		
 		$fwd = '/user/login.php?q='.$_SERVER['REQUEST_URI'];
 		header('location: '.$fwd);
@@ -9,4 +9,3 @@
   }
 
 ?>
-

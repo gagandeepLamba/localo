@@ -4,7 +4,7 @@
 
 	$answerDao = new \com\indigloo\sc\dao\Answer() ;
 		
-	$filter = array($answerDao::EMAIL => $gSessionUser->email);
+	$filter = array($answerDao::LOGIN => $gSessionLogin->id);
 	$total = $answerDao->getTotalCount($filter);
 
 	$pageSize =	Config::getInstance()->get_value("user.page.items");
@@ -25,7 +25,7 @@
 		}	
 
 		foreach($answerDBRows as $answerDBRow){
-			echo \com\indigloo\sc\html\Answer::getWidget($gSessionUser,$answerDBRow);
+			echo \com\indigloo\sc\html\Answer::getWidget($answerDBRow);
 		}
 
 	?>

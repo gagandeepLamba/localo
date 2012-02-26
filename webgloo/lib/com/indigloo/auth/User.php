@@ -38,6 +38,9 @@ namespace com\indigloo\auth {
          */
        
         const MODULE_NAME = 'com\indigloo\auth\User';
+
+		const USER_TOKEN = "WEBGLOO_USER_TOKEN" ;
+		const USER_DATA = "WEBGLOO_USER_DATA" ;
         
         static function createView($row) {
             $user = new UserVO();
@@ -87,8 +90,9 @@ namespace com\indigloo\auth {
                 //set userdata in session
                 if ($outcome == 0) {
                     $randomToken = Util::getBase36GUID();
-                    $_SESSION['LOGON_TOKEN'] = $randomToken;
-                    $_SESSION['LOGON_USER_DATA'] = $row;
+                    $_SESSION[self::USER_TOKEN] = $randomToken;
+					//@todo - filter user data in session 
+                    $_SESSION[self::USER_DATA] = $row;
                     $code = 1 ;
                 }
             }
@@ -98,8 +102,8 @@ namespace com\indigloo\auth {
         
         function isStaff() {
             $flag = false ;
-            if (isset($_SESSION) && isset($_SESSION['LOGON_TOKEN'])) {
-                $userDBRow = $_SESSION['LOGON_USER_DATA'];
+            if (isset($_SESSION) && isset($_SESSION[self::USER_TOKEN])) {
+                $userDBRow = $_SESSION[self::USER_DATA];
                 $flag = ($userDBRow['is_staff'] == 1) ? true : false ;
             }
             
@@ -108,8 +112,8 @@ namespace com\indigloo\auth {
 
         function isAdmin() {
             $flag = false ;
-            if (isset($_SESSION) && isset($_SESSION['LOGON_TOKEN'])) {
-                $userDBRow = $_SESSION['LOGON_USER_DATA'];
+            if (isset($_SESSION) && isset($_SESSION[self::USER_TOKEN])) {
+                $userDBRow = $_SESSION[self::USER_DATA];
                 $flag = ($userDBRow['is_admin'] == 1) ? true : false ;
             }
             
@@ -118,7 +122,7 @@ namespace com\indigloo\auth {
         
         function isAuthenticated() {
             $flag = false ;
-            if (isset($_SESSION) && isset($_SESSION['LOGON_TOKEN'])) {
+            if (isset($_SESSION) && isset($_SESSION[self::USER_TOKEN])) {
                 $flag = true ;
             }
             
@@ -129,8 +133,8 @@ namespace com\indigloo\auth {
         static function getUserInSession() {
             
             $user = NULL ;
-            if (isset($_SESSION) && isset($_SESSION['LOGON_TOKEN'])) {
-                $userDBRow = $_SESSION['LOGON_USER_DATA'];
+            if (isset($_SESSION) && isset($_SESSION[self::USER_TOKEN])) {
+                $userDBRow = $_SESSION[self::USER_DATA];
                 $user =  UserVO::create($userDBRow);
                 
             } else {
@@ -144,8 +148,8 @@ namespace com\indigloo\auth {
         static function tryUserInSession() {
             
             $user = NULL ;
-            if (isset($_SESSION) && isset($_SESSION['LOGON_TOKEN'])) {
-                $userDBRow = $_SESSION['LOGON_USER_DATA'];
+            if (isset($_SESSION) && isset($_SESSION[self::USER_TOKEN])) {
+                $userDBRow = $_SESSION[self::USER_DATA];
                 $user =  UserVO::create($userDBRow);
             }
             
@@ -153,7 +157,7 @@ namespace com\indigloo\auth {
             
         }
         
-        static function create($tableName,$firstName,$lastName,$userName,$email,$password) {
+        static function create($tableName,$firstName,$lastName,$userName,$email,$password,$loginId) {
             
             if(empty($tableName)) {
                 trigger_error("User Table name is not supplied",E_USER_ERROR);
@@ -176,8 +180,9 @@ namespace com\indigloo\auth {
             $message = $password.$salt;
             $digest = sha1($message);
             
-            $sql = " insert into {table} (first_name, last_name, user_name,email,password,salt,created_on,is_staff) ";
-            $sql .= " values(?,?,?,?,?,?,now(),0) ";
+			$sql = " insert into {table} (first_name, last_name, user_name,email,password, " ;
+			$sql .= " salt,created_on,is_staff,login_id) ";
+            $sql .= " values(?,?,?,?,?,?,now(),0,?) ";
             $sql = str_replace("{table}", $tableName,$sql);
             
 
@@ -186,13 +191,14 @@ namespace com\indigloo\auth {
             //store computed password and random salt
             $stmt = $mysqli->prepare($sql);
             if ($stmt) {
-                $stmt->bind_param("ssssss",
+                $stmt->bind_param("ssssssi",
                         $firstName,
                         $lastName,
                         $userName,
                         $email,
                         $digest,
-                        $salt);
+						$salt,
+						$loginId);
 
                 $stmt->execute();
 

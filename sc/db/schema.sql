@@ -118,5 +118,60 @@ delimiter ;
 -- switch engine to InnoDB
 -- 
 
+--
+-- 27 Feb 2012
+--
+
+
+
+drop table if exists sc_login;
+create table sc_login(
+	id int(11) NOT NULL auto_increment,
+	name varchar(32) not null,
+    provider varchar(16) not null,
+	PRIMARY KEY (id)) ENGINE = InnoDB;
+
+
+-- look @ DB - select user_name,email from sc_user, provider is 3mik
+insert into sc_login(name,provider) values ('Rajeev Jha','3mik');
+
+alter table sc_user add column login_id int ;
+alter table sc_question add column login_id int ;
+alter table sc_answer add column login_id int ;
+
+--
+-- update sc_user (login_id vs email)
+-- 1 | jha.rajeev@gmail.com
+-- 
+-- 
+
+update sc_user set login_id = 1 where user_email = 'jha.rajeev@gmail.com';
+update sc_question set login_id = 1 where user_email = 'jha.rajeev@gmail.com';
+update sc_answer set login_id = 1 where user_email = 'jha.rajeev@gmail.com';
+
+--
+-- verify first
+-- repeat above for multiple users
+-- drop user_email
+-- 
+
+alter table sc_question drop column user_email ;
+alter table sc_answer drop column user_email ;
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
 
 

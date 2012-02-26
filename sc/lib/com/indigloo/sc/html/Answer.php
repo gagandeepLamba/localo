@@ -8,7 +8,7 @@ namespace com\indigloo\sc\html {
     
     class Answer {
 
-		static function getSummary($sessionUser,$answerDBRow) {
+		static function getSummary($answerDBRow) {
            
 		    $html = NULL ;
 			$view = new \stdClass;
@@ -25,7 +25,7 @@ namespace com\indigloo\sc\html {
 
 		}
 
-        static function getWidget($sessionUser,$answerDBRow) {
+        static function getWidget($answerDBRow) {
            
 		    $html = NULL ;
 			$view = new \stdClass;

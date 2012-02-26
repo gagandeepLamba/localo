@@ -40,6 +40,8 @@
             $code = $data['code'];
             
             if ($code > 0 ) {
+				//success set our own session variables
+				\com\indigloo\sc\auth\Login::startMikSession();
                 header("location: ".$forwardURI);
                 
             } else{

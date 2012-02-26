@@ -9,10 +9,10 @@ namespace com\indigloo\sc\dao {
     
     class Answer {
 
-		const EMAIL = "scr1flma";
+		const LOGIN = "scr1flma";
 
 		function createDBFilter($filter) {
-			$map = array(self::EMAIL => mysql\Answer::EMAIL_COLUMN);
+			$map = array(self::LOGIN => mysql\Answer::LOGIN_COLUMN);
 			$dbfilter = mysql\Helper::createDBFilter($filter,$map);
 			return $dbfilter ;
 		}
@@ -74,14 +74,14 @@ namespace com\indigloo\sc\dao {
 			
         function create($questionId,
 						$answer,
-						$userEmail,
+						$loginId,
 						$userName) {
 			
             
             $code = mysql\Answer::create(
 								$questionId,
 								$answer,
-								$userEmail,
+								$loginId,
 								$userName);
             return $code ;
         }

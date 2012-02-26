@@ -5,8 +5,8 @@
     include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
     include($_SERVER['APP_WEB_DIR'] . '/inc/role/user.inc');
 	
-	if(is_null($gSessionUser)) {
-		$gSessionUser = \com\indigloo\auth\User::getUserInSession();
+	if(is_null($gSessionLogin)) {
+		$gSessionLogin = \com\indigloo\sc\auth\Login::getLoginInSession();
 	}
 
     use \com\indigloo\ui\form as Form;
@@ -44,8 +44,8 @@
                                 $fvalues['category'],
                                 'location',
                                 'tags',
-								$gSessionUser->email,
-								$gSessionUser->firstName,
+								$gSessionLogin->id,
+								$gSessionLogin->name,
                                 $_POST['links_json'],
                                 $_POST['images_json']);
 								

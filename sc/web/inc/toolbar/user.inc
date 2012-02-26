@@ -17,7 +17,7 @@
 			<ul class="nav">
 				<li class="divider-vertical"></li>
 				<li class="dropdown">
-				  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hello&nbsp;<?php echo $gSessionUser->firstName; ?><b class="caret"></b></a>
+				  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hello&nbsp;<?php echo $gSessionLogin->name; ?><b class="caret"></b></a>
 				  <ul class="dropdown-menu">
 					<li><a href="/user/dashboard.php">My Account</a></li>
 					<!-- <li><a href="#">Dummy Link</a></li> -->

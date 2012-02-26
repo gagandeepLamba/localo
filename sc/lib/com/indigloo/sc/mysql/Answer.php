@@ -10,7 +10,7 @@ namespace com\indigloo\sc\mysql {
         
         const MODULE_NAME = 'com\indigloo\sc\mysql\Answer';
 		//DB columns for filters
-		const EMAIL_COLUMN = "user_email" ;
+		const LOGIN_COLUMN = "login_id" ;
 
 		static function getOnQuestionId($questionId) {
 			$mysqli = MySQL\Connection::getInstance()->getHandle();
@@ -34,8 +34,8 @@ namespace com\indigloo\sc\mysql {
 			$mysqli = MySQL\Connection::getInstance()->getHandle();
 
 			$condition = '' ;
-			if(array_key_exists(self::EMAIL_COLUMN,$dbfilter)) {
-				$condition = " where user_email = '".$dbfilter[self::EMAIL_COLUMN]. "' " ;
+			if(array_key_exists(self::LOGIN_COLUMN,$dbfilter)) {
+				$condition = " where login_id = ".$dbfilter[self::LOGIN_COLUMN] ;
 			}
 
 			$sql = " select * from sc_answer ".$condition." order by id desc LIMIT ".$count ;
@@ -48,8 +48,8 @@ namespace com\indigloo\sc\mysql {
 			$mysqli = MySQL\Connection::getInstance()->getHandle();
 
 			$condition = '';
-			if(array_key_exists(self::EMAIL_COLUMN,$dbfilter)) {
-				$condition = " where user_email = '".$dbfilter[self::EMAIL_COLUMN]. "' " ;
+			if(array_key_exists(self::LOGIN_COLUMN,$dbfilter)) {
+				$condition = " where login_id = ".$dbfilter[self::LOGIN_COLUMN] ;
 			}
 
             $sql = " select count(id) as count from sc_answer ".$condition ;
@@ -64,8 +64,8 @@ namespace com\indigloo\sc\mysql {
             $predicate = '' ;
 			$condition = '' ;
 
-			if(array_key_exists(self::EMAIL_COLUMN,$dbfilter)) {
-				$condition = " and user_email = '".$dbfilter[self::EMAIL_COLUMN]. "' " ;
+			if(array_key_exists(self::LOGIN_COLUMN,$dbfilter)) {
+				$condition = " and login_id = ".$dbfilter[self::LOGIN_COLUMN] ;
 			}
 
             if($direction == 'after') {
@@ -101,21 +101,21 @@ namespace com\indigloo\sc\mysql {
 
         static function create($questionId,
 								$answer,
-								$userEmail,
+								$loginId,
 								$userName) {
 
             $mysqli = MySQL\Connection::getInstance()->getHandle();
-            $sql = " insert into sc_answer(question_id,answer,user_email,user_name, created_on) " ;
+            $sql = " insert into sc_answer(question_id,answer,login_id,user_name, created_on) " ;
             $sql .= " values(?,?,?,?,now()) ";
 
             $code = MySQL\Connection::ACK_OK;
             $stmt = $mysqli->prepare($sql);
             
             if ($stmt) {
-                $stmt->bind_param("isss",
+                $stmt->bind_param("isis",
 								$questionId,
 								$answer,
-								$userEmail,
+								$loginId,
 								$userName);
                 
                       

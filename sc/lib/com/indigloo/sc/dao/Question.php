@@ -10,10 +10,10 @@ namespace com\indigloo\sc\dao {
     
     class Question {
 
-		const EMAIL  = "oowyh1vm";
+		const LOGIN  = "oowyh1vm";
 
 		function createDBFilter($filter) {
-			$map = array(self::EMAIL => mysql\Question::EMAIL_COLUMN);
+			$map = array(self::LOGIN => mysql\Question::LOGIN_COLUMN);
 			$dbfilter = mysql\Helper::createDBFilter($filter,$map);
 			return $dbfilter ;
 		}
@@ -66,7 +66,7 @@ namespace com\indigloo\sc\dao {
 						$category,
 						$location,
 						$tags,
-						$userEmail,
+						$loginId,
 						$userName,
 						$linksJson,
 						$imagesJson) {
@@ -79,7 +79,7 @@ namespace com\indigloo\sc\dao {
 								$category,
 								$location,
 								$tags,
-								$userEmail,
+								$loginId,
 								$userName,
 								$linksJson,
 								$imagesJson);

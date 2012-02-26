@@ -1,9 +1,9 @@
 <?php
 
- use \com\indigloo\auth\User as User;
+ use \com\indigloo\sc\auth\Login as Login;
  
- if(User::isAuthenticated()){
-    $gSessionUser = User::getUserInSession();
+ if(Login::isValid()){
+    $gSessionLogin = Login::getLoginInSession();
     include($_SERVER['APP_WEB_DIR'].'/inc/toolbar/user.inc') ;
 
   } else {

@@ -11,7 +11,7 @@ namespace com\indigloo\sc\mysql {
         const MODULE_NAME = 'com\indigloo\sc\mysql\Question';
 
 		//DB columns for filters
-		const EMAIL_COLUMN = "user_email" ;
+		const LOGIN_COLUMN = "login_id" ;
 
 		static function getOnId($questionId) {
 			$mysqli = MySQL\Connection::getInstance()->getHandle();
@@ -27,8 +27,8 @@ namespace com\indigloo\sc\mysql {
 			$mysqli = MySQL\Connection::getInstance()->getHandle();
 
 			$condition = '' ;
-			if(array_key_exists(self::EMAIL_COLUMN,$dbfilter)) {
-				$condition = " where user_email = '".$dbfilter[self::EMAIL_COLUMN]. "' " ;
+			if(array_key_exists(self::LOGIN_COLUMN,$dbfilter)) {
+				$condition = " where login_id = ".$dbfilter[self::LOGIN_COLUMN];
 			}
 
 			$sql = " select * from sc_question ".$condition." order by id desc LIMIT ".$count ;
@@ -42,11 +42,11 @@ namespace com\indigloo\sc\mysql {
 			$mysqli = MySQL\Connection::getInstance()->getHandle();
 
 			$condition = '';
-			if(array_key_exists(self::EMAIL_COLUMN,$dbfilter)) {
-				$condition = " where user_email = '".$dbfilter[self::EMAIL_COLUMN]. "' " ;
+			if(array_key_exists(self::LOGIN_COLUMN,$dbfilter)) {
+				$condition = " where login_id = ".$dbfilter[self::LOGIN_COLUMN];
 			}
 
-            $sql = " select count(id) as count from sc_question ".$condition ;
+            $sql = " select count(id) as count from sc_question  ".$condition ;
             $row = MySQL\Helper::fetchRow($mysqli, $sql);
             return $row;
 
@@ -63,8 +63,8 @@ namespace com\indigloo\sc\mysql {
             $predicate = '' ;
 			$condition = '' ;
 
-			if(array_key_exists(self::EMAIL_COLUMN,$dbfilter)) {
-				$condition = " and user_email = '".$dbfilter[self::EMAIL_COLUMN]. "' " ;
+			if(array_key_exists(self::LOGIN_COLUMN,$dbfilter)) {
+				$condition = " and login_id = ".$dbfilter[self::LOGIN_COLUMN];
 			}
 
             if($direction == 'after') {
@@ -153,7 +153,7 @@ namespace com\indigloo\sc\mysql {
                                $category,
                                $location,
                                $tags,
-							   $userEmail,
+							   $loginId,
 							   $userName,
                                $linksJson,
                                $imagesJson) {
@@ -162,21 +162,21 @@ namespace com\indigloo\sc\mysql {
 			
             $mysqli = MySQL\Connection::getInstance()->getHandle();
             $sql = " insert into sc_question(title,seo_title,description,category_code,location,tags, " ;
-            $sql .= " user_email,user_name,links_json,images_json,created_on) ";
+            $sql .= " login_id,user_name,links_json,images_json,created_on) ";
             $sql .= " values(?,?,?,?,?,?,?,?,?,?,now()) ";
 
             $code = MySQL\Connection::ACK_OK;
             $stmt = $mysqli->prepare($sql);
             
             if ($stmt) {
-                $stmt->bind_param("ssssssssss",
+                $stmt->bind_param("ssssssisss",
                         $title,
                         $seoTitle,
                         $description,
                         $category,
                         $location,
 						$tags,
-						$userEmail,
+						$loginId,
 						$userName,
                         $linksJson,
                         $imagesJson);

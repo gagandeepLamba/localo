@@ -14,13 +14,12 @@
      
     $sticky = new Sticky($gWeb->find(Constants::STICKY_MAP,true));
     
-	if(is_null($gSessionUser)) {
-		$gSessionUser = \com\indigloo\auth\User::getUserInSession();
+	if(is_null($gSessionLogin)) {
+		$gSessionLogin = \com\indigloo\sc\auth\Login::getLoginInSession();
 	}
 	
-	$userId = $gSessionUser->id ;
     $userDao = new \com\indigloo\sc\dao\User() ;
-	$userDBRow = $userDao->getonId($userId);
+	$userDBRow = $userDao->getOnLoginId($gSessionLogin->provider,$gSessionLogin->id);
 	
 	$qparams = Url::getQueryParams($_SERVER['REQUEST_URI']);
 
@@ -77,9 +76,9 @@
 			<div class="row">
 				<div class="span12">
 					<div class="page-header">
-						<h2> <?php echo $gSessionUser->firstName; ?> </h2>
+						<h2> <?php echo $gSessionLogin->name; ?> </h2>
 					</div>
-					<?php echo \com\indigloo\sc\html\User::getProfile($gSessionUser,$userDBRow) ; ?>
+					<?php echo \com\indigloo\sc\html\User::getProfile($gSessionLogin,$userDBRow) ; ?>
 				</div>
 			</div>
 

@@ -27,10 +27,10 @@
     $answerDao = new com\indigloo\sc\dao\Answer();
     $answerDBRows = $answerDao->getOnQuestionId($questionId);
 
-	if(is_null($gSessionUser)) {
-		$user = \com\indigloo\auth\User::tryUserInSession();
-		if(!is_null($user)) {
-			$gSessionUser = $user ;
+	if(is_null($gSessionLogin)) {
+		$login = \com\indigloo\sc\auth\Login::tryLoginInSession();
+		if(!is_null($login)) {
+			$gSessionLogin = $login ;
 		}
 	}
 	
@@ -64,7 +64,7 @@
 				});
 
 				$('#myCarousel').carousel({
-				  interval: 5000
+				  interval: 10000
 				});
 				
             });
@@ -93,7 +93,7 @@
                            
 				<?php if(sizeof($images) > 0 ) { include('inc/carousel.inc') ; } ?> 
 				<?php echo \com\indigloo\sc\html\Question::getDetail($questionDBRow) ; ?>
-				<?php echo \com\indigloo\sc\html\Question::getEditBar($gSessionUser,$questionDBRow) ; ?>
+				<?php echo \com\indigloo\sc\html\Question::getEditBar($gSessionLogin,$questionDBRow) ; ?>
 				
 				<div class="page-header">
 					<h2>Comments </h2>
@@ -102,7 +102,7 @@
 				<div>
 					<?php
 						foreach($answerDBRows as $answerDBRow) {
-							echo \com\indigloo\sc\html\Answer::getSummary($gSessionUser,$answerDBRow) ;
+							echo \com\indigloo\sc\html\Answer::getSummary($answerDBRow) ;
 						}
 						
 					?>

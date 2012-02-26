@@ -30,10 +30,10 @@ namespace com\indigloo\sc\html {
 
 		}
 
-        static function getProfile($sessionUser,$userDBRow) {
+        static function getProfile($login,$userDBRow) {
 		    $html = NULL ;
           	//private view needs owner
-			if(!is_null($sessionUser) && ($sessionUser->email == $userDBRow['email'])) {
+			if(!is_null($login) && ($login->id == $userDBRow['login_id'])) {
 				$html = self::getPrivateProfile($userDBRow);
 			} else {
 				$html = self::getPublicProfile($userDBRow);
