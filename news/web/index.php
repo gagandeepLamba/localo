@@ -40,12 +40,9 @@
 		}
 		
 		if(Config::getInstance()->is_debug()) {
-			$strParams = Util::stringify($route["params"]);
-			$strOptions = Util::stringify($route["options"]);
-			
-			$message = sprintf("controller %s :: params %s :: options %s  for path %s",
-							   $controllerName,$strParams, $strOptions, $_SERVER['REQUEST_URI']);
+			$message = sprintf("controller %s :: path %s  route is ", $controllerName, $_SERVER['REQUEST_URI']);
 			Logger::getInstance()->debug($message);
+			Logger::getInstance()->dump($route);
 		}
 		
 		$controller = new $controllerName();

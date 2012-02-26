@@ -45,25 +45,6 @@ namespace com\indigloo {
             return $str;
         }
 
-        static function stringify($var) {
-            $buffer = '';
-            
-            if (is_object($var)) {
-                $buffer = '{object=' . $var->__toString() . '}';
-                return $buffer;
-            }
-            if (is_array($var)) {
-                $buffer = '[array=';
-                foreach ($var as $elem) {
-                    $buffer = $buffer . self::stringify($elem) . ',';
-                }
-                $buffer .= ']';
-                return $buffer;
-            }
-
-            return $var;
-        }
-
         /**
          *
          * @param <type> $original - timestamp coming from mysql DB

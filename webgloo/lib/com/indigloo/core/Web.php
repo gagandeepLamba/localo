@@ -64,8 +64,8 @@ namespace com\indigloo\core {
                 $_SESSION[self::CORE_URL_STACK] = $stack;
 
                 if (Config::getInstance()->is_debug()) {
-                    $message = Util::stringify($stack);
-                    Logger::getInstance()->debug('web >> url stack is >> ' . $message);
+                    Logger::getInstance()->debug('web :: url stack ::');
+					Logger::getInstance()->dump($stack);
                 }
             } else {
                 \trigger_error("session not set", E_USER_ERROR);
@@ -110,8 +110,8 @@ namespace com\indigloo\core {
                 $_SESSION[$key] = $value;
 
                 if (Config::getInstance()->is_debug()) {
-                    Logger::getInstance()->debug('web >> storing in session >> key is:: ' . $key);
-                    Logger::getInstance()->debug(Util::stringify($value));
+                    Logger::getInstance()->debug('web :: storing in session :: key is:: ' . $key);
+                    Logger::getInstance()->dump($value);
                 }
             } else {
 				trigger_error("No web session found", E_USER_ERROR);
@@ -124,8 +124,8 @@ namespace com\indigloo\core {
             if (isset($_SESSION[$key]) && !empty($_SESSION[$key])) {
                 $value = $_SESSION[$key];
                 if (Config::getInstance()->is_debug()) {
-                    Logger::getInstance()->debug('web >> fetching from session >> key is:: ' . $key);
-                    Logger::getInstance()->debug(Util::stringify($value));
+                    Logger::getInstance()->debug('web :: fetching from session :: key is:: ' . $key);
+                    Logger::getInstance()->dump($value);
                 }
 
                 if ($destroy) {

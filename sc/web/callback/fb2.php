@@ -2,6 +2,10 @@
 	
     include 'sc-app.inc';
 	include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
+		
+	//set special error handler for callback scripts	
+    include ($_SERVER['APP_WEB_DIR'].'/callback/error.inc');
+	set_error_handler('login_error_handler');
    
 	use com\indigloo\Util;
 	use com\indigloo\Constants as Constants;
@@ -10,9 +14,10 @@
 	
     $fbAppId = Config::getInstance()->get_value("facebook.app.id");
     $fbAppSecret = Config::getInstance()->get_value("facebook.app.secret");
-	$fbCallback = "http://www.3mik.com/callback/fb2.php";
+
+	$host = "http://".$_SERVER["HTTP_HOST"];
+	$fbCallback = $host. "/callback/fb2.php";
 		
-   
 	$code = NULL;
 	if(array_key_exists('code',$_REQUEST)) {
 		$code = $_REQUEST["code"];
@@ -23,13 +28,10 @@
 		$error = $_REQUEST['error'] ;
 		$description = $_REQUEST['error_description'] ;
 		$message = sprintf(" Facebook returned error :: %s :: %s ",$error,$description);
-		$gWeb->store(Constants::FORM_ERRORS,array($messagea));
-		FormMessage::render();
-		exit(1);
+		trigger_error($message,E_USER_ERROR);
 	}
 	
 	if(empty($code) && empty($error)) {
-		
 		//new state token
 		$stoken = Util::getMD5GUID();
 		$gWeb->store("fb_state",$stoken);
@@ -50,7 +52,7 @@
 		$fbTokenUrl .= "&redirect_uri=" . urlencode($fbCallback). "&client_secret=" . $fbAppSecret ;
 		$fbTokenUrl .= "&code=" . $code;
 		
-		$response = @file_get_contents($fbTokenUrl);
+		$response = file_get_contents($fbTokenUrl);
 		$params = null;
 		parse_str($response, $params);
 
@@ -60,10 +62,8 @@
 	 
 	}
 	else {
-		$message = "Error:: The state does not match. You may be a victim of CSRF.";
-		$gWeb->store(Constants::FORM_ERRORS,array($message));
-		FormMessage::render();
-		exit(1);
+		$message = "The state on 3mik.com and Faceboo do not match. You may be a victim of CSRF.";
+		trigger_error($message,E_USER_ERROR);
     }
 
  ?>

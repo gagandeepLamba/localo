@@ -15,7 +15,9 @@
     $gWeb->store("fb_state",$stoken);
    
     $fbAppId = Config::getInstance()->get_value("facebook.app.id");
-    $fbCallback = "http://www.3mik.com/callback/fb2.php" ;
+
+	$host = "http://".$_SERVER["HTTP_HOST"];
+    $fbCallback = $host."/callback/fb2.php" ;
     
     $fbDialogUrl = "https://www.facebook.com/dialog/oauth?client_id=".$fbAppId ;
     $fbDialogUrl .= "&redirect_uri=".urlencode($fbCallback)."&scope=email&state=".$stoken ;
