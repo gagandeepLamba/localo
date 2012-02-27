@@ -74,6 +74,15 @@ namespace com\indigloo {
             \trigger_error('Wrong url input',E_USER_ERROR);
         }
 
+		static function tryQueryParam($name){
+			$value = NULL ;
+			if(array_key_exists($name,$_GET) && !empty($_GET[$name])){
+				$value = $_GET[$name];
+			}
+
+			return $value ;
+		}
+
 
     }
 

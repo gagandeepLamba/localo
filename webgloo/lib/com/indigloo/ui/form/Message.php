@@ -34,7 +34,7 @@ namespace com\indigloo\ui\form {
                 printf("<a class=\"close\" data-dismiss=\"alert\" href=\"#\">x</a>");
                 printf("<ul>");
                 foreach($messages as $message) {
-                    printf("<li>  %s </li>", $error);
+                    printf("<li>  %s </li>", $message);
                 }
                 printf("</ul>");
                 printf("</div>");

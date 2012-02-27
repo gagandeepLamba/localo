@@ -17,15 +17,13 @@
         $fvalues = $fhandler->getValues();
         $ferrors = $fhandler->getErrors();
         
-        $forwardURI = '/' ;
-        
-        if(array_key_exists('fwd_uri',$_POST) && (!empty($_POST['fwd_uri']))) {
-            $forwardURI = $_POST['fwd_uri'] ;
-        }
-        
+        $qUrl = '/' ;
+		if(array_key_exists('q',$_POST) && !empty($_POST['q'])) {
+			$qUrl = $_POST['q'];
+		}
         
         if ($fhandler->hasErrors()) {
-            $locationOnError = '/user/login.php?q='.$forwardURI ;
+            $locationOnError = '/user/login.php?q='.$qUrl ;
             $gWeb->store(Constants::STICKY_MAP, $fvalues);
             $gWeb->store(Constants::FORM_ERRORS,$fhandler->getErrors());
             
@@ -42,13 +40,13 @@
             if ($code > 0 ) {
 				//success set our own session variables
 				\com\indigloo\sc\auth\Login::startMikSession();
-                header("location: ".$forwardURI);
+                header("location: ".$qUrl);
                 
             } else{
                 
                 $gWeb->store(Constants::STICKY_MAP, $fvalues);
                 $gWeb->store(Constants::FORM_ERRORS,array("Error: wrong login or password"));
-                $locationOnError = '/user/login.php?q='.$forwardURI ;
+                $locationOnError = '/user/login.php?q='.$qUrl ;
                 
 
                 header("location: ".$locationOnError);

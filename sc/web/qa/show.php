@@ -102,7 +102,7 @@
 				<div>
 					<?php
 						foreach($answerDBRows as $answerDBRow) {
-							echo \com\indigloo\sc\html\Answer::getSummary($answerDBRow) ;
+							echo \com\indigloo\sc\html\Answer::getSummary($gSessionLogin,$answerDBRow) ;
 						}
 						
 					?>

@@ -129,6 +129,8 @@ create table sc_login(
 	id int(11) NOT NULL auto_increment,
 	name varchar(32) not null,
     provider varchar(16) not null,
+	created_on TIMESTAMP  default '0000-00-00 00:00:00',
+    updated_on TIMESTAMP   default '0000-00-00 00:00:00',
 	PRIMARY KEY (id)) ENGINE = InnoDB;
 
 
@@ -158,6 +160,22 @@ update sc_answer set login_id = 1 where user_email = 'jha.rajeev@gmail.com';
 alter table sc_question drop column user_email ;
 alter table sc_answer drop column user_email ;
 
+--
+-- twitter user 
+-- 
+
+drop table if exists sc_twitter;
+create table sc_twitter(
+	id int(11) NOT NULL auto_increment,
+	twitter_id int(11) NOT NULL ,
+	login_id int(11) NOT NULL ,
+	name varchar(32) not null,
+	screen_name varchar(32) ,
+	profile_image varchar(128) ,
+    location varchar(32) ,
+	created_on TIMESTAMP  default '0000-00-00 00:00:00',
+    updated_on TIMESTAMP   default '0000-00-00 00:00:00',
+	PRIMARY KEY (id)) ENGINE = InnoDB;
 
 
 

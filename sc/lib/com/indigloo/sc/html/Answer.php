@@ -8,12 +8,17 @@ namespace com\indigloo\sc\html {
     
     class Answer {
 
-		static function getSummary($answerDBRow) {
-           
+		static function getSummary($login,$answerDBRow) {
 		    $html = NULL ;
 			$view = new \stdClass;
 			$template = $_SERVER['APP_WEB_DIR'].'/fragments/answer/summary.tmpl' ;
 			
+			$view->editBar = '' ;
+
+			if(!empty($login) && ($login->id == $answerDBRow['login_id'])){
+				$view->editBar = '<a href="/qa/answer/edit.php?id='.$answerDBRow['id'].'">edit comment</a>' ;
+			}
+
 			
 			$view->answer = $answerDBRow['answer'];
 			$view->createdOn = Util::formatDBTime($answerDBRow['created_on']);

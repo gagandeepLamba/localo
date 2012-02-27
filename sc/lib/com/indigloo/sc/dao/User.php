@@ -13,19 +13,33 @@ namespace com\indigloo\sc\dao {
 			return $row ;
 		}
 
-		function getOnLoginId($provider,$loginId) {
-			//@todo - select tables based on provider
-			$table = NULL ;
+		function getOnLoginId($loginId) {
+			//figure out the provider 
+			$loginDao = new \com\indigloo\sc\dao\Login();
+			$loginRow = $loginDao->getonId($loginId);
+
+			$provider = $loginRow['provider'];
+			$row = NULL ;
+
 			switch($provider) {
-				case '3mik' :
-					$table = 'sc_user' ;
-					break ;
-				default:
-					trigger_error("Unknown provider",E_USER_ERROR);
+				case \com\indigloo\sc\auth\Login::MIK :
+					$row = mysql\User::getOnLoginId($loginId);
 					break;
+				case \com\indigloo\sc\auth\Login::FACEBOOK :
+					$row = mysql\Facebook::getOnLoginId($loginId);
+					break;
+				case \com\indigloo\sc\auth\Login::TWITTER :
+					$row = mysql\Twitter::getOnLoginId($loginId);
+					break;
+				default:
+					trigger_error("Unknown user provider",E_USER_ERROR);
 			}
-			
-			$row = mysql\User::getOnLoginId($loginId);
+
+			//Add provider information
+			if(!empty($row)){
+				$row['provider'] = $provider ;
+			}
+
 			return $row ;
 		}
 		

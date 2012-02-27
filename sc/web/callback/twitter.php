@@ -51,8 +51,32 @@
 			trigger_error("Error retrieving twitter user information");	
 		}
 		else {
-			echo " Dump of user information <br>";
-			print_r($user_info);
+			// get screenName, profile Pic 
+			// exisitng record ? find on twitter_id
+			// New record - create login + twitter record
+			// start login session  
+			$id = $user_info->id;
+			$image = $user_info->profile_image_url;
+			$screenName = $user_info->screen_name;
+			$name = $user_info->name;
+			$location = $user_info->location;
+			
+			// do not what twitter will return
+			// we consider auth to be good enough for a user
+			if(empty($name) && empty($screenName)) {
+				$name = "Anonymous" ;
+			}
+
+			$twitterDao = new \com\indigloo\sc\dao\Twitter();
+			$loginId = $twitterDao->getOrCreate($id,$name,$screenName,$location,$image);
+
+			if(empty($loginId)) {
+				trigger_error("Not able to create login for twitter user",E_USER_ERROR);
+			}
+
+			\com\indigloo\sc\auth\Login::startTwitterSession($loginId,$name);
+			header("location: / ");
+			
 		}
 	}
 

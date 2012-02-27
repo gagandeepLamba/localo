@@ -9,7 +9,11 @@
     use com\indigloo\ui\form\Message as FormMessage;
      
     $sticky = new Sticky($gWeb->find(Constants::STICKY_MAP,true));
-    $fwdURI = empty($_GET['q']) ? '' : $_GET['q'] ;
+
+	$qUrl = "/" ;
+	if(array_key_exists('q',$_GET) && !empty($_GET['q'])){
+		$qUrl = $_GET['q'] ;
+	}
     
     $stoken = Util::getMD5GUID();
     $gWeb->store("fb_state",$stoken);
@@ -77,7 +81,6 @@
                         <h2> Login Page </h2>
                     </div>
                                                     
-                    <?php FormMessage::render(); ?>
                     <div class="wrapper">
                         <div class="facebook-login">
                            <div> <a href="<?php echo $fbDialogUrl; ?>"> Login with Facebook</a></div>
@@ -89,10 +92,11 @@
                         </div>
                         <img src="/nuke/twitter-bird.png" width="30" height="30"/>
                     </div> <!-- wrapper -->
-                    <div class="mt20 alert alert-info">
-                        You can login with a facebook or twitter account on this site.
-                        However for better site experience we suggest you create a 3mik.com account
-                    </div>
+
+					<div class="p20">
+						<?php FormMessage::render(); ?>
+					</div>
+
                     
                     <div class="page-header">
                         <h2> Login with 3mik.com account </h2>
@@ -122,13 +126,13 @@
 
                         <div class="form-actions">
                             <button class="btn btn-primary" type="submit" name="login" value="Login" onclick="this.setAttribute('value','Login');" ><span>Login</span></button>
-                            <a href="<?php echo $fwdURI; ?>">
+                            <a href="<?php echo $qUrl; ?>">
                                 <button class="btn" type="button" name="cancel"><span>Cancel</span></button>
                             </a>
                             
                         </div>
 
-                        <input type="hidden" name="fwd_uri" value="<?php echo $fwdURI; ?>" />
+                        <input type="hidden" name="q" value="<?php echo $qUrl; ?>" />
                         
                     </form>
                     

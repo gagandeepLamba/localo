@@ -42,27 +42,55 @@
         } else {
 
             $userName = $fvalues['first_name']. ' '.$fvalues['last_name'];
+			$provider = \com\indigloo\sc\auth\Login::MIK ;
+			$loginId = create_login($provider,$userName);
+
+			if(is_null($loginId)){
+				trigger_error("Null login Id in registration",E_USER_ERROR);
+			}
+
             $data = \com\indigloo\auth\User::create('sc_user',
 								$fvalues['first_name'],
                                 $fvalues['last_name'],
 								$userName,
                                 $fvalues['email'],
-                                $fvalues['password']);
+								$fvalues['password'],
+								$loginId);
     
             $code = $data['code'];
             
             if ($code == com\indigloo\mysql\Connection::ACK_OK ) {
-                header("location: / ");
-
+				$gWeb->store(Constants::FORM_MESSAGES,array("Registration success! Please login."));
+				header("location: /user/login.php");
             }else {
-                $message = sprintf("DB Error: (code is %d) please try again!",$code);
-                $gWeb->store(Constants::STICKY_MAP, $fvalues);
-                $gWeb->store(Constants::FORM_ERRORS,array($message));
-                 $locationOnError = '/user/register.php' ;
-                header("location: " . $locationOnError);
-                exit(1);
-            }
+				process_error($code);
+			}
             
         }
     }
+
+	function create_login($provider,$name) {
+		$loginId = NULL ;
+		//create a new login 
+		$loginDao = new \com\indigloo\sc\dao\Login();
+		$data = $loginDao->create($provider,$name);
+		$code = $data['code'];
+		if ($code == com\indigloo\mysql\Connection::ACK_OK ) {
+			return $data['lastInsertId'];
+		} else {
+			process_error($code);
+		}
+	}
+
+
+	function process_error($code){
+		$message = sprintf("DB Error: (code is %d) please try again!",$code);
+		$gWeb->store(Constants::STICKY_MAP, $fvalues);
+		$gWeb->store(Constants::FORM_ERRORS,array($message));
+		$locationOnError = '/user/register.php' ;
+		header("location: " . $locationOnError);
+		exit(1);
+	}
+
+
 ?>

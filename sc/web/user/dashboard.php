@@ -13,14 +13,22 @@
     use com\indigloo\ui\form\Message as FormMessage;
      
     $sticky = new Sticky($gWeb->find(Constants::STICKY_MAP,true));
-    
-	if(is_null($gSessionLogin)) {
-		$gSessionLogin = \com\indigloo\sc\auth\Login::getLoginInSession();
+
+	$loginId = Url::tryQueryParam('login_id') ;
+	$gSessionLogin = \com\indigloo\sc\auth\Login::tryLoginInSession();
+
+	if(is_null($loginId) && !is_null($gSessionLogin)) {
+		$loginId = $gSessionLogin->id ;
+	}
+
+	if(is_null($loginId)) {
+		trigger_error("Error : NULL login_id on user dashboard",E_USER_ERROR);
 	}
 	
     $userDao = new \com\indigloo\sc\dao\User() ;
-	$userDBRow = $userDao->getOnLoginId($gSessionLogin->provider,$gSessionLogin->id);
+	$userDBRow = $userDao->getOnLoginId($loginId);
 	
+	//@todo handle NULL userDBRow case
 	$qparams = Url::getQueryParams($_SERVER['REQUEST_URI']);
 
 	$ptab = 'active' ;
@@ -78,7 +86,7 @@
 					<div class="page-header">
 						<h2> <?php echo $gSessionLogin->name; ?> </h2>
 					</div>
-					<?php echo \com\indigloo\sc\html\User::getProfile($gSessionLogin,$userDBRow) ; ?>
+					<?php echo \com\indigloo\sc\html\User::getProfile($loginId,$userDBRow) ; ?>
 				</div>
 			</div>
 

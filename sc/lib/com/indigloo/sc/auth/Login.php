@@ -14,6 +14,11 @@ namespace com\indigloo\sc\auth {
 		const PROVIDER = "SC_USER_PROVIDER";
 		const TOKEN = "TOKEN" ;
 
+		//providers
+		const MIK = "3mik" ;
+		const FACEBOOK = "facebook" ;
+		const TWITTER = "twitter" ;
+
 		static function startMikSession() {
             if (isset($_SESSION) && isset($_SESSION[WebglooUser::USER_TOKEN])) {
 				$row = $_SESSION[WebglooUser::USER_DATA];
@@ -24,13 +29,27 @@ namespace com\indigloo\sc\auth {
 
 				$_SESSION[self::NAME] = $row['user_name'];
 				$_SESSION[self::LOGIN_ID] = $row['login_id'];
-				$_SESSION[self::PROVIDER] = "3mik";
+				$_SESSION[self::PROVIDER] = self::MIK;
 				$_SESSION[self::TOKEN] = Util::getBase36GUID();
 
 			} else {
 				trigger_error("No 3mik user data found in session", E_USER_ERROR);
 			}
 	
+		}
+
+		static function startTwitterSession($loginId,$name) {
+			$_SESSION[self::LOGIN_ID] = $loginId;
+			$_SESSION[self::NAME] = $name;
+			$_SESSION[self::PROVIDER] = self::TWITTER;
+			$_SESSION[self::TOKEN] = Util::getBase36GUID();
+		}
+
+		static function startFacebookSession($loginId,$name) {
+			$_SESSION[self::LOGIN_ID] = $loginId;
+			$_SESSION[self::NAME] = $name;
+			$_SESSION[self::PROVIDER] = self::FACEBOOK;
+			$_SESSION[self::TOKEN] = Util::getBase36GUID();
 		}
 
 		static function getLoginInSession() {
@@ -73,10 +92,6 @@ namespace com\indigloo\sc\auth {
             
             return $flag ;
         }
-
-	
-
-		
 
 	}
 }

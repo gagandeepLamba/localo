@@ -4,7 +4,7 @@
 
 	$answerDao = new \com\indigloo\sc\dao\Answer() ;
 		
-	$filter = array($answerDao::LOGIN => $gSessionLogin->id);
+	$filter = array($answerDao::LOGIN => $loginId);
 	$total = $answerDao->getTotalCount($filter);
 
 	$pageSize =	Config::getInstance()->get_value("user.page.items");
