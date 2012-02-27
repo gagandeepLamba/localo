@@ -15,7 +15,8 @@ namespace com\indigloo\sc\dao {
 			if(empty($row)){
 				//create login 
 				$loginDao = new \com\indigloo\sc\dao\Login();
-				$loginId = $loginDao->create(\com\indigloo\sc\auth\Login::TWITTER,$name);
+				$data = $loginDao->create(\com\indigloo\sc\auth\Login::TWITTER,$name);
+				$loginId = $data['lastInsertId'];
 				//create twitter user
 				$this->create($id,$name,$screenName,$location,$image,$loginId);
 			} else {

@@ -58,12 +58,43 @@
 
 		$graph_url = "https://graph.facebook.com/me?access_token=".$params['access_token'];
 		$user = json_decode(file_get_contents($graph_url));
-        print_r($user);
-	 
+	 	processUser($user);
+
+
 	}
 	else {
 		$message = "The state on 3mik.com and Faceboo do not match. You may be a victim of CSRF.";
 		trigger_error($message,E_USER_ERROR);
     }
+
+	function processUser($user) {
+		// exisitng record ? find on facebook_id
+		// New record - create login + facebook record
+		// start login session  
+		$id = $user->id;
+		$name = $user->name;
+		$firstName = $user->first_name ;
+		$lastName = $user->last_name ;
+		$link = $user->link ;
+		$gender = $user->gender ;
+		$email = $user->email ;
+
+		// do not what facebook will return
+		// we consider auth to be good enough for a user
+		if(empty($name) && empty($firstName)) {
+			$name = "Anonymous" ;
+		}
+
+		$facebookDao = new \com\indigloo\sc\dao\Facebook();
+		$loginId = $facebookDao->getOrCreate($id,$name,$firstName,$lastName,$link,$gender,$email);
+
+
+		if(empty($loginId)) {
+			trigger_error("Not able to create login for facebook user",E_USER_ERROR);
+		}
+
+		\com\indigloo\sc\auth\Login::startFacebookSession($loginId,$name);
+		header("location: / ");
+	}
 
  ?>

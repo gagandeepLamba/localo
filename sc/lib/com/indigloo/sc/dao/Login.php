@@ -14,8 +14,8 @@ namespace com\indigloo\sc\dao {
 		}
 
 		function create($provider,$name){
-			$loginId = mysql\Login::create($provider,$name);
-			return $loginId ;
+			$data = mysql\Login::create($provider,$name);
+			return $data ;
 		}
 
 	}

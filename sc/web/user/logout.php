@@ -1,6 +1,6 @@
 <?php
 
-    include ('news-app.inc');
+    include ('sc-app.inc');
     //destroy session
     session_start();
     $_SESSION = array();

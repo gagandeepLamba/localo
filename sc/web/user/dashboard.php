@@ -15,6 +15,7 @@
     $sticky = new Sticky($gWeb->find(Constants::STICKY_MAP,true));
 
 	$loginId = Url::tryQueryParam('login_id') ;
+
 	$gSessionLogin = \com\indigloo\sc\auth\Login::tryLoginInSession();
 
 	if(is_null($loginId) && !is_null($gSessionLogin)) {
@@ -24,6 +25,7 @@
 	if(is_null($loginId)) {
 		trigger_error("Error : NULL login_id on user dashboard",E_USER_ERROR);
 	}
+
 	
     $userDao = new \com\indigloo\sc\dao\User() ;
 	$userDBRow = $userDao->getOnLoginId($loginId);

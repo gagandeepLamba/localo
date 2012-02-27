@@ -147,7 +147,7 @@ alter table sc_answer add column login_id int ;
 -- 
 -- 
 
-update sc_user set login_id = 1 where user_email = 'jha.rajeev@gmail.com';
+update sc_user set login_id = 1 where email = 'jha.rajeev@gmail.com';
 update sc_question set login_id = 1 where user_email = 'jha.rajeev@gmail.com';
 update sc_answer set login_id = 1 where user_email = 'jha.rajeev@gmail.com';
 
@@ -173,6 +173,27 @@ create table sc_twitter(
 	screen_name varchar(32) ,
 	profile_image varchar(128) ,
     location varchar(32) ,
+	created_on TIMESTAMP  default '0000-00-00 00:00:00',
+    updated_on TIMESTAMP   default '0000-00-00 00:00:00',
+	PRIMARY KEY (id)) ENGINE = InnoDB;
+
+
+
+--
+-- facebook user 
+-- 
+
+drop table if exists sc_facebook;
+create table sc_facebook(
+	id int(11) NOT NULL auto_increment,
+	facebook_id int(11) NOT NULL ,
+	login_id int(11) NOT NULL ,
+	name varchar(32) not null,
+	first_name varchar(32) ,
+	last_name varchar(32) ,
+	link varchar(128) ,
+    gender varchar(8) ,
+    email varchar(32) ,
 	created_on TIMESTAMP  default '0000-00-00 00:00:00',
     updated_on TIMESTAMP   default '0000-00-00 00:00:00',
 	PRIMARY KEY (id)) ENGINE = InnoDB;

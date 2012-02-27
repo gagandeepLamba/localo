@@ -20,6 +20,33 @@ namespace com\indigloo\sc\html {
 			$html = Template::render($template,$view);
             return $html ;
 		}
+		
+		static function getTwitterProfile($loginId,$userDBRow) {
+		    $html = NULL ;
+			$view = new \stdClass;
+			$template = $_SERVER['APP_WEB_DIR'].'/fragments/user/profile/twitter.tmpl' ;
+			
+			$view->name = $userDBRow['name'];
+			$view->createdOn = Util::formatDBTime($userDBRow['created_on']);
+			$view->location = $userDBRow['location'];
+			$view->image = $userDBRow['profile_image'];
+			
+			$html = Template::render($template,$view);
+            return $html ;
+		}
+
+		static function getFacebookProfile($loginId,$userDBRow) {
+		    $html = NULL ;
+			$view = new \stdClass;
+			$template = $_SERVER['APP_WEB_DIR'].'/fragments/user/profile/facebook.tmpl' ;
+			
+			$view->name = $userDBRow['name'];
+			$view->createdOn = Util::formatDBTime($userDBRow['created_on']);
+			$view->email = $userDBRow['email'];
+				
+			$html = Template::render($template,$view);
+            return $html ;
+		}
 
         static function getProfile($loginId,$userDBRow) {
 			$html = NULL ;

@@ -7,6 +7,11 @@
     use com\indigloo\Constants as Constants;
     use com\indigloo\Configuration as Config;
     use com\indigloo\ui\form\Message as FormMessage;
+
+	//do we already have a login?
+	if(\com\indigloo\sc\auth\Login::isValid()) {
+		header("location: / ");
+	}	
      
     $sticky = new Sticky($gWeb->find(Constants::STICKY_MAP,true));
 

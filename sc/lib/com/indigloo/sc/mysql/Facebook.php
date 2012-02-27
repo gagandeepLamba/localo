@@ -6,40 +6,43 @@ namespace com\indigloo\sc\mysql {
     use \com\indigloo\Util as Util ;
     use \com\indigloo\Configuration as Config ;
     
-    class Twitter {
+    class Facebook {
         
-        const MODULE_NAME = 'com\indigloo\sc\mysql\Twitter';
+        const MODULE_NAME = 'com\indigloo\sc\mysql\Facebook';
 
-		static function getOnTwitterId($twitterId) {
+		static function getOnFacebookId($facebookId) {
 			$mysqli = MySQL\Connection::getInstance()->getHandle();
-			$sql = " select * from sc_twitter where twitter_id = ".$twitterId ;
+			$sql = " select * from sc_facebook where facebook_id = ".$facebookId ;
 			$row = MySQL\Helper::fetchRow($mysqli,$sql);
 			return $row ;
 		}
 
 		static function getOnLoginId($loginId) {
 			$mysqli = MySQL\Connection::getInstance()->getHandle();
-			$sql = " select * from sc_twitter where login_id = ".$loginId ;
+			$sql = " select * from sc_facebook where login_id = ".$loginId ;
 			$row = MySQL\Helper::fetchRow($mysqli,$sql);
 			return $row ;
 		}
 
 
-		static function create($twitterId,$name,$screenName,$location,$image,$loginId){
+		static function create($facebookId,$name,$firstName,$lastName,$link,$gender,$email,$loginId){
 			$mysqli = MySQL\Connection::getInstance()->getHandle();
-			$sql = " insert into sc_twitter(twitter_id,name,screen_name,location,profile_image,login_id,created_on) " ;
-			$sql .= " values(?,?,?,?,?,?,now()) ";
+			$sql = " insert into sc_facebook(facebook_id,name,first_name,last_name,link,gender," ;
+			$sql .= " email,login_id,created_on) " ;
+			$sql .= " values(?,?,?,?,?,?,?,?,now()) ";
 
 			$code = MySQL\Connection::ACK_OK;
             $stmt = $mysqli->prepare($sql);
             
             if ($stmt) {
-                $stmt->bind_param("issssi",
-                        $twitterId,
+                $stmt->bind_param("issssssi",
+                        $facebookId,
                         $name,
-                        $screenName,
-                        $location,
-						$image,
+                        $firstName,
+                        $lastName,
+                        $link,
+						$gender,
+						$email,
 						$loginId);
                       
                 $stmt->execute();
@@ -57,4 +60,5 @@ namespace com\indigloo\sc\mysql {
 
 	}
 }
+
 ?>
