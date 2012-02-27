@@ -30,7 +30,11 @@ namespace com\indigloo\sc\html {
 			$view->createdOn = Util::formatDBTime($userDBRow['created_on']);
 			$view->location = $userDBRow['location'];
 			$view->image = $userDBRow['profile_image'];
-			
+
+			if(empty($view->image)) {
+				$view->image = "/nuke/twitter-bird.png" ;
+			}
+
 			$html = Template::render($template,$view);
             return $html ;
 		}

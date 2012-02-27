@@ -64,16 +64,6 @@ namespace com\indigloo {
             return $params;
         }
 
-        static function tryUrls($urls) {
-            foreach($urls as $url) {
-                if(!empty($url)) {
-                    return $url ;
-                }
-            }
-            
-            \trigger_error('Wrong url input',E_USER_ERROR);
-        }
-
 		static function tryQueryParam($name){
 			$value = NULL ;
 			if(array_key_exists($name,$_GET) && !empty($_GET[$name])){

@@ -7,14 +7,14 @@ namespace com\indigloo\sc\html {
     
     class Question {
         
-			static function getEditBar($login,$questionDBRow) {
+			static function getEditBar($loginId,$questionDBRow) {
 			
 			$html = NULL ;
 			$id = $questionDBRow['id'] ;
 
 			$buffer = '<span> <a class="btn btn-primary" href="#form-wrapper">Add Comment</a></span>' ;
 			
-			if(!is_null($login) && ($login->id == $questionDBRow['login_id'])) {
+			if(!is_null($loginId) && ($loginId == $questionDBRow['login_id'])) {
 				$buffer .= '<span> <a class="btn btn-primary" href="/qa/edit.php?id='.$id.'">Edit</a></span>' ;
 			}
 			
@@ -33,8 +33,8 @@ namespace com\indigloo\sc\html {
 			$images = json_decode($imagesJson);
 			
 			$view = new \stdClass;
-			$view->title = $questionDBRow['title'];
-			$view->description = $questionDBRow['description'];
+			$view->description = Util::abbreviate($questionDBRow['description'],160);
+			$view->userPageURI = "/user/dashboard.php?login_id=".$questionDBRow['login_id'];
 			$view->id = $questionDBRow['id'];
 			
 				
@@ -42,7 +42,6 @@ namespace com\indigloo\sc\html {
 			$view->createdOn = Util::formatDBTime($questionDBRow['created_on']);
 			$view->tags = $questionDBRow['tags'];
 			
-			$view->border = 'bbd5' ;
 
 				
 			if(sizeof($images) > 0) {

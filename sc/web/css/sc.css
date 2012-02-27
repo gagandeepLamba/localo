@@ -767,3 +767,29 @@
 	.twitter-login a {
 		color: white ;
 	}
+
+	#xeyes {
+		width: 218px;
+	}
+
+	.eye {
+		width: 66px; /*required, but can be any value*/
+		height: 90px; /*required, but can be any value*/
+		background: #fff; /*recommended, but can any value*/
+		-webkit-border-radius: 50%; /*optional -- compatibiliy only*/
+		-moz-border-radius: 50%; /*optional -- compatibiliy only*/
+		border-radius: 50%; /*optional*/
+		/* border: 7px solid rgba(0,0,0,1); */
+		border: 3px solid rgba(0,0,0,1); 
+		float: left;
+	}
+
+	.iris {
+		background: #000; /*recommended, but can any value*/
+		width:25px; /*required, but can be any value*/
+		height:25px; /*required, but can be any value*/
+		-webkit-border-radius: 50%; /*optional -- compatibiliy only*/
+		-moz-border-radius: 50%; /*optional -- compatibiliy only*/
+		border-radius: 50%; /*optional*/
+	}
+

@@ -5,36 +5,41 @@
     include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
     
     use com\indigloo\Util as Util;
+    use com\indigloo\Url as Url;
     use com\indigloo\ui\form\Sticky;
     use com\indigloo\Constants as Constants;
     use com\indigloo\ui\form\Message as FormMessage;
      
     $sticky = new Sticky($gWeb->find(Constants::STICKY_MAP,true));
     
-	$questionId = NULL ;
-    if(!array_key_exists('id',$_GET) || empty($_GET['id'])) {
+	$questionId = Url::tryQueryParam("id");
+	if(is_null($questionId)) {
         trigger_error('question id is missing from request',E_USER_ERROR);
-    } else {
-        $questionId = $_GET['id'];
-    }
-    
-    
+	}
+
     $questionDao = new com\indigloo\sc\dao\Question();
     $questionDBRow = $questionDao->getOnId($questionId);
+
     $imagesJson = $questionDBRow['images_json'];
     $images = json_decode($imagesJson);
     
+	$linksJson = $questionDBRow['links_json'];
+	$links = json_decode($linksJson);
+
     $answerDao = new com\indigloo\sc\dao\Answer();
     $answerDBRows = $answerDao->getOnQuestionId($questionId);
+
+	$loginId = NULL ;
 
 	if(is_null($gSessionLogin)) {
 		$login = \com\indigloo\sc\auth\Login::tryLoginInSession();
 		if(!is_null($login)) {
-			$gSessionLogin = $login ;
+			$loginId = $login->id ;
 		}
 	}
-	
 
+	$loginUrl = "/user/login.php?q=".$_SERVER['REQUEST_URI'];
+	
 ?>  
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -91,20 +96,33 @@
 			<div class="row">
 				<div class="span9">
                            
-				<?php if(sizeof($images) > 0 ) { include('inc/carousel.inc') ; } ?> 
-				<?php echo \com\indigloo\sc\html\Question::getDetail($questionDBRow) ; ?>
-				<?php echo \com\indigloo\sc\html\Question::getEditBar($gSessionLogin,$questionDBRow) ; ?>
-				
-				<div class="page-header">
-					<h2>Comments </h2>
-				</div>
+				<?php 
+					if(sizeof($images) > 0 ) { include('inc/carousel.inc') ; }
+					echo \com\indigloo\sc\html\Question::getDetail($questionDBRow) ; 
 
-				<div>
+					if(sizeof($links) > 0 ) {  
+						//@todo cleanup kludge in body html
+						echo '<div class="p10"/> <ol>' ;
+						$tmpl = '<li><a href="{href}" target="_blank">{href} </a></li>';	
+
+						foreach($links as $link) {
+							$strLink = str_replace("{href}",$link,$tmpl);
+							echo $strLink ;
+						}
+
+						echo "</ol> </div>" ;
+					}
+
+					echo \com\indigloo\sc\html\Question::getEditBar($loginId,$questionDBRow) ; 
+					
+				?>
+				
+
+				<div class="mt20">
 					<?php
 						foreach($answerDBRows as $answerDBRow) {
-							echo \com\indigloo\sc\html\Answer::getSummary($gSessionLogin,$answerDBRow) ;
+							echo \com\indigloo\sc\html\Answer::getSummary($loginId,$answerDBRow) ;
 						}
-						
 					?>
 				</div>
 
@@ -117,9 +135,15 @@
 					<div class="error">  </div>
 
 					<table class="form-table">
+						<tr> 
+						<?php if(is_null($loginId)) { ?>
+							<td> Needs <a href="<?php echo $loginUrl ?>">login</a></td>
+						<?php } ?>
+							
+						</tr>
 						 <tr>
 							<td>
-								<textarea  name="answer" class="required h130 w500" title="Answer is required" cols="50" rows="4" ><?php echo $sticky->get('answer'); ?></textarea>
+								<textarea  name="answer" class="required w580 h130" title="Answer is required" cols="50" rows="4" ><?php echo $sticky->get('answer'); ?></textarea>
 							</td>
 						 </tr>
 						 
@@ -134,7 +158,7 @@
 				   <input type="hidden" name="q" value="<?php echo $_SERVER['REQUEST_URI']; ?>" />
 				   
 				</form>
-				</div> <!-- wrapper -->
+				</div> <!-- form-wrapper -->
 				
 			</div>
 		</div>

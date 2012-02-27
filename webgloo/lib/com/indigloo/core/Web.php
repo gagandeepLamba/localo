@@ -40,53 +40,6 @@ namespace com\indigloo\core {
             return self::$instance;
         }
 
-        function addCurrentUrlToStack() {
-            $url = $_SERVER['REQUEST_URI'];
-            
-            if (isset($_SESSION)) {
-                $stack = array();
-                if (!empty($_SESSION[self::CORE_URL_STACK])) {
-                    $stack = $_SESSION[self::CORE_URL_STACK];
-                    //user hit F5?
-                    if(md5($url) == md5($stack[sizeof($stack) -1])) {
-                        return ;
-                    }
-                }
-
-                //do not let the stack grow beyond 3
-                if (sizeof($stack) >= 3) {
-                    //remove oldest element
-                    \array_shift($stack);
-                }
-
-                //add new element to the end
-                \array_push($stack, $url);
-                $_SESSION[self::CORE_URL_STACK] = $stack;
-
-                if (Config::getInstance()->is_debug()) {
-                    Logger::getInstance()->debug('web :: url stack ::');
-					Logger::getInstance()->dump($stack);
-                }
-            } else {
-                \trigger_error("session not set", E_USER_ERROR);
-            }
-        }
-
-        function getPreviousUrl() {
-            $url = NULL;
-            //session is set and there are some elements in the url stack
-            if (isset($_SESSION) && !empty($_SESSION[self::CORE_URL_STACK])) {
-                $stack = $_SESSION[self::CORE_URL_STACK];
-                $url = $stack[sizeof($stack)-1];
-            }
-
-            if (Config::getInstance()->is_debug()) {
-                Logger::getInstance()->debug('web >> previous url on stack is >> ' . $url);
-            }
-
-            return $url;
-        }
-
         function getRequest() {
             return $this->request;
         }
@@ -132,15 +85,12 @@ namespace com\indigloo\core {
                     //remove this from session
                     $_SESSION[$key] = NULL;
                     if (Config::getInstance()->is_debug()) {
-                        Logger::getInstance()->debug('web >> removed from session >> key is:: ' . $key);
+                        Logger::getInstance()->debug('web :: removed from session :: key is:: ' . $key);
                     }
                 }
             }
             return $value;
         }
-
-        //@todo - pass a class with a well defined interface
-        // we need to call a particular method on that class
 
         function start() {
 
@@ -153,15 +103,7 @@ namespace com\indigloo\core {
             if (Config::getInstance()->is_debug()) {
                 Logger::getInstance()->debug('web >> end >> hash is:: ' . spl_object_hash(self::$instance));
             }
-
-            /*
-              Gloo_DB::getInstance()->closeConnection();
-              if (Gloo_Config::getInstance()->is_debug()) {
-              $eop = "\n\n";
-              Gloo_Logger::getInstance()->debug('web >> end request >> hash is >> ' . spl_object_hash(self::$instance) . $eop);
-              } */
         }
-
     }
 
 }

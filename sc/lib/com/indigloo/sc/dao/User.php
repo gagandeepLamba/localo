@@ -24,6 +24,8 @@ namespace com\indigloo\sc\dao {
 			switch($provider) {
 				case \com\indigloo\sc\auth\Login::MIK :
 					$row = mysql\User::getOnLoginId($loginId);
+					//@todo - get rid of kludge
+					$row["name"] = $row["user_name"];
 					break;
 				case \com\indigloo\sc\auth\Login::FACEBOOK :
 					$row = mysql\Facebook::getOnLoginId($loginId);

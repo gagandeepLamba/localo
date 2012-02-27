@@ -3,7 +3,7 @@
     //sc/user/dashboard.php
     include ('sc-app.inc');
     include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
-    include($_SERVER['APP_WEB_DIR'] . '/inc/role/user.inc');
+    //include($_SERVER['APP_WEB_DIR'] . '/inc/role/user.inc');
 	
     use com\indigloo\Util as Util;
     use com\indigloo\Url as Url;
@@ -49,7 +49,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 
-       <head><title> 3mik.com - page of <?php echo $userDBRow['first_name']; ?>  </title>
+       <head><title> 3mik.com - user <?php echo $userDBRow['name']; ?>  </title>
     
 
         <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
@@ -57,8 +57,14 @@
         <link rel="stylesheet" type="text/css" href="/css/sc.css">
 		<script type="text/javascript" src="/3p/jquery/jquery-1.7.1.min.js"></script>
 		<script type="text/javascript" src="/3p/bootstrap/js/bootstrap.js"></script>
+		<script type="text/javascript" src="/3p/jquery/jquery.xeyes.1.0.min.js"></script>
 		<script>
 			$(document).ready(function(){
+				//xeyes
+				$('.iris').xeyes({
+					padding: '12px',
+					position: 'topRight'
+				});
 				
 			});
 
@@ -86,7 +92,7 @@
 			<div class="row">
 				<div class="span12">
 					<div class="page-header">
-						<h2> <?php echo $gSessionLogin->name; ?> </h2>
+						<h2> <?php echo $userDBRow["name"]; ?> </h2>
 					</div>
 					<?php echo \com\indigloo\sc\html\User::getProfile($loginId,$userDBRow) ; ?>
 				</div>
@@ -96,8 +102,8 @@
 				<div class="span9">
 					<div class="mt20">
 						<ul class="nav nav-tabs">
-						<li class="<?php echo $ptab; ?>"> <a href="/user/dashboard.php?tab=post#post">Posts</a></li>
-						<li class="<?php echo $ctab; ?>"> <a href="/user/dashboard.php?tab=comment#comment">Comments</a></li>
+						<li class="<?php echo $ptab; ?>"> <a href="/user/dashboard.php?login_id=<?php echo $loginId; ?>&tab=post#post">Posts</a></li>
+						<li class="<?php echo $ctab; ?>"> <a href="/user/dashboard.php?login_id=<?php echo $loginId; ?>&tab=comment#comment">Comments</a></li>
 						</ul>
 
 						<?php include($tab); ?>
