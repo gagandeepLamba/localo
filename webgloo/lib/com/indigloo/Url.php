@@ -73,6 +73,19 @@ namespace com\indigloo {
 			return $value ;
 		}
 
+		static function getQueryParam($name){
+			$value = NULL ;
+			if(array_key_exists($name,$_GET) && !empty($_GET[$name])){
+				$value = $_GET[$name];
+			}
+
+			if(is_null($value)){
+				trigger_error("Required request parameter $name is missing",E_USER_ERROR);
+			}
+
+			return $value ;
+		}
+
 
     }
 

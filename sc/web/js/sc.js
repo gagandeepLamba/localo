@@ -109,6 +109,8 @@ webgloo.media = {
     addLink : function(linkData) {
         var buffer = webgloo.media.linkPreviewDIV.supplant({"link" : linkData});
         $("#link-data").append(buffer);
+		//clear out the box
+		$("#link-box").val('');
     },
     removeLink : function(linkObj) {
 		$(linkObj).parent().remove();

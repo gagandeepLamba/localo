@@ -15,7 +15,7 @@ namespace com\indigloo\mysql {
         private $connxId;
         
         //DB  codes
-        const ACK_OK = 1;
+        const ACK_OK = 0;
         const DUPLICATE_KEY = 1;
 
         private function __construct() {
@@ -30,6 +30,15 @@ namespace com\indigloo\mysql {
 
             return self::$instance;
         }
+		
+		/*
+		 * mysql server error code 0 indicates success
+		 * so we check for $code > 1 for error condition 
+		 */
+		public function isOk($code) {
+			$flag = ($code > 0 ) ? false : true ;
+			return $flag ;
+		}
 
         public function getHandle() {
 

@@ -10,10 +10,6 @@
     use \com\indigloo\Util as Util ;
     use \com\indigloo\Url as Url ;
 	
-	if(is_null($gSessionLogin)) {
-		$gSessionLogin = \com\indigloo\sc\auth\Login::getLoginInSession();
-	}
-
     if (isset($_POST['save']) && ($_POST['save'] == 'Save')) {
         
         $fhandler = new Form\Handler('web-form-1', $_POST);

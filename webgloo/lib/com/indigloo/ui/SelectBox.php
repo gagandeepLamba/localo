@@ -8,14 +8,16 @@ namespace com\indigloo\ui {
     class SelectBox {
         
         
-        static function render($name,$rows) {
+        static function render($name,$rows,$default=NULL) {
            
             $buffer = '' ;
-            $option = '<option value="{code}"> {display}</option>' ;
+            $option = '<option value="{code}" {flag}> {display}</option>' ;
             
             foreach($rows as $row) {
-                $str = str_replace(array("{code}","{display}") ,
-                                   array($row['code'], $row['display']) , $option);
+
+				$flag = (!is_null($default) && ($row['code'] == $default))? 'selected' : '' ;
+                $str = str_replace(array("{code}","{display}","{flag}") ,
+                                   array($row['code'], $row['display'],$flag) , $option);
                 $buffer = $buffer.$str ;
                                          
             }

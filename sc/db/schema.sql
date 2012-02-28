@@ -178,6 +178,7 @@ create table sc_twitter(
 	PRIMARY KEY (id)) ENGINE = InnoDB;
 
 
+alter table  sc_twitter add constraint UNIQUE uniq_id (twitter_id);
 
 --
 -- facebook user 
@@ -197,6 +198,10 @@ create table sc_facebook(
 	created_on TIMESTAMP  default '0000-00-00 00:00:00',
     updated_on TIMESTAMP   default '0000-00-00 00:00:00',
 	PRIMARY KEY (id)) ENGINE = InnoDB;
+
+
+alter table  sc_facebook add constraint UNIQUE uniq_id (facebook_id);
+
 
 
 

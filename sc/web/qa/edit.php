@@ -6,20 +6,16 @@
     include($_SERVER['APP_WEB_DIR'] . '/inc/role/user.inc');
 	
     use com\indigloo\Util;
-    use com\indigloo\ui\form\Sticky;
+    use com\indigloo\Url as Url;
     use com\indigloo\Constants as Constants;
+
+    use com\indigloo\ui\form\Sticky;
+    use com\indigloo\ui\SelectBox as SelectBox;
     use com\indigloo\ui\form\Message as FormMessage;
      
     $sticky = new Sticky($gWeb->find(Constants::STICKY_MAP,true));
 
-	$questionId = NULL ;
-
-    if(!array_key_exists('id',$_GET) || empty($_GET['id'])) {
-        trigger_error('question id is missing from request',E_USER_ERROR);
-    } else {
-        $questionId = $_GET['id'];
-    }
-
+	$questionId = Url::getQueryParam("id");
 
     $questionDao = new com\indigloo\sc\dao\Question();
     $questionDBRow = $questionDao->getOnId($questionId);
@@ -116,7 +112,7 @@
 								<?php
 										$selectBoxDao = new \com\indigloo\sc\dao\SelectBox(); 
 										$catRows = $selectBoxDao->get('CATEGORY'); 
-										echo \com\indigloo\ui\SelectBox::render('category',$catRows);              
+										echo SelectBox::render('category',$catRows,$questionDBRow['category_code']);              
 									?>
 								
 							</div>
