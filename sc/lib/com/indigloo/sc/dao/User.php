@@ -49,7 +49,12 @@ namespace com\indigloo\sc\dao {
             $code = mysql\User::update($userId,$firstName,$lastName);
             return $code ;
         }
-        
+
+		function addFeedback($feedback) {
+            $code = mysql\User::addFeedback($feedback);
+            return $code ;
+        }
+		
         
     }
 

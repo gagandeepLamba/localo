@@ -51,6 +51,32 @@ namespace com\indigloo\sc\mysql {
 
 			return $code ;
 		}
+
+		static function addFeedback($feedback) {
+			$code = MySQL\Connection::ACK_OK;
+
+			$mysqli = MySQL\Connection::getInstance()->getHandle();
+			$sql = " insert into sc_feedback(feedback,created_on) values(?,now()) " ;
+			
+			$stmt = $mysqli->prepare($sql);
+			if($stmt) { 
+				$stmt->bind_param("s",$feedback);
+				$stmt->execute();
+
+                if ($mysqli->affected_rows != 1) {
+                    $code = MySQL\Error::handle(self::MODULE_NAME, $stmt);
+                }
+
+				$stmt->close();
+
+			} else {
+				$code = Gloo_MySQL_Error::handle(self::MODULE_NAME, $mysqli);
+			}
+
+			return $code ;
+		}
+		
+
 		
 	}
 }

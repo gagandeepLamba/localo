@@ -5,11 +5,21 @@
     include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
 		
     use com\indigloo\Util;
+	use \com\indigloo\sc\auth\Login as Login ;
     use com\indigloo\ui\form\Sticky;
     use com\indigloo\Constants as Constants;
     use com\indigloo\ui\form\Message as FormMessage;
      
     $sticky = new Sticky($gWeb->find(Constants::STICKY_MAP,true));
+
+	$loginId = NULL ;
+	$userName = '';
+
+	$gSessionLogin = Login::tryLoginInSession();
+	if(!is_null($gSessionLogin)) {
+		$loginId = $gSessionLogin->id ;
+		$userName = $gSessionLogin->name ;
+	}
     
 ?>  
 
@@ -63,14 +73,11 @@
 					
 					
 					<div class="page-header">
-						<h2> Share your feedback </h2>
+						<h2> We appreciate your feedback </h2>
 					</div>
 					
 					<?php FormMessage::render(); ?>
-					<div class="alert alert-info">
-						We appreciate your feedback.
-					</div>		
-
+					
 					<form  id="web-form1"  name="web-form1" action="/share/form/feedback.php" enctype="multipart/form-data"  method="POST">
 						<table class="form-table">
 							<tr>
@@ -88,7 +95,6 @@
 							<button class="btn btn-primary" type="submit" name="save" value="Save" onclick="this.setAttribute('value','Save');" ><span>Send your feedback</span></button> 
 							<a href="/"> <button class="btn" type="button" name="cancel"><span>Cancel</span></button> </a>
 						</div>
-						<input type="hidden" name="q" value="<?php echo $_SERVER["REQUEST_URI"]; ?>" />
 						        
 					</form>
 					

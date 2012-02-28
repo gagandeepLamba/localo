@@ -205,7 +205,14 @@ alter table  sc_facebook add constraint UNIQUE uniq_id (facebook_id);
 
 
 
-   
+drop table if exists sc_feedback;
+create table sc_feedback(
+	id int(11) NOT NULL auto_increment,
+	feedback text not null,
+	created_on TIMESTAMP  default '0000-00-00 00:00:00',
+    updated_on TIMESTAMP   default '0000-00-00 00:00:00',
+	PRIMARY KEY (id)) ENGINE = InnoDB;
+ 
 
 
 

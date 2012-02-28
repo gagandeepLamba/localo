@@ -10,6 +10,7 @@
 						<li class="active"> <a href="/">Home</a> </li>
 						<li class="active"><a href="/share/new.php">Share</a></li>
 						<li class="active"><a href="/qa/new.php">Ask</a></li>
+						<li class="active"><a href="/user/login.php">Login</a></li>
 						<li class="divider-vertical"></li>
 					</ul> <!-- links -->
 				</div>
