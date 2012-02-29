@@ -38,6 +38,7 @@ namespace com\indigloo\sc\html {
 			$template = $_SERVER['APP_WEB_DIR'].'/fragments/answer/text.tmpl' ;
 			
 			
+			$view->id = $answerDBRow['id'];
 			$view->title = $answerDBRow['title'];
 			$view->questionId = $answerDBRow['question_id'];
 			$view->answer = $answerDBRow['answer'];

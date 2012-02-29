@@ -9,6 +9,7 @@
     
     use com\indigloo\ui\form as Form;
     use com\indigloo\Constants as Constants ;
+	$gSessionUser = NULL ;
     
     if (isset($_POST['save']) && ($_POST['save'] == 'Save')) {
         

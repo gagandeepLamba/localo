@@ -15,7 +15,7 @@
 	
 	
     
-	$uploader = new com\indigloo\media\ImageUpload($store);
+	$uploader =  NULL ; 
 		
 	if (isset($_GET['qqfile'])) {
 		$pipe = new \com\indigloo\media\XHRUpload();

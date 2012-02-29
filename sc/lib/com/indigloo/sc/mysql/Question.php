@@ -160,7 +160,7 @@ namespace com\indigloo\sc\mysql {
             $mysqli = MySQL\Connection::getInstance()->getHandle();
             $sql = " insert into sc_question(title,seo_title,description,location,tags, " ;
             $sql .= " login_id,user_name,links_json,images_json,created_on) ";
-            $sql .= " values(?,?,?,?,?,?,,?,?,?,now()) ";
+            $sql .= " values(?,?,?,?,?,?,?,?,?,now()) ";
 
             $code = MySQL\Connection::ACK_OK;
 			$lastInsertId = NULL;

@@ -17,11 +17,11 @@
 		</div> <!-- span2 -->
 	</div> <!-- row -->
 	<div class="ml40"> 
-		<a href="/qa/show.php?id={id}">View&nbsp;&#8594;</a>
+		<a href="/qa/show.php?id=<?php echo $view->id ?>">View&nbsp;&#8594;</a>
 		<?php if($view->isLoggedInUser) { ?>
-			<a href="/qa/show.php?id={id}">Edit&nbsp;&#8594;</a>
+			<a href="/qa/edit.php?id=<?php echo $view->id ?>">Edit&nbsp;&#8594;</a>
 			&nbsp;&nbsp;
-			<a href="/qa/show.php?id={id}">Delete&nbsp;&#8594;</a>
+			<a href="/qa/show.php?id=<?php echo $view->id ?>">Delete&nbsp;&#8594;</a>
 		<?php } ?> 
 	</div>
 
