@@ -29,7 +29,7 @@
        <head><title> 3mik.com - share your feedback</title>
          
 
-       <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+        <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
 
 		<link rel="stylesheet" type="text/css" href="/3p/bootstrap/css/bootstrap.css">
 		<link rel="stylesheet" type="text/css" href="/css/sc.css">
