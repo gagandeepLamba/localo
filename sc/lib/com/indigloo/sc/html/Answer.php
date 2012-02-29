@@ -15,9 +15,10 @@ namespace com\indigloo\sc\html {
 			
 			$view->editBar = '' ;
 
+			/*
 			if(!empty($loginId) && ($loginId == $answerDBRow['login_id'])){
 				$view->editBar = '<a href="/qa/answer/edit.php?id='.$answerDBRow['id'].'">edit comment</a>' ;
-			}
+			}*/
 
 			
 			$view->answer = $answerDBRow['answer'];
@@ -30,7 +31,7 @@ namespace com\indigloo\sc\html {
 
 		}
 
-        static function getWidget($answerDBRow) {
+        static function getWidget($gSessionLogin,$answerDBRow) {
            
 		    $html = NULL ;
 			$view = new \stdClass;
@@ -42,11 +43,17 @@ namespace com\indigloo\sc\html {
 			$view->answer = $answerDBRow['answer'];
 			$view->createdOn = Util::formatDBTime($answerDBRow['created_on']);
 			$view->userName = $answerDBRow['user_name'] ;
+			$view->isLoggedInUser = false ;
+		
+			if(!is_null($gSessionLogin) && ($gSessionLogin->id == $answerDBRow['login_id'])){
+				$view->isLoggedInUser = true ;
+			} 
 			
-			$html = Template::render($template,$view);
-			
+			ob_start();
+			include($template);
+			$html = ob_get_contents();
+			ob_end_clean();	
             return $html ;
-			
         }
         
     }

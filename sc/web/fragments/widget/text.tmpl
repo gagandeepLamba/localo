@@ -1,24 +1,29 @@
 <div class="widget bbd5">
 	<div class="row">
 		<div class="span7">
-			{description}
-			<br>
-			<div class="tags">{tags} </div>
+			<?php echo $view->description ?>
 		
 		</div> <!-- span7 -->
 		<div class="span2">
 			<div class="author">
 				<img src="/nuke/twitter-icon.png" height="32" width="32" alt="icon" /> 		
 				<div class="meta">
-					<span class="b"> <a href="#">{userName}</a></span>
+					<span class="b"> <a href="#"><?php echo $view->userName; ?></a></span>
 					<br>
-					<span class="b">{createdOn}</span>
+					<span class="b"><?php echo $view->createdOn ?></span>
 				</div>	
-			   <div><a href="/qa/show.php?id={id}">More&nbsp;&#8594;</a></div>
 			</div>
 	
 		</div> <!-- span2 -->
-
+	</div> <!-- row -->
+	<div class="ml40"> 
+		<a href="/qa/show.php?id={id}">View&nbsp;&#8594;</a>
+		<?php if($view->isLoggedInUser) { ?>
+			<a href="/qa/show.php?id={id}">Edit&nbsp;&#8594;</a>
+			&nbsp;&nbsp;
+			<a href="/qa/show.php?id={id}">Delete&nbsp;&#8594;</a>
+		<?php } ?> 
 	</div>
+
 </div>
 

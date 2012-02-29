@@ -35,7 +35,6 @@
 								$fvalues['question_id'],
 								$title,
                                 $fvalues['description'],
-                                $fvalues['category'],
                                 'location',
                                 'tags',
                                 $_POST['links_json'],

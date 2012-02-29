@@ -1,5 +1,7 @@
 
 
+--create database scdb  character set utf8 collate utf8_general_ci ;
+
 drop table if exists sc_question;
 create table sc_question(
 	id int(11) NOT NULL auto_increment,
@@ -15,9 +17,8 @@ create table sc_question(
     category_code varchar(16),
     created_on timestamp default '0000-00-00 00:00:00',
 	updated_on timestamp default '0000-00-00 00:00:00' ,
-	PRIMARY KEY (id)) ENGINE = InnoDB;
+	PRIMARY KEY (id)) ENGINE = InnoDB default character set utf8 collate utf8_general_ci;
     
-
 drop table if exists sc_answer;
 create table sc_answer(
 	id int(11) NOT NULL auto_increment,
@@ -28,7 +29,7 @@ create table sc_answer(
     answer TEXT ,
     created_on timestamp default '0000-00-00 00:00:00',
 	updated_on timestamp default '0000-00-00 00:00:00' ,
-	PRIMARY KEY (id)) ENGINE = InnoDB;
+	PRIMARY KEY (id)) ENGINE = InnoDB default character set utf8 collate utf8_general_ci;
     
    
  
@@ -44,7 +45,7 @@ create table sc_media(
     original_width int ,
     created_on timestamp default '0000-00-00 00:00:00',
 	updated_on timestamp default '0000-00-00 00:00:00' ,
-	PRIMARY KEY (id)) ENGINE = InnoDB;
+	PRIMARY KEY (id)) ENGINE = InnoDB default character set utf8 collate utf8_general_ci;
     
 
 
@@ -63,7 +64,7 @@ create table sc_media(
        login_on TIMESTAMP  default '0000-00-00 00:00:00',
        created_on TIMESTAMP  default '0000-00-00 00:00:00',
        updated_on TIMESTAMP   default '0000-00-00 00:00:00',
-       PRIMARY KEY (id)) ENGINE =InnoDB ;
+       PRIMARY KEY (id)) ENGINE =InnoDB  default character set utf8 collate utf8_general_ci;
     
    alter table  sc_user add constraint UNIQUE uniq_email (email);
    
@@ -78,7 +79,7 @@ create table sc_list(
     code varchar(8) not null,
     display varchar(32) not null,
 	ui_order int not null ,
-	PRIMARY KEY (id)) ENGINE = InnoDB;
+	PRIMARY KEY (id)) ENGINE = InnoDB default character set utf8 collate utf8_general_ci;
     
 
 --	
@@ -131,7 +132,7 @@ create table sc_login(
     provider varchar(16) not null,
 	created_on TIMESTAMP  default '0000-00-00 00:00:00',
     updated_on TIMESTAMP   default '0000-00-00 00:00:00',
-	PRIMARY KEY (id)) ENGINE = InnoDB;
+	PRIMARY KEY (id)) ENGINE = InnoDB default character set utf8 collate utf8_general_ci;
 
 
 -- look @ DB - select user_name,email from sc_user, provider is 3mik
@@ -175,7 +176,7 @@ create table sc_twitter(
     location varchar(32) ,
 	created_on TIMESTAMP  default '0000-00-00 00:00:00',
     updated_on TIMESTAMP   default '0000-00-00 00:00:00',
-	PRIMARY KEY (id)) ENGINE = InnoDB;
+	PRIMARY KEY (id)) ENGINE = InnoDB default character set utf8 collate utf8_general_ci;
 
 
 alter table  sc_twitter add constraint UNIQUE uniq_id (twitter_id);
@@ -197,7 +198,7 @@ create table sc_facebook(
     email varchar(32) ,
 	created_on TIMESTAMP  default '0000-00-00 00:00:00',
     updated_on TIMESTAMP   default '0000-00-00 00:00:00',
-	PRIMARY KEY (id)) ENGINE = InnoDB;
+	PRIMARY KEY (id)) ENGINE = InnoDB default character set utf8 collate utf8_general_ci;
 
 
 alter table  sc_facebook add constraint UNIQUE uniq_id (facebook_id);
@@ -211,14 +212,29 @@ create table sc_feedback(
 	feedback text not null,
 	created_on TIMESTAMP  default '0000-00-00 00:00:00',
     updated_on TIMESTAMP   default '0000-00-00 00:00:00',
-	PRIMARY KEY (id)) ENGINE = InnoDB;
+	PRIMARY KEY (id)) ENGINE = InnoDB default character set utf8 collate utf8_general_ci;
  
 
+ 
+--
+-- Patch to convert tables to utf-8
+-- 
+alter database scdb character set utf8 collate utf8_general_ci ;
 
+alter table sc_question convert to character set utf8 collate utf8_general_ci ;
+alter table sc_answer convert to character set utf8 collate utf8_general_ci ;
+alter table sc_media convert to character set utf8 collate utf8_general_ci ;
+alter table sc_user convert to character set utf8 collate utf8_general_ci ;
+alter table sc_list convert to character set utf8 collate utf8_general_ci ;
+alter table sc_login convert to character set utf8 collate utf8_general_ci ;
+alter table sc_twitter convert to character set utf8 collate utf8_general_ci ;
+alter table sc_facebook convert to character set utf8 collate utf8_general_ci ;
+alter table sc_feedback convert to character set utf8 collate utf8_general_ci ;
 
-
-
-
+-- 
+-- recreate the trigger 
+-- 
+alter table sc_question drop column category_code;
 
 
 

@@ -76,7 +76,7 @@
 			
 			
 			<div class="row">
-				<div class="span8">
+				<div class="span9">
 					
 					
 					<div class="page-header">
@@ -92,7 +92,7 @@
 						<table class="form-table">
 							 <tr>
 								<td>
-									<textarea  name="answer" class="w580 h280 required" cols="60" rows="10" ><?php echo $sticky->get('answer',$answerDBRow['answer']); ?></textarea>
+									<textarea  name="answer" class="w580 h130 required" cols="60" rows="10" ><?php echo $sticky->get('answer',$answerDBRow['answer']); ?></textarea>
 								</td>
 							 </tr>
 							 

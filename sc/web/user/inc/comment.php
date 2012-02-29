@@ -25,7 +25,7 @@
 		}	
 
 		foreach($answerDBRows as $answerDBRow){
-			echo \com\indigloo\sc\html\Answer::getWidget($answerDBRow);
+			echo \com\indigloo\sc\html\Answer::getWidget($gSessionLogin,$answerDBRow);
 		}
 
 	?>

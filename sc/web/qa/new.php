@@ -87,27 +87,18 @@
 			
 			
 			<div class="row">
-				<div class="span8">
+				<div class="span9">
 					
 					
 					<div class="page-header">
-						<h2> Share your wisdom </h2>
+						<h2> Ask </h2>
 					</div>
 					
 					<?php FormMessage::render(); ?>
 					
 					<form  id="web-form1"  name="web-form1" action="/qa/form/new.php" enctype="multipart/form-data"  method="POST">
 						<div class="row">
-							<div class="span4">
-								Category&nbsp;
-								<?php
-										$selectBoxDao = new \com\indigloo\sc\dao\SelectBox(); 
-										$catRows = $selectBoxDao->get('CATEGORY'); 
-										echo \com\indigloo\ui\SelectBox::render('category',$catRows);              
-									?>
-								
-							</div>
-							<div class="span4">
+							<div class="span9">
 								<div id="image-uploader"> </div>
 							</div>
 						</div> <!-- top row -->
@@ -150,9 +141,9 @@
 					</form>
 									
 				   
-				</div> <!-- span8 -->
+				</div> <!-- span9 -->
 				
-				<div class="span4">
+				<div class="span3">
 					 <?php include($_SERVER['APP_WEB_DIR'] .'/qa/sidebar/ask.inc'); ?>
 				</div>
 			

@@ -2,21 +2,25 @@
 <div class="widget bbd5">
 	<div class="row">
 		<div class="span7">
-		   {answer}
-		   <b>in reply to </b> <a href="/qa/show.php?id={questionId}">{title}</a>
+		   <?php echo $view->answer ?>
+		   <b>in reply to </b> <a href="/qa/show.php?id=<?php echo $view->questionId ?>"><?php echo $view->title ?></a>
 		</div> <!-- span7 -->
 
 		<div class="span2">
 			<div class="author">
 				<img src="/nuke/twitter-icon.png" height="32" width="32" alt="icon" /> 		
 				<div class="meta">
-					<span class="b"> <a href="#">{userName}</a></span>
+					<span class="b"> <a href="#"><?php echo $view->userName ?></a></span>
 					<br>
-					<span class="b">{createdOn}</span>
+					<span class="b"><?php echo $view->createdOn ?></span>
 				</div>	
 			</div>
-	
 		</div> <!-- span2 -->
-	</div>
+	</div> <!-- row -->
+	<?php if($view->isLoggedInUser) { ?>
+		<div class="ml40">
+			<a href="/qa/answer/edit.php?id=<?php echo $view->id; ?>">edit &rarr; </a>
+		</div>
+	<?php } ?>
 </div>
 

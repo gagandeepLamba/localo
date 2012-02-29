@@ -86,39 +86,29 @@
 			
 			
 			<div class="row">
-				<div class="span8">
+				<div class="span9">
 					
 					
 					<div class="page-header">
-						<h2> Share your wisdom </h2>
+						<h2> Share</h2>
 					</div>
 					
 					<?php FormMessage::render(); ?>
 					
 					<form  id="web-form1"  name="web-form1" action="/qa/form/new.php" enctype="multipart/form-data"  method="POST">
 						<div class="row">
-							
-							
-							<div class="span4">
-								Category&nbsp;
-								<?php
-										$selectBoxDao = new \com\indigloo\sc\dao\SelectBox(); 
-										$catRows = $selectBoxDao->get('CATEGORY'); 
-										echo \com\indigloo\ui\SelectBox::render('category',$catRows);              
-									?>
-								
-							</div>
-							<div class="span4"><div id="image-uploader"> </div></div>
+							<div class="span9"><div id="image-uploader"> </div></div>
 						</div>
 						<table class="form-table">
 							
 							
 							<tr>
 								<td>
-									<label>Details</label>
+									<label>Details *</label>
 									<textarea  name="description" class="required h130 w500" cols="50" rows="4" ><?php echo $sticky->get('description'); ?></textarea>
 								</td>
 							</tr>
+							
 							<tr>
 								<td>
 									<label>Link </label>
@@ -126,6 +116,7 @@
 									<button id="add-link" type="button" class="btn" value="Add"><i class="icon-plus-sign"> </i>&nbsp;Add</button> 
 								</td>
 							</tr>
+								
 							<tr>
 								<td>
 									<div id="link-data"> </div>
@@ -153,8 +144,8 @@
 				   
 				</div> <!-- content -->
 				
-				<div class="span4">
-					<!-- sidebar -->
+				<div class="span3">
+					<?php include('sidebar/new.inc'); ?>	
 				</div>
 			
 			</div>

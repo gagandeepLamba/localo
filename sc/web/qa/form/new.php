@@ -12,7 +12,8 @@
     use \com\indigloo\ui\form as Form;
     use \com\indigloo\Constants as Constants ;
     use \com\indigloo\Util as Util ;
-    
+    use \com\indigloo\Url as Url ;
+   	 
     if (isset($_POST['save']) && ($_POST['save'] == 'Save')) {
         
         $fhandler = new Form\Handler('web-form-1', $_POST);
@@ -38,10 +39,9 @@
             $questionDao = new com\indigloo\sc\dao\Question();
 			$title = Util::abbreviate($fvalues['description'],128);		
 
-            $code = $questionDao->create(
+            $data = $questionDao->create(
 								$title,
                                 $fvalues['description'],
-                                $fvalues['category'],
                                 'location',
                                 'tags',
 								$gSessionLogin->id,
@@ -49,9 +49,12 @@
                                 $_POST['links_json'],
                                 $_POST['images_json']);
 								
-    
+   			$code = $data['code'];
+
             if ($code == com\indigloo\mysql\Connection::ACK_OK ) {
-                header("location: /qa/thanks.php" );
+				$newId = $data['lastInsertId'];
+				$location = Url::createUrl("/qa/show.php",array("id" => $newId));
+                header("location: /qa/thanks.php?q=".$location );
                 
             } else {
                 $message = sprintf("DB Error: (code is %d) please try again!",$code);
@@ -60,7 +63,6 @@
                 header("location: " . $qUrl);
                 exit(1);
             }
-            
            
         }
         

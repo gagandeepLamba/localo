@@ -25,7 +25,7 @@
 		}	
 
 		foreach($questionDBRows as $questionDBRow){
-			echo \com\indigloo\sc\html\Question::getWidget($questionDBRow);
+			echo \com\indigloo\sc\html\Question::getWidget($gSessionLogin,$questionDBRow);
 		}
 	?>
 </div>

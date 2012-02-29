@@ -52,7 +52,18 @@ namespace com\indigloo\sc\html {
             return $html ;
 		}
 
-        static function getProfile($loginId,$userDBRow) {
+        static function getProfile($gSessionLogin,$userDBRow) {
+			if(is_null($gSessionLogin)) {
+				return '' ;
+			}
+
+			if(!is_null($gSessionLogin) && ($gSessionLogin->id != $userDBRow['login_id'] )) {
+				return '' ;
+
+			}
+
+			$loginId = $gSessionLogin->id ;
+
 			$html = NULL ;
 			$provider = $userDBRow['provider'];
 

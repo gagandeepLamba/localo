@@ -9,16 +9,15 @@
     use com\indigloo\ui\form\Sticky;
     use com\indigloo\Constants as Constants;
     use com\indigloo\ui\form\Message as FormMessage;
+	use \com\indigloo\sc\auth\Login as Login ;
      
     $sticky = new Sticky($gWeb->find(Constants::STICKY_MAP,true));
 	
-	if(is_null($gSessionUser)) {
-		$gSessionUser = \com\indigloo\auth\User::getUserInSession();
-	}
-	
-	$userId = $gSessionUser->id ;
+	$gSessionLogin = Login::getLoginInSession();
+	$loginId = $gSessionLogin->id ;
+
     $userDao = new \com\indigloo\sc\dao\User() ;
-	$userDBRow = $userDao->getonId($userId);
+	$userDBRow = $userDao->getonLoginId($loginId);
    
 ?>  
 
@@ -65,7 +64,7 @@
 			
 			
 			<div class="row">
-				<div class="span8">
+				<div class="span9">
 					<div class="page-header">
 						<h2> Edit Profile - <?php echo $userDBRow['first_name']; ?> </h2>
 					</div>

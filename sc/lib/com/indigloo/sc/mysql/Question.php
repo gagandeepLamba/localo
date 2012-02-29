@@ -102,7 +102,6 @@ namespace com\indigloo\sc\mysql {
 						       $title,
 							   $seoTitle,
                                $description,
-                               $category,
                                $location,
                                $tags,
                                $linksJson,
@@ -111,7 +110,7 @@ namespace com\indigloo\sc\mysql {
 		{
 			
 			$mysqli = MySQL\Connection::getInstance()->getHandle();
-            $sql = " update sc_question set title=?, seo_title=?, description=?, category_code =?, " ;
+            $sql = " update sc_question set title=?, seo_title=?, description=?, " ;
 			$sql .= " location=?, tags=?, links_json=?, images_json=? where id = ? " ;
 			
 			
@@ -120,11 +119,10 @@ namespace com\indigloo\sc\mysql {
             
             
             if ($stmt) {
-                $stmt->bind_param("ssssssssi",
+                $stmt->bind_param("sssssssi",
                         $title,
                         $seoTitle,
                         $description,
-                        $category,
                         $location,
                         $tags,
                         $linksJson,
@@ -150,7 +148,6 @@ namespace com\indigloo\sc\mysql {
         static function create($title,
                                $seoTitle,
                                $description,
-                               $category,
                                $location,
                                $tags,
 							   $loginId,
@@ -161,19 +158,20 @@ namespace com\indigloo\sc\mysql {
 			
 			
             $mysqli = MySQL\Connection::getInstance()->getHandle();
-            $sql = " insert into sc_question(title,seo_title,description,category_code,location,tags, " ;
+            $sql = " insert into sc_question(title,seo_title,description,location,tags, " ;
             $sql .= " login_id,user_name,links_json,images_json,created_on) ";
-            $sql .= " values(?,?,?,?,?,?,?,?,?,?,now()) ";
+            $sql .= " values(?,?,?,?,?,?,,?,?,?,now()) ";
 
             $code = MySQL\Connection::ACK_OK;
+			$lastInsertId = NULL;
+
             $stmt = $mysqli->prepare($sql);
             
             if ($stmt) {
-                $stmt->bind_param("ssssssisss",
+                $stmt->bind_param("sssssisss",
                         $title,
                         $seoTitle,
                         $description,
-                        $category,
                         $location,
 						$tags,
 						$loginId,
@@ -188,11 +186,16 @@ namespace com\indigloo\sc\mysql {
                     $code = MySQL\Error::handle(self::MODULE_NAME, $stmt);
                 }
                 $stmt->close();
+
             } else {
                 $code = MySQL\Error::handle(self::MODULE_NAME, $mysqli);
             }
 			
-			return $code ;
+			if($code == MySQL\Connection::ACK_OK) {     
+                $lastInsertId = MySQL\Connection::getInstance()->getLastInsertId();
+            }
+	
+			return array('code' => $code, 'lastInsertId' => $lastInsertId) ;
         }
 	}
 }

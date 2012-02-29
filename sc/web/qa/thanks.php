@@ -47,7 +47,7 @@
 			
 			
 			<div class="row">
-				<div class="span8">
+				<div class="span9">
 					
 					
 					<div class="page-header">

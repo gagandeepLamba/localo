@@ -3,8 +3,7 @@
     //sc/user/dashboard.php
     include ('sc-app.inc');
     include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
-    //include($_SERVER['APP_WEB_DIR'] . '/inc/role/user.inc');
-	
+		
     use com\indigloo\Util as Util;
     use com\indigloo\Url as Url;
     use com\indigloo\Configuration as Config;
@@ -29,8 +28,12 @@
 	
     $userDao = new \com\indigloo\sc\dao\User() ;
 	$userDBRow = $userDao->getOnLoginId($loginId);
+
+	if(empty($userDBRow)) {
+		trigger_error("No user record found for given login_id" , E_USER_ERROR);
+		
+	}
 	
-	//@todo handle NULL userDBRow case
 	$qparams = Url::getQueryParams($_SERVER['REQUEST_URI']);
 
 	$ptab = 'active' ;
@@ -94,7 +97,7 @@
 					<div class="page-header">
 						<h2> <?php echo $userDBRow["name"]; ?> </h2>
 					</div>
-					<?php echo \com\indigloo\sc\html\User::getProfile($loginId,$userDBRow) ; ?>
+					<?php echo \com\indigloo\sc\html\User::getProfile($gSessionLogin,$userDBRow) ; ?>
 				</div>
 			</div>
 

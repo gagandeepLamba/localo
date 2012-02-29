@@ -113,9 +113,12 @@
 						echo "</ol> </div>" ;
 					}
 
-					echo \com\indigloo\sc\html\Question::getEditBar($loginId,$questionDBRow) ; 
-					
 				?>
+
+				<div class="ml40">
+					<span> <a class="btn btn-primary" href="#form-wrapper">Add Comment</a></span>	
+				</div>
+					
 				
 
 				<div class="mt20">
@@ -137,7 +140,7 @@
 					<table class="form-table">
 						<tr> 
 						<?php if(is_null($loginId)) { ?>
-							<td> Needs <a href="<?php echo $loginUrl ?>">login</a></td>
+							<td> You need to<a href="<?php echo $loginUrl ?>">login</a></td>
 						<?php } ?>
 							
 						</tr>

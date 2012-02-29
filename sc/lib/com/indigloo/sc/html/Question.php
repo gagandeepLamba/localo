@@ -92,9 +92,11 @@ namespace com\indigloo\sc\html {
 			return $html ;	
 		}
 
-		static function getWidget($questionDBRow) {
+		static function getWidget($gSessionLogin,$questionDBRow) {
            
 			$html = NULL ;
+
+			$template = $_SERVER['APP_WEB_DIR'].'/fragments/widget/text.tmpl' ;
 			$imagesJson = $questionDBRow['images_json'];
 			$images = json_decode($imagesJson);
 			
@@ -106,12 +108,17 @@ namespace com\indigloo\sc\html {
 			$view->userName = $questionDBRow['user_name'];
 			$view->createdOn = Util::formatDBTime($questionDBRow['created_on']);
 			$view->tags = $questionDBRow['tags'];
+			$view->isLoggedInUser = false ;
+
+			if(!is_null($gSessionLogin) && ($gSessionLogin->id == $questionDBRow['login_id'])){
+				$view->isLoggedInUser = true ;
+			} 
 			
 			if(!empty($images) && (sizeof($images) > 0)) {
 				
+				/* image stuff */
 				$template = $_SERVER['APP_WEB_DIR'].'/fragments/widget/image.tmpl' ;
 				
-				/* image stuff */
 				$image = $images[0] ;
 				
 				$view->originalName = $image->originalName;
@@ -124,14 +131,14 @@ namespace com\indigloo\sc\html {
 				$view->height = $newxy["height"];
 				
 				/* image stuff end */
-				$html = Template::render($template,$view);
 				
-			} else {
 				
-				$template = $_SERVER['APP_WEB_DIR'].'/fragments/widget/text.tmpl' ;
-				$html = Template::render($template,$view);
 			}
 			
+			ob_start();
+			include($template);
+			$html = ob_get_contents();
+			ob_end_clean();	
             return $html ;
 			
         }

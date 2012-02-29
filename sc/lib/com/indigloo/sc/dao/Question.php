@@ -63,7 +63,6 @@ namespace com\indigloo\sc\dao {
 
         function create($title,
 						$description,
-						$category,
 						$location,
 						$tags,
 						$loginId,
@@ -72,11 +71,10 @@ namespace com\indigloo\sc\dao {
 						$imagesJson) {
 			
             $seoTitle = SeoStringUtil::convertNameToSeoKey($title);
-            $code = mysql\Question::create(
+            $data = mysql\Question::create(
 								$title,
 								$seoTitle,
 								$description,
-								$category,
 								$location,
 								$tags,
 								$loginId,
@@ -84,14 +82,13 @@ namespace com\indigloo\sc\dao {
 								$linksJson,
 								$imagesJson);
 			
-            return $code ;
+            return $data ;
         }
 		
 		
 		function update($questionId,
 						$title,
 						$description,
-						$category,
 						$location,
 						$tags,
 						$linksJson,
@@ -102,7 +99,6 @@ namespace com\indigloo\sc\dao {
 						       $title,
 							   $seoTitle,
                                $description,
-                               $category,
                                $location,
                                $tags,
                                $linksJson,
