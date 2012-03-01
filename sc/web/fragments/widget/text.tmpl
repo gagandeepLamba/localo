@@ -13,17 +13,20 @@
 					<span class="b">~~$view->createdOn~</span>
 				</div>	
 			</div>
+			<div class="btn-group">
+				<a data-toggle="dropdown" href="#">Actions<span class="caret"></span> </a>
+				  <ul class="dropdown-menu">
+					<li> <a href="/qa/show.php?id=~~$view->id~">View</a></li>
+					~if($view->isLoggedInUser) {~
+						<li> <a href="/qa/edit.php?id=~~$view->id~">Edit</a></li>
+						<li> <a href="/qa/delete.php?id=~~$view->id~">Delete</a> </li>
+					~}~
+					
+				  </ul>
+			</div>	
+
 	
 		</div> <!-- span2 -->
 	</div> <!-- row -->
-	<div class="ml40"> 
-		<a href="/qa/show.php?id=~~$view->id~">View&nbsp;&#8594;</a>
-		&nbsp;&nbsp;
-		~if($view->isLoggedInUser) {~
-			<a href="/qa/edit.php?id=~~$view->id~">Edit&nbsp;&#8594;</a>
-			&nbsp;&nbsp;
-			<a href="/qa/delete.php?id=~~$view->id~">Delete&nbsp;&#8594;</a>
-		~}~
-	</div>
 </div>
 

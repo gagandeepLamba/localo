@@ -9,6 +9,7 @@
     use \com\indigloo\Constants as Constants ;
     use \com\indigloo\Util as Util ;
     use \com\indigloo\Url as Url ;
+    use \com\indigloo\sc\auth\Login as Login ;
 	
     if (isset($_POST['save']) && ($_POST['save'] == 'Save')) {
         
