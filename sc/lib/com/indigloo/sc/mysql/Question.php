@@ -21,6 +21,13 @@ namespace com\indigloo\sc\mysql {
             $row = MySQL\Helper::fetchRow($mysqli, $sql);
             return $row;
 		}
+
+		static function getOnSearchIds($strIds) {
+			$mysqli = MySQL\Connection::getInstance()->getHandle();
+            $sql = " select * from sc_question where id in (".$strIds. ") " ;
+            $rows = MySQL\Helper::fetchRows($mysqli, $sql);
+            return $rows;
+		}
 		
 		static function getLatest($count,$dbfilter) {
 			

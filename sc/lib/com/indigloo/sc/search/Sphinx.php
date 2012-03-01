@@ -9,12 +9,10 @@ namespace com\indigloo\sc\search {
     class Sphinx {
 
 		private $cl ;
-		private $query ;
 
 		function __construct() {
 			$this->cl = new \SphinxClient();
 			$this->cl->SetServer('127.0.0.1', 9312);
-			$this->query = $query ;
 
 			//offset,limit
 			$this->cl->SetLimits(0,10);

@@ -22,6 +22,12 @@ namespace com\indigloo\sc\dao {
 			$row = mysql\Question::getOnId($questionId);
 			return $row ;
 		}
+
+		function getOnSearchIds($arrayIds) {
+			$strIds = implode(",",$arrayIds);
+			$rows = mysql\Question::getOnSearchIds($strIds);
+			return $rows ;
+		}
 		
 		function getPaged($paginator,$filter=NULL) {
  

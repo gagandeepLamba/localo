@@ -8,7 +8,7 @@ namespace com\indigloo\sc\html {
     class Question {
         
 		static function getSummary($questionDBRow) {
-           
+          	//print_r($questionDBRow); exit ; 
 		    $html = NULL ;
 			$imagesJson = $questionDBRow['images_json'];
 			$images = json_decode($imagesJson);

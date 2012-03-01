@@ -14,9 +14,9 @@
 						<li class="divider-vertical"></li>
 					</ul> <!-- links -->
 				</div>
-				<div class="pull-left"	
-					<form>
-						<input id="site-search" name="s" type="text" class="search-query" placeholder="Search">
+				<div class="pull-left">	
+					<form method="GET" action="/search/site.php">
+						<input id="site-search" name="gs" type="text" class="search-query" placeholder="Search">
 					</form>
 				</div>
 		  </div>
