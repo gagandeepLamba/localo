@@ -11,7 +11,7 @@ namespace com\indigloo\sc\html {
 		static function get3mikProfile($loginId,$userDBRow) {
 		    $html = NULL ;
 			$view = new \stdClass;
-			$template = $_SERVER['APP_WEB_DIR'].'/fragments/user/profile/3mik.tmpl' ;
+			$template = '/fragments/user/profile/3mik.tmpl' ;
 			
 			$view->name = $userDBRow['first_name']. ' '.$userDBRow['last_name'];
 			$view->createdOn = Util::formatDBTime($userDBRow['created_on']);
@@ -24,7 +24,7 @@ namespace com\indigloo\sc\html {
 		static function getTwitterProfile($loginId,$userDBRow) {
 		    $html = NULL ;
 			$view = new \stdClass;
-			$template = $_SERVER['APP_WEB_DIR'].'/fragments/user/profile/twitter.tmpl' ;
+			$template = '/fragments/user/profile/twitter.tmpl' ;
 			
 			$view->name = $userDBRow['name'];
 			$view->createdOn = Util::formatDBTime($userDBRow['created_on']);
@@ -42,7 +42,7 @@ namespace com\indigloo\sc\html {
 		static function getFacebookProfile($loginId,$userDBRow) {
 		    $html = NULL ;
 			$view = new \stdClass;
-			$template = $_SERVER['APP_WEB_DIR'].'/fragments/user/profile/facebook.tmpl' ;
+			$template = '/fragments/user/profile/facebook.tmpl' ;
 			
 			$view->name = $userDBRow['name'];
 			$view->createdOn = Util::formatDBTime($userDBRow['created_on']);

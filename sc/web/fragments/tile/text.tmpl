@@ -1,18 +1,18 @@
 
 <div class="tile">
    <div class="description">
-	 {description}
+	 ~~$view->description~
    </div>
  	   
 	<div class="author">
 		<img src="/nuke/twitter-icon.png" height="32" width="32" alt="icon" /> 		
 		<div class="meta">
-			<span class="b"> <a href="{userPageURI}">{userName}</a> </span>
-			<span class="b">{createdOn}</span>
+			<span class="b"> <a href="~~$view->userPageURI~">~~$view->userName~</a> </span>
+			<span class="b">~~$view->createdOn~</span>
 			<br>
 		   <span>&nbsp; </span>
 		</div>
 	</div>
-	<div><a href="/qa/show.php?id={id}">More&nbsp;&#8594;</a></div>
+	<div><a href="/qa/show.php?id=~~$view->id~">More&nbsp;&#8594;</a></div>
 </div>
 

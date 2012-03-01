@@ -1,29 +1,29 @@
 <div class="widget bbd5">
 	<div class="row">
 		<div class="span7">
-			<?php echo $view->description ?>
+			~~$view->description~
 		
 		</div> <!-- span7 -->
 		<div class="span2">
 			<div class="author">
 				<img src="/nuke/twitter-icon.png" height="32" width="32" alt="icon" /> 		
 				<div class="meta">
-					<span class="b"> <a href="#"><?php echo $view->userName; ?></a></span>
+					<span class="b"> <a href="#">~~$view->userName~</a></span>
 					<br>
-					<span class="b"><?php echo $view->createdOn ?></span>
+					<span class="b">~~$view->createdOn~</span>
 				</div>	
 			</div>
 	
 		</div> <!-- span2 -->
 	</div> <!-- row -->
 	<div class="ml40"> 
-		<a href="/qa/show.php?id=<?php echo $view->id ?>">View&nbsp;&#8594;</a>
-		<?php if($view->isLoggedInUser) { ?>
-			<a href="/qa/edit.php?id=<?php echo $view->id ?>">Edit&nbsp;&#8594;</a>
+		<a href="/qa/show.php?id=~~$view->id~">View&nbsp;&#8594;</a>
+		&nbsp;&nbsp;
+		~if($view->isLoggedInUser) {~
+			<a href="/qa/edit.php?id=~~$view->id~">Edit&nbsp;&#8594;</a>
 			&nbsp;&nbsp;
-			<a href="/qa/show.php?id=<?php echo $view->id ?>">Delete&nbsp;&#8594;</a>
-		<?php } ?> 
+			<a href="/qa/delete.php?id=~~$view->id~">Delete&nbsp;&#8594;</a>
+		~}~
 	</div>
-
 </div>
 

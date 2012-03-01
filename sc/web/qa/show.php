@@ -139,7 +139,7 @@
 					<table class="form-table">
 						<tr> 
 						<?php if(is_null($loginId)) { ?>
-							<td> You need to<a href="<?php echo $loginUrl ?>">login</a></td>
+							<td> You need to <a href="<?php echo $loginUrl ?>">login</a></td>
 						<?php } ?>
 							
 						</tr>

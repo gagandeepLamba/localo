@@ -11,15 +11,7 @@ namespace com\indigloo\sc\html {
 		static function getSummary($loginId,$answerDBRow) {
 		    $html = NULL ;
 			$view = new \stdClass;
-			$template = $_SERVER['APP_WEB_DIR'].'/fragments/answer/summary.tmpl' ;
-			
-			$view->editBar = '' ;
-
-			/*
-			if(!empty($loginId) && ($loginId == $answerDBRow['login_id'])){
-				$view->editBar = '<a href="/qa/answer/edit.php?id='.$answerDBRow['id'].'">edit comment</a>' ;
-			}*/
-
+			$template = '/fragments/answer/summary.tmpl' ;
 			
 			$view->answer = $answerDBRow['answer'];
 			$view->createdOn = Util::formatDBTime($answerDBRow['created_on']);
@@ -35,7 +27,7 @@ namespace com\indigloo\sc\html {
            
 		    $html = NULL ;
 			$view = new \stdClass;
-			$template = $_SERVER['APP_WEB_DIR'].'/fragments/answer/text.tmpl' ;
+			$template = '/fragments/answer/text.tmpl' ;
 			
 			
 			$view->id = $answerDBRow['id'];
@@ -49,11 +41,8 @@ namespace com\indigloo\sc\html {
 			if(!is_null($gSessionLogin) && ($gSessionLogin->id == $answerDBRow['login_id'])){
 				$view->isLoggedInUser = true ;
 			} 
-			
-			ob_start();
-			include($template);
-			$html = ob_get_contents();
-			ob_end_clean();	
+
+			$html = Template::render($template,$view);
             return $html ;
         }
         

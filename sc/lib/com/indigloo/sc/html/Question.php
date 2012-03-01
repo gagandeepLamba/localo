@@ -7,26 +7,7 @@ namespace com\indigloo\sc\html {
     
     class Question {
         
-			static function getEditBar($loginId,$questionDBRow) {
-			
-			$html = NULL ;
-			$id = $questionDBRow['id'] ;
-
-			$buffer = '<span> <a class="btn btn-primary" href="#form-wrapper">Add Comment</a></span>' ;
-			
-			if(!is_null($loginId) && ($loginId == $questionDBRow['login_id'])) {
-				$buffer .= '<span> <a class="btn btn-primary" href="/qa/edit.php?id='.$id.'">Edit</a></span>' ;
-			}
-			
-			$template = $_SERVER['APP_WEB_DIR'].'/fragments/question/edit-bar.tmpl' ;
-			$view = new \stdClass;
-			
-			$view->content = $buffer;
-			$html = Template::render($template,$view);
-			return $html ;
-		}
-		
-        static function getSummary($questionDBRow) {
+		static function getSummary($questionDBRow) {
            
 		    $html = NULL ;
 			$imagesJson = $questionDBRow['images_json'];
@@ -46,7 +27,7 @@ namespace com\indigloo\sc\html {
 				
 			if(sizeof($images) > 0) {
 				
-				$template = $_SERVER['APP_WEB_DIR'].'/fragments/tile/image.tmpl' ;
+				$template = '/fragments/tile/image.tmpl' ;
 				
 				/* image stuff */
 				$image = $images[0] ;
@@ -54,6 +35,7 @@ namespace com\indigloo\sc\html {
 				$view->originalName = $image->originalName;
 				$view->bucket = $image->bucket;
 				$view->storedName = $image->storeName;
+				$view->srcImage = $image->bucket.'/'.$image->storeName;
 				
 				$newxy = Util::foldX($image->width,$image->height,200);
 				
@@ -65,7 +47,7 @@ namespace com\indigloo\sc\html {
 				
 			} else {
 				
-				$template = $_SERVER['APP_WEB_DIR'].'/fragments/tile/text.tmpl' ;
+				$template = '/fragments/tile/text.tmpl' ;
 				$html = Template::render($template,$view);
 			}
 			
@@ -86,7 +68,7 @@ namespace com\indigloo\sc\html {
 			$view->tags = $questionDBRow['tags'];
 
 			
-			$template = $_SERVER['APP_WEB_DIR'].'/fragments/question/detail.tmpl' ;
+			$template = '/fragments/question/detail.tmpl' ;
 			$html = Template::render($template,$view);
 			
 			return $html ;	
@@ -96,7 +78,7 @@ namespace com\indigloo\sc\html {
            
 			$html = NULL ;
 
-			$template = $_SERVER['APP_WEB_DIR'].'/fragments/widget/text.tmpl' ;
+			$template = '/fragments/widget/text.tmpl' ;
 			$imagesJson = $questionDBRow['images_json'];
 			$images = json_decode($imagesJson);
 			
@@ -117,13 +99,14 @@ namespace com\indigloo\sc\html {
 			if(!empty($images) && (sizeof($images) > 0)) {
 				
 				/* image stuff */
-				$template = $_SERVER['APP_WEB_DIR'].'/fragments/widget/image.tmpl' ;
+				$template = '/fragments/widget/image.tmpl' ;
 				
 				$image = $images[0] ;
 				
 				$view->originalName = $image->originalName;
 				$view->bucket = $image->bucket;
 				$view->storedName = $image->storeName;
+				$view->srcImage = $image->bucket.'/'.$image->storeName;
 				
 				$newxy = Util::foldX($image->width,$image->height,200);
 				
@@ -135,10 +118,7 @@ namespace com\indigloo\sc\html {
 				
 			}
 			
-			ob_start();
-			include($template);
-			$html = ob_get_contents();
-			ob_end_clean();	
+			$html = Template::render($template,$view);
             return $html ;
 			
         }
