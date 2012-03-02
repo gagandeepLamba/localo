@@ -5,6 +5,7 @@ namespace com\indigloo\sc\mysql {
     use \com\indigloo\mysql as MySQL;
     use \com\indigloo\Util as Util ;
     use \com\indigloo\Configuration as Config ;
+    use \com\indigloo\Logger as Logger ;
     
     class Question {
         
@@ -164,7 +165,6 @@ namespace com\indigloo\sc\mysql {
             } else {
                 $code = MySQL\Error::handle(self::MODULE_NAME, $mysqli);
             }
-            
             
             return $code ;
             

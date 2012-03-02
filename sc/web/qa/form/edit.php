@@ -43,6 +43,7 @@
             
             if ($code == com\indigloo\mysql\Connection::ACK_OK ) {
                 $locationOnSuccess = Url::createUrl('/qa/show.php', array('id' => $fvalues['question_id'])) ;
+                $locationOnSuccess = "/item/".$fvalues['question_id'] ;
                 header("location: " . $locationOnSuccess);
                 
             } else {

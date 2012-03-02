@@ -53,7 +53,7 @@
 
             if ($code == com\indigloo\mysql\Connection::ACK_OK ) {
 				$newId = $data['lastInsertId'];
-				$location = Url::createUrl("/qa/show.php",array("id" => $newId));
+				$location = "/item/$newId" ;
                 header("location: /qa/thanks.php?q=".$location );
                 
             } else {

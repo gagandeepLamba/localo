@@ -3,7 +3,7 @@
 		<div class="span7">
 
 			<div class="photo">
-				<a href="/qa/show.php?id=~~$view->id~"> <img src="/~~$view->srcImage~" class="alignleft" width="~~$view->width~" height="~~$view->height~" title="~~$view->originalName~"  alt="~~$view->originalName~"/> </a> 
+				<a href="/item/~~$view->id~"> <img src="/~~$view->srcImage~" class="alignleft" width="~~$view->width~" height="~~$view->height~" title="~~$view->originalName~"  alt="~~$view->originalName~"/> </a> 
 
 			</div>
 			<div class="description">
@@ -20,7 +20,7 @@
 					<br>
 					<span class="b">~~$view->createdOn~ </span>
 				</div>	
-				<div> <a href="/qa/show.php?id=~~$view->id~">more&rarr;</a></div>
+				<div> <a href="/item/~~$view->id~">more&rarr;</a></div>
 			</div>
 			~if($view->isLoggedInUser) {~
 			<div class="btn-group">
