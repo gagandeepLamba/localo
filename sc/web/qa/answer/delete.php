@@ -7,6 +7,11 @@
 	use \com\indigloo\Url as Url ;
 	use \com\indigloo\Logger as Logger ;
 	use \com\indigloo\sc\auth\Login as Login ;
+    use com\indigloo\Constants as Constants;
+    use com\indigloo\ui\form\Sticky;
+    use com\indigloo\ui\form\Message as FormMessage;
+
+    $sticky = new Sticky($gWeb->find(Constants::STICKY_MAP,true));
 
 	$qUrl = Url::tryQueryParam('q');
 	$qUrl = empty($qUrl) ? '/user/dashboard.php' : $qUrl;
@@ -66,12 +71,17 @@
 					  Please make sure that you really want to delete this comment.
 					</div>
 					
+					<?php FormMessage::render(); ?>
 					<?php echo \com\indigloo\sc\html\Answer::getWidget(NULL,$answerDBRow); ?>
-					
-					<div>
-					    <a class="btn btn-danger" href="/qa/form/delete.php">I am sure, Delete </a>
-						<a class="btn" href="<?php echo $qUrl; ?>">Cancel</a>
-					</div>
+							
+					<form id="web-form1"  name="web-form1" action="/qa/answer/form/delete.php" method="POST">
+						<div>
+							<button class="btn btn-danger" type="submit" name="delete" value="Delete" onclick="this.setAttribute('value','Delete');">Delete</button>
+							<a href="<?php echo $qUrl; ?>"><button class="btn" type="button">Cancel</a></button></a>
+						</div>
+						<input type="hidden" name="q" value="<?php echo $qUrl; ?>" />
+						<input type="hidden" name="answer_id" value="<?php echo $answerId; ?>" />
+					</form>
 
 				</div>
 			</div>

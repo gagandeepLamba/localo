@@ -87,6 +87,12 @@ namespace com\indigloo\sc\dao {
             return $code ;
         }
 
+		function softDelete($answerId){
+			$loginId = \com\indigloo\sc\auth\Login::tryLoginIdInSession();
+            $code = mysql\Answer::softDelete($answerId,$loginId);
+            return $code ;
+        }
+
     }
 
 }

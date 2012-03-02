@@ -236,7 +236,8 @@ alter table sc_feedback convert to character set utf8 collate utf8_general_ci ;
 -- 
 alter table sc_question drop column category_code;
 
-
+alter table sc_question add column is_active int default 1 ;
+alter table sc_answer add column is_active int default 1 ;
 
 
 
