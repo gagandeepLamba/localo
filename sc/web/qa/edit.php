@@ -12,6 +12,7 @@
     use com\indigloo\ui\form\Sticky;
     use com\indigloo\ui\SelectBox as SelectBox;
     use com\indigloo\ui\form\Message as FormMessage;
+	use \com\indigloo\sc\auth\Login as Login ;
      
     $sticky = new Sticky($gWeb->find(Constants::STICKY_MAP,true));
 
@@ -19,6 +20,13 @@
 
     $questionDao = new com\indigloo\sc\dao\Question();
     $questionDBRow = $questionDao->getOnId($questionId);
+	
+
+	if(!Login::isOwner($questionDBRow['login_id'])) {
+		header("location: /qa/noowner.php");
+		exit(1);
+	}
+
     $imagesJson = $questionDBRow['images_json'];
 
 

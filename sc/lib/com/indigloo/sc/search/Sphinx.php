@@ -15,7 +15,7 @@ namespace com\indigloo\sc\search {
 			$this->cl->SetServer('127.0.0.1', 9312);
 
 			//offset,limit
-			$this->cl->SetLimits(0,10);
+			$this->cl->SetLimits(0,20);
 			$this->cl->SetMaxQueryTime(3000);
 			$this->cl->SetMatchMode(SPH_MATCH_PHRASE);
 			$this->cl->SetSortMode(SPH_SORT_RELEVANCE);

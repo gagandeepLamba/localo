@@ -12,6 +12,7 @@ namespace com\indigloo\sc\mysql {
 
 		static function getOnFacebookId($facebookId) {
 			$mysqli = MySQL\Connection::getInstance()->getHandle();
+			$facebookId = $mysqli->real_escape_string($facebookId);
 			$sql = " select * from sc_facebook where facebook_id = ".$facebookId ;
 			$row = MySQL\Helper::fetchRow($mysqli,$sql);
 			return $row ;
@@ -19,6 +20,7 @@ namespace com\indigloo\sc\mysql {
 
 		static function getOnLoginId($loginId) {
 			$mysqli = MySQL\Connection::getInstance()->getHandle();
+			$loginId = $mysqli->real_escape_string($loginId);
 			$sql = " select * from sc_facebook where login_id = ".$loginId ;
 			$row = MySQL\Helper::fetchRow($mysqli,$sql);
 			return $row ;

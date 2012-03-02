@@ -6,22 +6,22 @@
     include($_SERVER['APP_WEB_DIR'] . '/inc/role/user.inc');
 	 
     use com\indigloo\Util;
+    use com\indigloo\Url as Url;
     use com\indigloo\ui\form\Sticky;
     use com\indigloo\Constants as Constants;
     use com\indigloo\ui\form\Message as FormMessage;
+    use com\indigloo\sc\auth\Login as Login;
      
     $sticky = new Sticky($gWeb->find(Constants::STICKY_MAP,true));
     
-    $answerId = NULL ;
-	
-    if(!array_key_exists('id',$_GET) || empty($_GET['id'])) {
-        trigger_error('answer id is missing from request',E_USER_ERROR);
-    } else {
-        $answerId = $_GET['id'];
-    }
-    
+    $answerId = Url::getQueryParam("id");
     $answerDao = new com\indigloo\sc\dao\Answer();
     $answerDBRow = $answerDao->getOnId($answerId);
+
+	if(!Login::isOwner($answerDBRow['login_id'])) {
+		header("location : /qa/noowner.php");
+		exit ;
+	}
 
 	$sticky = new Sticky($gWeb->find(Constants::STICKY_MAP,true));
     

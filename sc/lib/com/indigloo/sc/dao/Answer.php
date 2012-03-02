@@ -6,13 +6,13 @@ namespace com\indigloo\sc\dao {
     use \com\indigloo\Util as Util ;
     use \com\indigloo\sc\mysql as mysql;
     use \com\indigloo\seo\StringUtil as SeoStringUtil ;
-    
+	
     class Answer {
 
-		const LOGIN = "scr1flma";
+		const LOGIN_ID_COLUMN = "scr1flma";
 
 		function createDBFilter($filter) {
-			$map = array(self::LOGIN => mysql\Answer::LOGIN_COLUMN);
+			$map = array(self::LOGIN_ID_COLUMN => mysql\Answer::LOGIN_COLUMN);
 			$dbfilter = mysql\Helper::createDBFilter($filter,$map);
 			return $dbfilter ;
 		}
@@ -68,7 +68,8 @@ namespace com\indigloo\sc\dao {
 
 
 		function update($answerId,$answer) {
-			$code = mysql\Answer::update($answerId,$answer) ;
+			$loginId = \com\indigloo\sc\auth\Login::tryLoginIdInSession();
+			$code = mysql\Answer::update($answerId,$answer,$loginId) ;
 			return $code ;
 		}
 			

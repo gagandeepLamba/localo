@@ -6,7 +6,6 @@
 
 	use \com\indigloo\Url as Url ;
 	use \com\indigloo\Logger as Logger ;
-
 	use \com\indigloo\sc\auth\Login as Login ;
 
 	$qUrl = Url::tryQueryParam('q');
@@ -15,16 +14,12 @@
 	$answerId = Url::getQueryParam("id");
 	$answerDao = new \com\indigloo\sc\dao\Answer();
 	$answerDBRow = $answerDao->getOnId($answerId);
-	$gSessionLogin = Login::getLoginInSession();
 
-	if($gSessionLogin->id != $answerDBRow['login_id']) {
-		$message = sprintf(" %d-%s tried to delete comment %d",$gSessionLogin->id,$gSessionLogin->name,$answerId) ;
-		Logger::getInstance()->error($message);
-		header("location: / " );
+	if(!Login::isOwner($answerDBRow['login_id'])) {
+		header("location : /qa/noowner.php");
 		exit ;
 	}
-   
-    
+
 ?>  
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">

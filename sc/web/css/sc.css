@@ -252,7 +252,6 @@
 	
 	
 	.author{
-		/* margin-left:30px; */
 		padding: 7px 0px 7px 0px ;
 		font-size : 12px;
 	}
@@ -378,9 +377,7 @@
 	.widget a{
 		text-decoration: none;
 	}
-	.widget a:hover{
-		text-decoration: underline;
-	}
+	.widget a:hover{ text-decoration:underline }
 	
 	/* Regular Post */
 	.widget .regular {
@@ -447,77 +444,6 @@
 		color:#AAA;
 	}
 	
-	/* + jquery tiny carousel */
-	/*  @see js file : iLeftover > 0 cause trouble  in alignment */
-	/* viewport h:w should be same as overview.li h:w, slider-code.h = viewport.h +45px */
-	/* viewport h:w should be in 3:4 aspect ratio */
-	
-	#slider-code { height:345px; overflow:hidden; }
-	#slider-code .viewport {
-		float: left; width: 400px; height: 300px;
-		overflow: hidden; position: relative;padding:10px;
-	}
-	#slider-code .buttons {
-		display: block; margin: 120px 10px 0 0; float: left;
-		background: url("/css/images/tiny-buttons.png");
-		width: 36px; height: 37px;
-	}
-	
-	#slider-code .next { margin: 120px 10px 0 10px;  }
-	#slider-code .prev { background-position: 0 -37px; }
-	#slider-code .disable { visibility: hidden; }
-	#slider-code .overview { list-style: none; padding: 0; margin: 0;  position: absolute; left: 0; top: 0; }
-	#slider-code .overview li{ float: left; margin: 0 20px 0 0; padding: 1px;
-		height: 300px; border: 5px solid #dcdcdc; width: 400px;
-	}
-	
-	#slider-code .pager { overflow:hidden; list-style: none; clear: both; margin: 0 0 0 45px; }
-	#slider-code .pager li { float: left; }
-	#slider-code .pagenum { background-color: #fff; text-decoration: none; text-align: center;
-		padding: 5px; color: #555555; font-size: 14px; font-weight: bold; display: block;
-	}
-	#slider-code .active { color: #fff; background-color:  #555555; }
-	#slider-code a { font-size:14px; font-weight:bold;}
-	
-	
-	/*
-	 * Here is the trick for resizing slider images. Slider images
-	 * are full size images that we force to fit into a 400x300 window
-	 * without resizing we will only get an inset of large images
-	 * 
-	 */
-	  
-	
-	#slider-code img {
-		width: auto;
-		height: auto;
-		max-width: 400px;
-		max-height: 300px;
-	}
-	
-	
-	
-	/* + pagination  */
-	.pagination {
-		padding: 1em;
-		margin: 1em 0;
-		clear: left;
-		font-size: 15px;
-		color: #AAA;
-	
-	}
-	
-	.pagination a {
-		/* border: 1px solid #9AAFE5;*/
-		text-decoration : none ;
-		padding: 2px 6px;
-		
-	}
-	
-	.pagination a:hover {
-		border-color: #2E6AB1;
-	}
-	
 	/* +fancybox stuff */
 	.fancybox-container {
 		display: none ;
@@ -545,10 +471,8 @@
 		   
 		background-color:#f0fff0;
 		width:460px;
-		/* margin-top :20px;
 		margin-bottom :20px; */
 		padding:20px;
-		/* border: 1px dotted blue; */
 		
 	}
 	
@@ -611,7 +535,6 @@
 		   background-color: whiteSmoke ;
 		 
 	}
-	
 		
 	.thumbnail-1 {
 		width: auto;
@@ -620,8 +543,6 @@
 		max-height: 90px;
 		margin-bottom : 5px;
 	}
-
-
 
 	div .previewImageAction {
 		float:right ;
@@ -688,6 +609,7 @@
 	.tile .photo img {
 		max-width:200px;
 		border:5px solid #d5d5d5;
+		margin :0px;
 	}
     
 	.mh800 {

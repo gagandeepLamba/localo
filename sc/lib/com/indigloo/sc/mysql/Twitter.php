@@ -12,6 +12,8 @@ namespace com\indigloo\sc\mysql {
 
 		static function getOnTwitterId($twitterId) {
 			$mysqli = MySQL\Connection::getInstance()->getHandle();
+			$twitterId = $mysqli->real_escape_string($twitterId);
+
 			$sql = " select * from sc_twitter where twitter_id = ".$twitterId ;
 			$row = MySQL\Helper::fetchRow($mysqli,$sql);
 			return $row ;
@@ -19,6 +21,8 @@ namespace com\indigloo\sc\mysql {
 
 		static function getOnLoginId($loginId) {
 			$mysqli = MySQL\Connection::getInstance()->getHandle();
+			$loginId = $mysqli->real_escape_string($loginId);
+
 			$sql = " select * from sc_twitter where login_id = ".$loginId ;
 			$row = MySQL\Helper::fetchRow($mysqli,$sql);
 			return $row ;

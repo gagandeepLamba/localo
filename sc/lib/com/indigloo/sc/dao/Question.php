@@ -10,10 +10,10 @@ namespace com\indigloo\sc\dao {
     
     class Question {
 
-		const LOGIN  = "oowyh1vm";
+		const LOGIN_ID_COLUMN  = "oowyh1vm";
 
 		function createDBFilter($filter) {
-			$map = array(self::LOGIN => mysql\Question::LOGIN_COLUMN);
+			$map = array(self::LOGIN_ID_COLUMN => mysql\Question::LOGIN_COLUMN);
 			$dbfilter = mysql\Helper::createDBFilter($filter,$map);
 			return $dbfilter ;
 		}
@@ -101,6 +101,8 @@ namespace com\indigloo\sc\dao {
 						$imagesJson) {
 			
             $seoTitle = SeoStringUtil::convertNameToSeoKey($title);
+			$loginId = \com\indigloo\sc\auth\Login::tryLoginIdInSession();
+
             $code = mysql\Question::update($questionId,
 						       $title,
 							   $seoTitle,
@@ -108,7 +110,8 @@ namespace com\indigloo\sc\dao {
                                $location,
                                $tags,
                                $linksJson,
-                               $imagesJson);
+							   $imagesJson,
+						   	   $loginId);
             return $code ;
         }
 

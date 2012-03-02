@@ -10,6 +10,8 @@ namespace com\indigloo\sc\mysql {
 
 		static function getOnId($loginId){
 			$mysqli = MySQL\Connection::getInstance()->getHandle();
+			$loginId = $mysqli->real_escape_string($loginId);
+
 			$sql = "select * from sc_login where id = ".$loginId ;
 			$row = MySQL\Helper::fetchRow($mysqli,$sql);
 			return $row ;

@@ -35,7 +35,9 @@ namespace com\indigloo\sc\mysql {
 
 			$condition = '' ;
 			if(array_key_exists(self::LOGIN_COLUMN,$dbfilter)) {
-				$condition = " where login_id = ".$dbfilter[self::LOGIN_COLUMN] ;
+
+				$loginId = $mysqli->real_escape_string($dbfilter[self::LOGIN_COLUMN]); 
+				$condition = " where login_id = ".$loginId;
 			}
 
 			$sql = " select * from sc_answer ".$condition." order by id desc LIMIT ".$count ;
@@ -49,7 +51,8 @@ namespace com\indigloo\sc\mysql {
 
 			$condition = '';
 			if(array_key_exists(self::LOGIN_COLUMN,$dbfilter)) {
-				$condition = " where login_id = ".$dbfilter[self::LOGIN_COLUMN] ;
+				$loginId = $mysqli->real_escape_string($dbfilter[self::LOGIN_COLUMN]); 
+				$condition = " where login_id = ".$loginId;
 			}
 
             $sql = " select count(id) as count from sc_answer ".$condition ;
@@ -65,7 +68,8 @@ namespace com\indigloo\sc\mysql {
 			$condition = '' ;
 
 			if(array_key_exists(self::LOGIN_COLUMN,$dbfilter)) {
-				$condition = " and login_id = ".$dbfilter[self::LOGIN_COLUMN] ;
+				$loginId = $mysqli->real_escape_string($dbfilter[self::LOGIN_COLUMN]); 
+				$condition = " and login_id = ".$loginId ;
 			}
 
             if($direction == 'after') {
@@ -132,17 +136,17 @@ namespace com\indigloo\sc\mysql {
 			return $code ;
         }
 		
-		static function update($answerId,$answer) {
+		static function update($answerId,$answer,$loginId) {
 			
 			$code = MySQL\Connection::ACK_OK ;
 			$mysqli = MySQL\Connection::getInstance()->getHandle();
-			$sql = "update sc_answer set answer = ? where id = ? " ;
+			$sql = "update sc_answer set answer = ? where id = ? and login_id = ?" ;
 			
 			
 			$stmt = $mysqli->prepare($sql);
             
             if ($stmt) {
-                $stmt->bind_param("si",$answer,$answerId) ;
+                $stmt->bind_param("sii",$answer,$answerId,$loginId) ;
                 $stmt->execute();
                 $stmt->close();
 				

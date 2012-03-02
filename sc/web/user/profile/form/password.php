@@ -9,6 +9,7 @@
     
     use com\indigloo\ui\form as Form;
     use com\indigloo\Constants as Constants ;
+	$mikUser = NULL ;
     
     if (isset($_POST['save']) && ($_POST['save'] == 'Save')) {
         
@@ -29,12 +30,12 @@
             exit(1);
         } else {
 		
-			if(is_null($gSessionUser)) {
-				$gSessionUser = \com\indigloo\auth\User::getUserInSession();
+			if(is_null($mikUser)) {
+				$mikUser = \com\indigloo\auth\User::getUserInSession();
 			}
 			
             //send raw password - w/o any processing
-			$data = \com\indigloo\auth\User::changePassword('sc_user',$gSessionUser->email,$_POST['password']) ;
+			$data = \com\indigloo\auth\User::changePassword('sc_user',$mikUser->email,$_POST['password']) ;
             
 			$code = $data['code'];
 			

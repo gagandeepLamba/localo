@@ -84,14 +84,49 @@ namespace com\indigloo\sc\auth {
             
         }
 
-		function isValid() {
+		static function tryLoginIdInSession() {
+           	$loginId = NULL ; 
+
+			if (isset($_SESSION) 
+				&& isset($_SESSION[self::TOKEN])
+				&& isset($_SESSION[self::LOGIN_ID]) ) {
+
+				$loginId = $_SESSION[self::LOGIN_ID] ;
+			}
+
+			return $loginId ;
+        }
+
+
+		static function isValid() {
             $flag = false ;
-            if (isset($_SESSION) && isset($_SESSION[self::TOKEN])) {
+			if (isset($_SESSION) 
+				&& isset($_SESSION[self::TOKEN])	
+				&& isset($_SESSION[self::LOGIN_ID])) {
                 $flag = true ;
             }
             
             return $flag ;
         }
 
+		static function isOwner($loginId) {
+			if(is_int($loginId)){
+				trigger_error("No Login ID supplied",E_USER_ERROR);
+			}
+			
+			$flag = false ;
+
+			if (isset($_SESSION) 
+				&& isset($_SESSION[self::TOKEN]) 
+				&& isset($_SESSION[self::LOGIN_ID])
+				&& ($_SESSION[self::LOGIN_ID] == $loginId)) {
+
+				$flag = true ;
+			}
+			
+			return $flag ;
+		}
+
 	}
 }
+?>

@@ -12,10 +12,7 @@
      
     $sticky = new Sticky($gWeb->find(Constants::STICKY_MAP,true));
     
-	$questionId = Url::tryQueryParam("id");
-	if(is_null($questionId)) {
-        trigger_error('question id is missing from request',E_USER_ERROR);
-	}
+	$questionId = Url::getQueryParam("id");
 
     $questionDao = new com\indigloo\sc\dao\Question();
     $questionDBRow = $questionDao->getOnId($questionId);

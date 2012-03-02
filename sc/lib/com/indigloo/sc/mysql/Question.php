@@ -22,9 +22,22 @@ namespace com\indigloo\sc\mysql {
             return $row;
 		}
 
+		/*
+		 *
+		 * 1. we need to fetch rows from mysql doing a range scan on ids 
+		 * returned by sphinx.
+		 *
+		 * 2. we have to reorder the results returned by mysql because sphinx
+		 * results have a different order (e.g relevance) 
+		 * @see http://sphinxsearch.com/info/faq/ 
+		 *
+		 * @todo - fix - this order by clause causes a FTS
+		 *
+		 */
 		static function getOnSearchIds($strIds) {
 			$mysqli = MySQL\Connection::getInstance()->getHandle();
             $sql = " select * from sc_question where id in (".$strIds. ") " ;
+            $sql .= " ORDER BY FIELD(id,".$strIds. ") " ;
             $rows = MySQL\Helper::fetchRows($mysqli, $sql);
             return $rows;
 		}
@@ -35,7 +48,8 @@ namespace com\indigloo\sc\mysql {
 
 			$condition = '' ;
 			if(array_key_exists(self::LOGIN_COLUMN,$dbfilter)) {
-				$condition = " where login_id = ".$dbfilter[self::LOGIN_COLUMN];
+				$loginId = $mysqli->real_escape_string($dbfilter[self::LOGIN_COLUMN]);
+				$condition = " where login_id = ".$loginId;
 			}
 
 			$sql = " select * from sc_question ".$condition." order by id desc LIMIT ".$count ;
@@ -50,7 +64,8 @@ namespace com\indigloo\sc\mysql {
 
 			$condition = '';
 			if(array_key_exists(self::LOGIN_COLUMN,$dbfilter)) {
-				$condition = " where login_id = ".$dbfilter[self::LOGIN_COLUMN];
+				$loginId = $mysqli->real_escape_string($dbfilter[self::LOGIN_COLUMN]);
+				$condition = " where login_id = ".$loginId;
 			}
 
             $sql = " select count(id) as count from sc_question  ".$condition ;
@@ -71,7 +86,8 @@ namespace com\indigloo\sc\mysql {
 			$condition = '' ;
 
 			if(array_key_exists(self::LOGIN_COLUMN,$dbfilter)) {
-				$condition = " and login_id = ".$dbfilter[self::LOGIN_COLUMN];
+				$loginId = $mysqli->real_escape_string($dbfilter[self::LOGIN_COLUMN]);
+				$condition = " and login_id = ".$loginId ;
 			}
 
             if($direction == 'after') {
@@ -112,13 +128,14 @@ namespace com\indigloo\sc\mysql {
                                $location,
                                $tags,
                                $linksJson,
-                               $imagesJson)
+							   $imagesJson,
+							   $loginId)
 		
 		{
 			
 			$mysqli = MySQL\Connection::getInstance()->getHandle();
             $sql = " update sc_question set title=?, seo_title=?, description=?, " ;
-			$sql .= " location=?, tags=?, links_json=?, images_json=? where id = ? " ;
+			$sql .= " location=?, tags=?, links_json=?, images_json=? where id = ? and login_id = ?" ;
 			
 			
             $code = MySQL\Connection::ACK_OK;
@@ -126,7 +143,7 @@ namespace com\indigloo\sc\mysql {
             
             
             if ($stmt) {
-                $stmt->bind_param("sssssssi",
+                $stmt->bind_param("sssssssii",
                         $title,
                         $seoTitle,
                         $description,
@@ -134,7 +151,8 @@ namespace com\indigloo\sc\mysql {
                         $tags,
                         $linksJson,
                         $imagesJson,
-						$questionId);
+						$questionId,
+						$loginId);
                 
                       
                 $stmt->execute();

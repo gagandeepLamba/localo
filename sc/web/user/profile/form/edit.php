@@ -9,7 +9,7 @@
     
     use com\indigloo\ui\form as Form;
     use com\indigloo\Constants as Constants ;
-	$gSessionUser = NULL ;
+	$mikUser = NULL ;
     
     if (isset($_POST['save']) && ($_POST['save'] == 'Save')) {
         
@@ -30,12 +30,12 @@
             exit(1);
         } else {
 			
-			if(is_null($gSessionUser)) {
-				$gSessionUser = \com\indigloo\auth\User::getUserInSession();
+			if(is_null($mikUser)) {
+				$mikUser = \com\indigloo\auth\User::getUserInSession();
 			}
 			
             $userDao= new \com\indigloo\sc\dao\User();
-			$code = $userDao->update($gSessionUser->id,$fvalues['first_name'], $fvalues['last_name']) ;
+			$code = $userDao->update($mikUser->id,$fvalues['first_name'], $fvalues['last_name']) ;
             
             if ($code == com\indigloo\mysql\Connection::ACK_OK ) {
                 header("location: /user/dashboard.php ");

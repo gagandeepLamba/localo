@@ -2,30 +2,16 @@
 
     include ('sc-app.inc');
     include($_SERVER['APP_WEB_DIR'] . '/inc/header.inc');
-    include($_SERVER['APP_WEB_DIR'] . '/inc/role/user.inc');
 
-	use \com\indigloo\Url as Url ;
-	use \com\indigloo\Logger as Logger ;
-	use \com\indigloo\sc\auth\Login as Login ;
-
-	$qUrl = Url::tryQueryParam('q');
-	$qUrl = empty($qUrl) ? '/user/dashboard.php' : $qUrl;
-
-	$questionId = Url::getQueryParam("id");
-	$questionDao = new \com\indigloo\sc\dao\Question();
-	$questionDBRow = $questionDao->getOnId($questionId);
-
-	if(!Login::isOwner($questionDBRow['login_id'])) {
-		header("location : /qa/noowner.php");
-		exit ;
-	}
-
+	$qUrl = "/" ;
+   
+    
 ?>  
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 
-       <head><title>3mik.com - Delete a post</title>
+       <head><title> Not allowed to do this action</title>
          
 
         <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
@@ -35,6 +21,9 @@
 		
 		<script type="text/javascript" src="/3p/jquery/jquery-1.7.1.min.js"></script>
 		<script type="text/javascript" src="/3p/bootstrap/js/bootstrap.js"></script>
+		<script>
+			window.setTimeout(function() {window.location.href = '<?php echo $qUrl; ?>'; }, 5000); 
+		</script>
 		 
     </head>
 
@@ -59,19 +48,17 @@
 					
 					
 					<div class="page-header">
-						<h2> Delete Post</h2>
+						<h2> You do not have the required permissions. Redirecting... </h2>
 					</div>
-					<div class="alert">
-					  <a class="close" data-dismiss="alert">×</a>
-					  <strong>Warning!</strong> There is no way to recover a deleted post.
-					  Please make sure that you really want to delete this post.
-					</div>
+
+				    <div class="p20">
+						<img src="/css/images/ajax_loader.gif" alt="ajax loader" />
+					</div>		
 					
-					<?php echo \com\indigloo\sc\html\Question::getWidget(NULL,$questionDBRow); ?>
-					
-					<div>
-					    <a class="btn btn-danger" href="/qa/form/delete.php">I am sure, Delete </a>
-						<a class="btn" href="<?php echo $qUrl; ?>">Cancel</a>
+					<div class="well">
+						<p class="help-text">
+						   <a class="btn btn-primary" href="/">Home Page</a>
+						</p>   
 					</div>
 
 				</div>

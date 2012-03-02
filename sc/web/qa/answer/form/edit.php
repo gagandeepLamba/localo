@@ -29,7 +29,7 @@
         } else {
             
             $answerDao = new com\indigloo\sc\dao\Answer();
-            $code = $answerDao->update( $fvalues['answer_id'], $fvalues['answer']);
+            $code = $answerDao->update($fvalues['answer_id'], $fvalues['answer']);
             
             if ($code == com\indigloo\mysql\Connection::ACK_OK ) {
                 $locationOnSuccess = Url::createUrl('/qa/show.php', array('id' => $fvalues['question_id'])) ;
