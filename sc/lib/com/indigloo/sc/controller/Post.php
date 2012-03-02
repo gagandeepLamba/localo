@@ -45,6 +45,10 @@ namespace com\indigloo\sc\controller{
 
 			$loginUrl = "/user/login.php?q=".$_SERVER['REQUEST_URI'];
 			$formErrors = FormMessage::render(); 
+
+			$pageTitle = Util::abbreviate($questionDBRow['title'],70);
+			$pageMetaDescription = Util::abbreviate($questionDBRow['description'],160);
+			
 			include($file);
         }
     }

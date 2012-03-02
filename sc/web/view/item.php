@@ -1,10 +1,12 @@
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 
-       <head><title> 3mik.com - <?php echo $questionDBRow['title']; ?>  </title>
+       <head><title> 3mik.com - <?php echo $pageTitle; ?>  </title>
          
 
         <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
+        <meta name="description" content="<?php echo $pageMetaDescription;  ?>">
        
         <link rel="stylesheet" type="text/css" href="/3p/bootstrap/css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="/css/sc.css">
@@ -33,6 +35,15 @@
     </head>
 
      <body>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id; js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
+	</script>
+
+	
 		<div class="container">
 			<div class="row">
 				<div class="span12">
@@ -119,6 +130,15 @@
 				</div> <!-- form-wrapper -->
 				
 			</div>
+			<div class="span3">
+				<div class="p10">	
+					<div class="fb-like" data-href="http://www.3mik.com" data-send="true" data-layout="button_count" data-width="220" data-show-faces="false"></div>
+				</div>
+				<div class="p10">
+					<a href="https://twitter.com/share" class="twitter-share-button" data-via="rjha94" data-count="none">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+				</div>	
+
+			</div> <!-- sidebar -->
 		</div>
 	</div> <!-- container -->
 	
