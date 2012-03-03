@@ -36,7 +36,7 @@ namespace com\indigloo\sc\html {
 				$view->storedName = $image->storeName;
 				$view->srcImage = $image->bucket.'/'.$image->storeName;
 				
-				$newxy = Util::foldX($image->width,$image->height,200);
+				$newxy = Util::foldX($image->width,$image->height,160);
 				
 				$view->width = $newxy["width"];
 				$view->height = $newxy["height"];

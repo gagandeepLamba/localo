@@ -18,15 +18,14 @@
 		
 		<script type="text/javascript">
 			/* column width = css width + margin */
-			$(document).ready(function(){
+            $(document).ready(function(){
 				var $container = $('#tiles');
 				$container.imagesLoaded(function(){
 					$container.masonry({
-						itemSelector : '.tile'
-						
+                        itemSelector : '.tile'
 					});
-				});
-			});
+                });
+            });
 		</script>
 		
     </head>
@@ -48,7 +47,7 @@
 			
 			
 			<div class="row">
-				<div class="span11">
+				<div class="span12">
 					<div id="tiles">
 						<?php
 
@@ -70,20 +69,17 @@
 					</div><!-- tiles -->
 
 					<?php $paginator->render('/',$startId,$endId);  ?>
-
-				</div> 
-				<div class="span1">
-					<div id="feedback" class="vertical">
+                   <div id="feedback" class="vertical">
 						<a href="/share/feedback.php">
 							Y O U R    
 							<br />
 							<br />
 						    F E E D B A C K 	
 						</a>
-					</div>	
-
-				</div>
-			</div>
+					</div>	<!-- feedback -->
+ 
+				</div> 
+			</div> <!-- row -->
 			
 			
 		</div>  <!-- container -->
