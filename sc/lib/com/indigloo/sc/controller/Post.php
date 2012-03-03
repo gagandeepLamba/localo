@@ -35,6 +35,7 @@ namespace com\indigloo\sc\controller{
 			$gWeb = \com\indigloo\core\Web::getInstance();
 			$sticky = new Sticky($gWeb->find(Constants::STICKY_MAP,true));
 			$loginId = NULL ;
+            $gSessionLogin = NULL ;
 
 			if(is_null($gSessionLogin)) {
 				$login = \com\indigloo\sc\auth\Login::tryLoginInSession();
@@ -48,6 +49,7 @@ namespace com\indigloo\sc\controller{
 
 			$pageTitle = Util::abbreviate($questionDBRow['title'],70);
 			$pageMetaDescription = Util::abbreviate($questionDBRow['description'],160);
+            $pageUrl = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 			
 			include($file);
         }
