@@ -45,7 +45,6 @@
                                 'location',
                                 'tags',
 								$gSessionLogin->id,
-								$gSessionLogin->name,
                                 $_POST['links_json'],
                                 $_POST['images_json']);
 								

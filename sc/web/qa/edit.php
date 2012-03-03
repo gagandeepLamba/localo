@@ -23,7 +23,7 @@
 	
 
 	if(!Login::isOwner($questionDBRow['login_id'])) {
-		header("location: /qa/noowner.php");
+		header("Location: /qa/noowner.php");
 		exit(1);
 	}
 
@@ -54,7 +54,7 @@
 		<script type="text/javascript" src="/3p/bootstrap/js/bootstrap.js"></script>
 		 
 		<script type="text/javascript" src="/3p/ful/valums/fileuploader.js" ></script>
-		<script type="text/javascript" src="/js/json2.js"></script>
+		<script type="text/javascript" src="/3p/json2.js"></script>
 		<script type="text/javascript" src="/js/sc.js"></script>
 		
 	  

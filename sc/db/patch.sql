@@ -1,71 +1,47 @@
 
+--	
+-- category data  
+--
 
---create database scdb  character set utf8 collate utf8_general_ci ;
+	
+insert into sc_list(name,ui_order,code,display) values('CATEGORY',1, 'BABY', 'Baby / Kids');
+insert into sc_list(name,ui_order,code,display) values('CATEGORY',2, 'BEAUTY', 'Beauty');
+insert into sc_list(name,ui_order,code,display) values('CATEGORY',3, 'BOOK', 'Books');
+insert into sc_list(name,ui_order,code,display) values('CATEGORY',4, 'CLOTH', 'Clothes');
 
-drop table if exists sc_question;
-create table sc_question(
-	id int(11) NOT NULL auto_increment,
-    login_id int not null,
-	title varchar(128) not null,
-    description TEXT ,
-    tags varchar(64),
-    links_json TEXT ,
-    images_json TEXT,
-    location varchar(32),
-    created_on timestamp default '0000-00-00 00:00:00',
-	updated_on timestamp default '0000-00-00 00:00:00' ,
-	PRIMARY KEY (id)) ENGINE = InnoDB default character set utf8 collate utf8_general_ci;
-    
-drop table if exists sc_answer;
-create table sc_answer(
-	id int(11) NOT NULL auto_increment,
-    login_id int not null,
-	question_id int not null ,
-	title varchar(128) ,
-    answer TEXT ,
-    created_on timestamp default '0000-00-00 00:00:00',
-	updated_on timestamp default '0000-00-00 00:00:00' ,
-	PRIMARY KEY (id)) ENGINE = InnoDB default character set utf8 collate utf8_general_ci;
-    
-   
- 
-drop table if exists sc_media;
-create table sc_media(
-	id int(11) NOT NULL auto_increment,
-	original_name varchar(256) not null,
-    stored_name varchar(64) not null,
-    bucket varchar(32) not null,
-	size int not null ,
-    mime varchar(64) not null,
-    original_height int,
-    original_width int ,
-    created_on timestamp default '0000-00-00 00:00:00',
-	updated_on timestamp default '0000-00-00 00:00:00' ,
-	PRIMARY KEY (id)) ENGINE = InnoDB default character set utf8 collate utf8_general_ci;
-    
+insert into sc_list(name,ui_order,code,display) values('CATEGORY',5, 'MFASHION', 'Fashion - Male');
+insert into sc_list(name,ui_order,code,display) values('CATEGORY',6, 'FFASHION', 'Fashion - Female');
+
+insert into sc_list(name,ui_order,code,display) values('CATEGORY',7, 'HEALTH', 'Health / Fitness');
+insert into sc_list(name,ui_order,code,display) values('CATEGORY',8, 'HOME', 'Home + Interior');
+insert into sc_list(name,ui_order,code,display) values('CATEGORY',9, 'GADGET', 'Camera/Mobiles/Gadgets');
+insert into sc_list(name,ui_order,code,display) values('CATEGORY',10, 'COMPUTER', 'Computer/Laptops');
+insert into sc_list(name,ui_order,code,display) values('CATEGORY',11, 'OTHER', 'Others');
 
 
-  drop table if exists sc_user;
-   CREATE TABLE sc_user (
-       id int(11) NOT NULL auto_increment,
-       login_id int not null,
-       user_name varchar(64) not null,
-       password varchar(64) not null,
-       first_name varchar(32) not null,
-       last_name varchar(32) not null,
-       email varchar(64) not null,
-       is_staff int default 0 ,
-       is_admin int default 0,
-       is_active int not null default 1,
-       salt varchar(16) not null,
-       login_on TIMESTAMP  default '0000-00-00 00:00:00',
-       created_on TIMESTAMP  default '0000-00-00 00:00:00',
-       updated_on TIMESTAMP   default '0000-00-00 00:00:00',
-       PRIMARY KEY (id)) ENGINE =InnoDB  default character set utf8 collate utf8_general_ci;
-    
-   alter table  sc_user add constraint UNIQUE uniq_email (email);
-   
- 
+DROP TRIGGER IF EXISTS trg_answer_title;
+
+delimiter //
+CREATE TRIGGER trg_answer_title BEFORE INSERT ON sc_answer
+    FOR EACH ROW
+    BEGIN
+	DECLARE p_title  varchar(128) ;
+	SELECT title into p_title from sc_question where id = NEW.question_id ;
+	set NEW.title = p_title ;
+	
+    END;//
+delimiter ;
+
+--
+-- switch engine to InnoDB
+-- 
+
+--
+-- 27 Feb 2012
+--
+
+
+
 drop table if exists sc_login;
 create table sc_login(
 	id int(11) NOT NULL auto_increment,
@@ -75,6 +51,36 @@ create table sc_login(
     updated_on TIMESTAMP   default '0000-00-00 00:00:00',
 	PRIMARY KEY (id)) ENGINE = InnoDB default character set utf8 collate utf8_general_ci;
 
+
+-- look @ DB - select user_name,email from sc_user, provider is 3mik
+insert into sc_login(name,provider) values ('Rajeev Jha','3mik');
+
+alter table sc_user add column login_id int ;
+alter table sc_question add column login_id int ;
+alter table sc_answer add column login_id int ;
+
+--
+-- update sc_user (login_id vs email)
+-- 1 | jha.rajeev@gmail.com
+-- 
+-- 
+
+update sc_user set login_id = 1 where email = 'jha.rajeev@gmail.com';
+update sc_question set login_id = 1 where user_email = 'jha.rajeev@gmail.com';
+update sc_answer set login_id = 1 where user_email = 'jha.rajeev@gmail.com';
+
+--
+-- verify first
+-- repeat above for multiple users
+-- drop user_email
+-- 
+
+alter table sc_question drop column user_email ;
+alter table sc_answer drop column user_email ;
+
+--
+-- twitter user 
+-- 
 
 drop table if exists sc_twitter;
 create table sc_twitter(
@@ -126,6 +132,45 @@ create table sc_feedback(
 	PRIMARY KEY (id)) ENGINE = InnoDB default character set utf8 collate utf8_general_ci;
  
 
+ 
+--
+-- Patch to convert tables to utf-8
+-- 
+alter database scdb character set utf8 collate utf8_general_ci ;
+
+alter table sc_question convert to character set utf8 collate utf8_general_ci ;
+alter table sc_answer convert to character set utf8 collate utf8_general_ci ;
+alter table sc_media convert to character set utf8 collate utf8_general_ci ;
+alter table sc_user convert to character set utf8 collate utf8_general_ci ;
+alter table sc_list convert to character set utf8 collate utf8_general_ci ;
+alter table sc_login convert to character set utf8 collate utf8_general_ci ;
+alter table sc_twitter convert to character set utf8 collate utf8_general_ci ;
+alter table sc_facebook convert to character set utf8 collate utf8_general_ci ;
+alter table sc_feedback convert to character set utf8 collate utf8_general_ci ;
+
+-- 
+-- recreate the trigger 
+-- 
+alter table sc_question drop column category_code;
+
+alter table sc_question add column is_active int default 1 ;
+alter table sc_answer add column is_active int default 1 ;
+
+
+
+--
+-- 03 March 2012 - DB change patch 
+-- 
+
+drop table sc_list ;
+alter table sc_question drop column user_name ;
+alter table sc_answer drop column user_name ;
+
+alter table sc_question drop column is_active ;
+alter table sc_answer drop column is_active ;
+
+alter table sc_question drop column seo_title ;
+
 drop table if exists sc_post_archive;
 create table sc_post_archive(
 	id int(11) NOT NULL auto_increment,
@@ -150,25 +195,8 @@ create table sc_comment_archive(
     created_on timestamp default '0000-00-00 00:00:00',
 	updated_on timestamp default '0000-00-00 00:00:00' ,
 	PRIMARY KEY (id)) ENGINE = InnoDB default character set utf8 collate utf8_general_ci;
-
-
---
--- Triggers 
---
-
-DROP TRIGGER IF EXISTS trg_answer_title;
-
-delimiter //
-CREATE TRIGGER trg_answer_title BEFORE INSERT ON sc_answer
-    FOR EACH ROW
-    BEGIN
-	DECLARE p_title  varchar(128) ;
-	SELECT title into p_title from sc_question where id = NEW.question_id ;
-	set NEW.title = p_title ;
-	
-    END;//
-delimiter ;
-
+    
+   
 
 DROP TRIGGER IF EXISTS trg_mik_user_name;
 

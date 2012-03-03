@@ -72,19 +72,15 @@ namespace com\indigloo\sc\dao {
 						$location,
 						$tags,
 						$loginId,
-						$userName,
 						$linksJson,
 						$imagesJson) {
 			
-            $seoTitle = SeoStringUtil::convertNameToSeoKey($title);
             $data = mysql\Question::create(
 								$title,
-								$seoTitle,
 								$description,
 								$location,
 								$tags,
 								$loginId,
-								$userName,
 								$linksJson,
 								$imagesJson);
 			
@@ -100,12 +96,10 @@ namespace com\indigloo\sc\dao {
 						$linksJson,
 						$imagesJson) {
 			
-            $seoTitle = SeoStringUtil::convertNameToSeoKey($title);
 			$loginId = \com\indigloo\sc\auth\Login::tryLoginIdInSession();
 
             $code = mysql\Question::update($questionId,
 						       $title,
-							   $seoTitle,
                                $description,
                                $location,
                                $tags,
@@ -115,9 +109,9 @@ namespace com\indigloo\sc\dao {
             return $code ;
         }
 
-		function softDelete($questionId){
+		function delete($questionId){
 			$loginId = \com\indigloo\sc\auth\Login::tryLoginIdInSession();
-            $code = mysql\Question::softDelete($questionId,$loginId);
+            $code = mysql\Question::delete($questionId,$loginId);
             return $code ;
         }
 

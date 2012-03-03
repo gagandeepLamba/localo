@@ -135,7 +135,7 @@
 					<div class="fb-like" data-href="http://www.3mik.com" data-send="true" data-layout="button_count" data-width="220" data-show-faces="false"></div>
 				</div>
 				<div class="p10">
-					<a href="https://twitter.com/share" class="twitter-share-button" data-via="rjha94" data-count="none">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+					<a href="https://twitter.com/share" class="twitter-share-button" data-via="3mikindia" data-count="none">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 				</div>	
 
 			</div> <!-- sidebar -->

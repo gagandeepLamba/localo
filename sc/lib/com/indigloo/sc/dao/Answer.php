@@ -73,23 +73,14 @@ namespace com\indigloo\sc\dao {
 			return $code ;
 		}
 			
-        function create($questionId,
-						$answer,
-						$loginId,
-						$userName) {
-			
-            
-            $code = mysql\Answer::create(
-								$questionId,
-								$answer,
-								$loginId,
-								$userName);
+        function create($questionId, $answer,$loginId) {
+            $code = mysql\Answer::create($questionId, $answer, $loginId);
             return $code ;
         }
 
-		function softDelete($answerId){
+		function delete($answerId){
 			$loginId = \com\indigloo\sc\auth\Login::tryLoginIdInSession();
-            $code = mysql\Answer::softDelete($answerId,$loginId);
+            $code = mysql\Answer::delete($answerId,$loginId);
             return $code ;
         }
 

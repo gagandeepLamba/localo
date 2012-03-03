@@ -30,7 +30,7 @@
         } else {
             
             $answerDao = new com\indigloo\sc\dao\Answer();
-            $code = $answerDao->softDelete($fvalues['answer_id']);
+            $code = $answerDao->delete($fvalues['answer_id']);
 
             if ($code == com\indigloo\mysql\Connection::ACK_OK ) {
                 header("location: " . $qUrl);

@@ -31,17 +31,14 @@ namespace com\indigloo\sc\mysql {
 		static function update($userId,$firstName,$lastName) {
 			$code = MySQL\Connection::ACK_OK;
 
+            $userName = $firstName. ' '.$lastName;
 			$mysqli = MySQL\Connection::getInstance()->getHandle();
-			$sql = " update sc_user set first_name = ? , last_name = ? where id = ?" ;
+			$sql = " update sc_user set first_name = ? , last_name = ? , user_name = ?  where id = ?" ;
 			
 			$stmt = $mysqli->prepare($sql);
         
 			if($stmt) {
-				$stmt->bind_param("ssi",
-						$firstName,
-						$lastName,
-						$userId);
-	
+				$stmt->bind_param("sssi", $firstName, $lastName, $userName, $userId);
 				$stmt->execute();
 				$stmt->close();
 				

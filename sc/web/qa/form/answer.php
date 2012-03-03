@@ -38,8 +38,7 @@
             $code = $answerDao->create(
 								$fvalues['question_id'],
                                 $fvalues['answer'],
-								$gSessionLogin->id,
-								$gSessionLogin->name);
+								$gSessionLogin->id);
 								
     
             

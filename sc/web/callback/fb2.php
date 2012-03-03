@@ -94,7 +94,7 @@
 		}
 
 		\com\indigloo\sc\auth\Login::startFacebookSession($loginId,$name);
-		header("location: / ");
+		header("Location: / ");
 	}
 
  ?>

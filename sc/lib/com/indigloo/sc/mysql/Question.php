@@ -18,7 +18,8 @@ namespace com\indigloo\sc\mysql {
 			$mysqli = MySQL\Connection::getInstance()->getHandle();
 			$questionId = $mysqli->real_escape_string($questionId);
 			
-            $sql = " select * from sc_question where is_active = 1 and id = ".$questionId ;
+            $sql = " select q.*,l.name as user_name from sc_question q,sc_login l " ;
+            $sql .= " where l.id = q.login_id and q.id = ".$questionId ;
             $row = MySQL\Helper::fetchRow($mysqli, $sql);
             return $row;
 		}
@@ -37,8 +38,9 @@ namespace com\indigloo\sc\mysql {
 		 */
 		static function getOnSearchIds($strIds) {
 			$mysqli = MySQL\Connection::getInstance()->getHandle();
-            $sql = " select * from sc_question where is_active = 1 and id in (".$strIds. ") " ;
-            $sql .= " ORDER BY FIELD(id,".$strIds. ") " ;
+            $sql = " select q.*,l.name as user_name from sc_question q, sc_login l " ;
+            $sql .= " where l.id = q.login_id and q.id in (".$strIds. ") " ;
+            $sql .= " ORDER BY FIELD(q.id,".$strIds. ") " ;
             $rows = MySQL\Helper::fetchRows($mysqli, $sql);
             return $rows;
 		}
@@ -50,10 +52,11 @@ namespace com\indigloo\sc\mysql {
 			$condition = '' ;
 			if(array_key_exists(self::LOGIN_COLUMN,$dbfilter)) {
 				$loginId = $mysqli->real_escape_string($dbfilter[self::LOGIN_COLUMN]);
-				$condition = " and login_id = ".$loginId;
+				$condition = " and q.login_id = ".$loginId;
 			}
 
-			$sql = " select * from sc_question where is_active = 1 ".$condition." order by id desc LIMIT ".$count ;
+            $sql = " select q.*,l.name as user_name from sc_question q,sc_login l " ;
+            $sql .= " where l.id=q.login_id ".$condition." order by q.id desc LIMIT ".$count ;
 			
             $rows = MySQL\Helper::fetchRows($mysqli, $sql);
             return $rows;
@@ -66,10 +69,10 @@ namespace com\indigloo\sc\mysql {
 			$condition = '';
 			if(array_key_exists(self::LOGIN_COLUMN,$dbfilter)) {
 				$loginId = $mysqli->real_escape_string($dbfilter[self::LOGIN_COLUMN]);
-				$condition = " and login_id = ".$loginId;
+				$condition = " where login_id = ".$loginId;
 			}
 
-            $sql = " select count(id) as count from sc_question where is_active = 1 ".$condition ;
+            $sql = " select count(id) as count from sc_question ".$condition ;
             $row = MySQL\Helper::fetchRow($mysqli, $sql);
             return $row;
 
@@ -82,7 +85,7 @@ namespace com\indigloo\sc\mysql {
             // latest posts has max(id) and appears on top
             // so AFTER (NEXT) means id < latest post id
             
-            $sql = " select q.* from sc_question q where q.is_active = 1 " ;
+            $sql = " select q.*,l.name as user_name from sc_question q,sc_login l  where l.id = q.login_id " ;
             $predicate = '' ;
 			$condition = '' ;
 
@@ -124,7 +127,6 @@ namespace com\indigloo\sc\mysql {
 
 		static function update($questionId,
 						       $title,
-							   $seoTitle,
                                $description,
                                $location,
                                $tags,
@@ -135,7 +137,7 @@ namespace com\indigloo\sc\mysql {
 		{
 			
 			$mysqli = MySQL\Connection::getInstance()->getHandle();
-            $sql = " update sc_question set title=?, seo_title=?, description=?, " ;
+            $sql = " update sc_question set title=?, description=?, " ;
 			$sql .= " location=?, tags=?, links_json=?, images_json=? where id = ? and login_id = ?" ;
 			
 			
@@ -144,9 +146,8 @@ namespace com\indigloo\sc\mysql {
             
             
             if ($stmt) {
-                $stmt->bind_param("sssssssii",
+                $stmt->bind_param("ssssssii",
                         $title,
-                        $seoTitle,
                         $description,
                         $location,
                         $tags,
@@ -171,21 +172,19 @@ namespace com\indigloo\sc\mysql {
 		}
 		
         static function create($title,
-                               $seoTitle,
                                $description,
                                $location,
                                $tags,
 							   $loginId,
-							   $userName,
                                $linksJson,
                                $imagesJson) {
 
 			
 			
             $mysqli = MySQL\Connection::getInstance()->getHandle();
-            $sql = " insert into sc_question(title,seo_title,description,location,tags, " ;
-            $sql .= " login_id,user_name,links_json,images_json,created_on) ";
-            $sql .= " values(?,?,?,?,?,?,?,?,?,now()) ";
+            $sql = " insert into sc_question(title,description,location,tags, " ;
+            $sql .= " login_id,links_json,images_json,created_on) ";
+            $sql .= " values(?,?,?,?,?,?,?,now()) ";
 
             $code = MySQL\Connection::ACK_OK;
 			$lastInsertId = NULL;
@@ -193,14 +192,12 @@ namespace com\indigloo\sc\mysql {
             $stmt = $mysqli->prepare($sql);
             
             if ($stmt) {
-                $stmt->bind_param("sssssisss",
+                $stmt->bind_param("ssssiss",
                         $title,
-                        $seoTitle,
                         $description,
                         $location,
 						$tags,
 						$loginId,
-						$userName,
                         $linksJson,
                         $imagesJson);
                 
@@ -223,11 +220,11 @@ namespace com\indigloo\sc\mysql {
 			return array('code' => $code, 'lastInsertId' => $lastInsertId) ;
         }
 
-		static function softDelete($questionId,$loginId) {
+		static function delete($questionId,$loginId) {
 
 			$code = MySQL\Connection::ACK_OK ;
 			$mysqli = MySQL\Connection::getInstance()->getHandle();
-			$sql = "update sc_question set is_active = 0 where id = ? and login_id = ?" ;
+			$sql = " delete from sc_question where id = ? and login_id = ?" ;
 
 			$stmt = $mysqli->prepare($sql);
 

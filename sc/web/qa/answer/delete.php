@@ -21,7 +21,7 @@
 	$answerDBRow = $answerDao->getOnId($answerId);
 
 	if(!Login::isOwner($answerDBRow['login_id'])) {
-		header("location : /qa/noowner.php");
+		header("Location: /qa/noowner.php");
 		exit ;
 	}
 

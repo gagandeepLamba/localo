@@ -75,7 +75,7 @@
 			}
 
 			\com\indigloo\sc\auth\Login::startTwitterSession($loginId,$name);
-			header("location: / ");
+			header("Location: / ");
 			
 		}
 	}
