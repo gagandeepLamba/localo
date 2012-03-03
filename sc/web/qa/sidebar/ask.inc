@@ -5,8 +5,13 @@
 			<dd>Please be specific. A focused and on the topic question has a better chance
 			to get answered. </dd>
 
+            <dt> Add Multiple images </dt>
+			<dd>You can click on Add images and select multiple images from your computer</dd>
+
             <dt> Add link </dt>
-			<dd>You can add websites links in this box. Links from other websites and sources can add more context to question</dd>
+			<dd> Write or paste link in the box and click on (+) Add next to it. You can add as many links as you like.
+        </dl>
+
         </dl>
 
 </div>

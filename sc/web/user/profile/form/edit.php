@@ -26,7 +26,7 @@
             $gWeb->store(Constants::STICKY_MAP, $fvalues);
             $gWeb->store(Constants::FORM_ERRORS,$fhandler->getErrors());
             
-            header("location: " . $locationOnError);
+            header("Location: " . $locationOnError);
             exit(1);
         } else {
 			
@@ -38,14 +38,14 @@
 			$code = $userDao->update($mikUser->id,$fvalues['first_name'], $fvalues['last_name']) ;
             
             if ($code == com\indigloo\mysql\Connection::ACK_OK ) {
-                header("location: /user/dashboard.php ");
+                header("Location: /user/dashboard.php ");
 
             }else {
                 $message = sprintf("DB Error: (code is %d) please try again!",$code);
                 $gWeb->store(Constants::STICKY_MAP, $fvalues);
                 $gWeb->store(Constants::FORM_ERRORS,array($message));
                 $locationOnError = '/user/profile/edit.php' ;
-                header("location: " . $locationOnError);
+                header("Location: " . $locationOnError);
                 exit(1);
             }
             

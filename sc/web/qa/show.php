@@ -14,6 +14,12 @@
     
 	$questionId = Url::getQueryParam("id");
 
+    //Add permanent redirect
+    $redirectUrl = "/item/".$questionId ;
+    header( "HTTP/1.1 301 Moved Permanently" ); 
+    header( "Location: ".$redirectUrl );   
+    exit ;
+
     $questionDao = new com\indigloo\sc\dao\Question();
     $questionDBRow = $questionDao->getOnId($questionId);
 

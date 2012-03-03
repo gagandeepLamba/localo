@@ -26,7 +26,7 @@
             $gWeb->store(Constants::STICKY_MAP, $fvalues);
             $gWeb->store(Constants::FORM_ERRORS,$fhandler->getErrors());
             
-            header("location: " . $locationOnError);
+            header("Location: " . $locationOnError);
             exit(1);
         } else {
 		
@@ -40,14 +40,14 @@
 			$code = $data['code'];
 			
             if ($code == com\indigloo\mysql\Connection::ACK_OK ) {
-                header("location: /user/dashboard.php ");
+                header("Location: /user/dashboard.php ");
 
             }else {
                 $message = sprintf("DB Error: (code is %d) please try again!",$code);
                 $gWeb->store(Constants::STICKY_MAP, $fvalues);
                 $gWeb->store(Constants::FORM_ERRORS,array($message));
                 $locationOnError = '/user/profile/password.php' ;
-                header("location: " . $locationOnError);
+                header("Location: " . $locationOnError);
                 exit(1);
             }
             

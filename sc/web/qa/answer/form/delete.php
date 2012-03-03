@@ -24,7 +24,7 @@
         if ($fhandler->hasErrors()) {
             $gWeb->store(Constants::STICKY_MAP, $fvalues);
             $gWeb->store(Constants::FORM_ERRORS,$fhandler->getErrors());
-            header("location: /qa/answer/delete.php?id=".$fvalues['answer_id']);
+            header("Location: /qa/answer/delete.php?id=".$fvalues['answer_id']);
             exit(1);
 			
         } else {
@@ -33,13 +33,13 @@
             $code = $answerDao->delete($fvalues['answer_id']);
 
             if ($code == com\indigloo\mysql\Connection::ACK_OK ) {
-                header("location: " . $qUrl);
+                header("Location: " . $qUrl);
                 
             } else {
                 $message = sprintf("DB Error: (code is %d) please try again!",$code);
                 $gWeb->store(Constants::STICKY_MAP, $fvalues);
                 $gWeb->store(Constants::FORM_ERRORS,array($message));
-				header("location: /qa/answer/delete.php?id=".$fvalues['answer_id']);
+				header("Location: /qa/answer/delete.php?id=".$fvalues['answer_id']);
                 exit(1);
             }
            

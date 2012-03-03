@@ -31,7 +31,7 @@
             $gWeb->store(Constants::STICKY_MAP, $fvalues);
             $gWeb->store(Constants::FORM_ERRORS,$fhandler->getErrors());
             
-            header("location: " . $qUrl);
+            header("Location: " . $qUrl);
             exit(1);
 			
         } else {
@@ -53,13 +53,13 @@
             if ($code == com\indigloo\mysql\Connection::ACK_OK ) {
 				$newId = $data['lastInsertId'];
 				$location = "/item/$newId" ;
-                header("location: /qa/thanks.php?q=".$location );
+                header("Location: /qa/thanks.php?q=".$location );
                 
             } else {
                 $message = sprintf("DB Error: (code is %d) please try again!",$code);
                 $gWeb->store(Constants::STICKY_MAP, $fvalues);
                 $gWeb->store(Constants::FORM_ERRORS,array($message));
-                header("location: " . $qUrl);
+                header("Location: " . $qUrl);
                 exit(1);
             }
            

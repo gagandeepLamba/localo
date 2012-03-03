@@ -6,6 +6,7 @@
          
 
         <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
+        <meta name="keywords" content="3mik, share, discover, india, cool shopping items, shopping bookmarking">
         <meta name="description" content="<?php echo $pageMetaDescription;  ?>">
        
         <link rel="stylesheet" type="text/css" href="/3p/bootstrap/css/bootstrap.css">

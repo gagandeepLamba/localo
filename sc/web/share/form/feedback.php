@@ -22,7 +22,7 @@
         if ($fhandler->hasErrors()) {
             $gWeb->store(Constants::STICKY_MAP, $fvalues);
             $gWeb->store(Constants::FORM_ERRORS,$fhandler->getErrors());
-            header("location: " . $locationOnError);
+            header("Location: " . $locationOnError);
             exit(1);
 			
         } else {
@@ -32,14 +32,14 @@
             
             if ($code == com\indigloo\mysql\Connection::ACK_OK ) {
                 $locationOnSuccess = "/";
-                header("location: " . $locationOnSuccess);
+                header("Location: " . $locationOnSuccess);
                 
             } else {
                 $message = sprintf("DB Error: (code is %d) please try again!",$code);
                 $gWeb->store(Constants::STICKY_MAP, $fvalues);
                 $gWeb->store(Constants::FORM_ERRORS,array($message));
                 $locationOnError = $_POST['q'] ;
-                header("location: " . $locationOnError);
+                header("Location: " . $locationOnError);
                 exit(1);
             }
         }

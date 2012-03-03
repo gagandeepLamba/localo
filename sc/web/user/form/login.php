@@ -27,7 +27,7 @@
             $gWeb->store(Constants::STICKY_MAP, $fvalues);
             $gWeb->store(Constants::FORM_ERRORS,$fhandler->getErrors());
             
-            header("location: ".$locationOnError);
+            header("Location: ".$locationOnError);
             exit(1);
         } else {
             
@@ -40,7 +40,7 @@
             if ($code > 0 ) {
 				//success set our own session variables
 				\com\indigloo\sc\auth\Login::startMikSession();
-                header("location: ".$qUrl);
+                header("Location: ".$qUrl);
                 
             } else{
                 
@@ -49,7 +49,7 @@
                 $locationOnError = '/user/login.php?q='.$qUrl ;
                 
 
-                header("location: ".$locationOnError);
+                header("Location: ".$locationOnError);
                 exit(1);
             }
             

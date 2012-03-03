@@ -37,7 +37,7 @@
             $gWeb->store(Constants::STICKY_MAP, $fvalues);
             $gWeb->store(Constants::FORM_ERRORS,$fhandler->getErrors());
             
-            header("location: " . $locationOnError);
+            header("Location: " . $locationOnError);
             exit(1);
         } else {
 
@@ -61,7 +61,7 @@
             
             if ($code == com\indigloo\mysql\Connection::ACK_OK ) {
 				$gWeb->store(Constants::FORM_MESSAGES,array("Registration success! Please login."));
-				header("location: /user/login.php");
+				header("Location: /user/login.php");
             }else {
 				process_error($code);
 			}
@@ -88,7 +88,7 @@
 		$gWeb->store(Constants::STICKY_MAP, $fvalues);
 		$gWeb->store(Constants::FORM_ERRORS,array($message));
 		$locationOnError = '/user/register.php' ;
-		header("location: " . $locationOnError);
+		header("Location: " . $locationOnError);
 		exit(1);
 	}
 

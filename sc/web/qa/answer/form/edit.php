@@ -23,7 +23,7 @@
             $gWeb->store(Constants::STICKY_MAP, $fvalues);
             $gWeb->store(Constants::FORM_ERRORS,$fhandler->getErrors());
             
-            header("location: " . $qUrl);
+            header("Location: " . $qUrl);
             exit(1);
 			
         } else {
@@ -32,15 +32,14 @@
             $code = $answerDao->update($fvalues['answer_id'], $fvalues['answer']);
             
             if ($code == com\indigloo\mysql\Connection::ACK_OK ) {
-                $locationOnSuccess = Url::createUrl('/qa/show.php', array('id' => $fvalues['question_id'])) ;
                 $locationOnSuccess =  "/item/".$fvalues['question_id'] ;
-                header("location: " . $locationOnSuccess);
+                header("Location: " . $locationOnSuccess);
                 
             } else {
                 $message = sprintf("DB Error: (code is %d) please try again!",$code);
                 $gWeb->store(Constants::STICKY_MAP, $fvalues);
                 $gWeb->store(Constants::FORM_ERRORS,array($message));
-                header("location: " . $qUrl);
+                header("Location: " . $qUrl);
                 exit(1);
             }
             

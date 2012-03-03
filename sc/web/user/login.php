@@ -10,7 +10,7 @@
 
 	//do we already have a login?
 	if(\com\indigloo\sc\auth\Login::isValid()) {
-		header("location: / ");
+		header("Location: / ");
 	}	
      
     $sticky = new Sticky($gWeb->find(Constants::STICKY_MAP,true));
