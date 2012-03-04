@@ -16,7 +16,7 @@ namespace com\indigloo {
 				if($ch == '~' ) { 
 					if($open) {
 						//close now
-						$buffer .= ' ?> ' ;
+						$buffer .= ' ?>' ;
 						$open = !$open ;
 					}else {
 						//not open
