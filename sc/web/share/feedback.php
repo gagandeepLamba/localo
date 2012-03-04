@@ -23,14 +23,13 @@
     
 ?>  
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html>
 <html>
 
-       <head><title> 3mik.com - share your feedback</title>
+       <head>
+        <title> 3mik.com - share your feedback</title>
+        <?php include($_SERVER['APP_WEB_DIR'] . '/inc/meta.inc'); ?>
          
-
-        <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
-
 		<link rel="stylesheet" type="text/css" href="/3p/bootstrap/css/bootstrap.css">
 		<link rel="stylesheet" type="text/css" href="/css/sc.css">
 		

@@ -11,13 +11,12 @@
     
 ?>  
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html>
 <html>
 
-       <head><title> Thank you for submitting a Post</title>
-         
-
-        <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
+       <head>
+        <title> Thank you for submitting a Post</title>
+        <?php include($_SERVER['APP_WEB_DIR'] . '/inc/meta.inc'); ?>
 
 		<link rel="stylesheet" type="text/css" href="/3p/bootstrap/css/bootstrap.css">
 		<link rel="stylesheet" type="text/css" href="/css/sc.css">

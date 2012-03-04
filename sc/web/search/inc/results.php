@@ -6,14 +6,13 @@
 ?>
 
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html>
 <html>
 
-       <head><title> 3mik.com - Search Results  </title>
+       <head>
+        <title> 3mik.com - Search Results  </title>
+        <?php include($_SERVER['APP_WEB_DIR'] . '/inc/meta.inc'); ?>
          
-
-		<meta http-equiv="Content-Type" content="text/html"; charset="utf-8">
-
         <link rel="stylesheet" type="text/css" href="/3p/bootstrap/css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="/css/sc.css">
 		<script type="text/javascript" src="/3p/jquery/jquery-1.7.1.min.js"></script>

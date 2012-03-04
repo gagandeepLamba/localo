@@ -1,13 +1,20 @@
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html>
 <html>
 
-       <head><title> 3mik.com - <?php echo $pageTitle; ?>  </title>
+    <head>
+        <title> 3mik.com - <?php echo $pageTitle; ?>  </title>
          
-
-        <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="keywords" content="3mik, share, discover, india, cool shopping items, shopping bookmarking">
         <meta name="description" content="<?php echo $pageMetaDescription;  ?>">
+
+        <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
        
         <link rel="stylesheet" type="text/css" href="/3p/bootstrap/css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="/css/sc.css">
