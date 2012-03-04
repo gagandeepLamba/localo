@@ -1,6 +1,6 @@
 
 
---create database scdb  character set utf8 collate utf8_general_ci ;
+-- create database scdb  character set utf8 collate utf8_general_ci ;
 
 drop table if exists sc_question;
 create table sc_question(

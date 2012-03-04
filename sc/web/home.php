@@ -1,14 +1,18 @@
-
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html>
 <html>
 
-       <head><title> 3mik.com - share and discover shopping items in India  </title>
-         
-
-		<meta http-equiv="Content-Type" content="text/html"; charset="utf-8">
-        <meta name="keywords" content="3mik, share, discover, india, cool shopping items, shopping bookmarking">
-        <meta name="description" content="3mik is a platform to share and discover shopping items in India ">
- 
+       <head>
+	   <title> 3mik.com - share and discover shopping items in India  </title>
+       <meta charset="utf-8">
+	   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <meta name="keywords" content="3mik, share, discover, india, cool shopping items, shopping bookmarking">
+       <meta name="description" content="3mik is a platform to share and discover shopping items in India ">
+		
+	   <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+       <!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	   <![endif]-->
+	   
         <link rel="stylesheet" type="text/css" href="/3p/bootstrap/css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="/css/sc.css">
 		<script type="text/javascript" src="/3p/jquery/jquery-1.7.1.min.js"></script>
