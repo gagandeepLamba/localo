@@ -90,8 +90,12 @@ namespace com\indigloo\auth {
                 //set userdata in session
                 if ($outcome == 0) {
                     $randomToken = Util::getBase36GUID();
-                    $_SESSION[self::USER_TOKEN] = $randomToken;
-					//@todo - filter user data in session 
+                    $_SESSION[self::USER_TOKEN] = $randomToken; 
+                    
+                    //mask password and salt from user session
+                    unset($row["password"]);
+                    unset($row["salt"]);
+
                     $_SESSION[self::USER_DATA] = $row;
                     $code = 1 ;
                 }
@@ -213,7 +217,7 @@ namespace com\indigloo\auth {
             return array('code' => $dbCode);
         }
         
-        static function changePassword($tableName,$email,$password) {
+        static function changePassword($tableName,$userId,$email,$password) {
             
              if(empty($tableName)) {
                 trigger_error("User Table name is not supplied",E_USER_ERROR);
@@ -236,18 +240,13 @@ namespace com\indigloo\auth {
             // we store this digest in table
             $digest = sha1($message);
             
-            $sql = " update {table} set updated_on=now(), salt=?, password=? where email = ? " ;
+            $sql = " update {table} set updated_on=now(), salt=?, password=? where email = ? and id = ?" ;
             $sql = str_replace("{table}", $tableName, $sql);
-            
-       
+
             $stmt = $mysqli->prepare($sql);
         
             if($stmt) {
-                $stmt->bind_param("ssi",
-                        $salt,
-                        $digest,
-                        $email);
-    
+                $stmt->bind_param("sssi", $salt, $digest,$email,$userId);
                 $stmt->execute();
                 $stmt->close();
     

@@ -35,7 +35,7 @@
 			}
 			
             //send raw password - w/o any processing
-			$data = \com\indigloo\auth\User::changePassword('sc_user',$mikUser->email,$_POST['password']) ;
+			$data = \com\indigloo\auth\User::changePassword('sc_user',$mikUser->id,$mikUser->email,$_POST['password']) ;
             
 			$code = $data['code'];
 			
