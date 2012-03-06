@@ -68,10 +68,10 @@ namespace com\indigloo\mysql {
         private function initDataBase() {
 
             $this->mysqli = new \mysqli(
-                            Configuration::getInstance()->mysql_host(),
-                            Configuration::getInstance()->mysql_user(),
-                            Configuration::getInstance()->mysql_password(),
-                            Configuration::getInstance()->mysql_db()
+                            Configuration::getInstance()->get_value("mysql.host"),
+                            Configuration::getInstance()->get_value("mysql.user"),
+                            Configuration::getInstance()->get_value("mysql.password"),
+                            Configuration::getInstance()->get_value("mysql.database")
             );
 
             if (mysqli_connect_errno ()) {

@@ -37,6 +37,7 @@ create table sc_media(
     bucket varchar(32) not null,
 	size int not null ,
     mime varchar(64) not null,
+    store varchar(8) not null default 'local',
     original_height int,
     original_width int ,
     created_on timestamp default '0000-00-00 00:00:00',

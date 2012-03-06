@@ -24,7 +24,7 @@ namespace com\indigloo\media {
     use com\indigloo\Configuration as Config;
     use com\indigloo\Logger;
     
-    class Upload {
+    class FormPipe {
         
         const ERROR_FIELD_MISSING = " No file found in post! Did you upload a file?";
         const ERROR_INI_SIZE= " file size greater than php.ini upload_max_file ";

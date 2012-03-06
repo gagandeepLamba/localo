@@ -47,21 +47,22 @@ namespace com\indigloo\sc\mysql {
             $mediaId = NULL ;
             
             $sql = " insert into sc_media(bucket,original_name, stored_name, " ;
-            $sql .= " size,mime, original_height, original_width,created_on) ";
-            $sql .= " values(?,?,?,?,?,?,?,now()) ";
+            $sql .= " size,mime, original_height, original_width,created_on,store) ";
+            $sql .= " values(?,?,?,?,?,?,?,now(),?) ";
 
             $dbCode = MySQL\Connection::ACK_OK;
             $stmt = $mysqli->prepare($sql);
             
             if ($stmt) {
-                $stmt->bind_param("sssisii",
+                $stmt->bind_param("sssisiis",
                         $mediaVO->bucket,
                         $mediaVO->originalName,
                         $mediaVO->storeName,
                         $mediaVO->size,
                         $mediaVO->mime,
                         $mediaVO->height,
-                        $mediaVO->width);
+                        $mediaVO->width,
+                        $mediaVO->store);
                         
 
                 $stmt->execute();

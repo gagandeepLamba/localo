@@ -52,7 +52,7 @@
 			
 			
 			<div class="row">
-				<div class="span11">
+				<div class="span12">
 					<div class="page-header">
 						<h2> Search Results </h2>
 					</div>
@@ -69,9 +69,6 @@
 					</div><!-- tiles -->
 
 				</div> 
-				<div class="span1">
-					<!-- sidebar -->
-				</div>
 			</div>
 			
 			

@@ -29,14 +29,11 @@
 			
 			
 			<div class="row">
-				<div class="span11">
+				<div class="span12">
 					<div class="page-header">
 					<h2> No results found for <strong><?php echo $token; ?><strong> ! </h2>
 					</div>
 				</div> 
-				<div class="span1">
-					<!-- sidebar -->
-				</div>
 			</div>
 			
 			

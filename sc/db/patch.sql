@@ -234,4 +234,7 @@ CREATE TRIGGER trg_comment_archive  BEFORE DELETE ON sc_answer
 delimiter ;
 
 
-
+--
+-- 06 march 2012
+--
+alter table sc_media add column store varchar(8) not null default 'local' ;

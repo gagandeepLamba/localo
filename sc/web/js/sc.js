@@ -73,7 +73,7 @@ webgloo.media = {
         });
         
     },
-    imagePreviewDIV : '<div class="stackImage" id="image-{id}"><img src="/{bucket}/{storeName}" class="thumbnail-1" alt="{originalName}" width="{width}" height="{height}"/> '
+    imagePreviewDIV : '<div class="stackImage" id="image-{id}"><img src="{fullUrl}" class="thumbnail-1" alt="{originalName}" width="{width}" height="{height}"/> '
         + '<div> <a class="remove-image" id="{id}" href="">Remove</a> </div> </div>',
     
     linkPreviewDIV : '<div class="previewLink"> {link} &nbsp; <a class="remove-link" href="{link}"> Remove</a> </div> ' ,
@@ -122,7 +122,7 @@ webgloo.media = {
 		$("#image-"+id).remove();
     },
     addImage : function(mediaVO) {
-		
+	    console.log(mediaVO);	
         webgloo.media.images[mediaVO.id] = mediaVO ;
         var buffer = webgloo.media.imagePreviewDIV.supplant(mediaVO);
         $("div#image-data").append(buffer);

@@ -34,7 +34,8 @@ namespace com\indigloo\sc\html {
 				$view->originalName = $image->originalName;
 				$view->bucket = $image->bucket;
 				$view->storedName = $image->storeName;
-				$view->srcImage = $image->bucket.'/'.$image->storeName;
+				//$view->srcImage = $image->bucket.'/'.$image->storeName;
+				$view->srcImage = 'http://media1.3mik.com/'.$image->storeName;
 				
 				$newxy = Util::foldX($image->width,$image->height,160);
 				

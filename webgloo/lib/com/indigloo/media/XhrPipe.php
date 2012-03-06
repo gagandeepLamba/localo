@@ -5,7 +5,7 @@ namespace com\indigloo\media {
     use com\indigloo\Configuration as Config;
     use com\indigloo\Logger;
     
-    class XHRUpload {
+    class XhrPipe {
         
         private $errors;
         private $fileData;
@@ -45,8 +45,6 @@ namespace com\indigloo\media {
 			
             $this->mediaData->mime = 'application/octet-stream' ;
 			$this->mediaData->size = strlen($this->fileData); ;
-			
-            
             return ;
         }
         

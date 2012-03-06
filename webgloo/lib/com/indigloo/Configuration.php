@@ -36,14 +36,6 @@ namespace com\indigloo {
             $this->ini_array = parse_ini_file($iniFile);
         }
 
-        function isRequired($name, $value) {
-
-            if (empty($value)) {
-                trigger_error("Default $name is empty in config", E_USER_ERROR);
-            }
-            return $value;
-        }
-
         function get_value($key) {
             return $this->ini_array[$key];
         }
@@ -51,26 +43,7 @@ namespace com\indigloo {
         function __destruct() {
             
         }
-
-        function mysql_host() {
-            return $this->ini_array['mysql.host'];
-        }
-
-        function mysql_db() {
-            return $this->ini_array['mysql.database'];
-        }
-
-        function mysql_user() {
-            return $this->ini_array['mysql.user'];
-        }
-
-        function mysql_password() {
-            //fetch encrypted password
-            $password = $this->ini_array['mysql.password'];
-            //$password = Gloo_Util::base64Decrypt($encpassword);
-            return $password;
-        }
-
+       
         function is_debug() {
             $val = $this->ini_array['debug.mode'];
             if (intval($val) == 1) {
@@ -84,71 +57,14 @@ namespace com\indigloo {
             return $this->ini_array['log.level'];
         }
 
-        function system_page_records() {
-            return $this->ini_array['system.page.records'];
+        function log_location() {
+            return $this->ini_array['log.location'];
         }
 
         function max_file_size() {
             return $this->ini_array['max.file.size'];
         }
 
-        function max_foto_size() {
-            return $this->ini_array['max.foto.size'];
-        }
-
-        function thumbnail_width() {
-            return $this->ini_array['thumbnail.width'];
-        }
-
-        function thumbnail_height() {
-            return $this->ini_array['thumbnail.height'];
-        }
-
-        function aws_bucket() {
-            return $this->ini_array['aws.bucket'];
-        }
-
-        function aws_access_key() {
-            return $this->ini_array['aws.access.key'];
-        }
-
-        function aws_secret_key() {
-            return $this->ini_array['aws.secret.key'];
-        }
-
-        function image_404_uri() {
-            return $this->ini_array['image.404.uri'];
-        }
-
-        function thumbnail_404_uri() {
-            return $this->ini_array['thumbnail.404.uri'];
-        }
-
-        function smtp_host() {
-            return $this->ini_array['smtp.host'];
-        }
-
-        function smtp_port() {
-            return $this->ini_array['smtp.port'];
-        }
-
-        function smtp_user() {
-            return $this->ini_array['smtp.user'];
-        }
-        
-        //@todo - donot use plain text password
-        function smtp_password() {
-            $password = $this->ini_array['smtp.password'];
-            return $password;
-        }
-        
-        function log_location() {
-            return $this->ini_array['log.location'];
-        }
-
-        function getFarmName() {
-            return $this->ini_array['farm.name'];
-        }
         
     }
 
