@@ -63,12 +63,11 @@
 
      <body>
         
-		<div class="container">
+		<div class="container mh800">
 			<div class="row">
 				<div class="span12">
 					<?php include($_SERVER['APP_WEB_DIR'] . '/inc/toolbar.inc'); ?>
 				</div> 
-				
 			</div>
 			
 			<div class="row">
@@ -79,38 +78,24 @@
 			
 			
 			<div class="row">
-				<div class="span8">
+				<div class="span12">
                     <div class="page-header">
                         <h2> Login Page </h2>
                     </div>
-                                                    
-                    <div class="wrapper">
-                        <div class="facebook-login">
-                           <div> <a href="<?php echo $fbDialogUrl; ?>"> Login with Facebook</a></div>
-                        </div>
-                        <div class="twitter-login">
-                            <div>
-                                <a href="/user/twitter-login.php"> Login with Twitter</a>
-                            </div>
-                        </div>
-                        <img src="/nuke/twitter-bird.png" width="30" height="30"/>
-                    </div> <!-- wrapper -->
-
-					<div class="p20">
-						<?php FormMessage::render(); ?>
-					</div>
-
-                    
-                    <div class="page-header">
-                        <h2> Login with 3mik.com account </h2>
-                         No 3mik.com account? <a href="/user/register.php"> Register for a new account</a> (Free and takes just 30 seconds!)
+                    <div class="p20">
+                        <?php FormMessage::render(); ?>
                     </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="span7">
+                   <h3> You can login with 3mik.com account | </h3>
+                         No 3mik.com account? <a href="/user/register.php"> Register for a new account</a> (Free and takes just 30 seconds!)
                       
-                    <form id="web-form1"  name="web-form1" action="/user/form/login.php" enctype="multipart/form-data"  method="POST">
+                        <form id="web-form1"  name="web-form1" action="/user/form/login.php" enctype="multipart/form-data"  method="POST">
+                            <div class="error">    </div>
 
-                        <div class="error">    </div>
-
-                        <table class="form-table">
+                            <table class="form-table">
                             <tr>
                                 <td class="field"> Email<span class="red-label">*</span></td>
                                 <td>
@@ -139,14 +124,30 @@
                         
                     </form>
                     
-                    <div>
-                   
-                
-                          
+ 
+
+                    
+                </div> <!-- span61 -->
+                <div class="span5">
+                     <div class="row">
+                       <h3> or  your facebook / twitter account </h3>
+                       <div class="span5">
+                           <div class="facebook-login">
+                               <a href="<?php echo $fbDialogUrl; ?>"> Login with Facebook</a>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                    <div class="row">
+                        <div class="span5">
+                            <div class="twitter-login">
+                                <a href="/user/twitter-login.php">Login with Twitter</a> 
+                            </div>
+                        </div>
+                    </div> <!-- row -->
+                </div> <!-- span62 -->
             </div>
-        </div> <!-- container -->
+
+       </div> <!-- container -->
                         
         <?php include($_SERVER['APP_WEB_DIR'] . '/inc/site-footer.inc'); ?>
 

@@ -14,16 +14,16 @@ namespace com\indigloo\media {
         private $store ;
         private $mediaData ;
         private $errors ;
-        private $isS3Pipe ;
+        private $isS3Store ;
         
         function __construct($pipe) {
             $this->pipe = $pipe ;
             if(Config::getInstance()->get_value("file.store") == 's3'){
                 $this->store = new \com\indigloo\media\S3Store() ;
-                $this->isS3Pipe = true ;
+                $this->isS3Store = true ;
             } else {
                 $this->store = new \com\indigloo\media\FileStore() ;
-                $this->isS3Pipe = false ;
+                $this->isS3Store = false ;
             }
 
             $this->errors = array() ;
@@ -73,7 +73,7 @@ namespace com\indigloo\media {
             $this->mediaData->storeName = $storeName;
             $this->mediaData->thumbnail = $thumbnail;
 
-            if($this->isS3Pipe) {
+            if($this->isS3Store) {
                 $this->mediaData->store = 's3';
                 $this->mediaData->bucket = Config::getInstance()->get_value("aws.bucket"); 
             } else {
@@ -102,9 +102,8 @@ namespace com\indigloo\media {
             $td = Util::foldX($this->mediaData->width,$this->mediaData->height,190);
             $oDestinationImage = \imagecreatetruecolor($td["width"], $td["height"]);
 
-            //http://in2.php.net/manual/en/function.imagecopyresized.php
-            // resize the image
-            \imagecopyresized($oDestinationImage,
+            // resample the image - do not use resized if you need quality
+            \imagecopyresampled($oDestinationImage,
                 $oSourceImage, 0, 0, 0, 0,
                 $td["width"], $td["height"],
                 $this->mediaData->width, $this->mediaData->height);

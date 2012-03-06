@@ -238,3 +238,4 @@ delimiter ;
 -- 06 march 2012
 --
 alter table sc_media add column store varchar(8) not null default 'local' ;
+alter table sc_media add column thumbnail varchar(64) ;
