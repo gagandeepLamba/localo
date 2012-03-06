@@ -34,9 +34,10 @@ namespace com\indigloo\sc\html {
 				$view->originalName = $image->originalName;
 				$view->bucket = $image->bucket;
 				$view->storedName = $image->storeName;
-				//$view->srcImage = $image->bucket.'/'.$image->storeName;
-				$view->srcImage = 'http://media1.3mik.com/'.$image->storeName;
-				
+
+                $prefix = ($image->store == 's3') ? 'http://' : '/' ;
+				$view->srcImage = $prefix.$image->bucket.'/'.$image->storeName;
+			    	
 				$newxy = Util::foldX($image->width,$image->height,160);
 				
 				$view->width = $newxy["width"];
@@ -106,7 +107,9 @@ namespace com\indigloo\sc\html {
 				$view->originalName = $image->originalName;
 				$view->bucket = $image->bucket;
 				$view->storedName = $image->storeName;
-				$view->srcImage = $image->bucket.'/'.$image->storeName;
+
+                $prefix = ($image->store == 's3') ? 'http://' : '/' ;
+				$view->srcImage = $prefix.$image->bucket.'/'.$image->storeName;
 				
 				$newxy = Util::foldX($image->width,$image->height,200);
 				

@@ -3,13 +3,17 @@
   <!-- Carousel items -->
   <div class="carousel-inner">
             <?php
-                $strItem = '<div class="item {active}"> <img src="/{bucket}/{storedName}"></div>';
+                $strItem = '<div class="item {active}"> <img src="{srcImage}"></div>';
 				$count = 0 ;
 				
                 foreach($images as $image) {
 					$active = ($count == 0) ? 'active' : '' ;
-                    $item = str_replace(array(0 => "{bucket}", 1 => "{storedName}", 2=>"{active}"),
-                                        array(0 => $image->bucket, 1 => $image->storeName, 2=> $active),
+                    $prefix = ($image->store == 's3') ? "http://" : "/" ;
+                    $srcImage = $prefix.$image->bucket."/".$image->storeName ;
+
+
+                    $item = str_replace(array(0 => "{srcImage}", 1=>"{active}"),
+                                        array(0 => $srcImage, 1=> $active),
                                         $strItem);
                     echo $item;
 					$count++ ;
