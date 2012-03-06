@@ -519,36 +519,21 @@
 	div .stackImage{
 		   position :relative ;
 		   float : left;
-		   padding:11px;
-		   height:120px;
-		   width:160px;
-		   border:2px solid #DDD ;
-		   margin :5px;
-	}
-	
-	div .previewImage{
-		   padding:11px;
-		   height:100px;
-		   width:470px;
-		   border:1px solid Gainsboro ;
-		   margin :5px;
-		   background-color: WhiteSmoke ;
-		 
+		   padding:7px;
+		   height:160px;
+		   width:200px;
+		   border:1px solid #DDD ;
+		   margin :2px;
 	}
 		
 	.thumbnail-1 {
 		width: auto;
 		height: auto;
-		max-width: 120px;
-		max-height: 90px;
+		max-width: 180px; 
+		max-height: 135px; 
 		margin-bottom : 5px;
 	}
 
-	div .previewImageAction {
-		float:right ;
-		margin-top:80px;
-	}
-	
 	div .previewLink{
 		padding:5px;
 		width:500px;
@@ -602,12 +587,11 @@
 	}
 	
 	.tile .photo {
-		padding:5px;
-		
+		padding:3px;
 	}
 	
 	.tile .photo img {
-		max-width:160px;
+		max-width:190px;
 		border:5px solid #d5d5d5;
 		margin :0px;
 	}

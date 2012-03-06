@@ -15,20 +15,24 @@ namespace com\indigloo\media {
         
         }
 
-        function persist($prefix,$name,$sBlobData) {
-            
+        static function getHashedName($name) {
             $token = $name.date(DATE_RFC822);
             $storeName = substr(md5($token), rand(1, 15), 16).rand(1,4096);
             $pos = strrpos($name, '.');
-            
+
             if ($pos != false) {
                 //separate filename and extension
                 $extension = substr($name, $pos + 1);
                 $storeName =  $storeName. '.' . $extension;
             } 
-            
+
+            return $storeName ;
+        }
+
+        function persist($prefix,$name,$sBlobData) {
+
+            $storeName = self::getHashedName($name) ;
             $storeName =  $prefix.$storeName ;
-            
             
             $fp = NULL;
             //system.upload.path has a trailing slash

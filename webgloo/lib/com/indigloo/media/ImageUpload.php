@@ -5,6 +5,7 @@ namespace com\indigloo\media {
 
     use com\indigloo\Configuration as Config;
     use com\indigloo\Logger;
+    use com\indigloo\Util;
     
     class ImageUpload  {
 
@@ -60,25 +61,25 @@ namespace com\indigloo\media {
             }
              
             //do image specific processing here
-            $this->computeHW($sBlobData);
+            $tBlobData = $this->computeHW($sBlobData);
             $storeName = $this->store->persist($prefix,$this->mediaData->originalName,$sBlobData);
-
+            $thumbnail = $this->store->persist($prefix,$this->mediaData->originalName,$tBlobData);
+            
             if(is_null($storeName)) {
                 array_push($this->errors, "file storage failed");
                 return ;
             }
 
             $this->mediaData->storeName = $storeName;
+            $this->mediaData->thumbnail = $thumbnail;
+
             if($this->isS3Pipe) {
                 $this->mediaData->store = 's3';
                 $this->mediaData->bucket = Config::getInstance()->get_value("aws.bucket"); 
-                //absolute URL for s3 
-                $this->mediaData->fullUrl = "http://".$this->mediaData->bucket."/".$storeName ;
             } else {
                 $this->mediaData->store = 'local';
                 //relative URL for local uploads
                 $this->mediaData->bucket = 'media'; 
-                $this->mediaData->fullUrl = "/media/".$storeName ;
             }
 
         }
@@ -96,8 +97,28 @@ namespace com\indigloo\media {
             //original width and height
             $this->mediaData->width = imagesx($oSourceImage);
             $this->mediaData->height = imagesy($oSourceImage);
-            
+
+            //@todo thumbail width from config
+            $td = Util::foldX($this->mediaData->width,$this->mediaData->height,190);
+            $oDestinationImage = \imagecreatetruecolor($td["width"], $td["height"]);
+
+            //http://in2.php.net/manual/en/function.imagecopyresized.php
+            // resize the image
+            \imagecopyresized($oDestinationImage,
+                $oSourceImage, 0, 0, 0, 0,
+                $td["width"], $td["height"],
+                $this->mediaData->width, $this->mediaData->height);
+
+            ob_start();
+            //default is 75. is Quality 75 good enough for us?
+            \imagejpeg($oDestinationImage, NULL, 100);
+            $tBlobData = ob_get_contents();
+            ob_end_clean();
+            // Free up memory
+            \imagedestroy($oDestinationImage);
+            return $tBlobData;   
         }
+
         
     }
 }

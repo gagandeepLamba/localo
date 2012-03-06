@@ -7,7 +7,6 @@ namespace com\indigloo\media {
         
 		public $originalName;
 		public $storeName;
-		public $fullUrl;
 		public $mime ;
 		public $size ;
 		public $height;
@@ -15,6 +14,7 @@ namespace com\indigloo\media {
         public $bucket ;
 		public $id ;
         public $store ;
+        public $thumbnail ;
 
     }
 }

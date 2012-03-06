@@ -17,21 +17,10 @@ namespace com\indigloo\media {
 
         function persist($prefix,$name,$sBlobData) {
 
-
             //create a unique name for s3 store
-
-            $token = $name.date(DATE_RFC822);
-            $storeName = substr(md5($token), rand(1, 15), 16).rand(1,4096);
-            $pos = strrpos($name, '.');
-            
-            if ($pos != false) {
-                //separate filename and extension
-                $extension = substr($name, $pos + 1);
-                $storeName =  $storeName. '.' . $extension;
-            } 
-            
+            $storeName = \com\indigloo\media\FileStore::getHashedName($name) ;
             $storeName =  $prefix.$storeName ;
-            
+
             $bucket = Config::getInstance()->get_value("aws.bucket");
             $awsKey = Config::getInstance()->get_value("aws.key");
             $awsSecret = Config::getInstance()->get_value("aws.secret");

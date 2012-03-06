@@ -12,8 +12,8 @@
 	$uploader =  NULL ; 
     $prefix = sprintf("%s/",date('Y/m/d')) ;
     
-    //special condition for test
-    if($_SERVER["HTTP_HOST"] == 'mint.3mik.com' ) {
+    //special prefix - test machines 
+    if($_SERVER["HTTP_HOST"] == 'mint.3mik.com' || $_SERVER["HTTP_HOST"] == 'mbp13.3mik.com') {
         $prefix = 'test/'.$prefix ;
     }
 		

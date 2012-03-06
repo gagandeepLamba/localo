@@ -33,14 +33,13 @@ namespace com\indigloo\sc\html {
 				
 				$view->originalName = $image->originalName;
 				$view->bucket = $image->bucket;
-				$view->storedName = $image->storeName;
 
                 $prefix = ($image->store == 's3') ? 'http://' : '/' ;
-				$view->srcImage = $prefix.$image->bucket.'/'.$image->storeName;
+				$view->srcImage = $prefix.$image->bucket.'/'.$image->thumbnail;
 			    	
-				$newxy = Util::foldX($image->width,$image->height,160);
+				$newxy = Util::foldX($image->width,$image->height,190);
 				
-				$view->width = $newxy["width"];
+				//$view->width = $newxy["width"];
 				$view->height = $newxy["height"];
 				
 				/* image stuff end */
@@ -106,12 +105,11 @@ namespace com\indigloo\sc\html {
 				
 				$view->originalName = $image->originalName;
 				$view->bucket = $image->bucket;
-				$view->storedName = $image->storeName;
 
                 $prefix = ($image->store == 's3') ? 'http://' : '/' ;
-				$view->srcImage = $prefix.$image->bucket.'/'.$image->storeName;
+				$view->srcImage = $prefix.$image->bucket.'/'.$image->thumbnail;
 				
-				$newxy = Util::foldX($image->width,$image->height,200);
+				$newxy = Util::foldX($image->width,$image->height,190);
 				
 				$view->width = $newxy["width"];
 				$view->height = $newxy["height"];
