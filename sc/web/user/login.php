@@ -89,7 +89,8 @@
             </div>
             <div class="row">
                 <div class="span7">
-                   <h3> You can login with 3mik.com account | </h3>
+                  <div id="mik-login-wrapper">
+                   <h3> You can login with 3mik.com account </h3>
                          No 3mik.com account? <a href="/user/register.php"> Register for a new account</a> (Free and takes just 30 seconds!)
                       
                         <form id="web-form1"  name="web-form1" action="/user/form/login.php" enctype="multipart/form-data"  method="POST">
@@ -123,14 +124,13 @@
                         <input type="hidden" name="q" value="<?php echo $qUrl; ?>" />
                         
                     </form>
-                    
- 
-
+                   </div> 
                     
                 </div> <!-- span61 -->
                 <div class="span5">
+                    <div id="social-login-wrapper">
                      <div class="row">
-                       <h3> or  your facebook / twitter account </h3>
+                       <h3> or Facebook, Twitter </h3>
                        <div class="span5">
                            <div class="facebook-login">
                                <a href="<?php echo $fbDialogUrl; ?>"> Login with Facebook</a>
@@ -144,6 +144,7 @@
                             </div>
                         </div>
                     </div> <!-- row -->
+                 </div> <!-- wrapper -->
                 </div> <!-- span62 -->
             </div>
 

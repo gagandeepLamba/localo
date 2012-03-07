@@ -10,7 +10,8 @@
 	error_reporting(-1);
 
     //get items
-    $sql = "select id,images_json from sc_question order by id desc limit 1";
+    //$sql = "select id,images_json from sc_question order by id desc limit 1";
+    $sql = "select id,images_json from sc_question where id = 611";
     $mysqli = MySQL\Connection::getInstance()->getHandle();
     $rows = MySQL\Helper::fetchRows($mysqli, $sql);
     

@@ -15,32 +15,49 @@
     $pipe = new \com\indigloo\media\FilePipe();
     $uploader = new com\indigloo\media\ImageUpload($pipe);
 
-    //get media in batch size of 20 
-    $sql = "select  id,original_name,stored_name from sc_media where store = 'local' order by id desc limit 2";
-    $mysqli = MySQL\Connection::getInstance()->getHandle();
-    $rows = MySQL\Helper::fetchRows($mysqli, $sql);
-    
+    $count = 0 ;
 
-    foreach($rows as $row) {
-        printf("processing row id %d \n" ,$row['id']);
+    while(1) {
+        //get media in batch size of 20 
+        $sql = "select  id,original_name,stored_name from sc_media where store = 'local' order by id desc limit 10";
+        $mysqli = MySQL\Connection::getInstance()->getHandle();
+        $rows = MySQL\Helper::fetchRows($mysqli, $sql);
 
-        //write a pipe that can return fileData 
-        $abspath = "/home/rjha/web/upload/" .$row["stored_name"];
-        $uploader->process($prefix,$abspath);
-        $errors = $uploader->getErrors() ;
-
-        if (sizeof($errors) > 0) {
-            print_r($errors);
-            exit ;
-        } else {
-            $mediaVO = $uploader->getMediaData();
-            print_r($mediaVO); 
-            updateMedia($mysqli,$row["id"],$mediaVO);
+        if(sizeof($rows) == 0 ) {
+            printf("No more local rows \n");
+            break ;
         }
 
+        //we have rows to process
+        foreach($rows as $row) {
+            printf("processing row id %d \n" ,$row['id']);
+
+            //write a pipe that can return fileData 
+            $abspath = "/home/rjha/web/upload/" .$row["stored_name"];
+            $uploader->process($prefix,$abspath);
+            $errors = $uploader->getErrors() ;
+
+            if (sizeof($errors) > 0) {
+                print_r($errors);
+                exit ;
+            } else {
+                $mediaVO = $uploader->getMediaData();
+                //print_r($mediaVO); 
+                updateMedia($mysqli,$row["id"],$mediaVO);
+            }
+
+            sleep(3);
+        } //loop
+
         sleep(1);
+        $count++ ;
+        printf("loop iteration number %d \n" ,$count);
+  
     }
 
+    
+
+   
     function updateMedia($mysqli,$mediaId,$mediaVO) {
       
         //update m.thumbnail,m.stored_name,m.bucket,m.store

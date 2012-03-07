@@ -8,7 +8,7 @@
 				
                 foreach($images as $image) {
 					$active = ($count == 0) ? 'active' : '' ;
-                    $prefix = ($image->store == 's3') ? "http://" : "/" ;
+                    $prefix = (property_exists($image,'store') && ($image->store == 's3')) ? "http://" : "/" ;
                     $srcImage = $prefix.$image->bucket."/".$image->storeName ;
 
 

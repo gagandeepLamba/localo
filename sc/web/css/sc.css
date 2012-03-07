@@ -679,6 +679,14 @@
         font-weight:bold;
 	}
 
+    #social-login-wrapper {
+        padding:20px;
+    }
+
+    #mik-login-wrapper {
+        padding:20px;
+        border-right:1px solid black;
+    }
 	#xeyes {
 		width: 218px;
 	}
