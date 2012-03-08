@@ -99,8 +99,6 @@
 							<div class="span9"><div id="image-uploader"> </div></div>
 						</div>
 						<table class="form-table">
-							
-							
 							<tr>
 								<td>
 									<label>Details *</label>
@@ -115,24 +113,27 @@
 									<button id="add-link" type="button" class="btn" value="Add"><i class="icon-plus-sign"> </i>&nbsp;Add</button> 
 								</td>
 							</tr>
-								
-							<tr>
+                            
+                            <tr>
+                                <td> 
+                                  	<div class="form-actions"> 
+                                        <button class="btn btn-primary" type="submit" name="save" value="Save" onclick="this.setAttribute('value','Save');" ><span>Save</span></button> 
+                                        <a href="/"> <button class="btn" type="button" name="cancel"><span>Cancel</span></button> </a>
+                                    </div>
+                  
+                                </td>
+                            </tr>
+                           	<tr>
 								<td>
-									<div id="link-data"> </div>
-									<div id="image-data"> </div>
 								</td>
 							</tr>
 							
-							
 						</table>
+
+                        <div id="link-data"> </div>
+                        <div id="image-data"> </div>
 						
-						
-					
-						<div class="form-actions"> 
-							<button class="btn btn-primary" type="submit" name="save" value="Save" onclick="this.setAttribute('value','Save');" ><span>Save your changes</span></button> 
-							<a href="/"> <button class="btn" type="button" name="cancel"><span>Cancel</span></button> </a>
-						</div>
-						<!-- put json data in single quotes to avoid interpreting double quotes --> 
+                        <!-- put json data in single quotes to avoid interpreting double quotes --> 
 						<input type="hidden" name="links_json" value='<?php echo $strLinksJson ; ?>' />
 						<input type="hidden" name="images_json" value='<?php echo $strImagesJson ; ?>' />
 						<input type="hidden" name="q" value="<?php echo $_SERVER["REQUEST_URI"]; ?>" />

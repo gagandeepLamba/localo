@@ -130,7 +130,7 @@
                 <div class="span5">
                     <div id="social-login-wrapper">
                      <div class="row">
-                       <h3> or Facebook, Twitter </h3>
+                       <h3> - OR - </h3>
                        <div class="span5">
                            <div class="facebook-login">
                                <a href="<?php echo $fbDialogUrl; ?>"> Login with Facebook</a>

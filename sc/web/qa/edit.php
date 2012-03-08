@@ -65,6 +65,23 @@
 				$("#web-form1").validate({
 					   errorLabelContainer: $("#web-form1 div.error") 
 				});
+
+                $("#show-group").click(function(event) {
+                    event.preventDefault(); 
+                    //alert('bobo');
+                    $("#add-group").slideDown("slow");
+                    //$(window).scrollTop($("#add-group").position().top) ;
+
+
+                });
+
+                $('.group-panel .wrapper .groups input[type=checkbox]').click(function() {
+                    if($(this).is(':checked')) {
+                        alert('checked');
+                    } else {
+                        alert('not checked');
+                    }
+                });
 					
 				webgloo.media.init(["link","image"]);
 				webgloo.media.attachEvents();
@@ -114,11 +131,10 @@
 						<div class="row">
 							<div class="span9"><div id="image-uploader"> </div></div>
 						</div>
-						<table class="form-table">
+                        <table class="form-table">
 							
-							
-							<tr>
-								<td>
+                            <tr>
+                                <td>
 									<label>Details</label>
 									<textarea  name="description" class="required h130 w500" cols="50" rows="4" ><?php echo $sticky->get('description',$questionDBRow['description']); ?></textarea>
 								</td>
@@ -130,23 +146,56 @@
 									<button id="add-link" type="button" class="btn" value="Add"><i class="icon-plus-sign"> </i>&nbsp;Add</button> 
 								</td>
 							</tr>
-							<tr>
-								<td>
-									<div id="link-data"> </div>
-									<div id="image-data"> </div>
+                            <tr>
+                                <td> 
+                                     <div class="group-panel">
+                                        <b>Group</b> None &nbsp;
+                                        <div class="box"> 
+                                            Add a group 
+                                            <input id="group-box" name="group" value="" />
+                                            <button id="add-group-btn" type="button" class="btn" value="Add"><i class="icon-tags"> </i>&nbsp;Add</button> 
+                                            
+                                        </div>
+ 
+                                        <div class="wrapper"> 
+                                           <div class="groups"> 
+                                            <b> Suggested </b>
+                                            <ul class="unstyled">
+                                                <li> <input type="checkbox" name="io1">Handicrafs</li>
+                                                <li> <input type="checkbox" name="io2">Food and Beverage</li>
+                                                <li> <input type="checkbox" name="io3">Home and Interiors</li>
+                                                <li> <input type="checkbox" name="io4">Cool Items</li>
+                                            </ul>
+                                            </div>
+                                         <div class="groups" id="gl2"> 
+                                            <ul class="unstyled">
+                                                <li> <input type="checkbox" name="io5">Clothes</li>
+                                                <li> <input type="checkbox" name="io6">Fashion</li>
+                                            </ul>
+                                        </div>
+                                        
+ 
+                                        </div> <!-- wrapper -->
+                                    </div>
+
+                                </td>
+							</tr>
+ 	                       	<tr>
+                                <td>
+	
+                                    <div class="form-actions"> 
+                                        <button class="btn btn-primary" type="submit" name="save" value="Save" onclick="this.setAttribute('value','Save');" ><span>Save</span></button> 
+                                        <a href="/"> <button class="btn" type="button" name="cancel"><span>Cancel</span></button> </a>
+                                    </div>
+
 								</td>
 							</tr>
-							
-							
+ 
 						</table>
+
+                        <div id="link-data"> </div>
+                        <div id="image-data"> </div>
 						
-						
-					
-						<div class="form-actions"> 
-							<button class="btn btn-primary" type="submit" name="save" value="Save" onclick="this.setAttribute('value','Save');" ><span>Save your changes</span></button> 
-							<a href="/"> <button class="btn" type="button" name="cancel"><span>Cancel</span></button> </a>
-						</div>
-						 
 						<input type="hidden" name="links_json" value='<?php echo $strLinksJson ; ?>' />
 						<input type="hidden" name="images_json" value='<?php echo $strImagesJson ; ?>' />
 						<input type="hidden" name="question_id" value="<?php echo $questionDBRow['id'];?>" />	
