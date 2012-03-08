@@ -12,7 +12,8 @@
     use \com\indigloo\sc\auth\Login as Login ;
 	
     if (isset($_POST['save']) && ($_POST['save'] == 'Save')) {
-        
+        print_r($_POST); exit ;
+
         $fhandler = new Form\Handler('web-form-1', $_POST);
         
 		$fhandler->addRule('links_json', 'links_json', array('noprocess' => 1));

@@ -126,16 +126,30 @@ namespace com\indigloo {
             return ctype_alnum($input);
         }
 
-        //@todo - fix - a valid value of zero will triggers this error
+        /* 
+         * used to check empty strings 
+         * php empty() will return TRUE for "<spaces>" and false
+         * for "0". we are interested in user inputs and want to catch 
+         * empty or all spaces only
+         *
+         */
         static function isEmpty($name, $value) {
-            if (empty($value)) {
+            if(is_null($value)) {
                 $message = 'Bad input:: ' . $name . ' is empty or null!';
                 trigger_error($message, E_USER_ERROR);
             }
+
+            $value = trim($value);
+
+            if(strlen($value)  == 0 ) {
+                $message = 'Bad input:: ' . $name . ' is empty or null!';
+                trigger_error($message, E_USER_ERROR);
+            }
+
         }
         
         static function isEmptyMessage($name, $value) {
-            if (empty($value)) {
+            if (self::isEmpty($value)) {
                 $message = "Bad input :: $name is empty or null \n";
                 echo nl2br($message);
                 exit ;

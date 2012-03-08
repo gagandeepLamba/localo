@@ -1,0 +1,36 @@
+
+ <div class="group-panel">
+    <b>Groups</b>&nbsp;
+    <div class="box"> 
+        New Group 
+        <input id="group-box" name="new-group" value="" />
+        <button id="add-group-btn" type="button" class="btn" value="Add"><i class="icon-tags"> </i>&nbsp;Add</button> 
+    </div>
+
+    <div class="wrapper"> 
+        <!-- first panel -->
+        <div class="groups">
+            <ul class="unstyled">
+            ~for($i = 0 ; $i < 2 ; $i++ ) {~
+                <li> <input type="checkbox" name="g[]" value="~~$view->records[$i]['value']~" ~~$view->records[$i]['checked']~ />~~$view->records[$i]['display']~</li>
+
+            ~}~
+            </ul>
+        </div>
+            
+
+        <!-- rest of panels -->
+        ~for($count = 2 ; $count < $view->total ; $count = $count +4 ) {~
+            <div class="groups">
+                <ul class="unstyled">
+                ~for($i = $count ; (($i < $count+4) && ($i < $view->total)) ; $i++) {~
+                <li> <input type="checkbox" name="g[]" value="~~$view->records[$i]['value']~" ~~$view->records[$i]['checked']~  />~~$view->records[$i]['display']~</li>
+                ~}~
+                </ul>
+            </div>
+           ~}~ 
+        
+    </div>
+</div> <!-- groups panel -->
+
+

@@ -66,21 +66,22 @@
 					   errorLabelContainer: $("#web-form1 div.error") 
 				});
 
-                $("#show-group").click(function(event) {
+                $("#add-group-btn").click(function(event) {
                     event.preventDefault(); 
-                    //alert('bobo');
-                    $("#add-group").slideDown("slow");
-                    //$(window).scrollTop($("#add-group").position().top) ;
-
+                    var group = $("#group-box").val();
+                    var node = ' <li> <input type="checkbox" name="g[]" checked ="checked" value="' 
+                        + group + '"/>' + group + '</li> ' ;
+                    $(".group-panel .wrapper ul:first").append(node);
 
                 });
 
                 $('.group-panel .wrapper .groups input[type=checkbox]').click(function() {
-                    if($(this).is(':checked')) {
-                        alert('checked');
-                    } else {
-                        alert('not checked');
-                    }
+                    var groups = [];
+                    $(".group-panel .wrapper .groups input:checkbox:checked").each(function(index) {
+                        groups.push($(this).val());
+                    });
+                    console.log(groups);
+
                 });
 					
 				webgloo.media.init(["link","image"]);
@@ -148,35 +149,8 @@
 							</tr>
                             <tr>
                                 <td> 
-                                     <div class="group-panel">
-                                        <b>Group</b> None &nbsp;
-                                        <div class="box"> 
-                                            Add a group 
-                                            <input id="group-box" name="group" value="" />
-                                            <button id="add-group-btn" type="button" class="btn" value="Add"><i class="icon-tags"> </i>&nbsp;Add</button> 
-                                            
-                                        </div>
- 
-                                        <div class="wrapper"> 
-                                           <div class="groups"> 
-                                            <b> Suggested </b>
-                                            <ul class="unstyled">
-                                                <li> <input type="checkbox" name="io1">Handicrafs</li>
-                                                <li> <input type="checkbox" name="io2">Food and Beverage</li>
-                                                <li> <input type="checkbox" name="io3">Home and Interiors</li>
-                                                <li> <input type="checkbox" name="io4">Cool Items</li>
-                                            </ul>
-                                            </div>
-                                         <div class="groups" id="gl2"> 
-                                            <ul class="unstyled">
-                                                <li> <input type="checkbox" name="io5">Clothes</li>
-                                                <li> <input type="checkbox" name="io6">Fashion</li>
-                                            </ul>
-                                        </div>
-                                        
- 
-                                        </div> <!-- wrapper -->
-                                    </div>
+                                <!-- groups --> 
+                                <?php echo \com\indigloo\sc\html\GroupPanel::render("fashion,handicrafts,gardening"); ?>
 
                                 </td>
 							</tr>
