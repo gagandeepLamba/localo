@@ -21,6 +21,18 @@
                         itemSelector : '.tile'
 					});
                 });
+
+                //show options on hover
+                $('.tile-option').hide();
+        
+                $('.tile').mouseenter(function() {
+                    $(this).find('.tile-option').toggle();
+                });
+        
+                $('.tile').mouseleave(function() {
+                    $(this).find('.tile-option').toggle();
+                }); 
+
             });
 		</script>
 		

@@ -586,7 +586,22 @@
 		padding:8px;
 		background-color: #fff;
 		border-radius :2px;
+        /* position:relative ; */
 	}
+
+    .tile-option {
+        position:absolute ;
+        overflow:hidden ;
+        z-index:100;
+        display:none ;
+        background-color:white;
+        margin:0px;
+        padding:0px;
+        top:0px;
+        left:0px;
+        height:50px;
+        width:100%;
+    }
 	
 	.tile .photo {
 		padding:3px;
