@@ -36,6 +36,21 @@
 			
         } else {
             
+            $group_slug = '' ;
+            $group_display = '' ;
+
+            $slugs = Util::tryArrayKey($fvalues,'g'); 
+            if(!is_null($slugs)) {
+                //what is coming in are keys
+                $slugs = array_map(array("\com\indigloo\util\StringUtil","convertNameToKey"),$slugs);
+                $group_slug = implode(",",$slugs);
+
+                //change to name for display
+                $slugs = array_map(array("\com\indigloo\util\StringUtil","convertKeyToName"),$slugs);
+                $group_display = implode(",",$slugs);
+            }
+
+
             $questionDao = new com\indigloo\sc\dao\Question();
 			$title = Util::abbreviate($fvalues['description'],128);		
 
@@ -46,7 +61,9 @@
                                 'tags',
 								$gSessionLogin->id,
                                 $_POST['links_json'],
-                                $_POST['images_json']);
+                                $_POST['images_json'],
+                                $group_slug,
+                                $group_display);
 								
    			$code = $data['code'];
 

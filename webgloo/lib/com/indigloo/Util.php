@@ -156,6 +156,13 @@ namespace com\indigloo {
             }
         }
         
+        static function tryEmpty($value) {
+            if(is_null($value)) { return true ; }
+            $value = trim($value);
+            if(strlen($value)  == 0 ) { return  true ; }
+            return false ;
+        }
+
         static function startsWith($haystack, $needle) {
             // Recommended version, using strpos
             return strpos($haystack, $needle) === 0;

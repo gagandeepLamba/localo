@@ -18,7 +18,7 @@ webgloo.sc = webgloo.sc || {};
 
 webgloo.sc.groups = {
     attachEvents : function() {
-        $("a#more-groups-link").fancybox({ 'hideOnContentClick': true });
+        $("a#more-groups-link").fancybox({ });
 
         $("#add-group-btn").click(function(event) {
             event.preventDefault(); 

@@ -8,10 +8,10 @@ namespace com\indigloo\sc\html {
     
     class GroupPanel {
 
-        static function render($strGroups){
+        static function render($slug){
 
-            if(is_null($strGroups)) {
-                $strGroups = '' ;
+            if(is_null($slug)) {
+                $slug = '' ;
             }
 
             $records = array();
@@ -24,7 +24,7 @@ namespace com\indigloo\sc\html {
                                 "home-and-interior",
                                 "cool-items"); 
 
-            $ugroups = explode(",",$strGroups);
+            $ugroups = explode(",",$slug);
 
             foreach($ugroups as $value) {
                 if(empty($value)) { continue ; }

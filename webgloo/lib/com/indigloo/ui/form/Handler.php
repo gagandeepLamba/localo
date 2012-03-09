@@ -153,10 +153,11 @@ namespace com\indigloo\ui\form {
         }
 
         private function getSecureHtml($x) {
-            if($this->translate)
-                return trim(htmlspecialchars($x, ENT_QUOTES));
-            else
-                return trim($x);
+            //post values can be array as well
+            //like for multiple select checkboxes
+            if(is_array($x)) { return $x; }
+            $x = (Util::tryEmpty($x) || !$this->translate) ? $x : htmlspecialchars($x,ENT_QUOTES) ;
+            return trim($x) ;
         }
 
     }

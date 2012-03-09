@@ -239,3 +239,21 @@ delimiter ;
 --
 alter table sc_media add column store varchar(8) not null default 'local' ;
 alter table sc_media add column thumbnail varchar(64) ;
+
+
+--
+--       09 march 2012
+--
+
+--
+-- drop column sc_question.category_code from server DB
+--
+ 
+alter table sc_question add column group_display varchar(64);
+alter table sc_question add column group_slug varchar(64);
+
+
+
+
+
+

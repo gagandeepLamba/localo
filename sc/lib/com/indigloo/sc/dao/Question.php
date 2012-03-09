@@ -93,7 +93,9 @@ namespace com\indigloo\sc\dao {
 						$location,
 						$tags,
 						$linksJson,
-						$imagesJson) {
+                        $imagesJson,
+                        $groupSlug,
+                        $groupDisplay) {
 			
 			$loginId = \com\indigloo\sc\auth\Login::tryLoginIdInSession();
 
@@ -104,7 +106,9 @@ namespace com\indigloo\sc\dao {
                                $tags,
                                $linksJson,
 							   $imagesJson,
-						   	   $loginId);
+                               $loginId,
+                               $groupSlug,
+                               $groupDisplay);
             return $code ;
         }
 

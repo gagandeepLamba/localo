@@ -34,7 +34,7 @@
 				});
 
 				$('#myCarousel').carousel({
-				  interval: 10000
+				  interval: 5000
 				});
 				
             });
@@ -87,13 +87,9 @@
 						echo "</ol> </div>" ;
 					}
 
-				?>
+					echo \com\indigloo\sc\html\Question::getEditBar($gSessionLogin,$questionDBRow) ; 
 
-				<div class="ml40">
-					<span> <a class="btn btn-primary" href="#form-wrapper">Add Comment</a></span>	
-				</div>
-					
-				
+				?>
 
 				<div class="mt20">
 					<?php
@@ -128,7 +124,7 @@
 					</table>
 					
 					 <div class="form-actions">
-						<button class="btn btn-primary" type="submit" name="save" value="Save" onclick="this.setAttribute('value','Save');" ><span>Add your comment</span></button>
+						<button class="btn btn-primary" type="submit" name="save" value="Save" onclick="this.setAttribute('value','Save');" ><span>Save</span></button>
 					</div>
 
 				   <input type="hidden" name="question_id" value="<?php echo $questionDBRow['id']; ?>" />

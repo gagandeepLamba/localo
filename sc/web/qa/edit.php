@@ -136,7 +136,7 @@
 							</tr>
                             <tr>
                                 <td> 
-                                <?php echo \com\indigloo\sc\html\GroupPanel::render("fashion,handicrafts,gardening"); ?>
+                                <?php echo \com\indigloo\sc\html\GroupPanel::render($questionDBRow['group_slug']); ?>
 
                                 </td>
 							</tr> <!-- groups --> 

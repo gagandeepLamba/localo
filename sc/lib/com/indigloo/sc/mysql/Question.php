@@ -132,13 +132,15 @@ namespace com\indigloo\sc\mysql {
                                $tags,
                                $linksJson,
 							   $imagesJson,
-							   $loginId)
+                               $loginId,
+                               $groupSlug,
+                               $groupDisplay)
 		
 		{
 			
 			$mysqli = MySQL\Connection::getInstance()->getHandle();
-            $sql = " update sc_question set title=?, description=?, " ;
-			$sql .= " location=?, tags=?, links_json=?, images_json=? where id = ? and login_id = ?" ;
+            $sql = " update sc_question set title=?,description=?,location = ?,tags =?,links_json =?, " ;
+			$sql .= " images_json=?,group_slug = ?,group_display=? where id = ? and login_id = ?" ;
 			
 			
             $code = MySQL\Connection::ACK_OK;
@@ -146,13 +148,15 @@ namespace com\indigloo\sc\mysql {
             
             
             if ($stmt) {
-                $stmt->bind_param("ssssssii",
+                $stmt->bind_param("ssssssssii",
                         $title,
                         $description,
                         $location,
                         $tags,
                         $linksJson,
                         $imagesJson,
+                        $groupSlug,
+                        $groupDisplay,
 						$questionId,
 						$loginId);
                 
@@ -177,14 +181,16 @@ namespace com\indigloo\sc\mysql {
                                $tags,
 							   $loginId,
                                $linksJson,
-                               $imagesJson) {
+                               $imagesJson,
+                               $groupSlug,
+                               $groupDisplay) {
 
 			
 			
             $mysqli = MySQL\Connection::getInstance()->getHandle();
-            $sql = " insert into sc_question(title,description,location,tags, " ;
-            $sql .= " login_id,links_json,images_json,created_on) ";
-            $sql .= " values(?,?,?,?,?,?,?,now()) ";
+            $sql = " insert into sc_question(title,description,location,tags,login_id,links_json, " ;
+            $sql .= "images_json,group_slug,group_display,created_on) ";
+            $sql .= " values(?,?,?,?,?,?,?,?,?,now()) ";
 
             $code = MySQL\Connection::ACK_OK;
 			$lastInsertId = NULL;
@@ -192,14 +198,16 @@ namespace com\indigloo\sc\mysql {
             $stmt = $mysqli->prepare($sql);
             
             if ($stmt) {
-                $stmt->bind_param("ssssiss",
+                $stmt->bind_param("ssssissss",
                         $title,
                         $description,
                         $location,
 						$tags,
 						$loginId,
                         $linksJson,
-                        $imagesJson);
+                        $imagesJson,
+                        $groupSlug,
+                        $groupDisplay);
                 
                       
                 $stmt->execute();

@@ -110,8 +110,10 @@ namespace com\indigloo\sc\auth {
         }
 
 		static function isOwner($loginId) {
-			if(is_int($loginId)){
-				trigger_error("No Login ID supplied",E_USER_ERROR);
+
+            //false on NULL or empty
+			if(Util::tryEmpty($loginId)){
+                return false ;
 			}
 			
 			$flag = false ;

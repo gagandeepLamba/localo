@@ -10,9 +10,9 @@
     use \com\indigloo\Util as Util ;
     use \com\indigloo\Url as Url ;
     use \com\indigloo\sc\auth\Login as Login ;
+    use \com\indigloo\util\StringUtil as StringUtil ;
 	
     if (isset($_POST['save']) && ($_POST['save'] == 'Save')) {
-        print_r($_POST); exit ;
 
         $fhandler = new Form\Handler('web-form-1', $_POST);
         
@@ -22,7 +22,7 @@
         $fvalues = $fhandler->getValues();
         $ferrors = $fhandler->getErrors();
 		$qUrl = $fvalues['q'];
-		
+
         if ($fhandler->hasErrors()) {
             $gWeb->store(Constants::STICKY_MAP, $fvalues);
             $gWeb->store(Constants::FORM_ERRORS,$fhandler->getErrors());
@@ -31,6 +31,20 @@
 			
         } else {
             
+            $group_slug = '' ;
+            $group_display = '' ;
+
+            $slugs = Util::tryArrayKey($fvalues,'g'); 
+            if(!is_null($slugs)) {
+                //what is coming in are keys
+                $slugs = array_map(array("\com\indigloo\util\StringUtil","convertNameToKey"),$slugs);
+                $group_slug = implode(" ",$slugs);
+
+                //change to name for display
+                $slugs = array_map(array("\com\indigloo\util\StringUtil","convertKeyToName"),$slugs);
+                $group_display = implode(" ",$slugs);
+            }
+
             $questionDao = new com\indigloo\sc\dao\Question();
 			$title = Util::abbreviate($fvalues['description'],128);		
             $code = $questionDao->update(
@@ -40,7 +54,9 @@
                                 'location',
                                 'tags',
                                 $_POST['links_json'],
-                                $_POST['images_json']);
+                                $_POST['images_json'],
+                                $group_slug,
+                                $group_display);
             
             if ($code == com\indigloo\mysql\Connection::ACK_OK ) {
                 $locationOnSuccess = "/item/".$fvalues['question_id'] ;
