@@ -48,12 +48,15 @@
 		<link rel="stylesheet" type="text/css" href="/3p/bootstrap/css/bootstrap.css">
 		<link rel="stylesheet" type="text/css" href="/css/sc.css">
 		<link rel="stylesheet" type="text/css" href="/3p/ful/valums/fileuploader.css">
+		<link rel="stylesheet" type="text/css" href="/3p/fancybox/jquery.fancybox-1.3.4.css">
 		
 		<script type="text/javascript" src="/3p/jquery/jquery-1.7.1.min.js"></script>
 		<script type="text/javascript" src="/3p/jquery/jquery.validate.1.9.0.min.js"></script>
 		<script type="text/javascript" src="/3p/bootstrap/js/bootstrap.js"></script>
 		 
 		<script type="text/javascript" src="/3p/ful/valums/fileuploader.js" ></script>
+        <script type="text/javascript" src="/3p/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+
 		<script type="text/javascript" src="/3p/json2.js"></script>
 		<script type="text/javascript" src="/js/sc.js"></script>
 		
@@ -66,26 +69,10 @@
 					   errorLabelContainer: $("#web-form1 div.error") 
 				});
 
-                $("#add-group-btn").click(function(event) {
-                    event.preventDefault(); 
-                    var group = $("#group-box").val();
-                    var node = ' <li> <input type="checkbox" name="g[]" checked ="checked" value="' 
-                        + group + '"/>' + group + '</li> ' ;
-                    $(".group-panel .wrapper ul:first").append(node);
-
-                });
-
-                $('.group-panel .wrapper .groups input[type=checkbox]').click(function() {
-                    var groups = [];
-                    $(".group-panel .wrapper .groups input:checkbox:checked").each(function(index) {
-                        groups.push($(this).val());
-                    });
-                    console.log(groups);
-
-                });
-					
+                              					
 				webgloo.media.init(["link","image"]);
 				webgloo.media.attachEvents();
+				webgloo.sc.groups.attachEvents();
 				  
 				var uploader = new qq.FileUploader({
 					element: document.getElementById('image-uploader'),
@@ -149,11 +136,10 @@
 							</tr>
                             <tr>
                                 <td> 
-                                <!-- groups --> 
                                 <?php echo \com\indigloo\sc\html\GroupPanel::render("fashion,handicrafts,gardening"); ?>
 
                                 </td>
-							</tr>
+							</tr> <!-- groups --> 
  	                       	<tr>
                                 <td>
 	
@@ -179,10 +165,10 @@
 					
 									
 				   
-				</div> <!-- content -->
+				</div> <!-- span9 -->
 				
 				<div class="span3">
-					<!-- sidebar -->
+					 <?php include($_SERVER['APP_WEB_DIR'] .'/qa/sidebar/edit.inc'); ?>
 				</div>
 			
 			</div>

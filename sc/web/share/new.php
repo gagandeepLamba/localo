@@ -31,12 +31,15 @@
 		<link rel="stylesheet" type="text/css" href="/3p/bootstrap/css/bootstrap.css">
 		<link rel="stylesheet" type="text/css" href="/css/sc.css">
 		<link rel="stylesheet" type="text/css" href="/3p/ful/valums/fileuploader.css">
+		<link rel="stylesheet" type="text/css" href="/3p/fancybox/jquery.fancybox-1.3.4.css">
 		
 		<script type="text/javascript" src="/3p/jquery/jquery-1.7.1.min.js"></script>
 		<script type="text/javascript" src="/3p/jquery/jquery.validate.1.9.0.min.js"></script>
 		<script type="text/javascript" src="/3p/bootstrap/js/bootstrap.js"></script>
 		 
 		<script type="text/javascript" src="/3p/ful/valums/fileuploader.js" ></script>
+        <script type="text/javascript" src="/3p/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+
 		<script type="text/javascript" src="/3p/json2.js" ></script>
 		<script type="text/javascript" src="/js/sc.js"></script>
 		
@@ -51,6 +54,7 @@
 					
 				webgloo.media.init(["image", "link"]);
 				webgloo.media.attachEvents();
+				webgloo.sc.groups.attachEvents();
 				  
 				var uploader = new qq.FileUploader({
 					element: document.getElementById('image-uploader'),
@@ -113,6 +117,13 @@
 									<button id="add-link" type="button" class="btn" value="Add"><i class="icon-plus-sign"> </i>&nbsp;Add</button> 
 								</td>
 							</tr>
+                            <tr>
+                                <td> 
+                                <?php echo \com\indigloo\sc\html\GroupPanel::render(""); ?>
+
+                                </td>
+							</tr> <!-- groups --> 
+
                             
                             <tr>
                                 <td> 
@@ -123,10 +134,6 @@
                   
                                 </td>
                             </tr>
-                           	<tr>
-								<td>
-								</td>
-							</tr>
 							
 						</table>
 
@@ -142,7 +149,7 @@
 					
 									
 				   
-				</div> <!-- content -->
+				</div> <!-- span9 -->
 				
 				<div class="span3">
 					<?php include('sidebar/new.inc'); ?>	

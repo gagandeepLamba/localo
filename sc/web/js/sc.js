@@ -15,6 +15,24 @@ String.prototype.supplant = function (o) {
 webgloo = window.webgloo || {};
 webgloo.sc = webgloo.sc || {};
 
+
+webgloo.sc.groups = {
+    attachEvents : function() {
+        $("a#more-groups-link").fancybox({ 'hideOnContentClick': true });
+
+        $("#add-group-btn").click(function(event) {
+            event.preventDefault(); 
+            var group = $("#group-box").val();
+            var node = ' <li> <input type="checkbox" name="g[]" checked ="checked" value="' 
+                + group + '"/>' + group + '</li> ' ;
+            $(".group-panel .wrapper ul:first").append(node);
+
+        });
+   }
+}
+
+
+
 /* + webgloo media object */
 
 webgloo.media = {

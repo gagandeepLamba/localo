@@ -22,8 +22,7 @@ namespace com\indigloo\sc\html {
                                 "clothes",
                                 "fashion",
                                 "home-and-interior",
-                                "cool-items", 
-                                "gardening");
+                                "cool-items"); 
 
             $ugroups = explode(",",$strGroups);
 
@@ -48,6 +47,20 @@ namespace com\indigloo\sc\html {
             
             $view->records  = $records ;
             $view->total = sizeof($records);
+            $view->step = 3 ;
+            //3 visible panels -> 2 + step + step 
+            $view->numVisible = (2*$view->step) + 2 ;
+            $view->numVisible = ($view->numVisible > $view->total) ? $view->total : $view->numVisible;
+
+            $view->moreLink = false ;
+
+            if($view->total > $view->numVisible){
+                //render more link
+                $view->moreLink = true ;
+            }
+
+
+
 			$html = Template::render($template,$view);
             return $html ;
 

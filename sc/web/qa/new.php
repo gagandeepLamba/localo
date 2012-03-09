@@ -31,12 +31,15 @@
 		<link rel="stylesheet" type="text/css" href="/3p/bootstrap/css/bootstrap.css">
 		<link rel="stylesheet" type="text/css" href="/css/sc.css">
 		<link rel="stylesheet" type="text/css" href="/3p/ful/valums/fileuploader.css">
+		<link rel="stylesheet" type="text/css" href="/3p/fancybox/jquery.fancybox-1.3.4.css">
 		
 		<script type="text/javascript" src="/3p/jquery/jquery-1.7.1.min.js"></script>
 		<script type="text/javascript" src="/3p/jquery/jquery.validate.1.9.0.min.js"></script>
 		<script type="text/javascript" src="/3p/bootstrap/js/bootstrap.js"></script>
 		 
 		<script type="text/javascript" src="/3p/ful/valums/fileuploader.js" ></script>
+        <script type="text/javascript" src="/3p/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+
 		<script type="text/javascript" src="/3p/json2.js" ></script>
 		<script type="text/javascript" src="/js/sc.js"></script>
 		
@@ -51,6 +54,7 @@
 					
 				webgloo.media.init(["image","link"]);
 				webgloo.media.attachEvents();
+				webgloo.sc.groups.attachEvents();
 				  
 				var uploader = new qq.FileUploader({
 					element: document.getElementById('image-uploader'),
@@ -116,23 +120,29 @@
 									<button id="add-link" type="button" class="btn" value="Add"><i class="icon-plus-sign"> </i>&nbsp;Add</button> 
 								</td>
 							</tr>
+                            <tr>
+                                <td> 
+                                <?php echo \com\indigloo\sc\html\GroupPanel::render(""); ?>
+
+                                </td>
+							</tr> <!-- groups --> 
+
 							<tr>
 								<td>
-									<div id="link-data"> </div>
-									<div id="image-data"> </div>
-								</td>
+                                  	<div class="form-actions"> 
+                                        <button class="btn btn-primary" type="submit" name="save" value="Save" onclick="this.setAttribute('value','Save');" ><span>Save your changes</span></button> 
+                                        <a href="/"> <button class="btn" type="button" name="cancel"><span>Cancel</span></button> </a>
+                                    </div>
+  
+                                </td>
 							</tr>
 							
-							
 						</table>
-						
-						
 					
-						<div class="form-actions"> 
-							<button class="btn btn-primary" type="submit" name="save" value="Save" onclick="this.setAttribute('value','Save');" ><span>Save your changes</span></button> 
-							<a href="/"> <button class="btn" type="button" name="cancel"><span>Cancel</span></button> </a>
-						</div>
-						 
+					
+                        <div id="link-data"> </div>
+                        <div id="image-data"> </div>
+
 						<input type="hidden" name="links_json" value='<?php echo $strLinksJson ; ?>' />
 						<input type="hidden" name="images_json" value='<?php echo $strImagesJson ; ?>' />
 						<input type="hidden" name="q" value="<?php echo $_SERVER["REQUEST_URI"]; ?>" />
