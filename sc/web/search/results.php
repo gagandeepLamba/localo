@@ -1,11 +1,3 @@
-<?php
-
-	$questionDao = new \com\indigloo\sc\dao\Question();
-	$questionDBRows = $questionDao->getOnSearchIds($arrayIds) ;
-
-?>
-
-
 <!DOCTYPE html>
 <html>
 

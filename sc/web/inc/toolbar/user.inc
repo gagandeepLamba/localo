@@ -22,8 +22,8 @@
 					</ul> <!-- links -->
 				</div>
 				<div class="pull-left">	
-					<form method="GET" action="/search/site.php">
-						<input id="site-search" name="gs" type="text" class="search-query" placeholder="Search">
+					<form method="GET" action="/search/site">
+						<input id="site-search" name="gt" type="text" class="search-query" placeholder="Search">
 					</form>
 				</div>
 
