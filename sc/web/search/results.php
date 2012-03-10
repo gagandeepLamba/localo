@@ -22,6 +22,12 @@
 						
 					});
 				});
+
+                //show options on hover
+                $('.tile .options').hide();
+                $('.tile').mouseenter(function() { $(this).find('.options').toggle(); });
+                $('.tile').mouseleave(function() { $(this).find('.options').toggle(); }); 
+
 			});
 		</script>
 		
@@ -46,7 +52,7 @@
 			<div class="row">
 				<div class="span12">
 					<div class="page-header">
-						<h2> Search Results </h2>
+                    <h2> <?php echo $searchTitle; ?> </h2>
 					</div>
 
 					<div id="tiles">

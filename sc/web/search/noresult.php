@@ -31,7 +31,7 @@
 			<div class="row">
 				<div class="span12">
 					<div class="page-header">
-					<h2> No results found for <strong><?php echo $token; ?><strong> ! </h2>
+                        <h2> <?php echo $searchTitle; ?> </h2>
 					</div>
 				</div> 
 			</div>

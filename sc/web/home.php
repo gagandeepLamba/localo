@@ -23,15 +23,9 @@
                 });
 
                 //show options on hover
-                $('.tile-option').hide();
-        
-                $('.tile').mouseenter(function() {
-                    $(this).find('.tile-option').toggle();
-                });
-        
-                $('.tile').mouseleave(function() {
-                    $(this).find('.tile-option').toggle();
-                }); 
+                $('.tile .options').hide();
+                $('.tile').mouseenter(function() { $(this).find('.options').toggle(); });
+                $('.tile').mouseleave(function() { $(this).find('.options').toggle(); }); 
 
             });
 		</script>

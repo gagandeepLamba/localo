@@ -5,6 +5,7 @@ namespace com\indigloo\sc\html {
     use com\indigloo\Util as Util ;
     use com\indigloo\util\StringUtil as StringUtil ;
     use com\indigloo\Template as Template;
+    use \com\indigloo\Constants as Constants ;
     
     class GroupPanel {
 
@@ -23,9 +24,9 @@ namespace com\indigloo\sc\html {
                                 "fashion",
                                 "home-and-interior",
                                 "cool-items"); 
-
-
-            $slugs = explode(",",$slug);
+        
+            //explode DB field on space
+            $slugs = explode(Constants::SPACE,$slug);
 
             foreach($slugs as $value) {
                 if(empty($value)) { continue ; }

@@ -254,6 +254,7 @@
 	.author{
 		padding: 7px 0px 7px 0px ;
 		font-size : 12px;
+        /* border-bottom : 1px solid #E8E7E3; */
 	}
 
 	/* 100 percent big orange button */
@@ -589,7 +590,7 @@
         /* position:relative ; */
 	}
 
-    .tile-option {
+    .tile .options {
         position:absolute ;
         overflow:hidden ;
         z-index:100;
@@ -599,10 +600,20 @@
         padding:0px;
         top:0px;
         left:0px;
-        height:50px;
+        height:30px;
         width:100%;
     }
-	
+
+    .tile .options .links {
+        padding : 5px 5px 10px 30px;
+        font-size:11px;
+        line-height:16px;
+    }
+
+    .tile .options .links a {
+        color : #777;
+    }
+
 	.tile .photo {
 		padding:3px;
 	}
@@ -768,6 +779,11 @@
 
     .form-actions {
         background : #FFF ;
+    }
+    .tile .groups {
+        color : #777 ;
+        font-size:11px;
+        line-height:16px;
     }
 
 

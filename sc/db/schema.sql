@@ -226,7 +226,6 @@ delimiter ;
 
 
 
-
 delimiter //
 DROP PROCEDURE IF EXISTS fn_user_group//
 CREATE PROCEDURE fn_user_group( IN login_id int, IN slug varchar(64))
@@ -242,7 +241,10 @@ BEGIN
     SET remainder = slug;
     
     WHILE CHAR_LENGTH(remainder) > 0 AND cur_position > 0 DO
-        SET cur_position = INSTR(remainder,',');
+        --
+        -- delimiter is space
+        --
+        SET cur_position = INSTR(remainder,' ');
         IF cur_position = 0 THEN
             SET cur_string = remainder;
         ELSE
@@ -260,6 +262,7 @@ BEGIN
 END;
 //
 delimiter ;
+
 
 DROP TRIGGER IF EXISTS trg_user_group;
 

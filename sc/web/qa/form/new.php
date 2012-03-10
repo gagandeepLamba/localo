@@ -40,14 +40,25 @@
             $group_display = '' ;
 
             $slugs = Util::tryArrayKey($fvalues,'g'); 
+
+            /*
+             * The group checkbox values are slugs (old) as well as names (new ones)
+             * so we first convert all (new) names to slugs by our map. we take this array
+             * and implode on space to make slugs to be stored in DB (we need to implode on space to
+             * index the field via sphinx.
+             *
+             *
+             *
+             *
+             */
             if(!is_null($slugs)) {
                 //what is coming in are keys
                 $slugs = array_map(array("\com\indigloo\util\StringUtil","convertNameToKey"),$slugs);
-                $group_slug = implode(",",$slugs);
+                $group_slug = implode(Constants::SPACE,$slugs);
 
                 //change to name for display
                 $slugs = array_map(array("\com\indigloo\util\StringUtil","convertKeyToName"),$slugs);
-                $group_display = implode(",",$slugs);
+                $group_display = implode(Constants::SPACE,$slugs);
             }
 
 

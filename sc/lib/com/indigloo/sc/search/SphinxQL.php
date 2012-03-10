@@ -29,7 +29,7 @@ namespace com\indigloo\sc\search {
 
         }
 
-        function getGroupIds($token) {
+        function getPostIdsOnGroup($token) {
             $sql = " select id from groups where match('".$token."') limit 0,50" ;
             $rows = MySQL\Helper::fetchRows($this->connx,$sql);
             $ids = array();

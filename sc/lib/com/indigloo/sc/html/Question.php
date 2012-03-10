@@ -4,6 +4,8 @@ namespace com\indigloo\sc\html {
 
     use com\indigloo\Template as Template;
     use com\indigloo\Util as Util ;
+    use com\indigloo\Constants as Constants ;
+    use com\indigloo\util\StringUtil as StringUtil ;
     
     class Question {
         
@@ -21,9 +23,29 @@ namespace com\indigloo\sc\html {
 			$view->userName = $questionDBRow['user_name'];
 			$view->createdOn = Util::formatDBTime($questionDBRow['created_on']);
 			$view->tags = $questionDBRow['tags'];
-			
 
-				
+            $group_slug = $questionDBRow['group_slug'];
+            $groups = array();
+
+            if(!is_null($group_slug) && (strlen($group_slug) > 0)) {
+                $slugs = explode(Constants::SPACE,$group_slug);
+                $display = NULL ;
+
+                foreach($slugs as $slug) {
+                    if(empty($slug)) continue ;
+
+                    $display = StringUtil::convertKeyToName($slug);
+                    $groups[] = array("slug" => $slug, "display"=> $display);
+                }
+            }
+
+            if(sizeof($groups) > 0 ) {
+                $view->hasGroups = true ;
+                $view->groups = $groups;
+            }else {
+                $view->hasGroups = false ;
+            }
+		    	
 			if(sizeof($images) > 0) {
 				
 				$template = '/fragments/tile/image.tmpl' ;
