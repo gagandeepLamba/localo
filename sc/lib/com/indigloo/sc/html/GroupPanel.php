@@ -8,7 +8,7 @@ namespace com\indigloo\sc\html {
     
     class GroupPanel {
 
-        static function render($slug){
+        static function render($ugroups,$slug=''){
 
             if(is_null($slug)) {
                 $slug = '' ;
@@ -24,9 +24,10 @@ namespace com\indigloo\sc\html {
                                 "home-and-interior",
                                 "cool-items"); 
 
-            $ugroups = explode(",",$slug);
 
-            foreach($ugroups as $value) {
+            $slugs = explode(",",$slug);
+
+            foreach($slugs as $value) {
                 if(empty($value)) { continue ; }
                 $value = trim($value);
                 //get display strings
@@ -38,9 +39,10 @@ namespace com\indigloo\sc\html {
 			$view = new \stdClass;
 			$template = '/fragments/ui/group/panel.tmpl' ;
 
-            foreach ($categories as $value) {
-                if(in_array($value,$ugroups)) { continue ; }
+            $allgroups = array_unique(array_merge($ugroups,$categories));
 
+            foreach ($allgroups as $value) {
+                if(in_array($value,$slugs)) { continue ; }
                 $display =  StringUtil::convertKeyToName($value);
                 $records[] = array("value" => $value, "display" => $display, "checked" => "") ;
             }

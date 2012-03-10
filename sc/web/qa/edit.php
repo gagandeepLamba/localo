@@ -18,7 +18,7 @@
 
 	$questionId = Url::getQueryParam("id");
 
-    $questionDao = new com\indigloo\sc\dao\Question();
+    $questionDao = new \com\indigloo\sc\dao\Question();
     $questionDBRow = $questionDao->getOnId($questionId);
 	
 
@@ -27,9 +27,13 @@
 		exit(1);
 	}
 
+    $loginId = Login::tryLoginIdInSession() ;
+    //get user groups
+    $userDao = new \com\indigloo\sc\dao\User();
+    $ugroups = $userDao->getGroups($loginId);
+
+
     $imagesJson = $questionDBRow['images_json'];
-
-
     $strImagesJson = $sticky->get('images_json',$questionDBRow['images_json']) ;
     $strLinksJson = $sticky->get('links_json',$questionDBRow['links_json']) ;
 
@@ -136,7 +140,7 @@
 							</tr>
                             <tr>
                                 <td> 
-                                <?php echo \com\indigloo\sc\html\GroupPanel::render($questionDBRow['group_slug']); ?>
+                                <?php echo \com\indigloo\sc\html\GroupPanel::render($ugroups,$questionDBRow['group_slug']); ?>
 
                                 </td>
 							</tr> <!-- groups --> 

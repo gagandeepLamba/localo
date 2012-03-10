@@ -34,15 +34,16 @@
             $group_slug = '' ;
             $group_display = '' ;
 
+            //implode scheme in create/edit should match
             $slugs = Util::tryArrayKey($fvalues,'g'); 
             if(!is_null($slugs)) {
                 //what is coming in are keys
                 $slugs = array_map(array("\com\indigloo\util\StringUtil","convertNameToKey"),$slugs);
-                $group_slug = implode(" ",$slugs);
+                $group_slug = implode(",",$slugs);
 
                 //change to name for display
                 $slugs = array_map(array("\com\indigloo\util\StringUtil","convertKeyToName"),$slugs);
-                $group_display = implode(" ",$slugs);
+                $group_display = implode(",",$slugs);
             }
 
             $questionDao = new com\indigloo\sc\dao\Question();

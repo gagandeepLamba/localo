@@ -72,7 +72,9 @@ namespace com\indigloo\sc\dao {
 						$tags,
 						$loginId,
 						$linksJson,
-						$imagesJson) {
+                        $imagesJson,
+                        $groupSlug,
+                        $groupDisplay) {
 			
             $data = mysql\Question::create(
 								$title,
@@ -81,7 +83,9 @@ namespace com\indigloo\sc\dao {
 								$tags,
 								$loginId,
 								$linksJson,
-								$imagesJson);
+                                $imagesJson,
+                                $groupSlug,
+                                $groupDisplay);
 			
             return $data ;
         }

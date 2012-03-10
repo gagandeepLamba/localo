@@ -252,8 +252,93 @@ alter table sc_media add column thumbnail varchar(64) ;
 alter table sc_question add column group_display varchar(64);
 alter table sc_question add column group_slug varchar(64);
 
+--
+-- 10 mar 2012
+--
+
+
+   
+drop table if exists sc_user_group;
+create table sc_user_group(
+	id int(11) NOT NULL auto_increment,
+    login_id int not null,
+	token varchar(32) ,
+    created_on timestamp default '0000-00-00 00:00:00',
+	updated_on timestamp default '0000-00-00 00:00:00' ,
+	PRIMARY KEY (id)) ENGINE = InnoDB default character set utf8 collate utf8_general_ci;
+
+
+alter table sc_user_group add constraint UNIQUE(login_id,token);
+    
+   
 
 
 
+delimiter //
+DROP PROCEDURE IF EXISTS fn_user_group//
+CREATE PROCEDURE fn_user_group( IN login_id int, IN slug varchar(64))
+BEGIN
+    DECLARE cur_position INT DEFAULT 1 ;
+    DECLARE cur_string VARCHAR(64);
+    DECLARE remainder varchar(64);
+
+    --
+    -- split slug on comma and push in sc_user_group
+    --  
+
+    SET remainder = slug;
+    
+    WHILE CHAR_LENGTH(remainder) > 0 AND cur_position > 0 DO
+        SET cur_position = INSTR(remainder,',');
+        IF cur_position = 0 THEN
+            SET cur_string = remainder;
+        ELSE
+            SET cur_string = LEFT(remainder, cur_position - 1);
+        END IF;
+        IF TRIM(cur_string) != '' THEN
+            -- 
+            -- 
+            insert ignore into sc_user_group(login_id,token,created_on) values(login_id,cur_string,now());
+        END IF;
+        SET remainder = SUBSTRING(remainder, cur_position + 1);
+    END WHILE;  
+
+
+END;
+//
+delimiter ;
+
+DROP TRIGGER IF EXISTS trg_user_group;
+
+delimiter //
+CREATE TRIGGER trg_user_group  AFTER  INSERT ON sc_question
+    FOR EACH ROW
+    BEGIN
+        DECLARE login_id INT ;
+        DECLARE slug varchar(64) ;
+
+        SET slug = NEW.group_slug ;
+        SET login_id = NEW.login_id ;
+        call fn_user_group(login_id,slug);
+
+    END;//
+delimiter ;
+
+
+DROP TRIGGER IF EXISTS trg_user_group2;
+
+delimiter //
+CREATE TRIGGER trg_user_group2  AFTER  update ON sc_question
+    FOR EACH ROW
+    BEGIN
+        DECLARE login_id INT ;
+        DECLARE slug varchar(64) ;
+
+        SET slug = NEW.group_slug ;
+        SET login_id = NEW.login_id ;
+        call fn_user_group(login_id,slug);
+
+    END;//
+delimiter ;
 
 

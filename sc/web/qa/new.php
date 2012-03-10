@@ -9,6 +9,7 @@
     use com\indigloo\ui\form\Sticky;
     use com\indigloo\Constants as Constants;
     use com\indigloo\ui\form\Message as FormMessage;
+    use \com\indigloo\sc\auth\Login as Login;
      
     $sticky = new Sticky($gWeb->find(Constants::STICKY_MAP,true));
     
@@ -18,6 +19,10 @@
     $strImagesJson = empty($strImagesJson) ? '[]' : $strImagesJson ;
     $strLinksJson = empty($strLinksJson) ? '[]' : $strLinksJson ;
 
+    $loginId = Login::tryLoginIdInSession() ;
+    //get user groups
+    $userDao = new \com\indigloo\sc\dao\User();
+    $ugroups = $userDao->getGroups($loginId);
     
 ?>  
 
@@ -122,7 +127,7 @@
 							</tr>
                             <tr>
                                 <td> 
-                                <?php echo \com\indigloo\sc\html\GroupPanel::render(""); ?>
+                                <?php echo \com\indigloo\sc\html\GroupPanel::render($ugroups); ?>
 
                                 </td>
 							</tr> <!-- groups --> 
