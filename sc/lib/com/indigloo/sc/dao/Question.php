@@ -33,6 +33,11 @@ namespace com\indigloo\sc\dao {
 			return $rows ;
 		}
 		
+        function getRandom($start,$limit) {
+			$rows = mysql\Question::getRandom($start,$limit);
+			return $rows ;
+		}
+
 		function getPaged($paginator,$filter=NULL) {
  
 			//translate the filter in terms of DB Column

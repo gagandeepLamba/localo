@@ -24,6 +24,19 @@ namespace com\indigloo\sc\mysql {
             return $row;
 		}
 
+         static function getRandom($start,$limit) {
+			$mysqli = MySQL\Connection::getInstance()->getHandle();
+			$start = $mysqli->real_escape_string($start);
+			$limit = $mysqli->real_escape_string($limit);
+			
+            $sql = " select q.* from sc_question q limit {start},{limit} " ;
+            $sql = str_replace(array("{start}","{limit}"), array(0 => $start, 1=> $limit), $sql); 
+
+            $rows = MySQL\Helper::fetchRows($mysqli, $sql);
+            return $rows;
+
+		}
+
         static function getOnLoginId($loginId,$limit) {
 			$mysqli = MySQL\Connection::getInstance()->getHandle();
 			$loginId = $mysqli->real_escape_string($loginId);

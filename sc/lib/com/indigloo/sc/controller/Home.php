@@ -23,11 +23,7 @@ namespace com\indigloo\sc\controller{
 
             $file = $_SERVER['APP_WEB_DIR']. '/home.php' ;
 
-			ob_start();
             include ($file);
-            $buffer = ob_get_contents();
-            ob_end_clean();
-            echo $buffer;
 		
         }
     }
