@@ -12,7 +12,6 @@ create table sc_question(
     links_json TEXT ,
     images_json TEXT,
     group_slug varchar(64),
-    group_display varchar(64),
     location varchar(32),
     created_on timestamp default '0000-00-00 00:00:00',
 	updated_on timestamp default '0000-00-00 00:00:00' ,

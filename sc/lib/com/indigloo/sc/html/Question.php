@@ -17,7 +17,7 @@ namespace com\indigloo\sc\html {
 			
 			$view = new \stdClass;
 			$view->description = Util::abbreviate($questionDBRow['description'],160);
-			$view->userPageURI = "/user/dashboard.php?login_id=".$questionDBRow['login_id'];
+			$view->userPageURI = "/pub/user/".$questionDBRow['login_id'];
 			$view->id = $questionDBRow['id'];
 				
 			$view->userName = $questionDBRow['user_name'];

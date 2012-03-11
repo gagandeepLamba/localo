@@ -37,8 +37,6 @@
         } else {
             
             $group_slug = '' ;
-            $group_display = '' ;
-
             $slugs = Util::tryArrayKey($fvalues,'g'); 
 
             /*
@@ -56,9 +54,6 @@
                 $slugs = array_map(array("\com\indigloo\util\StringUtil","convertNameToKey"),$slugs);
                 $group_slug = implode(Constants::SPACE,$slugs);
 
-                //change to name for display
-                $slugs = array_map(array("\com\indigloo\util\StringUtil","convertKeyToName"),$slugs);
-                $group_display = implode(Constants::SPACE,$slugs);
             }
 
 
@@ -73,8 +68,7 @@
 								$gSessionLogin->id,
                                 $_POST['links_json'],
                                 $_POST['images_json'],
-                                $group_slug,
-                                $group_display);
+                                $group_slug);
 								
    			$code = $data['code'];
 

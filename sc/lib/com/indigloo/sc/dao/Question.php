@@ -22,6 +22,11 @@ namespace com\indigloo\sc\dao {
 			return $row ;
 		}
 
+		function getOnLoginId($loginId) {
+			$rows = mysql\Question::getOnLoginId($loginId);
+			return $rows ;
+		}
+
 		function getOnSearchIds($arrayIds) {
 			$strIds = implode(",",$arrayIds);
 			$rows = mysql\Question::getOnSearchIds($strIds);
@@ -73,8 +78,7 @@ namespace com\indigloo\sc\dao {
 						$loginId,
 						$linksJson,
                         $imagesJson,
-                        $groupSlug,
-                        $groupDisplay) {
+                        $groupSlug) {
 			
             $data = mysql\Question::create(
 								$title,
@@ -84,8 +88,7 @@ namespace com\indigloo\sc\dao {
 								$loginId,
 								$linksJson,
                                 $imagesJson,
-                                $groupSlug,
-                                $groupDisplay);
+                                $groupSlug);
 			
             return $data ;
         }
@@ -98,8 +101,7 @@ namespace com\indigloo\sc\dao {
 						$tags,
 						$linksJson,
                         $imagesJson,
-                        $groupSlug,
-                        $groupDisplay) {
+                        $groupSlug) {
 			
 			$loginId = \com\indigloo\sc\auth\Login::tryLoginIdInSession();
 
@@ -111,8 +113,7 @@ namespace com\indigloo\sc\dao {
                                $linksJson,
 							   $imagesJson,
                                $loginId,
-                               $groupSlug,
-                               $groupDisplay);
+                               $groupSlug);
             return $code ;
         }
 

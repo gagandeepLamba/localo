@@ -16,6 +16,7 @@ namespace com\indigloo\sc\html {
 			$view->answer = $answerDBRow['answer'];
 			$view->createdOn = Util::formatDBTime($answerDBRow['created_on']);
 			$view->userName = $answerDBRow['user_name'] ;
+            $view->loginId = $answerDBRow['login_id'];
 			
 			$html = Template::render($template,$view);
 			

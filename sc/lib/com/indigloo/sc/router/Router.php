@@ -16,8 +16,8 @@ namespace com\indigloo\sc\router{
             $this->createRule('^/$', 'com\indigloo\sc\controller\Home');
             $this->createRule('^item/(?P<item_id>\d+)$','com\indigloo\sc\controller\Post');
             $this->createRule('^search/site$','com\indigloo\sc\controller\Search');
-
             $this->createRule('^group/(?P<name>[-\w]+)$','com\indigloo\sc\controller\Group');
+            $this->createRule('^pub/user/(?P<login_id>\d+)$','com\indigloo\sc\controller\User');
         }
     }
 }

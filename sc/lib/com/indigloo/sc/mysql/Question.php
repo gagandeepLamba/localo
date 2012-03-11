@@ -24,7 +24,7 @@ namespace com\indigloo\sc\mysql {
             return $row;
 		}
 
-		/*
+       	/*
 		 *
 		 * 1. we need to fetch rows from mysql doing a range scan on ids 
 		 * returned by sphinx.
@@ -133,14 +133,13 @@ namespace com\indigloo\sc\mysql {
                                $linksJson,
 							   $imagesJson,
                                $loginId,
-                               $groupSlug,
-                               $groupDisplay)
+                               $groupSlug)
 		
 		{
 			
 			$mysqli = MySQL\Connection::getInstance()->getHandle();
             $sql = " update sc_question set title=?,description=?,location = ?,tags =?,links_json =?, " ;
-			$sql .= " images_json=?,group_slug = ?,group_display=? where id = ? and login_id = ?" ;
+			$sql .= " images_json=?,group_slug = ? where id = ? and login_id = ?" ;
 			
 			
             $code = MySQL\Connection::ACK_OK;
@@ -148,7 +147,7 @@ namespace com\indigloo\sc\mysql {
             
             
             if ($stmt) {
-                $stmt->bind_param("ssssssssii",
+                $stmt->bind_param("sssssssii",
                         $title,
                         $description,
                         $location,
@@ -156,7 +155,6 @@ namespace com\indigloo\sc\mysql {
                         $linksJson,
                         $imagesJson,
                         $groupSlug,
-                        $groupDisplay,
 						$questionId,
 						$loginId);
                 
@@ -182,15 +180,14 @@ namespace com\indigloo\sc\mysql {
 							   $loginId,
                                $linksJson,
                                $imagesJson,
-                               $groupSlug,
-                               $groupDisplay) {
+                               $groupSlug) {
 
 			
 			
             $mysqli = MySQL\Connection::getInstance()->getHandle();
             $sql = " insert into sc_question(title,description,location,tags,login_id,links_json, " ;
-            $sql .= "images_json,group_slug,group_display,created_on) ";
-            $sql .= " values(?,?,?,?,?,?,?,?,?,now()) ";
+            $sql .= "images_json,group_slug,created_on) ";
+            $sql .= " values(?,?,?,?,?,?,?,?,now()) ";
 
             $code = MySQL\Connection::ACK_OK;
 			$lastInsertId = NULL;
@@ -198,7 +195,7 @@ namespace com\indigloo\sc\mysql {
             $stmt = $mysqli->prepare($sql);
             
             if ($stmt) {
-                $stmt->bind_param("ssssissss",
+                $stmt->bind_param("ssssisss",
                         $title,
                         $description,
                         $location,
@@ -206,8 +203,7 @@ namespace com\indigloo\sc\mysql {
 						$loginId,
                         $linksJson,
                         $imagesJson,
-                        $groupSlug,
-                        $groupDisplay);
+                        $groupSlug);
                 
                       
                 $stmt->execute();
