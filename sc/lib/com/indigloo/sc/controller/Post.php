@@ -44,6 +44,8 @@ namespace com\indigloo\sc\controller{
 				}
 			}
 
+            $tileDBRows = $questionDao->getOnLoginId($questionDBRow['login_id'],10);
+
 			$loginUrl = "/user/login.php?q=".$_SERVER['REQUEST_URI'];
 			$formErrors = FormMessage::render(); 
 

@@ -75,7 +75,7 @@
 			<div class="row">
 				<div class="span4">
 					<div> 
-						<?php echo \com\indigloo\sc\html\Question::getSummary($questionDBRow); ?>
+						<?php echo \com\indigloo\sc\html\Question::getTile($questionDBRow); ?>
 					</div>
 				</div> <!-- post summary -->
 

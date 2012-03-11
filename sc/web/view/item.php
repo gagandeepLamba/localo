@@ -65,10 +65,17 @@
 					<?php include($_SERVER['APP_WEB_DIR'] . '/inc/banner.inc'); ?>
 				</div>
 			</div>
-			
+		   	<div class="row">
+				<div class="span12">
+                    <div class="page-header"> 
+                        <h2> <?php echo $pageTitle; ?>  </h2>
+                    </div>
+				</div>
+			</div>
+ 	
 			
 			<div class="row">
-				<div class="span9">
+				<div class="span8">
                            
 				<?php 
 					if(sizeof($images) > 0 ) { include($_SERVER['APP_WEB_DIR'].'/qa/inc/carousel.inc') ; }
@@ -134,15 +141,23 @@
 				</div> <!-- form-wrapper -->
 				
 			</div>
-			<div class="span3">
+			<div class="span4">
+               
 				<div class="p10">	
-                <div class="fb-like" data-href="<?php echo $pageUrl;?>" data-send="true" data-layout="button_count" data-width="220" data-show-faces="false"></div>
+                    <div class="fb-like" data-href="<?php echo $pageUrl;?>" data-send="true" data-layout="button_count" data-width="220" data-show-faces="false"></div>
 				</div>
 				<div class="p10">
 					<a href="https://twitter.com/share" class="twitter-share-button" data-via="3mikindia" data-count="none">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-				</div>	
-
-			</div> <!-- sidebar -->
+                </div>	
+                <div class="block">
+                    <h3> More from 3mik </h3>
+                </div>
+					<?php
+						foreach($tileDBRows as $tileDBRow) {
+							echo \com\indigloo\sc\html\Question::getSimpleTile($tileDBRow) ;
+						}
+					?>
+			</div>
 		</div>
 	</div> <!-- container -->
 	

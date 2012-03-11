@@ -8,8 +8,51 @@ namespace com\indigloo\sc\html {
     use com\indigloo\util\StringUtil as StringUtil ;
     
     class Question {
-        
-		static function getSummary($questionDBRow) {
+
+		static function getSimpleTile($questionDBRow) {
+
+		    $html = NULL ;
+			$imagesJson = $questionDBRow['images_json'];
+			$images = json_decode($imagesJson);
+			
+			$view = new \stdClass;
+			$view->description = Util::abbreviate($questionDBRow['description'],70);
+			$view->userPageURI = "/pub/user/".$questionDBRow['login_id'];
+			$view->id = $questionDBRow['id'];
+
+			if(sizeof($images) > 0) {
+				
+				$template = '/fragments/tile/simple/image.tmpl' ;
+				/* image stuff */
+				$image = $images[0] ;
+				
+				$view->originalName = $image->originalName;
+				$view->bucket = $image->bucket;
+
+                $prefix = (property_exists($image,'store') && ($image->store == 's3')) ? 'http://' : '/' ;
+                //@todo remove property exists check after s3 migration?
+                $fileName = (property_exists($image,'thumbnail') && !empty($image->thumbnail)) ? $image->thumbnail : $image->storeName ;
+				$view->srcImage = $prefix.$image->bucket.'/'.$fileName;
+			    	
+				$newxy = Util::foldX($image->width,$image->height,190);
+				
+				$view->width = $newxy["width"];
+				$view->height = $newxy["height"];
+				
+				/* image stuff end */
+				$html = Template::render($template,$view);
+				
+			} else {
+				
+				$template = '/fragments/tile/simple/text.tmpl' ;
+				$html = Template::render($template,$view);
+			}
+			
+            return $html ;
+			
+        }
+
+		static function getTile($questionDBRow) {
 
 		    $html = NULL ;
 			$imagesJson = $questionDBRow['images_json'];
@@ -89,6 +132,7 @@ namespace com\indigloo\sc\html {
 			$view->userName = $questionDBRow['user_name'];
 			$view->createdOn = Util::formatDBTime($questionDBRow['created_on']);
 			$view->tags = $questionDBRow['tags'];
+            $view->loginId = $questionDBRow['login_id'];
 
 			
 			$template = '/fragments/question/detail.tmpl' ;

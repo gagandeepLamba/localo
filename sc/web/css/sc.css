@@ -542,32 +542,12 @@
 		width:500px;
 	}
 	
-	
-	#sidebar {
-		padding :20px;
-		min-height:600px;
-	}
-
 	.highlight {
 		padding:10px;
 		background-color:#FFF1A8;
 	}
 	
-	.block {
-		padding:10px;
-		/* background-color : #f0fff0; */
-		border:1px solid #a3a3a3;
-		font-size :15px;
-		min-height :160px;
-		margin-bottom:10px;
-	}
-	
-	.lightbg {
-		background-color : #f0fff0;
-		padding :20px;
-		border-radius:10px;
-	}
-
+   
 	#site-search{
 		margin-top:5px;
 		height:20px;
@@ -786,5 +766,32 @@
         line-height:16px;
     }
 
+    /*
+	.block {
+		padding:10px;
+		border:1px solid #a3a3a3;
+		font-size :15px;
+		min-height :160px;
+		margin-bottom:10px;
+	}
+	
+	.lightbg {
+		background-color : #f0fff0;
+		padding :20px;
+		border-radius:10px;
+	} */
+ 
+    .block{
+        border-bottom : 1px solid #E8E7E3; 
+    }
 
+    .block h3{
+        font-size:18px;
+        color:#211922;
+    }
 
+    /* override bootstrap css */
+    .hero-unit {
+        padding:30px;
+        margin-bottom:10px;
+    }

@@ -22,8 +22,8 @@ namespace com\indigloo\sc\dao {
 			return $row ;
 		}
 
-		function getOnLoginId($loginId) {
-			$rows = mysql\Question::getOnLoginId($loginId);
+		function getOnLoginId($loginId,$limit) {
+			$rows = mysql\Question::getOnLoginId($loginId,$limit);
 			return $rows ;
 		}
 

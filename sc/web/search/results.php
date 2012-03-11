@@ -58,7 +58,7 @@
 					<div id="tiles">
 						<?php
 							foreach($questionDBRows as $questionDBRow) {
-								$html = \com\indigloo\sc\html\Question::getSummary($questionDBRow);
+								$html = \com\indigloo\sc\html\Question::getTile($questionDBRow);
 								echo $html ;
 						
 							}

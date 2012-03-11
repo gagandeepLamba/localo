@@ -24,6 +24,20 @@ namespace com\indigloo\sc\mysql {
             return $row;
 		}
 
+        static function getOnLoginId($loginId,$limit) {
+			$mysqli = MySQL\Connection::getInstance()->getHandle();
+			$loginId = $mysqli->real_escape_string($loginId);
+			$limit = $mysqli->real_escape_string($limit);
+			
+            $sql = " select q.* from sc_question q where q.login_id = ".$loginId ;
+            $sql .=  " order by id desc limit ".$limit ;
+
+            $rows = MySQL\Helper::fetchRows($mysqli, $sql);
+            return $rows;
+
+		}
+
+
        	/*
 		 *
 		 * 1. we need to fetch rows from mysql doing a range scan on ids 
