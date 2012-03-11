@@ -8,12 +8,22 @@
     use \com\indigloo\Configuration as Config;
        
 	error_reporting(-1);
-    printf("Make backup of DB first \n");
-    exit ;
+    //printf("Make backup of DB first \n");
+    //exit ;
 
-    $iter = 1 ;
-    while($iter <= 1 ){
-        $sql = " select id,images_json from sc_question order by id desc limit 20 ";
+    $iter = 40;
+    $count = 0 ;
+
+    while($count  <= $iter ){
+        $start =  $count*20 ;
+        $end = $start + 20 ;
+
+        $sql = " select id,images_json from sc_question where  (id <= {end}) and (id >= {start} ) ";
+        $sql = str_replace(array("{end}", "{start}"),array( 0 => $end, 1=> $start),$sql);
+        //printf("%s \n ", $sql);
+        //$count++ ;
+        //continue ;
+
         $mysqli = MySQL\Connection::getInstance()->getHandle();
         $rows = MySQL\Helper::fetchRows($mysqli, $sql);
 
@@ -38,7 +48,7 @@
             sleep(1);
         }
 
-        $iter++ ;
+        $count++ ;
     }
     
 
