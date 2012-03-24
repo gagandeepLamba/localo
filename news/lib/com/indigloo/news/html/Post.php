@@ -12,7 +12,7 @@ namespace com\indigloo\news\html {
 			$html = NULL ;
 			$view = new \stdClass;
 			$view->postId = $row['id'];
-			$template = $_SERVER['APP_WEB_DIR'].'/fragments/post/admin-toolbar.tmpl' ;
+			$template = '/fragments/post/admin-toolbar.tmpl' ;
 			$html = Template::render($template,$view);
 			return $html ;
 		}
@@ -34,7 +34,7 @@ namespace com\indigloo\news\html {
 			
 			if(sizeof($images) > 0) {
 				
-				$template = $_SERVER['APP_WEB_DIR'].'/fragments/widget/image.tmpl' ;
+				$template = '/fragments/widget/image.tmpl' ;
 				
 				//use first image
 				$image = $images[0] ;
@@ -53,7 +53,7 @@ namespace com\indigloo\news\html {
 				$html = Template::render($template,$view);
 				
 			} else {
-				$template = $_SERVER['APP_WEB_DIR'].'/fragments/widget/text.tmpl' ;
+				$template = '/fragments/widget/text.tmpl' ;
 				$html = Template::render($template,$view);
 			}
 			

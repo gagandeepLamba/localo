@@ -22,7 +22,7 @@ namespace com\indigloo\news\html {
             
             $view->bgclass = ( ($count%2) == 0 )? 'lightyellowbg': '' ;
             
-			$template = $_SERVER['APP_WEB_DIR'].'/fragments/link/summary.tmpl' ;
+			$template = '/fragments/link/summary.tmpl' ;
 			$html = Template::render($template,$view);
 			return $html ;
         }

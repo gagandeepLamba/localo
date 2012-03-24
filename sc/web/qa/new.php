@@ -9,7 +9,6 @@
     use com\indigloo\ui\form\Sticky;
     use com\indigloo\Constants as Constants;
     use com\indigloo\ui\form\Message as FormMessage;
-    use \com\indigloo\sc\auth\Login as Login;
      
     $sticky = new Sticky($gWeb->find(Constants::STICKY_MAP,true));
     
@@ -19,32 +18,26 @@
     $strImagesJson = empty($strImagesJson) ? '[]' : $strImagesJson ;
     $strLinksJson = empty($strLinksJson) ? '[]' : $strLinksJson ;
 
-    $loginId = Login::tryLoginIdInSession() ;
-    //get user groups
-    $userDao = new \com\indigloo\sc\dao\User();
-    $ugroups = $userDao->getGroups($loginId);
     
 ?>  
 
-<!DOCTYPE html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 
-       <head>
-        <title> 3mik.com - Share your find, need and knowledge</title>
-        <?php include($_SERVER['APP_WEB_DIR'] . '/inc/meta.inc'); ?>
+       <head><title> 3mik.com - Share your find, need and knowledge</title>
          
+
+       <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+
 		<link rel="stylesheet" type="text/css" href="/3p/bootstrap/css/bootstrap.css">
 		<link rel="stylesheet" type="text/css" href="/css/sc.css">
 		<link rel="stylesheet" type="text/css" href="/3p/ful/valums/fileuploader.css">
-		<link rel="stylesheet" type="text/css" href="/3p/fancybox/jquery.fancybox-1.3.4.css">
 		
 		<script type="text/javascript" src="/3p/jquery/jquery-1.7.1.min.js"></script>
 		<script type="text/javascript" src="/3p/jquery/jquery.validate.1.9.0.min.js"></script>
 		<script type="text/javascript" src="/3p/bootstrap/js/bootstrap.js"></script>
 		 
 		<script type="text/javascript" src="/3p/ful/valums/fileuploader.js" ></script>
-        <script type="text/javascript" src="/3p/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
-
 		<script type="text/javascript" src="/3p/json2.js" ></script>
 		<script type="text/javascript" src="/js/sc.js"></script>
 		
@@ -59,7 +52,6 @@
 					
 				webgloo.media.init(["image","link"]);
 				webgloo.media.attachEvents();
-				webgloo.sc.groups.attachEvents();
 				  
 				var uploader = new qq.FileUploader({
 					element: document.getElementById('image-uploader'),
@@ -95,18 +87,27 @@
 			
 			
 			<div class="row">
-				<div class="span9">
+				<div class="span8">
 					
 					
 					<div class="page-header">
-						<h2> Ask </h2>
+						<h2> Share your wisdom </h2>
 					</div>
 					
 					<?php FormMessage::render(); ?>
 					
 					<form  id="web-form1"  name="web-form1" action="/qa/form/new.php" enctype="multipart/form-data"  method="POST">
 						<div class="row">
-							<div class="span9">
+							<div class="span4">
+								Category&nbsp;
+								<?php
+										$selectBoxDao = new \com\indigloo\sc\dao\SelectBox(); 
+										$catRows = $selectBoxDao->get('CATEGORY'); 
+										echo \com\indigloo\ui\SelectBox::render('category',$catRows);              
+									?>
+								
+							</div>
+							<div class="span4">
 								<div id="image-uploader"> </div>
 							</div>
 						</div> <!-- top row -->
@@ -125,29 +126,23 @@
 									<button id="add-link" type="button" class="btn" value="Add"><i class="icon-plus-sign"> </i>&nbsp;Add</button> 
 								</td>
 							</tr>
-                            <tr>
-                                <td> 
-                                <?php echo \com\indigloo\sc\html\GroupPanel::render($ugroups); ?>
-
-                                </td>
-							</tr> <!-- groups --> 
-
 							<tr>
 								<td>
-                                  	<div class="form-actions"> 
-                                        <button class="btn btn-primary" type="submit" name="save" value="Save" onclick="this.setAttribute('value','Save');" ><span>Save your changes</span></button> 
-                                        <a href="/"> <button class="btn" type="button" name="cancel"><span>Cancel</span></button> </a>
-                                    </div>
-  
-                                </td>
+									<div id="link-data"> </div>
+									<div id="image-data"> </div>
+								</td>
 							</tr>
 							
+							
 						</table>
+						
+						
 					
-					
-                        <div id="link-data"> </div>
-                        <div id="image-data"> </div>
-
+						<div class="form-actions"> 
+							<button class="btn btn-primary" type="submit" name="save" value="Save" onclick="this.setAttribute('value','Save');" ><span>Save your changes</span></button> 
+							<a href="/"> <button class="btn" type="button" name="cancel"><span>Cancel</span></button> </a>
+						</div>
+						 
 						<input type="hidden" name="links_json" value='<?php echo $strLinksJson ; ?>' />
 						<input type="hidden" name="images_json" value='<?php echo $strImagesJson ; ?>' />
 						<input type="hidden" name="q" value="<?php echo $_SERVER["REQUEST_URI"]; ?>" />
@@ -155,9 +150,9 @@
 					</form>
 									
 				   
-				</div> <!-- span9 -->
+				</div> <!-- span8 -->
 				
-				<div class="span3">
+				<div class="span4">
 					 <?php include($_SERVER['APP_WEB_DIR'] .'/qa/sidebar/ask.inc'); ?>
 				</div>
 			
